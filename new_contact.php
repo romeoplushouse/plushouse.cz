@@ -3,6 +3,25 @@ error_reporting(E_ALL);
 ini_set("log_errors", 1);
 ini_set("error_log", dirname(__FILE__) . "/php-error.log");
 
+function pix_send_response($type, $text, $statusCode = 200)
+{
+    http_response_code($statusCode);
+    die(json_encode(array('type' => $type, 'text' => $text)));
+}
+
+function pix_clean_input($value)
+{
+    if (is_array($value)) {
+        return '';
+    }
+    return trim(filter_var($value, FILTER_SANITIZE_STRING));
+}
+
+function pix_string_length($value)
+{
+    return function_exists('mb_strlen') ? mb_strlen($value) : strlen($value);
+}
+
 
 if($_POST)
 {
@@ -34,68 +53,105 @@ if($_POST)
 	//check if its an ajax request, exit if not
 	if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
 		//exit script outputting json data
-		$output = json_encode(
-		array(
-			'type'=>'error',
-			'text' => 'Request must come from Ajax'
-		));
-		die($output);
+        pix_send_response('error', $lang[$language]['invalid_request'], 400);
 	}
+
+    $sanitized_request = array();
+    foreach ($_POST as $key => $value) {
+        $sanitized_request[$key] = pix_clean_input($value);
+    }
+
+    if(array_key_exists('name', $sanitized_request)){
+        if($sanitized_request['name'] === ''){
+            pix_send_response('error', sprintf($lang[$language]['required_field'], 'Jméno a příjmení'), 422);
+        }
+        if(pix_string_length($sanitized_request['name']) < 2){
+            pix_send_response('error', $lang[$language]['name_length'], 422);
+        }
+    }
+
+    if(array_key_exists('email', $sanitized_request)){
+        if($sanitized_request['email'] === '' || !validMail($sanitized_request['email'])){
+            pix_send_response('error', $lang[$language]['check_email'], 422);
+        }
+        $user_Email = $sanitized_request['email'];
+    }
+
+    if(array_key_exists('phone', $sanitized_request)){
+        if($sanitized_request['phone'] === ''){
+            pix_send_response('error', sprintf($lang[$language]['required_field'], 'Telefonní číslo'), 422);
+        }
+        if(!preg_match('/^[+()0-9\\s-]{6,}$/', $sanitized_request['phone'])){
+            pix_send_response('error', $lang[$language]['invalid_phone'], 422);
+        }
+    }
+
+    if(array_key_exists('message', $sanitized_request)){
+        if($sanitized_request['message'] === ''){
+            pix_send_response('error', sprintf($lang[$language]['required_field'], 'Zpráva'), 422);
+        }elseif(pix_string_length($sanitized_request['message']) < 10){
+            pix_send_response('error', $lang[$language]['message_length'], 422);
+        }
+    }
+
+    $selectFields = array('select_field', 'distribution_network', 'voltage_level');
+    foreach ($selectFields as $selectField) {
+        if(array_key_exists($selectField, $sanitized_request) && $sanitized_request[$selectField] === ''){
+            pix_send_response('error', $lang[$language]['check_select'], 422);
+        }
+    }
 
 	$values = array($_POST);
 	$o_string = "";
 	$o_string1 = "";
 	$o_string_html = "";
-	$user_Email = $to_Email;
+	if(!isset($user_Email)){
+        $user_Email = $to_Email;
+    }
 	$pix_extra = array();
 	$has_type = false;
 	$the_type = "";
 	$the_list = "";
 	foreach ($values as  $value) {
 		foreach ($value as $variable => $v) {
-			if(filter_var($variable, FILTER_SANITIZE_STRING) == 'pixfort_form_type'){
-				if(filter_var($variable, FILTER_SANITIZE_STRING) != ''){
+            $clean_key = filter_var($variable, FILTER_SANITIZE_STRING);
+            $clean_value = array_key_exists($variable, $sanitized_request) ? $sanitized_request[$variable] : pix_clean_input($v);
+			if($clean_key == 'pixfort_form_type'){
+				if($clean_key != ''){
 					$the_type = $v;
 					$has_type =true;
 				}
-			}elseif(filter_var($variable, FILTER_SANITIZE_STRING) == 'pixfort_form_list'){
-				if(filter_var($variable, FILTER_SANITIZE_STRING) != ''){
+			}elseif($clean_key == 'pixfort_form_list'){
+				if($clean_key != ''){
 					$the_list = $v;
 				}
-			}elseif(filter_var($variable, FILTER_SANITIZE_STRING) == 'g-recaptcha-response'){
+			}elseif($clean_key == 'g-recaptcha-response'){
 				if($use_reCaptcha){
 					$response = $reCaptcha->verifyResponse(
 						$_SERVER["REMOTE_ADDR"],
 						$v
 					);
 					if ($response == null || (!$response->success)) {
-						$output = json_encode(array('type'=>'error', 'text' => $lang[$language]['captcha']));
-						die($output);
+                        pix_send_response('error', $lang[$language]['captcha'], 422);
 					}
 				}
-			}elseif(filter_var($variable, FILTER_SANITIZE_STRING) == 'g_recaptcha_response'){
+			}elseif($clean_key == 'g_recaptcha_response'){
                 if($use_reCaptcha){
                     $response = $reCaptcha->verifyResponse(
                         $_SERVER["REMOTE_ADDR"],
                         $v
                     );
                     if ($response == null || (!$response->success)) {
-                        $output = json_encode(array('type'=>'error', 'text' => $lang[$language]['captcha']));
-                        die($output);
+                        pix_send_response('error', $lang[$language]['captcha'], 422);
                     }
                 }
             }else{
-				$o_string1 .= filter_var($variable, FILTER_SANITIZE_STRING) . ': '. filter_var($v, FILTER_SANITIZE_STRING) ." -  \n";
-				$o_string .= "<b>".filter_var($variable, FILTER_SANITIZE_STRING) . '</b>: '. filter_var($v, FILTER_SANITIZE_STRING) ." -  <br>";
-				if(strtolower(filter_var($variable, FILTER_SANITIZE_STRING)) == 'email'){
-					$user_Email = $v;
-					if(!validMail($user_Email)) //email validation
-					{
-						$output = json_encode(array('type'=>'error', 'text' => $lang[$language]['check_email']));
-						die($output);
-					}
+				$o_string1 .= $clean_key . ': '. $clean_value ." -  \n";
+				$o_string .= "<b>".$clean_key . '</b>: '. $clean_value ." -  <br>";
+				if(strtolower($clean_key) == 'email'){
+					$user_Email = $clean_value;
 				}else{
-					$pix_extra[filter_var($variable, FILTER_SANITIZE_STRING)] = filter_var($v, FILTER_SANITIZE_STRING);
+					$pix_extra[$clean_key] = $clean_value;
 				}
 			}
 		}
@@ -181,7 +237,7 @@ if($_POST)
 			require 'phpmailer/PHPMailerAutoload.php';
 			$mail = new PHPMailer;
 
-			$final_msg = "\n"."Nov� popt�vka,"."<br>";
+			$final_msg = "\n"."Nová poptávka,"."<br>";
 			$final_msg .= $o_string_html;
 
 			//$mail->SMTPDebug = 3;                               // Enable verbose debug output
