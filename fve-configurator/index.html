@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FVE konfigurátor</title>
+  <style>
+    :root {
+      --accent: #b5e126;
+      --bg: #f6f7fb;
+      --card-bg: #ffffff;
+      --text: #1e1f24;
+      --muted: #6b7280;
+      --border: #e6e8ef;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(14px, 1.2vw, 18px);
+      color: var(--text);
+      background: var(--bg);
+    }
+    h1, h2, h3 {
+      margin: 0 0 12px 0;
+      font-weight: 700;
+      font-size: clamp(18px, 2vw, 28px);
+    }
+    p { margin: 0 0 12px 0; color: var(--muted); }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--card-bg);
+      padding: 20px 24px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .logo {
+      height: 52px;
+      width: auto;
+      display: none;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #111;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.85em;
+    }
+    .grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 960px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    label { font-weight: 600; }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 1em;
+      min-height: 44px;
+    }
+    input[type="range"] { width: 100%; }
+    .toggle {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .toggle button {
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      min-height: 44px;
+      font-weight: 600;
+    }
+    .toggle button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #111;
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .summary-item {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fbfbfd;
+      font-size: 0.95em;
+    }
+    .price-box {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .price-card {
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      text-align: center;
+    }
+    .price-card strong { font-size: 1.2em; display: block; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95em;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    th { background: #f1f4f9; }
+    .note {
+      margin-top: 16px;
+      font-size: 0.9em;
+      color: var(--muted);
+    }
+    .error {
+      background: #ffe7e7;
+      border: 1px solid #f4b6b6;
+      color: #9b1c1c;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .btn {
+      background: var(--accent);
+      border: none;
+      color: #111;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      min-height: 44px;
+      font-weight: 700;
+      width: 100%;
+    }
+    .btn[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <img id="brandLogo" class="logo" alt="Logo" />
+      <div>
+        <span class="badge" id="brandNameBadge">FVE konfigurátor</span>
+        <h1 id="headline">Konfigurátor fotovoltaiky</h1>
+        <p id="subhead">Ceny a pravidla jsou načítány z XLSX ceníku.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="error" id="adminError"></div>
+
+        <h2>Vstupy konfigurace</h2>
+        <div class="form-row">
+          <label for="segment">Segment</label>
+          <select id="segment"></select>
+        </div>
+
+        <div class="form-row">
+          <label for="kwp">Velikost systému (kWp)</label>
+          <input type="range" id="kwpRange" min="3" max="50" step="0.1" />
+          <input type="number" id="kwpInput" min="3" max="50" step="0.1" />
+        </div>
+
+        <div class="form-row">
+          <label>Systém</label>
+          <div class="checkbox-row">
+            <input type="checkbox" id="hasBattery" />
+            <label for="hasBattery">S baterií (Victron)</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="region">Kraj instalace</label>
+          <select id="region"></select>
+        </div>
+
+        <div class="form-row checkbox-row">
+          <input type="checkbox" id="hasLps" />
+          <label for="hasLps">Na budově je hromosvod (LPS)</label>
+        </div>
+
+        <div class="form-row checkbox-row">
+          <input type="checkbox" id="isLiving" />
+          <label for="isLiving">Budova pro bydlení</label>
+        </div>
+
+        <div class="form-row">
+          <label>Typ zákazníka</label>
+          <div class="toggle" id="customerTypeToggle">
+            <button type="button" data-value="B2C" class="active">B2C</button>
+            <button type="button" data-value="B2B">B2B</button>
+          </div>
+        </div>
+
+        <h3>Odeslání konfigurace</h3>
+        <div class="form-row">
+          <label for="customerEmail">E-mail zákazníka *</label>
+          <input type="email" id="customerEmail" placeholder="email@domena.cz" />
+        </div>
+        <div class="form-row">
+          <label for="customerName">Jméno (volitelně)</label>
+          <input type="text" id="customerName" placeholder="Jméno a příjmení" />
+        </div>
+        <div class="form-row checkbox-row">
+          <input type="checkbox" id="gdprConsent" />
+          <label for="gdprConsent">Souhlasím se zpracováním osobních údajů</label>
+        </div>
+        <button class="btn" id="sendBtn">Odeslat konfiguraci e-mailem</button>
+        <p class="note">Odeslání probíhá přes firemní webhook.</p>
+      </div>
+
+      <div class="card">
+        <h2>Souhrn</h2>
+        <div class="summary" id="summary"></div>
+        <div class="price-box" id="priceBox"></div>
+        <h3>Rozpad položek</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Položka</th>
+              <th>Množství</th>
+              <th>Jedn. cena bez DPH</th>
+              <th>Celkem bez DPH</th>
+            </tr>
+          </thead>
+          <tbody id="itemsTable"></tbody>
+        </table>
+        <p class="note">Jedná se o orientační kalkulaci.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
