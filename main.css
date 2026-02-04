@@ -16,7 +16,7 @@
         min-height: 100%; /* enforce height */
     }
 
-    body { font-family: 'Open Sans',sans-serif !important;
+    body { font-family: 'Montserrat',sans-serif !important;
         /* Support for all WebKit browsers. */
         -webkit-font-smoothing: antialiased;
         /* Support for Safari and Chrome. */

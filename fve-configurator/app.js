@@ -54,6 +54,25 @@ function debounce(fn, wait) {
   };
 }
 
+function waitForXlsx(timeoutMs) {
+  var waited = 0;
+  return new Promise(function (resolve, reject) {
+    function tick() {
+      if (window.XLSX) {
+        resolve();
+        return;
+      }
+      waited += 100;
+      if (waited >= timeoutMs) {
+        reject(new Error("Knihovna XLSX se nepodařila načíst."));
+        return;
+      }
+      setTimeout(tick, 100);
+    }
+    tick();
+  });
+}
+
 var state = {
   meta: {},
   items: {},
@@ -578,13 +597,16 @@ function handleSend() {
 
 function init() {
   var query = parseQuery();
-  loadConfig(query)
+  waitForXlsx(5000)
+    .then(function () {
+      return loadConfig(query);
+    })
     .then(function () {
       initUI(query);
       render();
     })
     .catch(function (err) {
-      setAdminError("admin error: " + err.message);
+      setAdminError("admin error: " + err.message + " Nahrajte pricing.xlsx do /fve-configurator/configs/.");
     });
 }
 

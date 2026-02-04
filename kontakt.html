@@ -287,15 +287,17 @@ svg {
       </p>
       <form class="pix-form-style pixfort-form pix-padding-top-20 pix-form-light-white-bg ui-sortable ui-droppable" pix-popup="#popup_thank_you" pix-redirect="" pix-form-type="smtp">
        <div class="form-group">
-            <input type="text" class="form-control" name="name" id="name" placeholder="Jméno a příjmení" required="">
+            <input type="text" class="form-control" name="name" id="name" placeholder="Jméno a příjmení" autocomplete="name" required="">
           </div>
             <div class="form-group">
-             <input type="email" class="form-control" name="email" id="email" placeholder="Emailová adresa" required="">
+             <input type="email" class="form-control" name="email" id="email" placeholder="Emailová adresa" autocomplete="email" required="">
             </div>
             <div class="form-group">
-        <input type="text" name="phone" class="form-control" id="phone" placeholder="Telefonní číslo" required="">
+        <input type="tel" name="phone" class="form-control" id="phone" placeholder="Telefonní číslo (+420…)" autocomplete="tel" inputmode="tel" required="">
        </div><div class="form-group"><select class="form-control input-lg" name="select_field" required=""><option value="">O co máte zájem?</option><option>Soběstačný dům - Novostavba</option><option>Soběstačný dům - Rekonstrukce</option><option>Popíšu ve zprávě...</option></select></div>
-            <div class="form-group"><textarea class="form-control" rows="5" id="message" name="message" placeholder="Popište nám jaká je Vaše představa..." required=""></textarea></div><button type="submit" class="btn blue-neon-bg pix-white btn-block small-text normal btn-xl" style="background-color: rgb(181, 225, 38);"><span class="pix_edit_text"><b style="color: rgb(57, 57, 57);">Mám zájem!</b></span></button>
+            <div class="form-group"><textarea class="form-control" rows="5" id="message" name="message" placeholder="Popište nám jaká je Vaše představa..." required=""></textarea></div>
+            <button type="submit" class="btn blue-neon-bg pix-white btn-block small-text normal btn-xl" style="background-color: rgb(181, 225, 38);"><span class="pix_edit_text"><b style="color: rgb(57, 57, 57);">Mám zájem!</b></span></button>
+            <small class="pix-gray">Ozveme se nejpozději do 1 pracovního dne.</small>
          </form>
          <p class="pix-black-gray-light">
           <span class="pix_edit_text"><a href="https://plushouse.cz/zasady_ochrany_os_udaju.html" target="_blank">Odesláním formuláře uděluji souhlas společnosti PLUS HOUSE s.r.o. ke zpracování svých osobních údajů v souladu s evropským nařízením GDPR.</a></span>
