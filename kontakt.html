@@ -294,7 +294,24 @@ svg {
             </div>
             <div class="form-group">
         <input type="tel" name="phone" class="form-control" id="phone" placeholder="Telefonní číslo (+420…)" autocomplete="tel" inputmode="tel" required="">
-       </div><div class="form-group"><select class="form-control input-lg" name="select_field" required=""><option value="">O co máte zájem?</option><option>Soběstačný dům - Novostavba</option><option>Soběstačný dům - Rekonstrukce</option><option>Popíšu ve zprávě...</option></select></div>
+       </div>
+       <div class="form-group">
+        <select class="form-control input-lg" name="contact_preference">
+          <option value="">Preferovaný způsob kontaktu</option>
+          <option>Telefon</option>
+          <option>Email</option>
+          <option>Nezáleží</option>
+        </select>
+       </div>
+       <div class="form-group">
+        <select class="form-control input-lg" name="contact_time">
+          <option value="">Kdy vás můžeme kontaktovat?</option>
+          <option>Dopoledne (8–12)</option>
+          <option>Odpoledne (12–16)</option>
+          <option>Večer (16–19)</option>
+        </select>
+       </div>
+       <div class="form-group"><select class="form-control input-lg" name="select_field" required=""><option value="">O co máte zájem?</option><option>Soběstačný dům - Novostavba</option><option>Soběstačný dům - Rekonstrukce</option><option>Popíšu ve zprávě...</option></select></div>
             <div class="form-group"><textarea class="form-control" rows="5" id="message" name="message" placeholder="Popište nám jaká je Vaše představa..." required=""></textarea></div>
             <button type="submit" class="btn blue-neon-bg pix-white btn-block small-text normal btn-xl" style="background-color: rgb(181, 225, 38);"><span class="pix_edit_text"><b style="color: rgb(57, 57, 57);">Mám zájem!</b></span></button>
             <small class="pix-gray">Ozveme se nejpozději do 1 pracovního dne.</small>
