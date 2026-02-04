@@ -1,0 +1,25 @@
+{
+  "categories": [
+    {
+      "id": "chytra-domacnost",
+      "label": "Chytrá domácnost"
+    },
+    {
+      "id": "fve",
+      "label": "FVE"
+    },
+    {
+      "id": "clenstvi-house",
+      "label": "Členství +House"
+    },
+    {
+      "id": "automatizace",
+      "label": "Automatizace"
+    },
+    {
+      "id": "elektroinstalace",
+      "label": "Elektroinstalace"
+    }
+  ],
+  "posts": []
+}

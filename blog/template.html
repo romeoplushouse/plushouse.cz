@@ -3,28 +3,24 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Ceník služeb | PlusHouse</title>
-    <meta name="description" content="Aktuální ceník služeb PlusHouse. Přehledně a srozumitelně na jednom místě.">
-    <meta name="keywords" content="ceník, služby, PlusHouse">
-    <meta property="og:title" content="Ceník služeb | PlusHouse">
-    <meta property="og:site_name" content="PlusHouse">
-    <meta property="og:url" content="https://plushouse.cz/cenik.html">
-    <meta property="og:description" content="Aktuální ceník služeb PlusHouse. Přehledně a srozumitelně na jednom místě.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://www.plushouse.cz/uploads/uploads/ogfoto.jpg">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/pix_style.css" />
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <link rel="stylesheet" type="text/css" href="css/font-style.css" />
-    <link href="css/animations.min.css" rel="stylesheet" type="text/css" media="all" />
-    <!--[if IE]>
-        <link rel="stylesheet" type="text/css" href="css/ie-fix.css" />
-    <![endif]-->
-    <link rel="apple-touch-icon" sizes="180x180" href="uploads/uploads/ico/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="uploads/uploads/ico/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="uploads/uploads/ico/favicon-96x96.png">
+    <title>Titulek článku | PlusHouse Blog</title>
+    <meta name="description" content="Krátký popis článku.">
+    <meta name="keywords" content="blog, PlusHouse">
+    <meta name="blog:title" content="Titulek článku">
+    <meta name="blog:category" content="chytra-domacnost">
+    <meta name="blog:excerpt" content="Krátký popis článku.">
+    <meta name="blog:cover" content="https://www.plushouse.cz/blog/img/hero.jpg">
+    <meta name="blog:published_at" content="2024-01-01">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/pix_style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/css/font-style.css" />
+    <link href="/css/animations.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/uploads/uploads/ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/uploads/uploads/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/uploads/uploads/ico/favicon-96x96.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
     <script>
@@ -37,6 +33,7 @@
     </script>
 </head>
 <body>
+    <!-- header copied from main site -->
     <div class="pix_section pix_nav_menu normal pix-padding-v-20 pix-over-header pix_scroll_header slow-mo" data-scroll-bg="#000000" id="section_1" style="background-repeat: repeat-x; padding-top: 20px; padding-bottom: 20px; display: block;">
         <div class="container">
             <div class="row">
@@ -52,7 +49,7 @@
                                         <span class="icon-bar"></span>
                                     </button>
                                     <a class="navbar-brand logo-img logo-img-a pix-adjust-height" href="https://www.plushouse.cz/">
-                                        <img src="uploads/plushouse-RSF.png" alt="PlusHouse" class="img-responsive pix-logo-img"></a>
+                                        <img src="/uploads/plushouse-RSF.png" alt="PlusHouse" class="img-responsive pix-logo-img"></a>
                                 </div>
                             </div>
                         </nav>
@@ -105,28 +102,29 @@
         </div>
     </div>
 
-    <div class="pix_section pix-padding-v-100" id="section_cenik" style="background-color: #f7f7f7; padding-top: 120px; padding-bottom: 120px;">
+    <div class="pix_section pix-padding-v-100" style="background-color: #f7f7f7; padding-top: 120px; padding-bottom: 120px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
-                    <h2 class="pix-navy-blue-2" style="margin-top: 30px;">Ceník služeb</h2>
-                    <p class="pix-gray">Pokud potřebujete orientační kalkulaci nebo individuální nabídku, kontaktujte nás a připravíme ji obratem.</p>
-                    <a href="https://www.plushouse.cz/kontakt" class="btn pix-white btn-md pix-margin-top-10" style="background-color: rgb(181, 225, 38); color: rgb(57, 57, 57);">Kontaktovat</a>
+                    <h2 class="pix-navy-blue-2">Titulek článku</h2>
+                    <p class="pix-gray">Kategorie: Chytrá domácnost • Datum: 2024-01-01</p>
                 </div>
             </div>
-            <div class="row pix-padding-top-40">
-                <div class="col-md-12">
-                    <div id="cenik-loading" class="text-center pix-gray">Načítám ceník…</div>
-                    <div id="cenik-table" class="table-responsive"></div>
-                    <div id="cenik-fallback" class="text-center pix-gray" style="display: none;">
-                        Aktuální ceník je připravovaný. Nahrajte prosím soubor <strong>data/cenik.xlsx</strong> nebo <strong>cenik.xlsx</strong> do kořene webu.
-                    </div>
+            <div class="row pix-padding-top-30">
+                <div class="col-md-10 col-md-offset-1">
+                    <img src="https://www.plushouse.cz/blog/img/hero.jpg" alt="Titulek článku" class="img-responsive" style="border-radius: 8px;">
+                </div>
+            </div>
+            <div class="row pix-padding-top-30">
+                <div class="col-md-10 col-md-offset-1 pix-gray">
+                    <p>Sem vložte text článku. Můžete používat běžné HTML značky, včetně <strong>tučného</strong> textu, odkazů a obrázků.</p>
+                    <p><img src="https://www.plushouse.cz/blog/img/vlozeny-obrazek.jpg" alt="Popis" class="img-responsive" style="border-radius: 8px; margin: 20px 0;"></p>
                 </div>
             </div>
         </div>
     </div>
 
-        <div class="pix_section blog-strip" id="blog-strip">
+    <div class="pix_section blog-strip" id="blog-strip">
         <div class="container">
             <div class="blog-strip__inner">
                 <div class="blog-strip__header">
@@ -137,7 +135,8 @@
             </div>
         </div>
     </div>
-<div class="pix_section pix-padding-v-60 pix-gray-bg" style="background-color: #23272D;">
+
+    <div class="pix_section pix-padding-v-60 pix-gray-bg" style="background-color: #23272D;">
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-xs-12 col-sm-3 column ui-droppable">
@@ -174,7 +173,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-7 column ui-droppable col-md-5">
                     <div class="pix-content pix-padding-v-30">
-                        <a class="pix-inline-block" href="https://www.plushouse.cz/"><img src="uploads/plushouse-RSF.png" alt="PlusHouse" class="img-responsive"></a>
+                        <a class="pix-inline-block" href="https://www.plushouse.cz/"><img src="/uploads/plushouse-RSF.png" alt="PlusHouse" class="img-responsive"></a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-5 column ui-droppable col-md-7" style="display: block;">
@@ -198,59 +197,16 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-    <script src="js/jquery-1.11.2.js"></script>
-    <script src="js/jquery-ui.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/velocity.min.js"></script>
-    <script src="js/velocity.ui.min.js"></script>
-    <script src="js/appear.min.js" type="text/javascript"></script>
-    <script src="js/animations.js" type="text/javascript"></script>
-    <script src="js/plugins.js" type="text/javascript"></script>
-    <script src="js/jquery.fancybox.min.js" type="text/javascript"></script>
-    <script src="js/custom.js"></script>
-    <script>
-        (function () {
-            var loading = document.getElementById('cenik-loading');
-            var tableWrap = document.getElementById('cenik-table');
-            var fallback = document.getElementById('cenik-fallback');
-            function showFallback() {
-                if (loading) loading.style.display = 'none';
-                if (fallback) fallback.style.display = 'block';
-            }
-            function showTable(html) {
-                if (loading) loading.style.display = 'none';
-                if (tableWrap) tableWrap.innerHTML = html;
-            }
-            function loadXlsx(urls, index) {
-                if (index >= urls.length) {
-                    showFallback();
-                    return;
-                }
-                fetch(urls[index], { cache: 'no-store' })
-                    .then(function (response) {
-                        if (!response.ok) {
-                            throw new Error('Ceník nenalezen');
-                        }
-                        return response.arrayBuffer();
-                    })
-                    .then(function (data) {
-                        var workbook = XLSX.read(data, { type: 'array' });
-                        var firstSheetName = workbook.SheetNames[0];
-                        if (!firstSheetName) {
-                            throw new Error('Ceník je prázdný');
-                        }
-                        var worksheet = workbook.Sheets[firstSheetName];
-                        var html = XLSX.utils.sheet_to_html(worksheet, { id: 'cenik-table-main' });
-                        showTable(html);
-                    })
-                    .catch(function () {
-                        loadXlsx(urls, index + 1);
-                    });
-            }
-            loadXlsx(['data/cenik.xlsx', 'cenik.xlsx'], 0);
-        })();
-    </script>
+    <script src="/js/jquery-1.11.2.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/velocity.min.js"></script>
+    <script src="/js/velocity.ui.min.js"></script>
+    <script src="/js/appear.min.js" type="text/javascript"></script>
+    <script src="/js/animations.js" type="text/javascript"></script>
+    <script src="/js/plugins.js" type="text/javascript"></script>
+    <script src="/js/jquery.fancybox.min.js" type="text/javascript"></script>
+    <script src="/js/custom.js"></script>
     <script src="/blog/blog.js"></script>
 </body>
 </html>
