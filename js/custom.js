@@ -50,3 +50,23 @@
 
   document.addEventListener("DOMContentLoaded", initCookieConsent);
 })();
+
+(() => {
+  function bindMenuToggle() {
+    var nav = document.getElementById("pix-navbar-collapse");
+    if (!nav || typeof window.jQuery === "undefined") return;
+    window.jQuery(nav)
+      .on("shown.bs.collapse", function () {
+        document.body.classList.add("menu-open");
+      })
+      .on("hidden.bs.collapse", function () {
+        document.body.classList.remove("menu-open");
+      });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bindMenuToggle);
+  } else {
+    bindMenuToggle();
+  }
+})();
