@@ -111,8 +111,24 @@ function ensure(condition, message) {
   }
 }
 
+function normalizeSheetName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_-]+/g, "");
+}
+
+function getSheet(workbook, name) {
+  var direct = workbook.Sheets[name];
+  if (direct) return direct;
+  var target = normalizeSheetName(name);
+  var match = Object.keys(workbook.Sheets).find(function (key) {
+    return normalizeSheetName(key) === target;
+  });
+  return match ? workbook.Sheets[match] : null;
+}
+
 function sheetToObjects(workbook, name) {
-  var sheet = workbook.Sheets[name];
+  var sheet = getSheet(workbook, name);
   if (!sheet) return [];
   return XLSX.utils.sheet_to_json(sheet, { defval: "" });
 }
@@ -163,7 +179,7 @@ function loadConfig(query) {
         "Meta"
       ];
       requiredSheets.forEach(function (name) {
-        ensure(workbook.Sheets[name], "Chybí list: " + name);
+        ensure(getSheet(workbook, name), "Chybí list: " + name);
       });
 
       state.items = mapItems(sheetToObjects(workbook, "Items"));

@@ -3,15 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Blog | PlusHouse</title>
-    <meta name="description" content="Novinky a články PlusHouse.">
-    <meta name="keywords" content="blog, PlusHouse, FVE, chytrá domácnost">
-    <meta property="og:title" content="Blog | PlusHouse">
-    <meta property="og:site_name" content="PlusHouse">
-    <meta property="og:url" content="https://plushouse.cz/blog">
-    <meta property="og:description" content="Novinky a články PlusHouse.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://www.plushouse.cz/uploads/uploads/ogfoto.jpg">
+    <title>Fotovoltaika (FVE): návrh, montáž a chytré využití energie</title>
+    <meta name="description" content="Fotovoltaika na klíč: návrh FVE, bezpečné zapojení, ochrany, monitoring a řízení spotřeby. Využij přebytky přes Loxone a energy management.">
+    <meta name="keywords" content="blog, PlusHouse">
+    <meta name="blog:title" content="Fotovoltaika (FVE): návrh, montáž a chytré využití energie">
+    <meta name="blog:category" content="fve">
+    <meta name="blog:excerpt" content="Fotovoltaika na klíč: návrh FVE, bezpečné zapojení, ochrany, monitoring a řízení spotřeby. Využij přebytky přes Loxone a energy management.">
+    <meta name="blog:cover" content="https://www.plushouse.cz/blog/img/fotovoltaika-fve-hero.jpg">
+    <meta name="blog:published_at" content="">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.min.css" />
@@ -19,50 +18,9 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/css/font-style.css" />
     <link href="/css/animations.min.css" rel="stylesheet" type="text/css" media="all" />
-    <style>
-        .blog-controls {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .blog-controls select,
-        .blog-controls input {
-            min-width: 220px;
-            border-radius: 999px;
-            border: 1px solid #e5e7eb;
-            padding: 10px 16px;
-        }
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin-top: 30px;
-        }
-        .blog-card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-            height: 100%;
-        }
-        .blog-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .blog-card-body {
-            padding: 18px;
-        }
-        .blog-card-body h4 {
-            margin-top: 0;
-        }
-        .blog-meta {
-            color: #6b7280;
-            font-size: 13px;
-        }
-    </style>
+    <link rel="apple-touch-icon" sizes="180x180" href="/uploads/uploads/ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/uploads/uploads/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/uploads/uploads/ico/favicon-96x96.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
     <script>
@@ -139,28 +97,39 @@
         </div>
     </div>
 
-    <div class="pix_section pix-padding-v-100" id="section_blog" style="background-color: #f7f7f7; padding-top: 120px; padding-bottom: 120px;">
+    <div class="pix_section pix-padding-v-100" style="background-color: #f7f7f7; padding-top: 120px; padding-bottom: 120px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
-                    <h2 class="pix-navy-blue-2" style="margin-top: 40px;">Blog PlusHouse</h2>
-                    <p class="pix-gray">Novinky a praktické rady z oblasti chytrých domů, FVE a automatizace.</p>
+                    <h2 class="pix-navy-blue-2" style="margin-top: 40px;">Fotovoltaika (FVE), která dává smysl: výkon, bezpečnost a využití</h2>
+                    <p class="pix-gray">Kategorie: FVE</p>
                 </div>
             </div>
             <div class="row pix-padding-top-30">
-                <div class="col-md-12">
-                    <div class="blog-controls">
-                        <input type="search" id="blogSearch" placeholder="Hledat v článcích..." />
-                        <select id="blogCategory">
-                            <option value="">Všechny kategorie</option>
-                        </select>
-                    </div>
+                <div class="col-md-10 col-md-offset-1">
+                    <img src="https://www.plushouse.cz/blog/img/fotovoltaika-fve-hero.jpg" alt="Fotovoltaika (FVE), která dává smysl: výkon, bezpečnost a využití" class="img-responsive" style="border-radius: 8px;">
                 </div>
             </div>
             <div class="row pix-padding-top-30">
-                <div class="col-md-12">
-                    <div class="blog-grid" id="blogGrid"></div>
-                    <div id="blogEmpty" class="pix-gray text-center" style="display:none; margin-top: 20px;">Zatím nemáme žádné články.</div>
+                <div class="col-md-10 col-md-offset-1 pix-gray">
+                    <p><strong>Perex:</strong> Fotovoltaika (FVE) není jen o panelech. Dobře navržená fotovoltaická elektrárna řeší bezpečnost DC části, přepětí, jištění, monitoring a hlavně využití vyrobené energie. U FVE rozhoduje detail: návrh stringů, volba střídače, ochrany, práce s přetoky a chytré řízení spotřeby.</p>
+                    <p><img src="https://www.plushouse.cz/blog/img/fotovoltaika-fve-inline.jpg" alt="Fotovoltaika (FVE), která dává smysl: výkon, bezpečnost a využití" class="img-responsive" style="border-radius: 8px; margin: 20px 0;"></p>
+<h3 class="pix-navy-blue-2">Co je FVE a jak funguje fotovoltaická elektrárna</h3>
+<p>Fotovoltaická elektrárna (FVE) vyrábí elektřinu ze slunce. Prakticky to znamená:</p>
+<ul>
+<li>panely vyrobí DC napětí</li>
+<li>střídač/měnič to převede na AC</li>
+<li>energie se spotřebuje v objektu nebo se (pokud to je povoleno) dodává do sítě</li>
+<li>systém se monitoruje a řídí</li>
+</ul>
+<p>Zásadní otázka není „kolik kWp“, ale kolik z výroby reálně využiješ.</p>
+<h3 class="pix-navy-blue-2">Jak navrhujeme fotovoltaiku: od střechy po rozvaděč</h3>
+<p>Střecha a konstrukce: orientace a sklony, statika, kotvení, prostupy a bezpečné vedení kabelů.</p>
+<p>DC část: nejvíc podceňovaná část FVE – správné zapojení stringů, odpínače a jištění, přepěťové ochrany, správné trasy kabelů a značení.</p>
+<p>AC část: jističe, chrániče, přepětí, připojení – správné jištění, vhodné proudové chrániče, koordinace přepěťových ochran a přehledný rozvaděč.</p>
+<p>Monitoring a diagnostika: bez monitoringu nepoznáš pokles výroby, chyby, degradaci výkonu ani špatné nastavení.</p>
+<h3 class="pix-navy-blue-2">FAQ</h3><div><p><strong>Kolik kWp potřebuji?</strong><br>Záleží na spotřebě, typu objektu a možnosti využít výrobu. Kvalitní návrh vychází z dat, ne z odhadu.</p><p><strong>Vyplatí se fotovoltaika i bez baterie?</strong><br>Ano, pokud umíš spotřebovat výrobu přes den (např. TUV, provoz, technologie).</p><p><strong>Jak poznám, že FVE funguje správně?</strong><br>Monitoring, logy, pravidelná kontrola a smysluplné řízení spotřeby.</p></div>
+<p><strong>Chceš fotovoltaiku (FVE), která bude bezpečná, přehledná a dlouhodobě funkční? Navrhneme FVE, uděláme montáž i zapojení, nastavíme monitoring a řízení spotřeby.</strong></p>
                 </div>
             </div>
         </div>
@@ -243,7 +212,7 @@
     <script src="/js/jquery-ui.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/velocity.min.js"></script>
-    <script src="/js/velocity.ui.min.js"></script>
+    <script src="/js/velocity.ui.min.js" type="text/javascript"></script>
     <script src="/js/appear.min.js" type="text/javascript"></script>
     <script src="/js/animations.js" type="text/javascript"></script>
     <script src="/js/plugins.js" type="text/javascript"></script>

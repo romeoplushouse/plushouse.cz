@@ -3,15 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Blog | PlusHouse</title>
-    <meta name="description" content="Novinky a články PlusHouse.">
-    <meta name="keywords" content="blog, PlusHouse, FVE, chytrá domácnost">
-    <meta property="og:title" content="Blog | PlusHouse">
-    <meta property="og:site_name" content="PlusHouse">
-    <meta property="og:url" content="https://plushouse.cz/blog">
-    <meta property="og:description" content="Novinky a články PlusHouse.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://www.plushouse.cz/uploads/uploads/ogfoto.jpg">
+    <title>Elektroinstalace: návrh, rekonstrukce a rozvaděče bezpečně</title>
+    <meta name="description" content="Elektroinstalace pro RD i firmy: návrh okruhů, rozvaděč, jištění, chrániče, přepětí, příprava pro FVE, TČ a wallbox. Dokumentace a revize.">
+    <meta name="keywords" content="blog, PlusHouse">
+    <meta name="blog:title" content="Elektroinstalace: návrh, rekonstrukce a rozvaděče bezpečně">
+    <meta name="blog:category" content="elektroinstalace">
+    <meta name="blog:excerpt" content="Elektroinstalace pro RD i firmy: návrh okruhů, rozvaděč, jištění, chrániče, přepětí, příprava pro FVE, TČ a wallbox. Dokumentace a revize.">
+    <meta name="blog:cover" content="https://www.plushouse.cz/blog/img/elektroinstalace-hero.jpg">
+    <meta name="blog:published_at" content="">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.min.css" />
@@ -19,50 +18,9 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/css/font-style.css" />
     <link href="/css/animations.min.css" rel="stylesheet" type="text/css" media="all" />
-    <style>
-        .blog-controls {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .blog-controls select,
-        .blog-controls input {
-            min-width: 220px;
-            border-radius: 999px;
-            border: 1px solid #e5e7eb;
-            padding: 10px 16px;
-        }
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
-            margin-top: 30px;
-        }
-        .blog-card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-            height: 100%;
-        }
-        .blog-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .blog-card-body {
-            padding: 18px;
-        }
-        .blog-card-body h4 {
-            margin-top: 0;
-        }
-        .blog-meta {
-            color: #6b7280;
-            font-size: 13px;
-        }
-    </style>
+    <link rel="apple-touch-icon" sizes="180x180" href="/uploads/uploads/ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/uploads/uploads/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/uploads/uploads/ico/favicon-96x96.png">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
     <script>
@@ -139,28 +97,36 @@
         </div>
     </div>
 
-    <div class="pix_section pix-padding-v-100" id="section_blog" style="background-color: #f7f7f7; padding-top: 120px; padding-bottom: 120px;">
+    <div class="pix_section pix-padding-v-100" style="background-color: #f7f7f7; padding-top: 120px; padding-bottom: 120px;">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 col-xs-12 text-center">
-                    <h2 class="pix-navy-blue-2" style="margin-top: 40px;">Blog PlusHouse</h2>
-                    <p class="pix-gray">Novinky a praktické rady z oblasti chytrých domů, FVE a automatizace.</p>
+                    <h2 class="pix-navy-blue-2" style="margin-top: 40px;">Elektroinstalace: bezpečný základ pro dům, firmu i chytré technologie</h2>
+                    <p class="pix-gray">Kategorie: Elektroinstalace</p>
                 </div>
             </div>
             <div class="row pix-padding-top-30">
-                <div class="col-md-12">
-                    <div class="blog-controls">
-                        <input type="search" id="blogSearch" placeholder="Hledat v článcích..." />
-                        <select id="blogCategory">
-                            <option value="">Všechny kategorie</option>
-                        </select>
-                    </div>
+                <div class="col-md-10 col-md-offset-1">
+                    <img src="https://www.plushouse.cz/blog/img/elektroinstalace-hero.jpg" alt="Elektroinstalace: bezpečný základ pro dům, firmu i chytré technologie" class="img-responsive" style="border-radius: 8px;">
                 </div>
             </div>
             <div class="row pix-padding-top-30">
-                <div class="col-md-12">
-                    <div class="blog-grid" id="blogGrid"></div>
-                    <div id="blogEmpty" class="pix-gray text-center" style="display:none; margin-top: 20px;">Zatím nemáme žádné články.</div>
+                <div class="col-md-10 col-md-offset-1 pix-gray">
+                    <p><strong>Perex:</strong> Kvalitní elektroinstalace je základ bezpečného a funkčního objektu. Nejde jen o zásuvky a světla – rozhoduje návrh okruhů, rozvaděč, jištění, proudové chrániče, přepěťové ochrany a připravenost na budoucí technologie jako FVE, tepelné čerpadlo nebo wallbox.</p>
+                    <p><img src="https://www.plushouse.cz/blog/img/elektroinstalace-inline.jpg" alt="Elektroinstalace: bezpečný základ pro dům, firmu i chytré technologie" class="img-responsive" style="border-radius: 8px; margin: 20px 0;"></p>
+<h3 class="pix-navy-blue-2">Co zahrnuje moderní elektroinstalace</h3>
+<p>Elektroinstalace dnes typicky řeší více okruhů a vyšší nároky na bezpečnost, citlivou elektroniku a potřebu přepěťové ochrany, technologie (FVE, TČ, rekuperace, EV), datové rozvody a přípravu pro automatizaci.</p>
+<p>Elektroinstalace se musí navrhnout tak, aby byla přehledná, servisovatelná a rozšiřitelná.</p>
+<h3 class="pix-navy-blue-2">Rozvaděč: srdce elektroinstalace</h3>
+<p>Dobře udělaný rozvaděč znamená logické členění okruhů, správné jištění, správně zvolený proudový chránič, přepěťové ochrany a jejich koordinaci, jasné popisy, rezervu a pořádek.</p>
+<p>U rozvaděče platí jednoduché pravidlo: co je nepřehledné dnes, bude neservisovatelné zítra.</p>
+<h3 class="pix-navy-blue-2">Rekonstrukce elektroinstalace vs. novostavba</h3>
+<p>Rekonstrukce elektroinstalace často řeší stav starého vedení, kapacitu přívodu, sjednocení rozvaděče, doplnění přepěťových ochran a přípravu pro FVE a další technologie.</p>
+<p>U novostavby je nejdůležitější návrh dopředu: okruhy, rezervy a budoucí rozšíření, příprava pro chytrou domácnost (např. Loxone), datové rozvody a technická místnost.</p>
+<h3 class="pix-navy-blue-2">Dokumentace a revize</h3>
+<p>U elektroinstalace je standardem dokumentace zapojení a rozvaděče, popisy okruhů a výchozí revize. To není „papír navíc“ – je to ochrana pro majitele i firmu a základ pro budoucí servis.</p>
+<h3 class="pix-navy-blue-2">FAQ</h3><div><p><strong>Proč dělit okruhy víc než dřív?</strong><br>Protože dnešní domy mají víc spotřebičů, citlivější elektroniku a vyšší požadavky na komfort a bezpečnost.</p><p><strong>Má smysl dělat přípravu na FVE a wallbox?</strong><br>Ano – nejlevnější je to udělat ve fázi návrhu a rozvaděče.</p></div>
+<p><strong>Chceš elektroinstalaci, která bude bezpečná, přehledná a připravená na FVE i chytrou domácnost? Uděláme návrh, rozvaděč, realizaci i revizi.</strong></p>
                 </div>
             </div>
         </div>
@@ -243,7 +209,7 @@
     <script src="/js/jquery-ui.js"></script>
     <script src="/js/bootstrap.js"></script>
     <script src="/js/velocity.min.js"></script>
-    <script src="/js/velocity.ui.min.js"></script>
+    <script src="/js/velocity.ui.min.js" type="text/javascript"></script>
     <script src="/js/appear.min.js" type="text/javascript"></script>
     <script src="/js/animations.js" type="text/javascript"></script>
     <script src="/js/plugins.js" type="text/javascript"></script>
