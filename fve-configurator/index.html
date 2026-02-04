@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FVE konfigurátor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #B5E126;
+      --bg: #f7f7f7;
+      --card-bg: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --border: #e6e8ef;
+      --shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+      font-size: clamp(14px, 1.2vw, 18px);
+      color: var(--text);
+      background: var(--bg);
+    }
+    h1, h2, h3 {
+      margin: 0 0 12px 0;
+      font-weight: 700;
+      font-size: clamp(18px, 2vw, 28px);
+    }
+    p { margin: 0 0 12px 0; color: var(--muted); }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--card-bg);
+      padding: 20px 24px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .logo {
+      height: 52px;
+      width: auto;
+      display: none;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #111;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.85em;
+    }
+    .grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 960px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    label { font-weight: 600; }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 1em;
+      min-height: 44px;
+    }
+    input[type="range"] { width: 100%; }
+    .toggle {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .toggle button {
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      min-height: 44px;
+      font-weight: 600;
+    }
+    .toggle button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #111;
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .summary-item {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fbfbfd;
+      font-size: 0.95em;
+    }
+    .price-box {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .price-card {
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      text-align: center;
+    }
+    .price-card strong { font-size: 1.2em; display: block; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95em;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    th { background: #f1f4f9; }
+    .note {
+      margin-top: 16px;
+      font-size: 0.9em;
+      color: var(--muted);
+    }
+    .error {
+      background: #ffe7e7;
+      border: 1px solid #f4b6b6;
+      color: #9b1c1c;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .btn {
+      background: var(--accent);
+      border: none;
+      color: #111;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      min-height: 44px;
+      font-weight: 700;
+      width: 100%;
+    }
+    .btn[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .cookie-consent {
+      position: fixed;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 9999;
+      background: #111827;
+      color: #f9fafb;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+      padding: 18px 22px;
+      font-size: 14px;
+    }
+    .cookie-consent__content {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .cookie-consent__text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      line-height: 1.5;
+    }
+    .cookie-consent__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .cookie-consent__btn {
+      border: none;
+      background: var(--accent);
+      color: #111;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    .cookie-consent__btn--ghost {
+      background: transparent;
+      color: #f9fafb;
+      border: 1px solid rgba(249, 250, 251, 0.4);
+    }
+    .cookie-consent__link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .cookie-consent__link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 640px) {
+      .cookie-consent {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+  </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: 'denied' });
+      gtag('js', new Date());
+
+      gtag('config', 'G-GVQ2MF6LY5');
+    </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <img id="brandLogo" class="logo" alt="Logo" />
+      <div>
+        <span class="badge" id="brandNameBadge">FVE konfigurátor</span>
+        <h1 id="headline">Konfigurátor fotovoltaiky</h1>
+        <p id="subhead">Ceny a pravidla jsou načítány z XLSX ceníku.</p>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="error" id="adminError"></div>
+
+        <h2>Vstupy konfigurace</h2>
+        <div class="form-row">
+          <label for="segment">Segment</label>
+          <select id="segment"></select>
+        </div>
+
+        <div class="form-row">
+          <label for="kwp">Velikost systému (kWp)</label>
+          <input type="range" id="kwpRange" min="3" max="50" step="0.1" />
+          <input type="number" id="kwpInput" min="3" max="50" step="0.1" />
+        </div>
+
+        <div class="form-row">
+          <label>Systém</label>
+          <div class="checkbox-row">
+            <input type="checkbox" id="hasBattery" />
+            <label for="hasBattery">S baterií (Victron)</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="region">Kraj instalace</label>
+          <select id="region"></select>
+        </div>
+
+        <div class="form-row checkbox-row">
+          <input type="checkbox" id="hasLps" />
+          <label for="hasLps">Na budově je hromosvod (LPS)</label>
+        </div>
+
+        <div class="form-row checkbox-row">
+          <input type="checkbox" id="isLiving" />
+          <label for="isLiving">Budova pro bydlení</label>
+        </div>
+
+        <div class="form-row">
+          <label>Typ zákazníka</label>
+          <div class="toggle" id="customerTypeToggle">
+            <button type="button" data-value="B2C" class="active">B2C</button>
+            <button type="button" data-value="B2B">B2B</button>
+          </div>
+        </div>
+
+        <h3>Odeslání konfigurace</h3>
+        <div class="form-row">
+          <label for="customerEmail">E-mail zákazníka *</label>
+          <input type="email" id="customerEmail" placeholder="email@domena.cz" />
+        </div>
+        <div class="form-row">
+          <label for="customerName">Jméno (volitelně)</label>
+          <input type="text" id="customerName" placeholder="Jméno a příjmení" />
+        </div>
+        <div class="form-row checkbox-row">
+          <input type="checkbox" id="gdprConsent" />
+          <label for="gdprConsent">Souhlasím se zpracováním osobních údajů</label>
+        </div>
+        <button class="btn" id="sendBtn">Odeslat konfiguraci e-mailem</button>
+        <p class="note">Odeslání probíhá přes firemní webhook.</p>
+      </div>
+
+      <div class="card">
+        <h2>Souhrn</h2>
+        <div class="summary" id="summary"></div>
+        <div class="price-box" id="priceBox"></div>
+        <h3>Rozpad položek</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Položka</th>
+              <th>Množství</th>
+              <th>Jedn. cena bez DPH</th>
+              <th>Celkem bez DPH</th>
+            </tr>
+          </thead>
+          <tbody id="itemsTable"></tbody>
+        </table>
+        <p class="note">Jedná se o orientační kalkulaci.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="vendor/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    (function () {
+      var CONSENT_KEY = "plushouse_cookie_consent";
+
+      function updateConsent(value) {
+        if (typeof window.gtag === "function") {
+          window.gtag("consent", "update", {
+            analytics_storage: value === "granted" ? "granted" : "denied"
+          });
+        }
+      }
+
+      function createBanner() {
+        var banner = document.createElement("div");
+        banner.className = "cookie-consent";
+        banner.innerHTML = '' +
+          '<div class="cookie-consent__content">' +
+            '<div class="cookie-consent__text">' +
+              '<strong>Používáme cookies</strong>' +
+              '<span>Pomáhají nám zlepšovat web. Souhlas můžete kdykoli změnit v zásadách ochrany osobních údajů.</span>' +
+            '</div>' +
+            '<div class="cookie-consent__actions">' +
+              '<a class="cookie-consent__link" href="https://plushouse.cz/zasady_ochrany_os_udaju.html" target="_blank" rel="noopener">Více informací</a>' +
+              '<button type="button" class="cookie-consent__btn cookie-consent__btn--ghost" data-consent="denied">Odmítnout</button>' +
+              '<button type="button" class="cookie-consent__btn" data-consent="granted">Přijmout</button>' +
+            '</div>' +
+          '</div>';
+
+        banner.addEventListener("click", function (event) {
+          var button = event.target.closest("button[data-consent]");
+          if (!button) return;
+          var consent = button.getAttribute("data-consent");
+          localStorage.setItem(CONSENT_KEY, consent);
+          updateConsent(consent);
+          banner.remove();
+        });
+
+        document.body.appendChild(banner);
+      }
+
+      function initCookieConsent() {
+        var existing = localStorage.getItem(CONSENT_KEY);
+        if (existing) {
+          updateConsent(existing);
+          return;
+        }
+        createBanner();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCookieConsent);
+      } else {
+        initCookieConsent();
+      }
+    })();
+  </script>
+</body>
+</html>
