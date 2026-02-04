@@ -29,7 +29,37 @@ if (!fs.existsSync(inputPath)) {
 }
 
 const workbook = xlsx.readFile(inputPath);
-const sheet = workbook.Sheets[sheetName];
+function normalizeSheetName(name) {
+  return String(name || "")
+    .toLowerCase()
+    .replace(/[\s_-]+/g, "");
+}
+function getSheetByName(workbookObj, name) {
+  const direct = workbookObj.Sheets[name];
+  if (direct) return direct;
+  const target = normalizeSheetName(name);
+  const match = Object.keys(workbookObj.Sheets).find(
+    (key) => normalizeSheetName(key) === target
+  );
+  return match ? workbookObj.Sheets[match] : null;
+}
+function findSheetByColumns(workbookObj, columns) {
+  const keys = Object.keys(workbookObj.Sheets);
+  for (const key of keys) {
+    const sheet = workbookObj.Sheets[key];
+    const rows = xlsx.utils.sheet_to_json(sheet, { defval: "" });
+    if (!rows.length) continue;
+    const header = Object.keys(rows[0]);
+    if (columns.every((col) => header.includes(col))) {
+      return sheet;
+    }
+  }
+  return null;
+}
+let sheet = getSheetByName(workbook, sheetName);
+if (!sheet) {
+  sheet = findSheetByColumns(workbook, requiredColumns);
+}
 if (!sheet) {
   console.error(`Chybí list '${sheetName}' v ${inputPath}.`);
   process.exit(1);
