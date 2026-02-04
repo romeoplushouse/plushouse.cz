@@ -187,7 +187,78 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
+    .cookie-consent {
+      position: fixed;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 9999;
+      background: #111827;
+      color: #f9fafb;
+      border-radius: 16px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+      padding: 18px 22px;
+      font-size: 14px;
+    }
+    .cookie-consent__content {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .cookie-consent__text {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      line-height: 1.5;
+    }
+    .cookie-consent__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .cookie-consent__btn {
+      border: none;
+      background: var(--accent);
+      color: #111;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    .cookie-consent__btn--ghost {
+      background: transparent;
+      color: #f9fafb;
+      border: 1px solid rgba(249, 250, 251, 0.4);
+    }
+    .cookie-consent__link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .cookie-consent__link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 640px) {
+      .cookie-consent {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+      }
+    }
   </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', { analytics_storage: 'denied' });
+      gtag('js', new Date());
+
+      gtag('config', 'G-GVQ2MF6LY5');
+    </script>
 </head>
 <body>
   <div class="wrap">
@@ -287,5 +358,61 @@
 
   <script src="vendor/xlsx.full.min.js"></script>
   <script src="app.js"></script>
+  <script>
+    (function () {
+      var CONSENT_KEY = "plushouse_cookie_consent";
+
+      function updateConsent(value) {
+        if (typeof window.gtag === "function") {
+          window.gtag("consent", "update", {
+            analytics_storage: value === "granted" ? "granted" : "denied"
+          });
+        }
+      }
+
+      function createBanner() {
+        var banner = document.createElement("div");
+        banner.className = "cookie-consent";
+        banner.innerHTML = '' +
+          '<div class="cookie-consent__content">' +
+            '<div class="cookie-consent__text">' +
+              '<strong>Používáme cookies</strong>' +
+              '<span>Pomáhají nám zlepšovat web. Souhlas můžete kdykoli změnit v zásadách ochrany osobních údajů.</span>' +
+            '</div>' +
+            '<div class="cookie-consent__actions">' +
+              '<a class="cookie-consent__link" href="https://plushouse.cz/zasady_ochrany_os_udaju.html" target="_blank" rel="noopener">Více informací</a>' +
+              '<button type="button" class="cookie-consent__btn cookie-consent__btn--ghost" data-consent="denied">Odmítnout</button>' +
+              '<button type="button" class="cookie-consent__btn" data-consent="granted">Přijmout</button>' +
+            '</div>' +
+          '</div>';
+
+        banner.addEventListener("click", function (event) {
+          var button = event.target.closest("button[data-consent]");
+          if (!button) return;
+          var consent = button.getAttribute("data-consent");
+          localStorage.setItem(CONSENT_KEY, consent);
+          updateConsent(consent);
+          banner.remove();
+        });
+
+        document.body.appendChild(banner);
+      }
+
+      function initCookieConsent() {
+        var existing = localStorage.getItem(CONSENT_KEY);
+        if (existing) {
+          updateConsent(existing);
+          return;
+        }
+        createBanner();
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCookieConsent);
+      } else {
+        initCookieConsent();
+      }
+    })();
+  </script>
 </body>
 </html>
