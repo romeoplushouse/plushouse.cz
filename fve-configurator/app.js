@@ -127,6 +127,21 @@ function getSheet(workbook, name) {
   return match ? workbook.Sheets[match] : null;
 }
 
+function findSheetByColumns(workbook, requiredColumns) {
+  var keys = Object.keys(workbook.Sheets);
+  for (var i = 0; i < keys.length; i++) {
+    var sheet = workbook.Sheets[keys[i]];
+    var rows = XLSX.utils.sheet_to_json(sheet, { defval: "" });
+    if (!rows.length) continue;
+    var header = Object.keys(rows[0]);
+    var hasAll = requiredColumns.every(function (col) {
+      return header.indexOf(col) !== -1;
+    });
+    if (hasAll) return sheet;
+  }
+  return null;
+}
+
 function sheetToObjects(workbook, name) {
   var sheet = getSheet(workbook, name);
   if (!sheet) return [];
@@ -182,7 +197,12 @@ function loadConfig(query) {
         ensure(getSheet(workbook, name), "Chybí list: " + name);
       });
 
-      state.items = mapItems(sheetToObjects(workbook, "Items"));
+      var itemsSheet = getSheet(workbook, "Items");
+      if (!itemsSheet) {
+        itemsSheet = findSheetByColumns(workbook, ["key", "name", "price_net"]);
+      }
+      ensure(itemsSheet, "Chybí list: Items");
+      state.items = mapItems(XLSX.utils.sheet_to_json(itemsSheet, { defval: "" }));
       state.systemRules = sheetToObjects(workbook, "SystemRules");
       state.conditionalRules = sheetToObjects(workbook, "ConditionalRules");
       state.regions = sheetToObjects(workbook, "Regions");

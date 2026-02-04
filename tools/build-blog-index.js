@@ -3,6 +3,8 @@ const path = require("path");
 
 const blogDir = path.resolve(__dirname, "..", "blog");
 const indexPath = path.join(blogDir, "index.json");
+const sitemapPath = path.join(blogDir, "sitemap.xml");
+const baseUrl = "https://www.plushouse.cz";
 
 function readMeta(html, name) {
   const regex = new RegExp(`<meta\\s+name=[\"']${name}[\"']\\s+content=[\"']([^\"']*)[\"']\\s*\\/?>`, "i");
@@ -40,7 +42,20 @@ function buildIndex() {
   };
 
   fs.writeFileSync(indexPath, JSON.stringify(output, null, 2), "utf-8");
+  const urls = [
+    { loc: `${baseUrl}/blog`, lastmod: new Date().toISOString() },
+    ...posts.map((post) => ({ loc: post.url, lastmod: post.published_at }))
+  ];
+  const sitemapXml =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls
+      .map((item) => `  <url>\n    <loc>${item.loc}</loc>\n    <lastmod>${item.lastmod}</lastmod>\n  </url>`)
+      .join("\n") +
+    `\n</urlset>\n`;
+  fs.writeFileSync(sitemapPath, sitemapXml, "utf-8");
   console.log(`✔ Blog index updated: ${indexPath}`);
+  console.log(`✔ Blog sitemap updated: ${sitemapPath}`);
 }
 
 buildIndex();
