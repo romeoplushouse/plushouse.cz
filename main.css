@@ -206,6 +206,30 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
+.page-title--offset {
+    margin-top: 80px;
+}
+
+@media (max-width: 991px) {
+    .page-title--offset {
+        margin-top: 60px;
+    }
+}
+
+.pix-header-item {
+    transition: opacity 0.2s ease;
+}
+
+@media (max-width: 991px) {
+    .pix-header-item {
+        display: none;
+    }
+
+    body.menu-open .pix-header-item {
+        display: block;
+    }
+}
+
 .fve-configurator-card {
     background: #f9fafb;
     border-radius: 16px;
