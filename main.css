@@ -245,6 +245,17 @@
     background: #fff;
 }
 
+@media (min-width: 992px) {
+    .fve-configurator-card--wide {
+        width: calc(100% + 150px);
+        margin-left: -75px;
+    }
+
+    .fve-configurator-frame--tall {
+        height: 690px;
+    }
+}
+
 @media (max-width: 992px) {
     .fve-configurator-frame {
         height: 720px;
