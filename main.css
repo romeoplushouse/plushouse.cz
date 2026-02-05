@@ -119,8 +119,25 @@
     }
 }
 
+.navbar-toggle {
+    background-color: #000 !important;
+    border-color: #000 !important;
+}
+
+.navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+.page-title-section {
+    padding-top: 160px !important;
+}
+
+.page-title-section .page-title {
+    margin-top: 60px !important;
+}
+
 .blog-strip {
-    background: #111827;
+    background: #000;
     color: #fff;
     padding: 30px 0;
 }
@@ -157,12 +174,12 @@
 }
 
 .blog-strip__item {
-    background: #1f2937;
+    background: #111;
     border-radius: 12px;
     overflow: hidden;
     text-decoration: none;
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
     min-height: 220px;

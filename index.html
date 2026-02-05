@@ -103,7 +103,7 @@ fbq('track', 'PageView');
     </script>
 </head>
     <body>
-        <div class="pix_section pix-padding-v-10" style="background-color: rgb(0, 0, 0);">
+        <div class="pix_section pix-padding-v-10" style="background-color: rgb(0, 0, 0); display: none;">
             <div class="container text-center">
                 <a href="https://www.plushouse.cz/blog" class="pix-white" style="font-weight: 700; text-decoration: none;">Novinky z blogu PlusHouse</a>
             </div>
@@ -225,12 +225,6 @@ fbq('track', 'PageView');
                                     <span style="font-family: Montserrat;">Navrhujeme a realizujeme chytré řízení domů i komerčních objektů — tak, aby se v nich lidem dobře žilo, pracovalo a aby provoz nebolel. Propojujeme technologie do jednoho funkčního celku: automatizaci, MaR, hotelové integrace, osvětlení, audio, elektroinstalace i rozvaděče na míru.</span>
                                 </span>      
                             </p>
-                            <ul class="pix-slight-white big-text pix-padding-top-10" style="list-style: none; padding-left: 0;">
-                                <li style="margin-bottom: 8px;">Hotely a ubytování: integrace PMS, přístupy, režimy pokojů, energie</li>
-                                <li style="margin-bottom: 8px;">Rodinné a bytové domy: komfort, stabilita, jednoduché ovládání, dohled</li>
-                                <li style="margin-bottom: 8px;">Komerce: atmosféra (světlo + zvuk), provozní režimy, spolehlivost</li>
-                                <li>Elektro a rozvaděče: profesionální provedení, servisovatelnost, čistá dokumentace</li>
-                            </ul>
                             <div class="pix-padding-top-20">
                                 <a href="https://www.plushouse.cz/kontakt" class="btn brown-bg pix-white pix-margin-right-10" style="background-color: rgb(181, 225, 38);">Domluvit konzultaci</a>
                                 <a href="https://www.plushouse.cz/#section_gallery_1" class="btn brown-bg pix-white" style="background-color: transparent; border: 2px solid rgb(181, 225, 38); color: rgb(181, 225, 38);">Ukázky realizací</a>
@@ -325,7 +319,7 @@ fbq('track', 'PageView');
                     <div class="col-xs-12 col-sm-3 column ui-droppable col-md-3">     
                         <div class="pix-content text-center pix-margin-v-20 animate-in" style="background-repeat: repeat-x; padding: 0px; margin: 20px 0px;">      
                             <span class="pix-margin-bottom-20">
-                                <i class="pixicon-pin96" style="color: rgb(255, 255, 255); font-size: 120px;"></i>
+                                <i class="pixicon-house16" style="color: rgb(255, 255, 255); font-size: 120px;"></i>
                             </span>      
                             <h5 class="pix-black-gray-dark pix-margin-top-20">
                                 <span class="pix_edit_text">
@@ -2064,8 +2058,21 @@ fbq('track', 'PageView');
                     </div>   
                 </div>  
             </div> 
-        </div> 
-        <div class="pix_section pix-padding-bottom-20 pix-padding-top-60 gray-dark-bg fade-in-up-big pix-animate-in animate-in" id="section_12" style="background-color: rgb(0, 0, 0); background-repeat: repeat-x; padding-top: 60px; padding-bottom: 20px;">  
+        </div>
+</div>
+         
+                <div class="pix_section blog-strip" id="blog-strip">
+    <div class="container">
+        <div class="blog-strip__inner">
+            <div class="blog-strip__header">
+                <h3>Nejnovější články z blogu</h3>
+                <a href="https://www.plushouse.cz/blog">Zobrazit celý blog</a>
+            </div>
+            <div class="blog-strip__list"></div>
+        </div>
+    </div>
+</div>
+<div class="pix_section pix-padding-bottom-20 pix-padding-top-60 gray-dark-bg fade-in-up-big pix-animate-in animate-in" id="section_12" style="background-color: rgb(0, 0, 0); background-repeat: repeat-x; padding-top: 60px; padding-bottom: 20px;">  
             <div class="container">   
                 <div class="row">    
                     <div class="col-md-6 col-xs-12 col-sm-6 column ui-droppable">     
@@ -2678,17 +2685,6 @@ fbq('track', 'PageView');
                     </div>   
                 </div>  
             </div> 
-        </div>
-                <div class="pix_section blog-strip" id="blog-strip">
-            <div class="container">
-                <div class="blog-strip__inner">
-                    <div class="blog-strip__header">
-                        <h3>Nejnovější články z blogu</h3>
-                        <a href="https://www.plushouse.cz/blog">Zobrazit celý blog</a>
-                    </div>
-                    <div class="blog-strip__list"></div>
-                </div>
-            </div>
         </div>
         <!-- Javascript -->
 <script src="js/jquery-1.11.2.js"></script>
