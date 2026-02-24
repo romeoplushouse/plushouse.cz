@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-02-05T13:51:42Z",
+  "clenstvi": [
+    {
+      "plan_key": "house_start",
+      "plan_name": "+house START",
+      "price_monthly_b2c": 590,
+      "price_monthly_b2b": 590,
+      "currency": "CZK"
+    },
+    {
+      "plan_key": "house_standard",
+      "plan_name": "+house STANDARD",
+      "price_monthly_b2c": 1490,
+      "price_monthly_b2b": 1490,
+      "currency": "CZK"
+    },
+    {
+      "plan_key": "house_pro",
+      "plan_name": "+house PRO",
+      "price_monthly_b2c": 2990,
+      "price_monthly_b2b": 2990,
+      "currency": "CZK"
+    }
+  ]
+}
