@@ -23,6 +23,54 @@
   ],
   "posts": [
     {
+      "title": "Nejčastější chyby při chytré elektroinstalaci",
+      "category": "elektroinstalace",
+      "excerpt": "Nejčastější chyby v chytré elektroinstalaci a doporučení, jak navrhnout systém, který bude fungovat roky.",
+      "cover_image": "https://www.plushouse.cz/uploads/uploads/ogfoto.jpg",
+      "published_at": "2026-02-24T10:00:00.000Z",
+      "url": "https://www.plushouse.cz/blog/nejcastejsi-chyby-pri-chytre-elektroinstalaci/"
+    },
+    {
+      "title": "Hotelová automatizace + PMS Previo: hlavní přínosy",
+      "category": "automatizace",
+      "excerpt": "Integrace hotelové automatizace s PMS Previo: méně operativy, lepší komfort hostů a úspora energií.",
+      "cover_image": "https://www.plushouse.cz/uploads/uploads/ogfoto.jpg",
+      "published_at": "2026-02-24T10:00:00.000Z",
+      "url": "https://www.plushouse.cz/blog/hotel-automatizace-pms-previo-prinosy/"
+    },
+    {
+      "title": "Energetický management FVE a Loxone: co umí v praxi",
+      "category": "fve",
+      "excerpt": "Jak Loxone řídí přebytky z FVE, baterie, TUV, wallbox i spotové tarify pro nižší provozní náklady.",
+      "cover_image": "https://www.plushouse.cz/uploads/uploads/ogfoto.jpg",
+      "published_at": "2026-02-24T10:00:00.000Z",
+      "url": "https://www.plushouse.cz/blog/energeticky-management-fve-loxone-co-umi/"
+    },
+    {
+      "title": "Loxone vs. bezdrátové systémy: co dává smysl",
+      "category": "chytra-domacnost",
+      "excerpt": "Srovnání Loxone a bezdrátových řešení podle stability, rozšiřitelnosti, servisu a celkových nákladů.",
+      "cover_image": "https://www.plushouse.cz/uploads/uploads/ogfoto.jpg",
+      "published_at": "2026-02-24T10:00:00.000Z",
+      "url": "https://www.plushouse.cz/blog/loxone-vs-bezdratove-systemy-co-dava-smysl/"
+    },
+    {
+      "title": "Chytrá domácnost: kolik stojí a co tvoří cenu",
+      "category": "chytra-domacnost",
+      "excerpt": "Co ovlivňuje cenu chytré domácnosti: projekt, elektroinstalace, rozvaděč, konfigurace i dlouhodobý servis.",
+      "cover_image": "https://www.plushouse.cz/uploads/uploads/ogfoto.jpg",
+      "published_at": "2026-02-24T10:00:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-kolik-stoji/"
+    },
+    {
+      "title": "Chytrá domácnost Loxone: novostavba vs. rekonstrukce",
+      "category": "chytra-domacnost",
+      "excerpt": "Praktické srovnání Loxone pro novostavbu a rekonstrukci: rozpočet, postup realizace a nejčastější technické rozdíly.",
+      "cover_image": "https://www.plushouse.cz/uploads/uploads/ogfoto.jpg",
+      "published_at": "2026-02-24T10:00:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-loxone-novostavba-vs-rekonstrukce/"
+    },
+    {
       "title": "Automatizace budov: MaR, Loxone a řízení energií",
       "category": "automatizace",
       "excerpt": "Automatizace budov (MaR) snižuje spotřebu a zvyšuje komfort. Řízení HVAC, světel, stínění, přístupů i energií, včetně integrací.",
