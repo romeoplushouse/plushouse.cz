@@ -1,0 +1,49 @@
+{
+  "products": [
+    {
+      "sku": "PH-LX-START",
+      "name": "Loxone Start balíček",
+      "price_czk": 28990,
+      "currency": "CZK",
+      "loxone_item_number": "100335",
+      "lead_time_text": "1–5 pracovních dnů, dle dostupnosti",
+      "is_kit": true,
+      "kit_components": [
+        { "item_number": "100335", "qty": 1 },
+        { "item_number": "100114", "qty": 1 },
+        { "item_number": "100499", "qty": 2 }
+      ],
+      "warranty_returns_notes": "Záruka 24 měsíců. Vrácení a reklamace řešíte vždy s PLUS HOUSE, který zajišťuje RMA vůči dodavateli fulfillmentu."
+    },
+    {
+      "sku": "PH-LX-ENERGY",
+      "name": "Loxone Energy + Victron balíček",
+      "price_czk": 54990,
+      "currency": "CZK",
+      "loxone_item_number": "100336",
+      "lead_time_text": "1–5 pracovních dnů, dle dostupnosti",
+      "is_kit": true,
+      "kit_components": [
+        { "item_number": "100336", "qty": 1 },
+        { "item_number": "100497", "qty": 1 },
+        { "item_number": "100114", "qty": 1 }
+      ],
+      "warranty_returns_notes": "Záruka 24 měsíců. Vrácení a reklamace řešíte vždy s PLUS HOUSE, který zajišťuje RMA vůči dodavateli fulfillmentu."
+    },
+    {
+      "sku": "PH-LX-SECURITY",
+      "name": "Loxone Security balíček",
+      "price_czk": 31990,
+      "currency": "CZK",
+      "loxone_item_number": "100337",
+      "lead_time_text": "1–5 pracovních dnů, dle dostupnosti",
+      "is_kit": true,
+      "kit_components": [
+        { "item_number": "100337", "qty": 1 },
+        { "item_number": "100212", "qty": 4 },
+        { "item_number": "100213", "qty": 2 }
+      ],
+      "warranty_returns_notes": "Záruka 24 měsíců. Vrácení a reklamace řešíte vždy s PLUS HOUSE, který zajišťuje RMA vůči dodavateli fulfillmentu."
+    }
+  ]
+}
