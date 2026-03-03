@@ -2,26 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.plushouse.cz/blog</loc>
-    <lastmod>2026-02-04T14:35:21.706Z</lastmod>
+    <lastmod>2026-03-03T07:11:37.163Z</lastmod>
   </url>
   <url>
     <loc>https://www.plushouse.cz/blog/automatizace-budov-mar.html</loc>
-    <lastmod>2026-02-04T14:34:37.539Z</lastmod>
+    <lastmod>2026-03-03T07:10:19.070Z</lastmod>
   </url>
   <url>
     <loc>https://www.plushouse.cz/blog/chytra-domacnost-loxone.html</loc>
-    <lastmod>2026-02-04T14:34:37.535Z</lastmod>
+    <lastmod>2026-03-03T07:10:19.070Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.plushouse.cz/blog/chytra-domacnost-zony-a-klima.html</loc>
+    <lastmod>2026-03-03T09:10:00.000Z</lastmod>
   </url>
   <url>
     <loc>https://www.plushouse.cz/blog/clenstvi-house.html</loc>
-    <lastmod>2026-02-04T14:34:37.535Z</lastmod>
+    <lastmod>2026-03-03T07:10:19.074Z</lastmod>
   </url>
   <url>
     <loc>https://www.plushouse.cz/blog/elektroinstalace.html</loc>
-    <lastmod>2026-02-04T14:34:37.539Z</lastmod>
+    <lastmod>2026-03-03T07:10:19.074Z</lastmod>
   </url>
   <url>
     <loc>https://www.plushouse.cz/blog/fotovoltaika-fve.html</loc>
-    <lastmod>2026-02-04T14:34:37.535Z</lastmod>
+    <lastmod>2026-03-03T07:10:19.074Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.plushouse.cz/blog/loxone-a-energeticky-management-domu.html</loc>
+    <lastmod>2026-03-03T09:05:00.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.plushouse.cz/blog/loxone-miniserver-gen2-co-prinasi.html</loc>
+    <lastmod>2026-03-03T09:00:00.000Z</lastmod>
   </url>
 </urlset>
