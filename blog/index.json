@@ -19,6 +19,18 @@
     {
       "id": "elektroinstalace",
       "label": "Elektroinstalace"
+    },
+    {
+      "id": "topeni",
+      "label": "Topení"
+    },
+    {
+      "id": "regulace",
+      "label": "Regulace"
+    },
+    {
+      "id": "hvac",
+      "label": "HVAC"
     }
   ],
   "posts": [
@@ -27,16 +39,80 @@
       "category": "automatizace",
       "excerpt": "Automatizace budov (MaR) snižuje spotřebu a zvyšuje komfort. Řízení HVAC, světel, stínění, přístupů i energií, včetně integrací.",
       "cover_image": "https://www.plushouse.cz/blog/img/automatizace-budov-hero.jpg",
-      "published_at": "2026-03-03T07:10:19.070Z",
+      "published_at": "2026-03-03T07:27:58.312Z",
       "url": "https://www.plushouse.cz/blog/automatizace-budov-mar.html"
+    },
+    {
+      "title": "Chytrá domácnost a FVE: jedna logika řízení",
+      "category": "chytra-domacnost",
+      "excerpt": "Chytrá domácnost a FVE: jedna logika řízení: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:27:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-a-fve-jedna-logika-rizeni.html"
     },
     {
       "title": "Chytrá domácnost Loxone: komfort, úspory a bezpečí",
       "category": "chytra-domacnost",
       "excerpt": "Chytrá domácnost Loxone řídí světla, stínění, topení i energii z FVE. Návrh, elektroinstalace, rozvaděč, programování i servis.",
       "cover_image": "https://www.plushouse.cz/blog/img/chytra-domacnost-loxone-hero.jpg",
-      "published_at": "2026-03-03T07:10:19.070Z",
+      "published_at": "2026-03-03T07:27:58.312Z",
       "url": "https://www.plushouse.cz/blog/chytra-domacnost-loxone.html"
+    },
+    {
+      "title": "Chytrá domácnost: měření spotřeby krok za krokem",
+      "category": "regulace",
+      "excerpt": "Chytrá domácnost: měření spotřeby krok za krokem: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:05:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-mereni-spotreby-krok-za-krokem.html"
+    },
+    {
+      "title": "Chytrá domácnost: přístupy a zabezpečení",
+      "category": "chytra-domacnost",
+      "excerpt": "Chytrá domácnost: přístupy a zabezpečení: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:04:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-pristupy-a-zabezpeceni.html"
+    },
+    {
+      "title": "Chytrá domácnost: řízení osvětlení v praxi",
+      "category": "chytra-domacnost",
+      "excerpt": "Chytrá domácnost: řízení osvětlení v praxi: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:00:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-rizeni-osvetleni-v-praxi.html"
+    },
+    {
+      "title": "Chytrá domácnost: stínění a přehřívání domu",
+      "category": "chytra-domacnost",
+      "excerpt": "Chytrá domácnost: stínění a přehřívání domu: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:01:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-stineni-a-prehrivani-domu.html"
+    },
+    {
+      "title": "Chytrá domácnost v novostavbě: checklist",
+      "category": "chytra-domacnost",
+      "excerpt": "Chytrá domácnost v novostavbě: checklist: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:28:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-v-novostavbe-checklist.html"
+    },
+    {
+      "title": "Chytrá domácnost v rekonstrukci: doporučený postup",
+      "category": "chytra-domacnost",
+      "excerpt": "Chytrá domácnost v rekonstrukci: doporučený postup: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:29:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-v-rekonstrukci-postup.html"
+    },
+    {
+      "title": "Chytrá domácnost: větrání a kvalita vzduchu",
+      "category": "hvac",
+      "excerpt": "Chytrá domácnost: větrání a kvalita vzduchu: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:02:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-vetrani-a-kvalita-vzduchu.html"
     },
     {
       "title": "Chytrá domácnost: zóny, klima a reálný komfort",
@@ -47,11 +123,19 @@
       "url": "https://www.plushouse.cz/blog/chytra-domacnost-zony-a-klima.html"
     },
     {
+      "title": "Chytrá domácnost: zóny vytápění bez kompromisů",
+      "category": "topeni",
+      "excerpt": "Chytrá domácnost: zóny vytápění bez kompromisů: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:03:00.000Z",
+      "url": "https://www.plushouse.cz/blog/chytra-domacnost-zony-vytapeni-bez-kompromisu.html"
+    },
+    {
       "title": "Členství +house: servis FVE a Loxone bez starostí",
       "category": "clenstvi-house",
       "excerpt": "+house je členství pro FVE, Loxone a elektroinstalace: monitoring, prevence, vzdálený servis, pravidelné kontroly, priorita zásahů a dlouhodobá péče.",
       "cover_image": "https://www.plushouse.cz/blog/img/clenstvi-house-hero.jpg",
-      "published_at": "2026-03-03T07:10:19.074Z",
+      "published_at": "2026-03-03T07:27:58.312Z",
       "url": "https://www.plushouse.cz/blog/clenstvi-house.html"
     },
     {
@@ -59,16 +143,112 @@
       "category": "elektroinstalace",
       "excerpt": "Elektroinstalace pro RD i firmy: návrh okruhů, rozvaděč, jištění, chrániče, přepětí, příprava pro FVE, TČ a wallbox. Dokumentace a revize.",
       "cover_image": "https://www.plushouse.cz/blog/img/elektroinstalace-hero.jpg",
-      "published_at": "2026-03-03T07:10:19.074Z",
+      "published_at": "2026-03-03T07:27:58.316Z",
       "url": "https://www.plushouse.cz/blog/elektroinstalace.html"
+    },
+    {
+      "title": "Fotovoltaika a záloha kritických okruhů",
+      "category": "fve",
+      "excerpt": "Fotovoltaika a záloha kritických okruhů: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:25:00.000Z",
+      "url": "https://www.plushouse.cz/blog/fotovoltaika-a-zaloha-kritickych-okruhu.html"
+    },
+    {
+      "title": "Fotovoltaika: baterie – kdy se vyplatí",
+      "category": "fve",
+      "excerpt": "Fotovoltaika: baterie – kdy se vyplatí: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:22:00.000Z",
+      "url": "https://www.plushouse.cz/blog/fotovoltaika-baterie-kdy-se-vyplati.html"
     },
     {
       "title": "Fotovoltaika (FVE): návrh, montáž a chytré využití energie",
       "category": "fve",
       "excerpt": "Fotovoltaika na klíč: návrh FVE, bezpečné zapojení, ochrany, monitoring a řízení spotřeby. Využij přebytky přes Loxone a energy management.",
       "cover_image": "https://www.plushouse.cz/blog/img/fotovoltaika-fve-hero.jpg",
-      "published_at": "2026-03-03T07:10:19.074Z",
+      "published_at": "2026-03-03T07:27:58.316Z",
       "url": "https://www.plushouse.cz/blog/fotovoltaika-fve.html"
+    },
+    {
+      "title": "Fotovoltaika: monitoring a vyhodnocení výkonu",
+      "category": "fve",
+      "excerpt": "Fotovoltaika: monitoring a vyhodnocení výkonu: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:24:00.000Z",
+      "url": "https://www.plushouse.cz/blog/fotovoltaika-monitoring-a-vyhodnoceni-vykonu.html"
+    },
+    {
+      "title": "Fotovoltaika: revize, bezpečnost a normy",
+      "category": "fve",
+      "excerpt": "Fotovoltaika: revize, bezpečnost a normy: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:26:00.000Z",
+      "url": "https://www.plushouse.cz/blog/fotovoltaika-revize-bezpecnost-a-normy.html"
+    },
+    {
+      "title": "Fotovoltaika: řízení přebytků do TUV",
+      "category": "fve",
+      "excerpt": "Fotovoltaika: řízení přebytků do TUV: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:20:00.000Z",
+      "url": "https://www.plushouse.cz/blog/fotovoltaika-rizeni-prebytku-do-tuv.html"
+    },
+    {
+      "title": "Fotovoltaika: spotové ceny a řízení odběru",
+      "category": "fve",
+      "excerpt": "Fotovoltaika: spotové ceny a řízení odběru: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:23:00.000Z",
+      "url": "https://www.plushouse.cz/blog/fotovoltaika-spotove-ceny-a-rizeni-odberu.html"
+    },
+    {
+      "title": "Fotovoltaika: wallbox a dynamické nabíjení",
+      "category": "fve",
+      "excerpt": "Fotovoltaika: wallbox a dynamické nabíjení: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:21:00.000Z",
+      "url": "https://www.plushouse.cz/blog/fotovoltaika-wallbox-a-dynamicke-nabijeni.html"
+    },
+    {
+      "title": "HVAC: chlazení v létě bez plýtvání",
+      "category": "hvac",
+      "excerpt": "HVAC: chlazení v létě bez plýtvání: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:16:00.000Z",
+      "url": "https://www.plushouse.cz/blog/hvac-chlazeni-v-lete-bez-plytvani.html"
+    },
+    {
+      "title": "HVAC: inteligentní řízení rekuperace",
+      "category": "hvac",
+      "excerpt": "HVAC: inteligentní řízení rekuperace: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:15:00.000Z",
+      "url": "https://www.plushouse.cz/blog/hvac-inteligentni-rizeni-rekuperace.html"
+    },
+    {
+      "title": "HVAC: řízení tepelného čerpadla s FVE",
+      "category": "hvac",
+      "excerpt": "HVAC: řízení tepelného čerpadla s FVE: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:18:00.000Z",
+      "url": "https://www.plushouse.cz/blog/hvac-rizeni-tepelneho-cerpadla-s-fve.html"
+    },
+    {
+      "title": "HVAC: servisní režimy a diagnostika",
+      "category": "hvac",
+      "excerpt": "HVAC: servisní režimy a diagnostika: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:19:00.000Z",
+      "url": "https://www.plushouse.cz/blog/hvac-servisni-rezimy-a-diagnostika.html"
+    },
+    {
+      "title": "HVAC: vlhkost a kondenzace – co hlídat",
+      "category": "hvac",
+      "excerpt": "HVAC: vlhkost a kondenzace – co hlídat: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:17:00.000Z",
+      "url": "https://www.plushouse.cz/blog/hvac-vlhkost-a-kondenzace-co-hlidat.html"
     },
     {
       "title": "Loxone a energetický management domu",
@@ -85,6 +265,78 @@
       "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
       "published_at": "2026-03-03T09:00:00.000Z",
       "url": "https://www.plushouse.cz/blog/loxone-miniserver-gen2-co-prinasi.html"
+    },
+    {
+      "title": "Regulace: jak pracovat s predikcí počasí",
+      "category": "regulace",
+      "excerpt": "Regulace: jak pracovat s predikcí počasí: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:12:00.000Z",
+      "url": "https://www.plushouse.cz/blog/regulace-jak-pracovat-s-predikci-pocasi.html"
+    },
+    {
+      "title": "Regulace: jak správně nastavit hysterezi",
+      "category": "regulace",
+      "excerpt": "Regulace: jak správně nastavit hysterezi: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:10:00.000Z",
+      "url": "https://www.plushouse.cz/blog/regulace-jak-spravne-nastavit-hysterezi.html"
+    },
+    {
+      "title": "Regulace PID v HVAC jednoduše",
+      "category": "regulace",
+      "excerpt": "Regulace PID v HVAC jednoduše: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:11:00.000Z",
+      "url": "https://www.plushouse.cz/blog/regulace-pid-v-hvac-jednoduse.html"
+    },
+    {
+      "title": "Regulace: prioritizace spotřeb v domácnosti",
+      "category": "regulace",
+      "excerpt": "Regulace: prioritizace spotřeb v domácnosti: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:14:00.000Z",
+      "url": "https://www.plushouse.cz/blog/regulace-prioritizace-spotreb-v-domacnosti.html"
+    },
+    {
+      "title": "Regulace: zátěžové špičky a řízení výkonu",
+      "category": "regulace",
+      "excerpt": "Regulace: zátěžové špičky a řízení výkonu: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:13:00.000Z",
+      "url": "https://www.plushouse.cz/blog/regulace-zatezove-spicky-a-rizeni-vykonu.html"
+    },
+    {
+      "title": "Topení: ekvitermní regulace pro rodinný dům",
+      "category": "topeni",
+      "excerpt": "Topení: ekvitermní regulace pro rodinný dům: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:06:00.000Z",
+      "url": "https://www.plushouse.cz/blog/topeni-ekvitermni-regulace-pro-rodinny-dum.html"
+    },
+    {
+      "title": "Topení: optimalizace nočního útlumu",
+      "category": "topeni",
+      "excerpt": "Topení: optimalizace nočního útlumu: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2023/09/miniserver-gen2.jpg",
+      "published_at": "2026-03-03T10:09:00.000Z",
+      "url": "https://www.plushouse.cz/blog/topeni-optimalizace-nocniho-utlumu.html"
+    },
+    {
+      "title": "Topení: podlahovka a inteligentní řízení",
+      "category": "topeni",
+      "excerpt": "Topení: podlahovka a inteligentní řízení: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2022/11/energy-management.jpg",
+      "published_at": "2026-03-03T10:07:00.000Z",
+      "url": "https://www.plushouse.cz/blog/topeni-podlahovka-a-inteligentni-rizeni.html"
+    },
+    {
+      "title": "Topení: radiátory vs. podlahovka v automatizaci",
+      "category": "topeni",
+      "excerpt": "Topení: radiátory vs. podlahovka v automatizaci: stručné praktické doporučení z pohledu návrhu, realizace a servisu.",
+      "cover_image": "https://www.loxone.com/cscz/wp-content/uploads/sites/11/2021/06/smart-home-climate.jpg",
+      "published_at": "2026-03-03T10:08:00.000Z",
+      "url": "https://www.plushouse.cz/blog/topeni-radiatory-vs-podlahovka-v-automatizaci.html"
     }
   ]
 }
