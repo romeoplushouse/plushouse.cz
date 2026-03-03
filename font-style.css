@@ -7,6 +7,7 @@
     url('fonts/MEGAPACK.svg?lo76bi#MEGAPACK') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 [class^="pixicon-"], [class*=" pixicon-"] {
@@ -3027,4 +3028,3 @@
 .pixicon-ellipsis:before {
   content: "\e1d9";
 }
-

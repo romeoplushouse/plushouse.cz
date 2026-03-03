@@ -1,0 +1,312 @@
+{
+  "Items": [
+    {
+      "key": "lpsyes",
+      "name": "Ochrana před bleskem (LPS) – ano",
+      "unit": "ks",
+      "price_net": 12000,
+      "active": true
+    },
+    {
+      "key": "lpsno",
+      "name": "Ochrana před bleskem (LPS) – ne",
+      "unit": "ks",
+      "price_net": 0,
+      "active": true
+    },
+    {
+      "key": "livinginprice",
+      "name": "Objekt obývaný během instalace",
+      "unit": "ks",
+      "price_net": 8000,
+      "active": true
+    },
+    {
+      "key": "nolivinginprice",
+      "name": "Objekt neobývaný během instalace",
+      "unit": "ks",
+      "price_net": 0,
+      "active": true
+    },
+    {
+      "key": "safety120Vpriceperkw",
+      "name": "Odpojovač 120V/string (nad 10 kWp) – cena za kWp",
+      "unit": "kWp",
+      "price_net": 900,
+      "active": true
+    },
+    {
+      "key": "SAFETY_120V_VICTRON_PCT_OVER10",
+      "name": "Navýšení (120V/string) – Victron nad 10 kWp",
+      "unit": "%",
+      "price_net": 4,
+      "active": true
+    },
+    {
+      "key": "panel_basic",
+      "name": "FV panel 450 Wp",
+      "unit": "ks",
+      "price_net": 3200,
+      "active": true
+    },
+    {
+      "key": "inverter_fronius",
+      "name": "Střídač Fronius",
+      "unit": "ks",
+      "price_net": 52000,
+      "active": true
+    },
+    {
+      "key": "inverter_victron",
+      "name": "Měnič Victron",
+      "unit": "ks",
+      "price_net": 68000,
+      "active": true
+    },
+    {
+      "key": "battery_module",
+      "name": "Bateriový modul",
+      "unit": "ks",
+      "price_net": 28000,
+      "active": true
+    },
+    {
+      "key": "structure",
+      "name": "Montážní konstrukce",
+      "unit": "sada",
+      "price_net": 18000,
+      "active": true
+    },
+    {
+      "key": "installation",
+      "name": "Montáž a elektroinstalace",
+      "unit": "sada",
+      "price_net": 65000,
+      "active": true
+    }
+  ],
+  "SystemRules": [
+    {
+      "system": "fronius_no_battery",
+      "range_from_kWp": 3,
+      "range_to_kWp": 10,
+      "key": "inverter_fronius",
+      "qty": 1
+    },
+    {
+      "system": "fronius_no_battery",
+      "range_from_kWp": 3,
+      "range_to_kWp": 10,
+      "key": "panel_basic",
+      "qty": 10
+    },
+    {
+      "system": "fronius_no_battery",
+      "range_from_kWp": 11,
+      "range_to_kWp": 50,
+      "key": "inverter_fronius",
+      "qty": 1
+    },
+    {
+      "system": "fronius_no_battery",
+      "range_from_kWp": 11,
+      "range_to_kWp": 50,
+      "key": "panel_basic",
+      "qty": 20
+    },
+    {
+      "system": "victron_with_battery",
+      "range_from_kWp": 3,
+      "range_to_kWp": 10,
+      "key": "inverter_victron",
+      "qty": 1
+    },
+    {
+      "system": "victron_with_battery",
+      "range_from_kWp": 3,
+      "range_to_kWp": 10,
+      "key": "panel_basic",
+      "qty": 10
+    },
+    {
+      "system": "victron_with_battery",
+      "range_from_kWp": 3,
+      "range_to_kWp": 10,
+      "key": "battery_module",
+      "qty": 1
+    },
+    {
+      "system": "victron_with_battery",
+      "range_from_kWp": 11,
+      "range_to_kWp": 50,
+      "key": "inverter_victron",
+      "qty": 1
+    },
+    {
+      "system": "victron_with_battery",
+      "range_from_kWp": 11,
+      "range_to_kWp": 50,
+      "key": "panel_basic",
+      "qty": 20
+    },
+    {
+      "system": "victron_with_battery",
+      "range_from_kWp": 11,
+      "range_to_kWp": 50,
+      "key": "battery_module",
+      "qty": 2
+    }
+  ],
+  "ConditionalRules": [],
+  "Regions": [
+    {
+      "region_code": "CZ-01",
+      "region_name": "Praha",
+      "transport_price_net": 4500,
+      "active": true
+    },
+    {
+      "region_code": "CZ-02",
+      "region_name": "Středočeský",
+      "transport_price_net": 5200,
+      "active": true
+    },
+    {
+      "region_code": "CZ-03",
+      "region_name": "Jihočeský",
+      "transport_price_net": 6200,
+      "active": true
+    },
+    {
+      "region_code": "CZ-04",
+      "region_name": "Plzeňský",
+      "transport_price_net": 6100,
+      "active": true
+    },
+    {
+      "region_code": "CZ-05",
+      "region_name": "Karlovarský",
+      "transport_price_net": 6400,
+      "active": true
+    },
+    {
+      "region_code": "CZ-06",
+      "region_name": "Ústecký",
+      "transport_price_net": 5900,
+      "active": true
+    },
+    {
+      "region_code": "CZ-07",
+      "region_name": "Liberecký",
+      "transport_price_net": 6000,
+      "active": true
+    },
+    {
+      "region_code": "CZ-08",
+      "region_name": "Královéhradecký",
+      "transport_price_net": 6000,
+      "active": true
+    },
+    {
+      "region_code": "CZ-09",
+      "region_name": "Pardubický",
+      "transport_price_net": 6000,
+      "active": true
+    },
+    {
+      "region_code": "CZ-10",
+      "region_name": "Vysočina",
+      "transport_price_net": 6400,
+      "active": true
+    },
+    {
+      "region_code": "CZ-11",
+      "region_name": "Jihomoravský",
+      "transport_price_net": 6200,
+      "active": true
+    },
+    {
+      "region_code": "CZ-12",
+      "region_name": "Olomoucký",
+      "transport_price_net": 6300,
+      "active": true
+    },
+    {
+      "region_code": "CZ-13",
+      "region_name": "Zlínský",
+      "transport_price_net": 6400,
+      "active": true
+    },
+    {
+      "region_code": "CZ-14",
+      "region_name": "Moravskoslezský",
+      "transport_price_net": 6500,
+      "active": true
+    }
+  ],
+  "VATRules": [
+    {
+      "customer_type": "B2C",
+      "is_living": true,
+      "vat_rate": 0.12
+    },
+    {
+      "customer_type": "B2C",
+      "is_living": false,
+      "vat_rate": 0.21
+    },
+    {
+      "customer_type": "B2B",
+      "is_living": true,
+      "vat_rate": 0.21
+    },
+    {
+      "customer_type": "B2B",
+      "is_living": false,
+      "vat_rate": 0.21
+    }
+  ],
+  "Segments": [
+    {
+      "segment": "Rodinný dům",
+      "min_kWp": 3,
+      "max_kWp": 15
+    },
+    {
+      "segment": "Bytový dům",
+      "min_kWp": 10,
+      "max_kWp": 40
+    },
+    {
+      "segment": "Firma",
+      "min_kWp": 15,
+      "max_kWp": 50
+    }
+  ],
+  "Meta": [
+    {
+      "key": "company_name",
+      "value": "PLUS HOUSE"
+    },
+    {
+      "key": "accent_color",
+      "value": "#B5E126"
+    },
+    {
+      "key": "logo_url",
+      "value": "https://www.plushouse.cz/uploads/plushouse-RSF.png"
+    },
+    {
+      "key": "vat_default_rate",
+      "value": 0.21
+    },
+    {
+      "key": "lead_webhook_url",
+      "value": "https://example.com/webhook"
+    },
+    {
+      "key": "lead_webhook_token",
+      "value": "CHANGE_ME"
+    }
+  ]
+}
