@@ -10,7 +10,20 @@
   <link rel="stylesheet" type="text/css" href="/css/pix_style.css" />
   <link rel="stylesheet" type="text/css" href="/css/main.css"/>
   <link rel="stylesheet" type="text/css" href="/css/font-style.css" />
-</head>
+
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESCRIPTION}}">
+<meta property="og:image" content="https://www.plushouse.cz/uploads/uploads/ogfoto.jpg">
+<meta property="og:type" content="website">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GVQ2MF6LY5');
+</script></head>
 <body>
   <!-- Header/footer and section wrappers intentionally match service pages (fototermika) -->
   {{HEADER}}
