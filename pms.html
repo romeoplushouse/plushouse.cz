@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="Automatizace služeb pro hotely: PMS integrace (Previo, Better Hotel), energetický management, topení podle rezervací, přístupy a provozní dohled.">
+<meta name="keywords" content="automatizace hotelu,pms,previo,better hotel,loxone,energetický management,topení podle rezervací,přístupové systémy">
+<title>PMS automatizace pro hotely | PLUS HOUSE</title>
+<meta property="og:title" content="PMS automatizace pro hotely | PLUS HOUSE">
+<meta property="og:site_name" content="PlusHouse">
+<meta property="og:url" content="https://www.plushouse.cz/pms">
+<meta property="og:description" content="Komplexní hotelová automatizace: PMS, přístupy, energetika, HVAC a provozní režimy. Previo přes náš Python konektor na VPS, Better Hotel přes Loxone library.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.plushouse.cz/uploads/uploads/ogfoto.jpg">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css" />
+<link rel="stylesheet" type="text/css" href="css/pix_style.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/font-style.css" />
+<link href="css/animations.min.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="canonical" href="https://www.plushouse.cz/pms">
+<!--ICO -->
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.plushouse.cz/uploads/uploads/ico/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-16x16.png">
+<link rel="manifest" href="https://www.plushouse.cz//manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--ICO -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GVQ2MF6LY5');
+</script>
+</head>
+<body>
+<div class="pix_section pix_nav_menu normal pix-padding-v-20 pix-over-header pix_scroll_header slow-mo" data-scroll-bg="#000000" id="section_1" style="background-repeat: repeat-x; padding-top: 20px; padding-bottom: 20px; display: block;">
+  <div class="container"><div class="row">
+    <div class="col-md-10 col-xs-12 pix-inner-col col-sm-10 column ui-droppable"><div class="pix-content"><nav class="navbar navbar-default pix-no-margin-bottom pix-navbar-default"><div class="container"><div class="navbar-header pix-lg-inline-block pix-float-none"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pix-navbar-collapse" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand logo-img logo-img-a pix-adjust-height" href="https://www.plushouse.cz/"><img src="uploads/plushouse-RSF.png" alt="" class="img-responsive pix-logo-img"></a></div></div></nav></div></div>
+    <div class="col-md-2 col-xs-12 pix-inner-col col-sm-2 column ui-droppable"><div class="pix-content pix-adjust-height text-right mobile-text-left" id="pix-header-btn" style="margin-top: 8.5px;"><a href="https://www.plushouse.cz/kontakt" class="btn small-text brown-bg pix-white pix-margin-top-10 pix-inline-block normal btn-md pix-line super-slow-mo" style="background: transparent; border-color: rgb(181, 225, 38); color: rgb(181, 225, 38);"><span class="pix_edit_text"><b>KONZULTACE</b></span></a></div></div>
+    <div class="col-md-10 col-xs-10 pix-inner-col col-sm-10 column ui-droppable"><div class="pix-content"><div class="navbar-collapse pix-no-h-padding collapse" id="pix-navbar-collapse" style="height: 1px;"><ul class="nav navbar-nav pix-inline-block pix-float-none media-middle pix-header-nav pix-adjust-height" id="pix-header-nav" style="margin-top: 13.5px;">
+<li><a href="https://www.plushouse.cz/" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">DOMŮ</a></li>
+<li class="dropdown"><a class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">SLUŽBY</a>
+<ul class="dropdown-menu dropdown-menu-left">
+<li><a href="https://www.plushouse.cz/fotovoltaika" class="dropdown-menu-link pix-nav-link">FOTOVOLTAIKA</a></li>
+<li><a href="https://www.plushouse.cz/trafostanice" class="dropdown-menu-link pix-nav-link">TRAFOSTANICE</a></li>
+<li><a href="https://www.plushouse.cz/fototermika.html" class="dropdown-menu-link pix-nav-link">FOTOTERMIKA</a></li>
+<li><a href="https://www.plushouse.cz/tepelna-cerpadla.html" class="dropdown-menu-link pix-nav-link">TEPELNÁ ČERPADLA</a></li>
+<li><a href="https://www.plushouse.cz/nabijeci-stanice.html" class="dropdown-menu-link pix-nav-link">NABÍJECÍ STANICE</a></li>
+<li><a href="https://www.plushouse.cz/pms" class="dropdown-menu-link pix-nav-link">PMS PRO HOTELY</a></li>
+</ul></li>
+<li><a href="#section_3" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">SLUŽBY</a></li>
+<li><a href="#section_4" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">SPOLUPRÁCE</a></li>
+<li><a href="#section_5" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">FAQ</a></li>
+<li><a href="https://www.plushouse.cz/blog" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">BLOG</a></li>
+</ul></div></div></div>
+  </div></div>
+</div>
+
+<div class="pix_section pix-real-intro pix-padding-v-100" id="section_2" style="padding-top: 520px; background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('uploads/shutterstock_2206914231-min-VDL.jpg'); background-size: cover; background-repeat: repeat-x; background-attachment: fixed; padding-bottom: 140px;">
+  <div class="container"><div class="row"><div class="col-xs-12 col-sm-7 col-md-12">
+    <div class="pix-content pix-padding-top-40 slow-mo">
+      <h5 class="pix-brown-2"><span class="pix_edit_text"><strong style="font-family: Montserrat; color: rgb(181, 225, 38);">HOTEL AUTOMATION BY PLUS HOUSE</strong></span></h5>
+      <h2 class="pix-white pix-no-margin-top"><span class="pix_edit_text"><span style="font-family: Montserrat; font-weight: bold;">PMS automatizace hotelu, která snižuje náklady a zvyšuje kvalitu provozu.</span></span></h2>
+      <p class="pix-slight-white big-text"><span class="pix_edit_text"><span style="font-family: Montserrat;">Integrace PMS, přístupů, HVAC a energetického managementu do jednoho profesionálního systému nad Loxone.</span></span></p>
+    </div>
+  </div></div></div>
+</div>
+
+<div class="pix_section gray-bg pix-padding" id="section_3" style="background-color: rgb(181, 225, 38); background-repeat: repeat-x; padding-top: 60px; padding-bottom: 60px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12 col-xs-12 col-sm-12"><div class="pix-content pix-padding-bottom-40 animate-in"><h5 class="text-center pix-brown"><span class="pix_edit_text"><span style="color: rgb(0, 0, 0);">Přesná hotelová orchestrace</span></span></h5><h2 class="pix-black-gray-dark text-center pix-no-margin-top"><span class="pix_edit_text"><span style="font-family: Montserrat; font-weight: 700; color: rgb(0, 0, 0);">Služby v oblasti hotelové PMS automatizace</span></span></h2><h5 class="pix-black-gray-light text-center"><span class="pix_edit_text"><span style="font-family: Montserrat; color: rgb(37, 55, 0);">Návrh řešení od malého penzionu po víceobjektový hotel</span></span></h5></div></div>
+
+    <div class="col-xs-12 col-sm-4 col-md-4"><div class="pix-content text-center pix-margin-v-20 animate-in"><span class="pix-margin-bottom-20"><i class="pixicon-graphs4" style="color: rgb(255, 255, 255); font-size: 120px;"></i></span><h5 class="pix-black-gray-dark pix-margin-top-20"><span class="pix_edit_text"><b style="color: rgb(0, 0, 0);">Integrace PMS</b></span></h5><p class="pix-black-gray-light"><span class="pix_edit_text"><span style="color: rgb(0, 0, 0);">Previo napojujeme přes náš Python konektor na VPS. Better Hotel integrujeme přímo přes Loxone library.</span></span></p></div></div>
+    <div class="col-xs-12 col-sm-4 col-md-4"><div class="pix-content text-center pix-margin-v-20 animate-in"><span class="pix-margin-bottom-20"><i class="pixicon-hotels" style="color: rgb(255, 255, 255); font-size: 120px;"></i></span><h5 class="pix-black-gray-dark pix-margin-top-20"><span class="pix_edit_text"><strong style="color: rgb(0, 0, 0);">Topení dle rezervací</strong></span></h5><p class="pix-black-gray-light"><span class="pix_edit_text"><span style="color: rgb(0, 0, 0);">Automatický předehřev před check-inem, úsporný režim po check-outu, predikce dle počasí a obsazenosti.</span></span></p></div></div>
+    <div class="col-xs-12 col-sm-4 col-md-4"><div class="pix-content text-center pix-margin-v-20 animate-in"><span class="pix-margin-bottom-20"><i class="pixicon-lock107" style="color: rgb(255, 255, 255); font-size: 120px;"></i></span><h5 class="pix-black-gray-dark pix-margin-top-20"><span class="pix_edit_text"><strong style="color: rgb(0, 0, 0);">Přístupy a bezpečnost</strong></span></h5><p class="pix-black-gray-light"><span class="pix_edit_text"><span style="color: rgb(0, 0, 0);">Scénáře pro hosta, housekeeping i techniky. Časová práva, audit událostí a servisní režimy.</span></span></p></div></div>
+  </div></div>
+</div>
+
+<div class="pix_section pix-padding-v-50" id="section_4" style="background-color: rgb(255, 255, 255); background-repeat: repeat-x; padding-top: 50px; padding-bottom: 50px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-40 animate-in"><h5 class="text-center pix-brown"><span class="pix_edit_text"><span style="font-weight: bold; font-size: 24px; font-family: Montserrat; color: rgb(181, 225, 38);">Jak probíhá spolupráce krok za krokem</span></span></h5><h5 class="pix-black-gray-light text-center"><span class="pix_edit_text">Přehledný proces od analýzy po dlouhodobý servis bez provozních výpadků.</span></h5></div></div>
+
+    <div class="col-xs-12 col-sm-6 col-md-2"><div class="pix-content text-center pix-margin-v-20"><span class="pix-margin-bottom-20"><i class="pixicon-search9" style="color: rgb(181, 225, 38); font-size: 90px;"></i></span><h5 class="pix-black-gray-dark"><strong>1. Audit</strong></h5><p class="pix-black-gray-light">Technický audit objektu, mapování procesů recepce a housekeepingu.</p></div></div>
+    <div class="col-xs-12 col-sm-6 col-md-2"><div class="pix-content text-center pix-margin-v-20"><span class="pix-margin-bottom-20"><i class="pixicon-interiordesign" style="color: rgb(181, 225, 38); font-size: 90px;"></i></span><h5 class="pix-black-gray-dark"><strong>2. Návrh</strong></h5><p class="pix-black-gray-light">Architektura integrace PMS, přístupů, energií a topných režimů.</p></div></div>
+    <div class="col-xs-12 col-sm-6 col-md-2"><div class="pix-content text-center pix-margin-v-20"><span class="pix-margin-bottom-20"><i class="pixicon-cloudcomputing" style="color: rgb(181, 225, 38); font-size: 90px;"></i></span><h5 class="pix-black-gray-dark"><strong>3. Integrace</strong></h5><p class="pix-black-gray-light">Nasazení konektorů (Previo/Python VPS, Better/Loxone library) a testovací scénáře.</p></div></div>
+    <div class="col-xs-12 col-sm-6 col-md-2"><div class="pix-content text-center pix-margin-v-20"><span class="pix-margin-bottom-20"><i class="pixicon-tools" style="color: rgb(181, 225, 38); font-size: 90px;"></i></span><h5 class="pix-black-gray-dark"><strong>4. Oživení</strong></h5><p class="pix-black-gray-light">Uvedení do provozu po etapách, zaškolení personálu a kontrola KPI.</p></div></div>
+    <div class="col-xs-12 col-sm-6 col-md-2"><div class="pix-content text-center pix-margin-v-20"><span class="pix-margin-bottom-20"><i class="pixicon-headphones" style="color: rgb(181, 225, 38); font-size: 90px;"></i></span><h5 class="pix-black-gray-dark"><strong>5. Servis</strong></h5><p class="pix-black-gray-light">Dohled, alarmy, pravidelná optimalizace nákladů a podpora 24/7.</p></div></div>
+    <div class="col-xs-12 col-sm-6 col-md-2"><div class="pix-content text-center pix-margin-v-20"><span class="pix-margin-bottom-20"><i class="pixicon-money207" style="color: rgb(181, 225, 38); font-size: 90px;"></i></span><h5 class="pix-black-gray-dark"><strong>6. Rozvoj</strong></h5><p class="pix-black-gray-light">Škálování na další objekty a nové služby podle sezónní obsazenosti.</p></div></div>
+  </div></div>
+</div>
+
+<div class="pix_section gray-dark-bg pix-padding" id="section_5" style="background-color: rgb(0, 0, 0); background-repeat: repeat-x; padding-top: 60px; padding-bottom: 60px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><h2 class="pix-white text-center">FAQ pro provozovatele hotelů</h2></div>
+    <div class="col-md-4"><h5 class="pix-white">Funguje systém i při výpadku internetu?</h5><p class="pix-gray">Ano. Kritické funkce běží lokálně na objektu. Výpadek internetu neblokuje základní provozní scénáře.</p></div>
+    <div class="col-md-4"><h5 class="pix-white">Jak rychle uvidíme úsporu?</h5><p class="pix-gray">Obvykle během prvních měsíců díky řízení topení/chlazení podle rezervací, režimu pokojů a energetickému monitoringu.</p></div>
+    <div class="col-md-4"><h5 class="pix-white">Jde to nasadit bez odstávky?</h5><p class="pix-gray">Ano. Nasazení etapizujeme po částech tak, aby provoz hotelu nebyl přerušen.</p></div>
+    <div class="col-md-12 text-center pix-padding-top-20"><a href="https://www.plushouse.cz/kontakt" class="btn" style="background:#b5e126;color:#000;font-weight:700;">Domluvit technickou konzultaci</a></div>
+  </div></div>
+</div>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"PMS automatizace pro hotely","provider":{"@type":"Organization","name":"PLUS HOUSE s.r.o."},"url":"https://www.plushouse.cz/pms","serviceType":"PMS integration, hotel automation, energy management"}</script>
+<script src="js/jquery-1.11.2.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/velocity.min.js"></script>
+<script src="js/velocity.ui.min.js"></script>
+<script src="js/appear.min.js" type="text/javascript"></script>
+<script src="js/animations.js" type="text/javascript"></script>
+<script src="js/plugins.js" type="text/javascript"></script>
+<script src="js/jquery.fancybox.min.js" type="text/javascript"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>
