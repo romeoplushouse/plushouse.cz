@@ -12,6 +12,11 @@
     return d.toLocaleDateString('cs-CZ');
   }
 
+  function estimateReadTime(text) {
+    var words = (text || "").trim().split(/\s+/).filter(Boolean).length;
+    return Math.max(1, Math.round(words / 180));
+  }
+
   function sortPosts(posts) {
     return posts.slice().sort(function (a, b) {
       var da = parseDate(a.published_at) || new Date(0);
@@ -46,6 +51,7 @@
     var select = document.getElementById('blogCategory');
     var search = document.getElementById('blogSearch');
     var empty = document.getElementById('blogEmpty');
+    var count = document.getElementById('blogCount');
     if (select && categories) {
       select.innerHTML = '<option value="">Všechny kategorie</option>' + categories.map(function (cat) {
         return '<option value="' + cat.id + '">' + cat.label + '</option>';
@@ -61,6 +67,8 @@
         return matchesCategory && matchesQuery;
       });
 
+      if (count) count.textContent = 'Výsledky: ' + filtered.length + ' článků';
+
       if (filtered.length === 0) {
         grid.innerHTML = '';
         if (empty) empty.style.display = 'block';
@@ -68,15 +76,21 @@
       }
       if (empty) empty.style.display = 'none';
       grid.innerHTML = filtered.map(function (post) {
+        var readTime = estimateReadTime((post.excerpt || '') + ' ' + (post.title || ''));
         return '' +
-          '<div class="blog-card">' +
+          '<article class="blog-card">' +
             '<a href="' + post.url + '"><img src="' + post.cover_image + '" alt="' + post.title + '"></a>' +
             '<div class="blog-card-body">' +
-              '<div class="blog-meta">' + formatDate(post.published_at) + ' • ' + (post.category_label || '') + '</div>' +
+              '<div class="blog-meta">' +
+                '<span class="blog-meta__badge">' + formatDate(post.published_at) + '</span>' +
+                '<span class="blog-meta__badge">' + (post.category_label || 'Článek') + '</span>' +
+                '<span class="blog-meta__badge">≈ ' + readTime + ' min čtení</span>' +
+              '</div>' +
               '<h4 class="pix-navy-blue-2"><a href="' + post.url + '">' + post.title + '</a></h4>' +
               '<p class="pix-gray">' + (post.excerpt || '') + '</p>' +
+              '<a class="blog-read-more" href="' + post.url + '">Číst článek →</a>' +
             '</div>' +
-          '</div>';
+          '</article>';
       }).join('');
     }
 
@@ -104,6 +118,7 @@
         var grid = document.getElementById('blogGrid');
         if (grid) grid.innerHTML = '';
         var empty = document.getElementById('blogEmpty');
+    var count = document.getElementById('blogCount');
         if (empty) empty.style.display = 'block';
       });
   }

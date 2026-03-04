@@ -23,45 +23,88 @@
     <style>
         .blog-controls {
             display: flex;
-            gap: 16px;
+            gap: 14px;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.05);
         }
         .blog-controls select,
         .blog-controls input {
             min-width: 220px;
             border-radius: 999px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #d9d9d9;
             padding: 10px 16px;
+            height: 42px;
+            outline: none;
+        }
+        .blog-controls select:focus,
+        .blog-controls input:focus {
+            border-color: #b5e126;
+            box-shadow: 0 0 0 3px rgba(181,225,38,.25);
+        }
+        .blog-count {
+            font-size: 13px;
+            color: #666;
+            font-weight: 600;
         }
         .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 22px;
             margin-top: 30px;
         }
         .blog-card {
-            background: #fff;
-            border-radius: 12px;
+            background: linear-gradient(180deg, #fff 0%, #fdfdfd 100%);
+            border-radius: 14px;
             overflow: hidden;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+            border: 1px solid #ececec;
+            box-shadow: 0 12px 28px rgba(0,0,0,.07);
             height: 100%;
+            transition: transform .25s ease, box-shadow .25s ease;
         }
+        .blog-card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(0,0,0,.12); }
         .blog-card img {
             width: 100%;
-            height: 180px;
+            height: 190px;
             object-fit: cover;
         }
         .blog-card-body {
             padding: 18px;
         }
         .blog-card-body h4 {
-            margin-top: 0;
+            margin-top: 8px;
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+        .blog-card .blog-read-more {
+            display: inline-block;
+            margin-top: 8px;
+            font-weight: 700;
+            color: #2b2b2b;
+            border-bottom: 2px solid #b5e126;
+            text-decoration: none;
         }
         .blog-meta {
             color: #6b7280;
             font-size: 13px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .blog-meta__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f5f7f8;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 12px;
         }
     </style>
 <!--ICO -->
@@ -102,7 +145,7 @@
                         <nav class="navbar navbar-default pix-no-margin-bottom pix-navbar-default">
                             <div class="container">
                                 <div class="navbar-header pix-lg-inline-block pix-float-none">
-                                    <button style="background-color:#ffffff !important" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pix-navbar-collapse" aria-expanded="false">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pix-navbar-collapse" aria-expanded="false">
                                         <span class="sr-only">Toggle navigation</span>
                                         <span class="icon-bar"></span>
                                         <span class="icon-bar"></span>
@@ -171,6 +214,7 @@
             <div class="row pix-padding-top-30">
                 <div class="col-md-12">
                     <div class="blog-controls">
+                        <span class="blog-count" id="blogCount">Načítám články…</span>
                         <input type="search" id="blogSearch" placeholder="Hledat v článcích..." />
                         <select id="blogCategory">
                             <option value="">Všechny kategorie</option>
@@ -181,14 +225,6 @@
             <div class="row pix-padding-top-30">
                 <div class="col-md-12">
                                         <div class="blog-grid" id="blogGrid"></div>
-                    <div class="blog-grid" id="blogStaticList" style="margin-top:20px;">
-                        <article class="blog-card"><h3><a href="https://www.plushouse.cz/blog/chytra-domacnost-loxone-novostavba-vs-rekonstrukce/">Chytrá domácnost Loxone: novostavba vs. rekonstrukce</a></h3></article>
-                        <article class="blog-card"><h3><a href="https://www.plushouse.cz/blog/chytra-domacnost-kolik-stoji/">Chytrá domácnost: kolik stojí a co tvoří cenu</a></h3></article>
-                        <article class="blog-card"><h3><a href="https://www.plushouse.cz/blog/loxone-vs-bezdratove-systemy-co-dava-smysl/">Loxone vs. bezdrátové systémy: co dává smysl</a></h3></article>
-                        <article class="blog-card"><h3><a href="https://www.plushouse.cz/blog/energeticky-management-fve-loxone-co-umi/">Energetický management FVE a Loxone: co umí v praxi</a></h3></article>
-                        <article class="blog-card"><h3><a href="https://www.plushouse.cz/blog/hotel-automatizace-pms-previo-prinosy/">Hotelová automatizace + PMS Previo: hlavní přínosy</a></h3></article>
-                        <article class="blog-card"><h3><a href="https://www.plushouse.cz/blog/nejcastejsi-chyby-pri-chytre-elektroinstalaci/">Nejčastější chyby při chytré elektroinstalaci</a></h3></article>
-                    </div>
                     <div id="blogEmpty" class="pix-gray text-center" style="display:none; margin-top: 20px;">Zatím nemáme žádné články.</div>
                 </div>
             </div>

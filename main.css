@@ -1230,3 +1230,41 @@
     .ge-layout-phone .pix-slider-btn:last-of-type .btn{
         margin-right: 0px !important;
     }
+
+/* Global mobile menu unification */
+.navbar-toggle,
+.navbar-default .navbar-toggle,
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #000 !important;
+  border-color: #000 !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar,
+.navbar-toggle .icon-bar {
+  background-color: #fff !important;
+}
+
+@media (max-width: 768px) {
+  #pix-header-btn {
+    display: none !important;
+  }
+
+  body.menu-open #pix-header-btn {
+    display: block !important;
+    margin-top: 10px !important;
+  }
+
+  .pix_nav_menu .navbar-collapse,
+  .pix_nav_menu .navbar-collapse.in {
+    background: #000 !important;
+    border-radius: 8px;
+    margin-top: 8px;
+    padding: 10px 12px;
+  }
+
+  .pix_nav_menu .navbar-collapse a.pix-nav-link,
+  .pix_nav_menu .navbar-collapse .dropdown-menu-link {
+    color: #b5e126 !important;
+  }
+}
