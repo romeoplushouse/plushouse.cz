@@ -1,0 +1,29 @@
+{
+  "orders": [
+    {
+      "id": "ORD-2026-0001",
+      "state": "PAID",
+      "customer": {
+        "name": "Jan Novák",
+        "email": "jan.novak@example.com",
+        "phone": "+420777111222"
+      },
+      "shipping_address": {
+        "street": "Dlouhá 12",
+        "city": "Olomouc",
+        "zip": "77900",
+        "country": "CZ"
+      },
+      "items": [
+        { "sku": "PH-LX-START", "qty": 1 },
+        { "sku": "PH-LX-SECURITY", "qty": 1 }
+      ],
+      "loxone_order_ref": "",
+      "tracking_number": "",
+      "carrier": "",
+      "history": [
+        { "at": "2026-02-24T08:00:00+00:00", "from": "NEW", "to": "PAID", "note": "Platba přijata." }
+      ]
+    }
+  ]
+}
