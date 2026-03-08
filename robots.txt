@@ -1,3 +1,7 @@
-User-Agent: *
-Disallow:
-Sitemap: https://www.plushouse.cz/
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /draft
+Disallow: /tools
+
+Sitemap: https://www.plushouse.cz/sitemap.xml
