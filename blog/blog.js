@@ -180,21 +180,6 @@
       }
     }
 
-    var headings = container.querySelectorAll('h2, h3');
-    if (headings.length >= 3 && !document.getElementById('articleToc')) {
-      var toc = document.createElement('div');
-      toc.id = 'articleToc';
-      toc.className = 'article-toc';
-      var html = '<h4>Obsah článku</h4><ul>';
-      headings.forEach(function (h, i) {
-        if (!h.id) h.id = 'toc-' + i;
-        html += '<li class="' + h.tagName.toLowerCase() + '"><a href="#' + h.id + '">' + h.textContent + '</a></li>';
-      });
-      html += '</ul>';
-      toc.innerHTML = html;
-      container.insertBefore(toc, container.querySelector('h1').nextSibling);
-    }
-
     if (currentPost && !document.getElementById('relatedPosts')) {
       var related = sortPosts(posts)
         .filter(function (p) { return normalizePostUrl(p.url) !== current; })
