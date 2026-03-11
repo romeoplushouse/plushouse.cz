@@ -1,6 +1,6 @@
 <?php
 
-    $mail_type = “smtp”;
+    $mail_type = 'smtp';
     //-----------------------------------------------------------------------------------------
     $to_Email       = "tonda@plushouse.cz"; //Replace with recipient email address
     $subject        = 'Formular'; //Subject line for emails
