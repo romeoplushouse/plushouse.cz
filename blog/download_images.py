@@ -24,50 +24,94 @@ INDEX_JSON = os.path.join(SCRIPT_DIR, "index.json")
 
 # Mapování: slug článku → vyhledávací dotaz na Unsplash
 ARTICLE_IMAGES = {
-    "automatizace-budov-mar": "building automation control panel smart system",
-    "chytra-domacnost-a-fve-jedna-logika-rizeni": "smart home solar panels integration",
-    "chytra-domacnost-loxone": "smart home living room modern automation",
-    "chytra-domacnost-mereni-spotreby-krok-za-krokem": "energy monitoring smart meter electricity",
-    "chytra-domacnost-pristupy-a-zabezpeceni": "home security smart lock access control",
-    "chytra-domacnost-rizeni-osvetleni-v-praxi": "smart lighting living room LED ambiance",
-    "chytra-domacnost-stineni-a-prehrivani-domu": "window blinds shading sun protection house",
-    "chytra-domacnost-v-novostavbe-checklist": "modern new house construction building",
-    "chytra-domacnost-v-rekonstrukci-postup": "house renovation reconstruction remodel",
-    "chytra-domacnost-vetrani-a-kvalita-vzduchu": "ventilation air quality indoor fresh air system",
-    "chytra-domacnost-zony-a-klima": "smart thermostat climate zones comfort home",
-    "chytra-domacnost-zony-vytapeni-bez-kompromisu": "underfloor heating thermostat zones warm",
-    "clenstvi-house": "home maintenance service technician support",
-    "elektroinstalace": "electrical panel wiring installation switchboard",
-    "fotovoltaika-a-zaloha-kritickych-okruhu": "solar battery backup power supply home",
-    "fotovoltaika-baterie-kdy-se-vyplati": "home battery storage energy solar wall",
-    "fotovoltaika-fve": "solar panels roof house photovoltaic installation",
-    "fotovoltaika-monitoring-a-vyhodnoceni-vykonu": "solar panel monitoring dashboard performance",
-    "fotovoltaika-revize-bezpecnost-a-normy": "solar panel inspection safety technician roof",
-    "fotovoltaika-rizeni-prebytku-do-tuv": "hot water tank solar energy heating boiler",
-    "fotovoltaika-spotove-ceny-a-rizeni-odberu": "electricity price market energy trading graph",
-    "fotovoltaika-wallbox-a-dynamicke-nabijeni": "electric car charging station wallbox EV home",
-    "hvac-chlazeni-v-lete-bez-plytvani": "air conditioning cooling summer modern house",
-    "hvac-inteligentni-rizeni-rekuperace": "heat recovery ventilation system HRV ductwork",
-    "hvac-rizeni-tepelneho-cerpadla-s-fve": "heat pump outdoor unit residential house",
-    "hvac-servisni-rezimy-a-diagnostika": "HVAC technician service maintenance diagnostic",
-    "hvac-vlhkost-a-kondenzace-co-hlidat": "humidity condensation window moisture indoor",
-    "loxone-a-energeticky-management-domu": "energy management dashboard home smart display",
-    "loxone-miniserver-gen2-co-prinasi": "smart home server hub controller technology",
-    "regulace-jak-pracovat-s-predikci-pocasi": "weather forecast sky clouds prediction sun",
-    "regulace-jak-spravne-nastavit-hysterezi": "temperature control digital thermostat setting",
-    "regulace-pid-v-hvac-jednoduse": "HVAC control panel industrial automation gauge",
-    "regulace-prioritizace-spotreb-v-domacnosti": "smart home energy appliances kitchen modern",
-    "regulace-zatezove-spicky-a-rizeni-vykonu": "electrical power grid energy peak load meter",
-    "topeni-ekvitermni-regulace-pro-rodinny-dum": "heating house winter warm cozy family home",
-    "topeni-optimalizace-nocniho-utlumu": "night house warm light cozy heating dark sky",
-    "topeni-podlahovka-a-inteligentni-rizeni": "underfloor heating installation pipes floor",
-    "topeni-radiatory-vs-podlahovka-v-automatizaci": "radiator heater white modern room interior",
-    "chytra-domacnost-kolik-stoji": "smart home budget cost calculator modern house",
-    "chytra-domacnost-loxone-novostavba-vs-rekonstrukce": "new build versus renovation house comparison",
-    "energeticky-management-fve-loxone-co-umi": "energy management solar battery display screen",
-    "hotel-automatizace-pms-previo-prinosy": "hotel room automation smart technology lobby",
-    "loxone-vs-bezdratove-systemy-co-dava-smysl": "wired versus wireless smart home technology",
-    "nejcastejsi-chyby-pri-chytre-elektroinstalaci": "electrical installation mistake wiring cable error",
+    # Automatizace budov - MaR systém, rozvaděč, BMS řídící panel
+    "automatizace-budov-mar": "building management system BMS touchscreen panel commercial",
+    # Chytrá domácnost + FVE - solární panely na střeše rodinného domu s tabletem
+    "chytra-domacnost-a-fve-jedna-logika-rizeni": "solar panels roof modern house tablet control",
+    # Chytrá domácnost Loxone - interiér s chytrým osvětlením a ovládáním
+    "chytra-domacnost-loxone": "smart home interior touchscreen wall panel lighting",
+    # Měření spotřeby - elektroměr, chytrý měřič, graf spotřeby na displeji
+    "chytra-domacnost-mereni-spotreby-krok-za-krokem": "smart energy meter display electricity consumption graph",
+    # Přístupy a zabezpečení - čtečka otisků, klávesnice, kamera u dveří
+    "chytra-domacnost-pristupy-a-zabezpeceni": "smart door lock keypad fingerprint access entry",
+    # Řízení osvětlení - stmívatelné LED světlo, scéna v obýváku
+    "chytra-domacnost-rizeni-osvetleni-v-praxi": "dimmable LED ceiling light modern living room evening",
+    # Stínění a přehřívání - venkovní žaluzie na okně, stín, slunce
+    "chytra-domacnost-stineni-a-prehrivani-domu": "exterior window blinds shading sunlight modern facade",
+    # Novostavba checklist - hrubá stavba, projekt, plány na stole
+    "chytra-domacnost-v-novostavbe-checklist": "new house construction blueprint planning architecture",
+    # Rekonstrukce postup - bourání, nová elektroinstalace ve zdi
+    "chytra-domacnost-v-rekonstrukci-postup": "home renovation electrical wiring wall open cables",
+    # Větrání a kvalita vzduchu - rekuperační jednotka, čidlo CO2
+    "chytra-domacnost-vetrani-a-kvalita-vzduchu": "indoor air quality sensor ventilation unit modern",
+    # Zóny a klima - termostat na zdi, zónové vytápění, pohodlí
+    "chytra-domacnost-zony-a-klima": "wall thermostat digital temperature zone control room",
+    # Zóny vytápění - podlahové topení s rozdělovačem, termostatická hlavice
+    "chytra-domacnost-zony-vytapeni-bez-kompromisu": "floor heating manifold pipes thermostatic valve",
+    # Členství +House - servisní technik, vzdálená správa, monitoring
+    "clenstvi-house": "technician remote monitoring laptop maintenance service",
+    # Elektroinstalace - otevřený rozvaděč, jističe, kabeláž
+    "elektroinstalace": "electrical distribution board circuit breakers wiring panel open",
+    # FVE záloha kritických okruhů - baterie, záložní zdroj, UPS
+    "fotovoltaika-a-zaloha-kritickych-okruhu": "home battery backup storage system wall mounted",
+    # FVE baterie kdy se vyplatí - lithiové baterie, úložiště, garáž
+    "fotovoltaika-baterie-kdy-se-vyplati": "lithium battery storage residential garage solar",
+    # FVE obecně - fotovoltaické panely na střeše rodinného domu
+    "fotovoltaika-fve": "photovoltaic solar panels rooftop residential house blue sky",
+    # FVE monitoring - graf výkonu, aplikace, dashboard
+    "fotovoltaika-monitoring-a-vyhodnoceni-vykonu": "solar energy monitoring app dashboard graph production",
+    # FVE revize a bezpečnost - technik na střeše kontroluje panely
+    "fotovoltaika-revize-bezpecnost-a-normy": "solar panel inspection technician rooftop safety harness",
+    # FVE řízení přebytků do TUV - bojler, ohřev vody, trubky
+    "fotovoltaika-rizeni-prebytku-do-tuv": "water heater boiler tank domestic hot water system",
+    # FVE spotové ceny - burza elektřiny, graf cen, obchodování
+    "fotovoltaika-spotove-ceny-a-rizeni-odberu": "electricity spot price chart stock energy market screen",
+    # FVE wallbox - nabíjecí stanice, elektromobil v garáži
+    "fotovoltaika-wallbox-a-dynamicke-nabijeni": "electric vehicle charging wallbox garage home EV cable",
+    # HVAC chlazení - klimatizace split jednotka, léto, chlazený interiér
+    "hvac-chlazeni-v-lete-bez-plytvani": "split air conditioner unit wall mounted cooling interior",
+    # HVAC rekuperace - rekuperační jednotka, potrubí, filtr
+    "hvac-inteligentni-rizeni-rekuperace": "heat recovery ventilation unit HRV filter ductwork ceiling",
+    # HVAC tepelné čerpadlo s FVE - venkovní jednotka TČ u domu
+    "hvac-rizeni-tepelneho-cerpadla-s-fve": "heat pump outdoor unit garden residential modern house",
+    # HVAC servis a diagnostika - servisní technik, nářadí, měření
+    "hvac-servisni-rezimy-a-diagnostika": "HVAC technician multimeter diagnostic service maintenance",
+    # HVAC vlhkost a kondenzace - orosené okno, vlhkost, kapky
+    "hvac-vlhkost-a-kondenzace-co-hlidat": "window condensation moisture droplets indoor humidity glass",
+    # Loxone energetický management - dashboard spotřeby na tabletu
+    "loxone-a-energeticky-management-domu": "home energy dashboard tablet consumption solar graph",
+    # Loxone Miniserver Gen2 - zelená deska, server, řídící jednotka
+    "loxone-miniserver-gen2-co-prinasi": "smart home automation controller server green circuit board",
+    # Regulace predikce počasí - meteogram, předpověď, oblačnost
+    "regulace-jak-pracovat-s-predikci-pocasi": "weather forecast app screen cloud sun temperature",
+    # Regulace hystereze - termostat nastavení, teplotní křivka
+    "regulace-jak-spravne-nastavit-hysterezi": "digital thermostat display temperature setting adjustment",
+    # Regulace PID v HVAC - průmyslový regulátor, displej, graf
+    "regulace-pid-v-hvac-jednoduse": "industrial PID controller display process automation panel",
+    # Regulace prioritizace spotřeb - pračka, myčka, spotřebiče, chytrá zásuvka
+    "regulace-prioritizace-spotreb-v-domacnosti": "smart plug socket appliance washing machine energy",
+    # Regulace zátěžové špičky - elektroměr, hlavní jistič, ampérmetr
+    "regulace-zatezove-spicky-a-rizeni-vykonu": "electric meter main breaker panel amperage load",
+    # Topení ekvitermní regulace - kotelna, kotel, potrubí, rodinný dům
+    "topeni-ekvitermni-regulace-pro-rodinny-dum": "boiler room heating system pipes residential house",
+    # Topení noční útlum - dům v noci, teplé okno, útulný interiér
+    "topeni-optimalizace-nocniho-utlumu": "house night warm window glow cozy winter exterior",
+    # Topení podlahovka - pokládka podlahového topení, trubky v betonu
+    "topeni-podlahovka-a-inteligentni-rizeni": "underfloor heating pipes installation concrete floor laying",
+    # Topení radiátory vs podlahovka - radiátor vedle podlahového topení
+    "topeni-radiatory-vs-podlahovka-v-automatizaci": "radiator heating modern room white wall interior clean",
+    # Kolik stojí chytrá domácnost - rozvaděč, kalkulačka, projekt
+    "chytra-domacnost-kolik-stoji": "smart home project planning calculator cost estimate blueprint",
+    # Novostavba vs rekonstrukce - nový dům vedle starého
+    "chytra-domacnost-loxone-novostavba-vs-rekonstrukce": "new modern house old house comparison renovation contrast",
+    # Energetický management FVE + Loxone - graf spotřeby, baterie, panely
+    "energeticky-management-fve-loxone-co-umi": "solar energy management system battery inverter dashboard",
+    # Hotel automatizace PMS - hotelový pokoj, karta, ovládání
+    "hotel-automatizace-pms-previo-prinosy": "hotel room keycard smart thermostat bedside modern luxury",
+    # Loxone vs bezdrátové systémy - kabely vs bezdrátový senzor
+    "loxone-vs-bezdratove-systemy-co-dava-smysl": "network cable ethernet wiring structured cabling rack",
+    # Nejčastější chyby elektroinstalace - špatné zapojení, chyba, varování
+    "nejcastejsi-chyby-pri-chytre-elektroinstalaci": "electrician checking wiring junction box installation work",
 }
 
 
