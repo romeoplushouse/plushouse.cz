@@ -62,6 +62,12 @@ ARTICLE_IMAGES = {
     "topeni-optimalizace-nocniho-utlumu": "night house warm light cozy heating dark sky",
     "topeni-podlahovka-a-inteligentni-rizeni": "underfloor heating installation pipes floor",
     "topeni-radiatory-vs-podlahovka-v-automatizaci": "radiator heater white modern room interior",
+    "chytra-domacnost-kolik-stoji": "smart home budget cost calculator modern house",
+    "chytra-domacnost-loxone-novostavba-vs-rekonstrukce": "new build versus renovation house comparison",
+    "energeticky-management-fve-loxone-co-umi": "energy management solar battery display screen",
+    "hotel-automatizace-pms-previo-prinosy": "hotel room automation smart technology lobby",
+    "loxone-vs-bezdratove-systemy-co-dava-smysl": "wired versus wireless smart home technology",
+    "nejcastejsi-chyby-pri-chytre-elektroinstalaci": "electrical installation mistake wiring cable error",
 }
 
 
