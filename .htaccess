@@ -67,6 +67,9 @@
     # Force www
     RewriteCond %{HTTP_HOST} ^plushouse\.cz$ [NC]
     RewriteRule ^(.*)$ https://www.plushouse.cz/$1 [L,R=301]
+
+    # Clean URL for PlusConnect
+    RewriteRule ^plusconnect/?$ /plusconnect.html [L]
 </IfModule>
 
 # === ERROR PAGES ===
