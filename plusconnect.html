@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="PlusConnect – integrační platforma pro propojení hotelových PMS systémů s budovou. Automatizace provozu, úspory energií a přehledný dashboard.">
+<meta name="keywords" content="plusconnect,integrace pms,hotelová automatizace,dashboard,energetický management,loxone,previo,better hotel">
+<title>PlusConnect – Integrační platforma pro chytré budovy | PLUS HOUSE</title>
+<meta property="og:title" content="PlusConnect – Integrační platforma pro chytré budovy | PLUS HOUSE">
+<meta property="og:site_name" content="PlusHouse">
+<meta property="og:url" content="https://www.plushouse.cz/plusconnect">
+<meta property="og:description" content="PlusConnect propojuje hotelové PMS systémy s automatizací budovy. Jeden dashboard, úspory energií, plná kontrola provozu.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.plushouse.cz/uploads/uploads/ogfoto.jpg">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css" />
+<link rel="stylesheet" type="text/css" href="css/pix_style.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/font-style.css" />
+<link href="css/animations.min.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="canonical" href="https://www.plushouse.cz/plusconnect">
+<!--ICO -->
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.plushouse.cz/uploads/uploads/ico/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-16x16.png">
+<link rel="manifest" href="https://www.plushouse.cz/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<!--ICO -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GVQ2MF6LY5');
+</script>
+<style>
+.dropdown-menu-link {
+  color: #b5e126;
+  font: Montserrat;
+  font-weight: 600;
+}
+.dropdown-menu-link:hover {
+  color: #b5e154;
+  background-color: white !important;
+  font: Montserrat;
+  font-weight: 600;
+}
+.dropdown-menu {
+  font-weight: 600 !important;
+  background-color: black !important;
+  padding: 5px 15px !important;
+  padding-bottom: 10px !important;
+  color: black !important;
+}
+.plusconnect-flow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px 0;
+}
+.plusconnect-flow .flow-box {
+  background: #111;
+  border: 2px solid #333;
+  border-radius: 12px;
+  padding: 30px 25px;
+  text-align: center;
+  min-width: 200px;
+  max-width: 240px;
+  flex: 1;
+}
+.plusconnect-flow .flow-box h5 {
+  color: #b5e126;
+  font-family: Montserrat;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.plusconnect-flow .flow-box p {
+  color: #aaa;
+  font-size: 13px;
+  margin: 0;
+}
+.plusconnect-flow .flow-arrow {
+  color: #b5e126;
+  font-size: 36px;
+  font-weight: bold;
+}
+.plusconnect-feature-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 35px 25px;
+  text-align: center;
+  border-bottom: 4px solid #b5e126;
+  min-height: 220px;
+}
+.plusconnect-feature-card i {
+  color: #b5e126;
+  font-size: 60px;
+  margin-bottom: 15px;
+  display: block;
+}
+.plusconnect-feature-card h5 {
+  font-family: Montserrat;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.plusconnect-feature-card p {
+  color: #666;
+  font-size: 13px;
+}
+@media (max-width: 767px) {
+  .plusconnect-flow {
+    flex-direction: column;
+  }
+  .plusconnect-flow .flow-arrow {
+    transform: rotate(90deg);
+  }
+}
+</style>
+</head>
+<body>
+<div class="pix_section pix_nav_menu normal pix-padding-v-20 pix-over-header pix_scroll_header slow-mo" data-scroll-bg="#000000" id="section_1" style="background-repeat: repeat-x; padding-top: 20px; padding-bottom: 20px; display: block;">
+  <div class="container"><div class="row">
+    <div class="col-md-10 col-xs-12 pix-inner-col col-sm-10 column ui-droppable"><div class="pix-content"><nav class="navbar navbar-default pix-no-margin-bottom pix-navbar-default"><div class="container"><div class="navbar-header pix-lg-inline-block pix-float-none"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pix-navbar-collapse" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand logo-img logo-img-a pix-adjust-height" href="https://www.plushouse.cz/"><img src="uploads/plushouse-RSF.png" alt="" class="img-responsive pix-logo-img"></a></div></div></nav></div></div>
+    <div class="col-md-2 col-xs-12 pix-inner-col col-sm-2 column ui-droppable"><div class="pix-content pix-adjust-height text-right mobile-text-left" id="pix-header-btn" style="margin-top: 8.5px;"><a href="https://www.plushouse.cz/kontakt" class="btn small-text brown-bg pix-white pix-margin-top-10 pix-inline-block normal btn-md pix-line super-slow-mo" style="background: transparent; border-color: rgb(181, 225, 38); color: rgb(181, 225, 38);"><span class="pix_edit_text"><b>KONZULTACE</b></span></a></div></div>
+    <div class="col-md-10 col-xs-10 pix-inner-col col-sm-10 column ui-droppable"><div class="pix-content"><div class="navbar-collapse pix-no-h-padding collapse" id="pix-navbar-collapse" style="height: 1px;"><ul class="nav navbar-nav pix-inline-block pix-float-none media-middle pix-header-nav pix-adjust-height" id="pix-header-nav" style="margin-top: 13.5px;">
+<li><a href="https://www.plushouse.cz/" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">DOMŮ</a></li>
+<li class="dropdown"><a class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">SLUŽBY</a>
+<ul class="dropdown-menu dropdown-menu-left">
+<li><a href="https://www.plushouse.cz/fotovoltaika" class="dropdown-menu-link pix-nav-link">FOTOVOLTAIKA</a></li>
+<li><a href="https://www.plushouse.cz/trafostanice" class="dropdown-menu-link pix-nav-link">TRAFOSTANICE</a></li>
+<li><a href="https://www.plushouse.cz/fototermika.html" class="dropdown-menu-link pix-nav-link">FOTOTERMIKA</a></li>
+<li><a href="https://www.plushouse.cz/tepelna-cerpadla.html" class="dropdown-menu-link pix-nav-link">TEPELNÁ ČERPADLA</a></li>
+<li><a href="https://www.plushouse.cz/nabijeci-stanice.html" class="dropdown-menu-link pix-nav-link">NABÍJECÍ STANICE</a></li>
+<li><a href="https://www.plushouse.cz/pms" class="dropdown-menu-link pix-nav-link">PMS PRO HOTELY</a></li>
+<li><a href="https://www.plushouse.cz/plusconnect" class="dropdown-menu-link pix-nav-link">PLUSCONNECT</a></li>
+</ul></li>
+<li><a href="#section_3" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">JAK TO FUNGUJE</a></li>
+<li><a href="#section_4" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">FUNKCE</a></li>
+<li><a href="#section_5" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">PRO KOHO</a></li>
+<li><a href="#section_6" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">FAQ</a></li>
+<li><a href="https://www.plushouse.cz/blog" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">BLOG</a></li>
+</ul></div></div></div>
+  </div></div>
+</div>
+
+<!-- HERO -->
+<div class="pix_section pix-real-intro pix-padding-v-100" id="section_2" style="padding-top: 520px; background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=1920&q=80'); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; padding-bottom: 140px;">
+  <div class="container"><div class="row"><div class="col-xs-12 col-sm-7 col-md-12">
+    <div class="pix-content pix-padding-top-40 slow-mo">
+      <h5 class="pix-brown-2"><span class="pix_edit_text"><strong style="font-family: Montserrat; color: rgb(181, 225, 38);">INTEGRAČNÍ PLATFORMA</strong></span></h5>
+      <h2 class="pix-white pix-no-margin-top"><span class="pix_edit_text"><span style="font-family: Montserrat; font-weight: bold;">PlusConnect propojuje vaši budovu s&nbsp;provozními systémy do jednoho celku.</span></span></h2>
+      <p class="pix-slight-white big-text"><span class="pix_edit_text"><span style="font-family: Montserrat;">Vlastní integrační vrstva mezi PMS, automatizací budovy a energetikou. Dashboard, stavové přehledy a automatická provozní logika.</span></span></p>
+      <div class="pix-padding-top-20">
+        <a href="https://www.plushouse.cz/kontakt" class="btn btn-md wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; font-family: Montserrat;">CHCI VĚDĚT VÍC</a>
+      </div>
+    </div>
+  </div></div></div>
+</div>
+
+<!-- CO JE PLUSCONNECT -->
+<div class="pix_section pix-padding" id="section_about" style="background-color: rgb(181, 225, 38); padding-top: 60px; padding-bottom: 60px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-20 animate-in">
+      <h5 class="text-center"><span style="color: rgb(0, 0, 0);">Co je PlusConnect?</span></h5>
+      <h2 class="text-center pix-no-margin-top"><span style="font-family: Montserrat; font-weight: 700; color: rgb(0, 0, 0);">Integrační most mezi světem IT a světem budovy</span></h2>
+    </div></div>
+    <div class="col-md-6 col-sm-6">
+      <div class="pix-content animate-in">
+        <p style="color: #000; font-family: Montserrat; font-size: 15px; line-height: 26px;">
+          <strong>PlusConnect</strong> je naše proprietární integrační řešení, které překlenuje mezeru mezi provozními systémy (PMS, booking, správa hostů) a fyzickou automatizací budovy (HVAC, přístupy, osvětlení, energie).
+        </p>
+        <p style="color: #253700; font-family: Montserrat; font-size: 14px; line-height: 24px;">
+          Místo desítek izolovaných nástrojů získáte jeden přehledný systém, kde vidíte stav celého objektu v reálném čase – od obsazenosti pokojů přes spotřebu energie po servisní požadavky.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="pix-content animate-in">
+        <p style="color: #000; font-family: Montserrat; font-size: 15px; line-height: 26px;">
+          Systém byl navržen pro <strong>hotely, penziony a komerční objekty</strong>, kde provozní efektivita přímo ovlivňuje ziskovost. PlusConnect řeší komunikaci mezi systémy, které spolu běžně nemluvily.
+        </p>
+        <p style="color: #253700; font-family: Montserrat; font-size: 14px; line-height: 24px;">
+          Konkrétní technickou architekturu a způsob integrace navrhujeme vždy na míru po úvodní konzultaci, protože každý objekt má jiné potřeby i infrastrukturu.
+        </p>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- JAK TO FUNGUJE – SCHÉMA -->
+<div class="pix_section pix-padding-v-50" id="section_3" style="background-color: #000; padding-top: 70px; padding-bottom: 70px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-20 animate-in">
+      <h5 class="text-center" style="color: #b5e126; font-family: Montserrat; font-weight: 600;">Princip fungování</h5>
+      <h2 class="pix-white text-center pix-no-margin-top" style="font-family: Montserrat; font-weight: 700;">Jak PlusConnect propojuje váš provoz</h2>
+      <p class="text-center" style="color: #888; font-family: Montserrat; max-width: 700px; margin: 0 auto;">
+        Tři vrstvy, jeden cíl – automatizovat rutinní provozní rozhodnutí a dát vám přehled na jednom místě.
+      </p>
+    </div></div>
+
+    <div class="col-md-12">
+      <div class="plusconnect-flow animate-in">
+        <div class="flow-box">
+          <h5>Provozní systémy</h5>
+          <p>PMS, booking platformy, správa hostů, fakturace – data o rezervacích a obsazenosti</p>
+        </div>
+        <span class="flow-arrow hidden-xs">&#10132;</span>
+        <span class="flow-arrow visible-xs-block" style="text-align:center;">&#10515;</span>
+        <div class="flow-box" style="border-color: #b5e126;">
+          <h5 style="font-size: 22px;">PlusConnect</h5>
+          <p>Integrační vrstva s vlastní logikou, konektory a dashboardem</p>
+        </div>
+        <span class="flow-arrow hidden-xs">&#10132;</span>
+        <span class="flow-arrow visible-xs-block" style="text-align:center;">&#10515;</span>
+        <div class="flow-box">
+          <h5>Budova</h5>
+          <p>Topení, chlazení, přístupy, osvětlení, energie – fyzická automatizace objektu</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 pix-padding-top-40">
+      <div class="pix-content text-center animate-in">
+        <i class="pixicon-laptop3" style="color: #b5e126; font-size: 50px;"></i>
+        <h5 class="pix-white" style="font-family: Montserrat; font-weight: 600;">1. Sběr dat</h5>
+        <p style="color: #888;">PlusConnect přijímá data z provozních systémů – rezervace, check-iny, stavy pokojů a požadavky hostů.</p>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 pix-padding-top-40">
+      <div class="pix-content text-center animate-in">
+        <i class="pixicon-browser13" style="color: #b5e126; font-size: 50px;"></i>
+        <h5 class="pix-white" style="font-family: Montserrat; font-weight: 600;">2. Rozhodovací logika</h5>
+        <p style="color: #888;">Na základě pravidel a kontextu (čas, počasí, obsazenost) systém určí optimální akce pro budovu.</p>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 pix-padding-top-40">
+      <div class="pix-content text-center animate-in">
+        <i class="pixicon-tools" style="color: #b5e126; font-size: 50px;"></i>
+        <h5 class="pix-white" style="font-family: Montserrat; font-weight: 600;">3. Řízení budovy</h5>
+        <p style="color: #888;">Automatizace provede akce – příprava pokoje, nastavení teploty, otevření přístupu, přepnutí režimů.</p>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- KLÍČOVÉ FUNKCE -->
+<div class="pix_section pix-padding-v-50" id="section_4" style="background-color: #f4f4f4; padding-top: 70px; padding-bottom: 70px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-40 animate-in">
+      <h5 class="text-center" style="color: #b5e126; font-family: Montserrat; font-weight: 600;">Klíčové funkce</h5>
+      <h2 class="text-center pix-no-margin-top" style="font-family: Montserrat; font-weight: 700; color: #333;">Co PlusConnect umí</h2>
+    </div></div>
+
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-graphs4"></i>
+        <h5>Provozní dashboard</h5>
+        <p>Celkový přehled o stavu objektu, obsazenosti, energetice a servisních událostech na jednom místě.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-hotels"></i>
+        <h5>Automatické scénáře</h5>
+        <p>Check-in spustí přípravu pokoje. Check-out přepne do úsporného režimu. Bez zásahu recepce.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-money210"></i>
+        <h5>Energetické úspory</h5>
+        <p>Řízení topení a chlazení podle skutečné obsazenosti. Zbytečně nevytápíte prázdné pokoje.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-lock107"></i>
+        <h5>Přístupy a bezpečnost</h5>
+        <p>Časově omezené přístupy pro hosty, housekeeping i techniky s kompletním logem událostí.</p>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-wrench"></i>
+        <h5>Konektory na míru</h5>
+        <p>Napojení na PMS systémy, booking platformy a další provozní nástroje dle potřeb vašeho objektu.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-phone79"></i>
+        <h5>Alarmy a notifikace</h5>
+        <p>Upozornění na provozní anomálie, servisní požadavky a kritické stavy v reálném čase.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-cloud91"></i>
+        <h5>Vzdálený dohled</h5>
+        <p>Přístup k dashboardu odkudkoli. Správa více objektů z jednoho rozhraní.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-refresh10"></i>
+        <h5>Průběžný rozvoj</h5>
+        <p>Systém roste s vámi. Nové konektory, funkce a integrace přidáváme podle vašich potřeb.</p>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- PRO KOHO -->
+<div class="pix_section pix-padding-v-50" id="section_5" style="background-color: #fff; padding-top: 70px; padding-bottom: 70px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-40 animate-in">
+      <h5 class="text-center" style="color: #b5e126; font-family: Montserrat; font-weight: 600;">Pro koho je PlusConnect</h5>
+      <h2 class="text-center pix-no-margin-top" style="font-family: Montserrat; font-weight: 700; color: #333;">Typické nasazení</h2>
+    </div></div>
+
+    <div class="col-md-4 col-sm-4">
+      <div class="pix-content text-center pix-margin-v-20 animate-in">
+        <span class="pix-margin-bottom-20"><i class="pixicon-hotels" style="color: #b5e126; font-size: 90px;"></i></span>
+        <h4 style="font-family: Montserrat; font-weight: 700;">Hotely a penziony</h4>
+        <p class="pix-black-gray-light" style="font-size: 14px;">Plná integrace PMS s automatizací pokojů, společných prostor a energetikou. Od malého penzionu po víceobjektový hotel.</p>
+        <a href="https://www.plushouse.cz/pms" class="btn btn-sm wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; margin-top: 15px;">PMS automatizace</a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <div class="pix-content text-center pix-margin-v-20 animate-in">
+        <span class="pix-margin-bottom-20"><i class="pixicon-office" style="color: #b5e126; font-size: 90px;"></i></span>
+        <h4 style="font-family: Montserrat; font-weight: 700;">Komerční objekty</h4>
+        <p class="pix-black-gray-light" style="font-size: 14px;">Propojení správy budovy s provozními systémy. Energetický management, přístupy a monitorování stavu technologií.</p>
+        <a href="https://www.plushouse.cz/kontakt" class="btn btn-sm wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; margin-top: 15px;">Konzultace</a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <div class="pix-content text-center pix-margin-v-20 animate-in">
+        <span class="pix-margin-bottom-20"><i class="pixicon-house4" style="color: #b5e126; font-size: 90px;"></i></span>
+        <h4 style="font-family: Montserrat; font-weight: 700;">Apartmány a resorty</h4>
+        <p class="pix-black-gray-light" style="font-size: 14px;">Správa více jednotek s centrálním přehledem. Automatizace příjezdu a odjezdu hostů, úsporné režimy mimo sezónu.</p>
+        <a href="https://www.plushouse.cz/kontakt" class="btn btn-sm wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; margin-top: 15px;">Konzultace</a>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- FAQ -->
+<div class="pix_section pix-padding" id="section_6" style="background-color: #000; padding-top: 60px; padding-bottom: 60px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><h2 class="pix-white text-center" style="font-family: Montserrat; font-weight: 700;">Časté dotazy</h2></div>
+    <div class="col-md-4">
+      <h5 class="pix-white" style="font-family: Montserrat;">Jaké PMS systémy podporujete?</h5>
+      <p class="pix-gray">Aktuálně máme konektory pro nejrozšířenější české PMS. Konkrétní kompatibilitu ověříme při úvodní konzultaci.</p>
+    </div>
+    <div class="col-md-4">
+      <h5 class="pix-white" style="font-family: Montserrat;">Musím měnit stávající PMS?</h5>
+      <p class="pix-gray">Ne. PlusConnect se napojuje na váš stávající systém. Neměníme to, co funguje – rozšiřujeme to o automatizaci budovy.</p>
+    </div>
+    <div class="col-md-4">
+      <h5 class="pix-white" style="font-family: Montserrat;">Je to bezpečné?</h5>
+      <p class="pix-gray">Komunikace je šifrovaná a kritické funkce běží lokálně. Výpadek internetu neblokuje základní provozní scénáře.</p>
+    </div>
+    <div class="col-md-4 pix-padding-top-20">
+      <h5 class="pix-white" style="font-family: Montserrat;">Jak dlouho trvá nasazení?</h5>
+      <p class="pix-gray">Záleží na rozsahu objektu. Typicky od několika týdnů po etapizované nasazení u větších hotelů.</p>
+    </div>
+    <div class="col-md-4 pix-padding-top-20">
+      <h5 class="pix-white" style="font-family: Montserrat;">Mohu spravovat více objektů?</h5>
+      <p class="pix-gray">Ano. Dashboard umožňuje centrální správu a přehled přes všechny připojené objekty z jednoho místa.</p>
+    </div>
+    <div class="col-md-4 pix-padding-top-20">
+      <h5 class="pix-white" style="font-family: Montserrat;">Co když potřebuji nový konektor?</h5>
+      <p class="pix-gray">Vyvíjíme konektory na míru. Pokud váš systém ještě nepodporujeme, rádi to vyřešíme.</p>
+    </div>
+    <div class="col-md-12 text-center pix-padding-top-40">
+      <a href="https://www.plushouse.cz/kontakt" class="btn btn-md wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; font-family: Montserrat;">Domluvit konzultaci k PlusConnect</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- BLOG -->
+<div class="pix_section blog-strip" id="blog-strip">
+  <div class="container">
+    <div class="blog-strip__inner">
+      <div class="blog-strip__header">
+        <h3>Nejnovější články z blogu</h3>
+        <a href="https://www.plushouse.cz/blog">Zobrazit celý blog</a>
+      </div>
+      <div class="blog-strip__list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="pix_section pix-padding-bottom-20 pix-padding-top-60 gray-dark-bg" id="section_footer" style="background-color: rgb(0, 0, 0); padding-top: 60px; padding-bottom: 20px;">
+  <div class="container">
+   <div class="row">
+    <div class="col-md-6 col-xs-12 col-sm-6 column ui-droppable">
+     <div class="pix-content"><h5 class="pix-white"><span class="pix_edit_text"><span style="font-weight: bold;">NAŠE VIZE</span></span></h5><div class="pix-padding-v-10">
+      <p class="pix-gray"><span class="pix_edit_text"><span style="color: rgb(255, 255, 255);">Cílem PLUS HOUSE je navrhovat technicky kvalitní řešení s jasným ekonomickým přínosem a dlouhodobou udržitelností provozu.</span></span></p>
+     </div></div>
+    </div>
+    <div class="col-md-3 col-xs-12 col-sm-3 column ui-droppable">
+     <div class="pix-content"><h5 class="pix-white"><span class="pix_edit_text"><strong>KONTAKTUJTE NÁS</strong></span></h5><div class="pix-padding-v-10">
+      <span class="pix-gray pix-lineheight-24"><span class="pix_edit_text"><span style="color: rgb(255, 255, 255);">info@plushouse.cz<br>+420 734 38 48 58<br>Mladeč 61, 783 21 Mladeč</span></span></span>
+     </div></div>
+    </div>
+    <div class="col-md-3 col-xs-12 col-sm-3 column ui-droppable">
+     <div class="pix-content"><h5 class="pix-white"><span class="pix_edit_text"><strong>SLEDUJTE NÁS</strong></span></h5>
+      <div class="pix-padding-bottom-20">
+      <a href="https://www.facebook.com/plushousecz" class="small-social"><i class="pixicon-facebook3" style="color: rgb(164, 170, 174); font-size: 37px;"></i></a>
+      <a href="https://www.instagram.com/plushouse.cz" class="small-social"><i class="pixicon-instagram4" style="color: rgb(164, 170, 174); font-size: 37px;"></i></a>
+     </div></div>
+    </div>
+   </div>
+  </div>
+</div>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PlusConnect","applicationCategory":"BusinessApplication","description":"Integrační platforma pro propojení PMS systémů s automatizací budovy","provider":{"@type":"Organization","name":"PLUS HOUSE s.r.o."},"url":"https://www.plushouse.cz/plusconnect"}</script>
+<script src="js/jquery-1.11.2.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/velocity.min.js"></script>
+<script src="js/velocity.ui.min.js"></script>
+<script src="js/appear.min.js" type="text/javascript"></script>
+<script src="js/animations.js" type="text/javascript"></script>
+<script src="js/plugins.js" type="text/javascript"></script>
+<script src="js/jquery.fancybox.min.js" type="text/javascript"></script>
+<script src="js/custom.js"></script>
+<script src="/blog/blog.js"></script>
+</body>
+</html>

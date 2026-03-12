@@ -56,6 +56,7 @@ NAV='''<div class="pix_section pix_nav_menu normal pix-padding-v-20 pix-over-hea
           <li><a href="https://www.plushouse.cz/tepelna-cerpadla.html" class="dropdown-menu-link" data-toggle="undefined">TEPELNÁ ČERPADLA</a></li>
           <li><a href="https://www.plushouse.cz/nabijeci-stanice.html" class="dropdown-menu-link" data-toggle="undefined">NABÍJECÍ STANICE</a></li>
           <li><a href="https://www.plushouse.cz/pms" class="dropdown-menu-link" data-toggle="undefined">PMS PRO HOTELY</a></li>
+<li><a href="https://www.plushouse.cz/plusconnect" class="dropdown-menu-link pix-nav-link">PLUSCONNECT</a></li>
         </ul>
       </li>
       <li><a href="https://www.plushouse.cz/cenik.html" class="pix-gray pix-nav-link" data-toggle="undefined" style="color: rgb(181, 225, 38);">CENÍK</a></li>
