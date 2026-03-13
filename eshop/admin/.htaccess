@@ -1,0 +1,7 @@
+# Deny direct access to admin from search engines
+Header set X-Robots-Tag "noindex, nofollow"
+
+# Force HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
