@@ -149,6 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <link rel="stylesheet" type="text/css" href="/css/pix_style.css" />
 <link rel="stylesheet" type="text/css" href="/css/main.css" />
 <link rel="stylesheet" type="text/css" href="/css/font-style.css" />
+<link rel="stylesheet" type="text/css" href="/css/professional.css" />
 <link rel="icon" type="image/png" sizes="32x32" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-32x32.png">
 <style>
 html { scroll-behavior: smooth; }
