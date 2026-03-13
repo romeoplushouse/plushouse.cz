@@ -1,0 +1,368 @@
+/* ================================================================
+   PLUS HOUSE – Professional UI Enhancement Layer
+   Global styles applied across all pages for consistent, polished look.
+   ================================================================ */
+
+/* ── Base Refinements ── */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(181, 225, 38, .25);
+  color: #111;
+}
+
+/* ── Typography Polish ── */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.01em;
+}
+
+.pix-content p {
+  line-height: 1.75;
+}
+
+/* ── Navigation Enhancements ── */
+.pix_nav_menu {
+  transition: background-color .35s ease, box-shadow .35s ease;
+  z-index: 1000;
+}
+
+.pix_nav_menu.pix_scroll_header[style*="background"] {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, .25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.pix-nav-link {
+  transition: color .2s ease, opacity .2s ease !important;
+  position: relative;
+  font-size: 13px !important;
+  letter-spacing: .5px;
+}
+
+.pix-nav-link:hover {
+  opacity: .85;
+}
+
+.pix-header-nav > li > .pix-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #b5e126;
+  transition: width .25s ease, left .25s ease;
+}
+
+.pix-header-nav > li > .pix-nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Dropdown improvements */
+.dropdown-menu {
+  border: none !important;
+  border-radius: 8px !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, .4) !important;
+  margin-top: 8px !important;
+  animation: dropdownFadeIn .2s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-menu-link {
+  transition: color .15s ease, padding-left .2s ease !important;
+  padding: 6px 0 !important;
+  display: block;
+}
+
+.dropdown-menu-link:hover {
+  padding-left: 6px !important;
+  background-color: transparent !important;
+}
+
+/* ── Button Polish ── */
+.btn {
+  transition: all .25s ease !important;
+  border-radius: 4px;
+  font-family: Montserrat, sans-serif;
+  letter-spacing: .3px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(181, 225, 38, .3);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+a.btn-flat[style*="background-color: rgb(181, 225, 38)"],
+a.btn[style*="background-color: rgb(181, 225, 38)"] {
+  box-shadow: 0 2px 8px rgba(181, 225, 38, .25);
+}
+
+a.btn-flat[style*="background-color: rgb(181, 225, 38)"]:hover,
+a.btn[style*="background-color: rgb(181, 225, 38)"]:hover {
+  box-shadow: 0 6px 20px rgba(181, 225, 38, .4) !important;
+  filter: brightness(1.05);
+}
+
+/* ── Card & Section Polish ── */
+.pix-cover-shape-180 {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.pix-cover-shape-180 img {
+  transition: transform .5s ease;
+}
+
+.pix-cover-shape-180:hover img {
+  transform: scale(1.04);
+}
+
+/* Service cards (zoomer class) */
+.zoomer {
+  border-radius: 6px;
+}
+
+/* ── Section Transitions ── */
+.pix_section {
+  position: relative;
+}
+
+/* Subtle gradient overlays for depth */
+.pix_section[style*="background-color: rgb(181, 225, 38)"]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, .3);
+}
+
+/* ── Footer Enhancement ── */
+.pix_section[style*="background-color: rgb(0, 0, 0)"] h5 {
+  letter-spacing: .5px;
+}
+
+.pix_section[style*="background-color: rgb(0, 0, 0)"] .small-social i {
+  transition: color .2s ease, transform .2s ease;
+}
+
+.pix_section[style*="background-color: rgb(0, 0, 0)"] .small-social:hover i {
+  color: #b5e126 !important;
+  transform: scale(1.15);
+}
+
+/* ── Hero Section Depth ── */
+.pix-real-intro {
+  position: relative;
+}
+
+.pix-real-intro::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, .3));
+  pointer-events: none;
+}
+
+/* ── Form Inputs ── */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  transition: border-color .2s ease, box-shadow .2s ease;
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #b5e126 !important;
+  box-shadow: 0 0 0 3px rgba(181, 225, 38, .15);
+}
+
+/* ── Animate-in Refinement ── */
+.animate-in {
+  transition: opacity .6s ease, transform .6s ease;
+}
+
+/* ── Scrollbar (for pages that don't have it) ── */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: rgba(255, 255, 255, .4);
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+  opacity: .4;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* ── Image Polish ── */
+.img-responsive {
+  image-rendering: auto;
+}
+
+/* ── Stat numbers (PlusConnect style reusable) ── */
+.stat-highlight {
+  font-family: Montserrat, sans-serif;
+  font-weight: 800;
+  font-size: 42px;
+  color: #b5e126;
+  line-height: 1;
+}
+
+/* ── Mobile Improvements ── */
+@media (max-width: 767px) {
+  .pix-real-intro {
+    padding-top: 350px !important;
+  }
+
+  .pix-nav-link {
+    font-size: 14px !important;
+    padding: 8px 0 !important;
+  }
+
+  .dropdown-menu {
+    position: static !important;
+    float: none !important;
+    box-shadow: none !important;
+    margin-top: 0 !important;
+    border-top: 1px solid rgba(181, 225, 38, .2) !important;
+  }
+
+  .pix-header-nav > li > .pix-nav-link::after {
+    display: none;
+  }
+
+  .pix-content h2 {
+    font-size: 24px;
+  }
+
+  .pix-content .big-text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pix-real-intro {
+    padding-top: 280px !important;
+    padding-bottom: 80px !important;
+  }
+
+  .pix-real-intro h2 {
+    font-size: 22px !important;
+  }
+
+  .pix-real-intro .big-text {
+    font-size: 14px !important;
+  }
+}
+
+/* ── Blog Strip (on non-blog pages) ── */
+.blog-strip {
+  background: #f8f9fa;
+  padding: 60px 0;
+}
+
+.blog-strip__inner {
+  max-width: 100%;
+}
+
+.blog-strip__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.blog-strip__header h3 {
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+}
+
+.blog-strip__header a {
+  color: #b5e126;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  border-bottom: 2px solid #b5e126;
+  padding-bottom: 2px;
+  transition: opacity .2s;
+}
+
+.blog-strip__header a:hover {
+  opacity: .75;
+}
+
+.blog-strip__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 991px) {
+  .blog-strip__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 575px) {
+  .blog-strip__list {
+    grid-template-columns: 1fr;
+  }
+  .blog-strip__header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+
+/* ── Loading State ── */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+/* ── Print Styles ── */
+@media print {
+  .pix_nav_menu,
+  .blog-strip,
+  .small-social {
+    display: none !important;
+  }
+}
