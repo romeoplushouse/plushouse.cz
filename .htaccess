@@ -7,7 +7,7 @@
 </FilesMatch>
 
 # Allow specific PHP files that need web access
-<FilesMatch "^(index|new_contact|recaptchalib|admin_fulfillment)\.php$">
+<FilesMatch "^(index|new_contact|recaptchalib|admin_fulfillment|checkout|comgate-callback|comgate-return)\.php$">
     Order Allow,Deny
     Allow from all
 </FilesMatch>
