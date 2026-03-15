@@ -191,7 +191,7 @@ function initUI(query) {
   var brandName = state.meta.company_name || "FVE konfigurátor";
   $("brandNameBadge").textContent = brandName;
   $("headline").textContent = "Konfigurátor fotovoltaiky";
-  $("subhead").textContent = "Orientační kalkulace – ceny jsou bez DPH, finální nabídku připravíme individuálně.";
+  $("subhead").textContent = "Orientační kalkulace na klíč – ceny odpovídají aktuálnímu trhu 2025/2026. Finální nabídku připravíme individuálně.";
 
   var accent = state.meta.accent_color;
   if (accent) {
@@ -308,8 +308,8 @@ function computePanelCount(kwp) {
 }
 
 function computeBatteryModules(kwp) {
-  // 1 module per ~5 kWp, minimum 1
-  var kwhPerModule = toNumber(state.meta.battery_kwh_per_module) || 5.8;
+  // 1 module per ~4.8 kWp (Pylontech US5000), minimum 1
+  var kwhPerModule = toNumber(state.meta.battery_kwh_per_module) || 4.8;
   return Math.max(1, Math.ceil(kwp / kwhPerModule));
 }
 
@@ -541,6 +541,17 @@ function render() {
     div.innerHTML = "<small style='color:#6b7280'>" + key + "</small><br><strong>" + result.summary[key] + "</strong>";
     summary.appendChild(div);
   });
+
+  // Price highlight
+  var priceHighlight = $("priceHighlight");
+  if (priceHighlight) {
+    if (result.errors.length > 0) {
+      priceHighlight.innerHTML = "Vyberte všechny parametry";
+    } else {
+      var perKwp = result.totals.gross / state.current.kwp;
+      priceHighlight.innerHTML = formatCurrency(result.totals.gross) + " s DPH<small>" + formatCurrency(perKwp) + " / kWp na klíč</small>";
+    }
+  }
 
   var priceBox = $("priceBox");
   priceBox.innerHTML = "";

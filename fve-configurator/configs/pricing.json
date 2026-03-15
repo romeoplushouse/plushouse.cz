@@ -32,7 +32,7 @@
       "key": "safety120Vpriceperkw",
       "name": "Odpojovač 120V/string (nad 10 kWp)",
       "unit": "kWp",
-      "price_net": 900,
+      "price_net": 950,
       "active": true
     },
     {
@@ -44,61 +44,61 @@
     },
     {
       "key": "panel_basic",
-      "name": "FV panel 450 Wp",
+      "name": "FV panel 500 Wp mono",
       "unit": "ks",
-      "price_net": 3200,
+      "price_net": 2800,
       "active": true,
-      "wp_per_panel": 450
+      "wp_per_panel": 500
     },
     {
       "key": "inverter_fronius_small",
-      "name": "Střídač Fronius Primo (do 10 kWp)",
+      "name": "Střídač Fronius Gen24 (do 10 kWp)",
       "unit": "ks",
-      "price_net": 42000,
+      "price_net": 45000,
       "active": true
     },
     {
       "key": "inverter_fronius_medium",
-      "name": "Střídač Fronius Symo (10–20 kWp)",
+      "name": "Střídač Fronius Symo Gen24 (10–20 kWp)",
       "unit": "ks",
-      "price_net": 58000,
+      "price_net": 72000,
       "active": true
     },
     {
       "key": "inverter_fronius_large",
-      "name": "Střídač Fronius Eco (20–50 kWp)",
+      "name": "Střídač Fronius Tauro (20–50 kWp)",
       "unit": "ks",
-      "price_net": 82000,
+      "price_net": 95000,
       "active": true
     },
     {
       "key": "inverter_victron_small",
-      "name": "Měnič Victron MultiPlus-II (do 10 kWp)",
-      "unit": "ks",
-      "price_net": 58000,
+      "name": "Měnič Victron MultiPlus-II 5000VA + MPPT (do 10 kWp)",
+      "unit": "sada",
+      "price_net": 55000,
       "active": true
     },
     {
       "key": "inverter_victron_medium",
-      "name": "Měnič Victron Quattro (10–20 kWp)",
-      "unit": "ks",
-      "price_net": 78000,
+      "name": "Měnič Victron Quattro-II + MPPT (10–20 kWp)",
+      "unit": "sada",
+      "price_net": 75000,
       "active": true
     },
     {
       "key": "inverter_victron_large",
-      "name": "Měnič Victron Quattro (20–50 kWp)",
-      "unit": "ks",
-      "price_net": 115000,
+      "name": "Měnič Victron Quattro-II + MPPT (20–50 kWp)",
+      "unit": "sada",
+      "price_net": 110000,
       "active": true
     },
     {
       "key": "battery_module",
-      "name": "Bateriový modul 5,8 kWh",
+      "name": "Baterie Pylontech US5000 (4,8 kWh)",
       "unit": "ks",
-      "price_net": 28000,
+      "price_net": 35000,
       "active": true,
-      "kwh_per_module": 5.8
+      "kwh_per_module": 4.8
     },
     {
       "key": "structure",
@@ -360,11 +360,11 @@
     },
     {
       "key": "panel_wp",
-      "value": 450
+      "value": 500
     },
     {
       "key": "battery_kwh_per_module",
-      "value": 5.8
+      "value": 4.8
     },
     {
       "key": "lead_webhook_url",
