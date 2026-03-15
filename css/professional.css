@@ -354,7 +354,8 @@ a.btn[style*="background-color: rgb(181, 225, 38)"]:hover,
 }
 
 /* ── FAQ Section Styles ── */
-#section_faq p {
+#section_faq p,
+.ph-faq-section .faq-item {
   padding: 16px 20px;
   border-radius: var(--ph-radius-md);
   border-left: 4px solid var(--ph-accent);
@@ -363,16 +364,28 @@ a.btn[style*="background-color: rgb(181, 225, 38)"]:hover,
   transition: box-shadow var(--ph-transition-fast);
 }
 
-#section_faq p:hover {
+#section_faq p:hover,
+.ph-faq-section .faq-item:hover {
   box-shadow: var(--ph-shadow-sm);
 }
 
-#section_faq p strong {
+#section_faq p strong,
+.ph-faq-section .faq-item h3 {
   display: block;
   margin-bottom: 6px;
   font-family: var(--ph-font-sans);
   font-size: 15px;
+  font-weight: 700;
   color: var(--ph-gray-900);
+  margin-top: 0;
+  line-height: 1.4;
+}
+
+.ph-faq-section .faq-item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ph-gray-700);
 }
 
 /* ── Package Tier Cards ── */
@@ -777,7 +790,8 @@ select:focus {
   }
 
   /* FAQ cards full width */
-  #section_faq p {
+  #section_faq p,
+  .ph-faq-section .faq-item {
     padding: 14px 16px;
   }
 
