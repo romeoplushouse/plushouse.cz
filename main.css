@@ -1004,7 +1004,7 @@
 
 
         .pix_nav_menu.pix-over-header {
-            background: #444;
+            background: #000 !important;
         }
         .navbar-header {
             border-bottom: 2px solid rgba(0,0,0,0.3);
