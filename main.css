@@ -1515,3 +1515,25 @@
 .blog-strip__item:hover {
   transform: translateY(-4px);
 }
+
+/* ── Global Bootstrap 3 card alignment fix ──
+   Float-based grid breaks when cards have unequal heights.
+   Apply flexbox to all content rows (except nav, hero, modals). */
+.pix_section:not(.pix_nav_menu):not(.pix-real-intro):not(.pix_scroll_menu) > .container > .row,
+.pix_section:not(.pix_nav_menu):not(.pix-real-intro):not(.pix_scroll_menu) > .container > .row > .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pix_section:not(.pix_nav_menu):not(.pix-real-intro):not(.pix_scroll_menu) > .container > .row > [class*="col-"],
+.pix_section:not(.pix_nav_menu):not(.pix-real-intro):not(.pix_scroll_menu) > .container > .row > .row > [class*="col-"] {
+  float: none;
+}
+
+/* Cards that need to fill column height for visual alignment */
+.plusconnect-feature-card,
+.audio-feature-card {
+  height: 100%;
+}
+.segment-card {
+  height: calc(100% - 30px);
+}
