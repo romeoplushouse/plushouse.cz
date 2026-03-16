@@ -1,62 +1,75 @@
 <?php
 
+    // Nacti .env soubor pokud existuje
+    $envFile = __DIR__ . '/.env';
+    if (file_exists($envFile)) {
+        foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+            if (strpos($line, '#') === 0) continue;
+            if (strpos($line, '=') === false) continue;
+            list($key, $value) = explode('=', $line, 2);
+            $key = trim($key);
+            $value = trim($value, " \t\n\r\0\x0B\"'");
+            putenv("$key=$value");
+        }
+    }
+
     $mail_type = 'smtp';
     //-----------------------------------------------------------------------------------------
     $to_Email       = "tonda@plushouse.cz"; //Replace with recipient email address
     $subject        = 'Formular'; //Subject line for emails
-    
+
     // your recaptcha secret key
-    $secret = "";      // Add your reCAPTCHA secret key
-    //----------------------------------------------------------    -------------------------------
-    
+    $secret = getenv('RECAPTCHA_SECRET') ?: "";
+    //-----------------------------------------------------------------------------------------
+
     // Language
     $language = "EN";
-    
-    
-    
+
+
+
     // SMTP Settings
-    define('SMTP_HOST', 'wes1-smtp.wedos.net');
-    define('SMTP_USER', 'tonda@plushouse.cz');
-    define('SMTP_PASS', '1@m.Th23K`c4Em');
-    
-    
+    define('SMTP_HOST', getenv('SMTP_HOST') ?: 'wes1-smtp.wedos.net');
+    define('SMTP_USER', getenv('SMTP_USER') ?: 'tonda@plushouse.cz');
+    define('SMTP_PASS', getenv('SMTP_PASS') ?: '');
+
+
     /* Mailchimp setting. */
-    define('MC_APIKEY', '80c0cb054518dea608366800029674c4-us11'); // Your API key from here - http://admin.mailchimp.com/account/api
-    
+    define('MC_APIKEY', getenv('MC_APIKEY') ?: '');
+
     /* Campaign Monitor setting. */
-    define('CM_APIKEY', ''); // Your APIKEY from here - https://pixfort.createsend.com/admin/account/
-    
+    define('CM_APIKEY', '');
+
     /* GetResponse setting. */
-    define('GR_APIKEY', ''); // Your API key from here - https://app.getresponse.com/my_api_key.html
-    
+    define('GR_APIKEY', '');
+
     /* AWeber setting */
-    define('AW_AUTHCODE', ''); // Your Authcode from here - https://auth.aweber.com/1.0/oauth/authorize_app/647b2efd
-    
+    define('AW_AUTHCODE', '');
+
     /* ActiveCampaign setting */
-    define("ACTIVECAMPAIGN_URL", ""); // API_URL : Go to My Settings - > Developers
-    define("ACTIVECAMPAIGN_API_KEY", ""); // API_KEY : Go to My Settings - > Developers
-    
+    define("ACTIVECAMPAIGN_URL", "");
+    define("ACTIVECAMPAIGN_API_KEY", "");
+
     /* MailerLite setting */
-    define("MailerLite_API_KEY", ""); // API Key: Go to https://app.mailerlite.com/integrations/api/
-    
+    define("MailerLite_API_KEY", "");
+
     /* FreshMail setting */
-    define ( 'FM_API_KEY', '' ); // API Key: Go to https://app.freshmail.com/en/settings/integration/
-    define ( 'FM_API_SECRET', '' ); // API Secret: Go to https://app.freshmail.com/en/settings/integration/
-    
+    define ( 'FM_API_KEY', '' );
+    define ( 'FM_API_SECRET', '' );
+
     /* Sendloop setting */
-    define("Sendloop_API3_KEY", ''); // API Key
-    define("Sendloop_SUBDOMAIN", ''); // LIST ID (GroupID)
-    
-    
+    define("Sendloop_API3_KEY", '');
+    define("Sendloop_SUBDOMAIN", '');
+
+
     /* MailWizz setting */
-    define("Mailwizz_apiUrl", ''); // API URL, Should be http://www.yourdomain.com/api/index.php (where MailWizz is installed)
-    define("Mailwizz_publicKey", ''); // Public Key: Go to "Api Keys" and create new key
-	define("Mailwizz_privateKey", ''); // Private Key: Go to "Api Keys" and get the private key
-	
+    define("Mailwizz_apiUrl", '');
+    define("Mailwizz_publicKey", '');
+	define("Mailwizz_privateKey", '');
+
 	/* Sendy setting */
-    define("Sendy_URL", ''); // Your Sendy installation URL (without trailing slash).
-    define("Sendy_apikey", ''); // Your API key. Available in Sendy Settings.
-    
+    define("Sendy_URL", '');
+    define("Sendy_apikey", '');
+
     /* Hubspot setting */
     define("Hubspot_api", '');
 
@@ -64,5 +77,5 @@
     define("iContact_appId", '');
     define("iContact_apiPassword", '');
     define("iContact_apiUsername", '');
-    
+
 ?>

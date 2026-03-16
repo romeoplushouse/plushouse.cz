@@ -6,8 +6,17 @@
 session_start();
 require_once __DIR__ . '/../../fulfillment_lib.php';
 
-// Heslo pro přístup – změňte na silné heslo
-define('ADMIN_PASSWORD', 'plushouse2026');
+// Heslo pro přístup – nastavte v .env souboru (ESHOP_ADMIN_PASSWORD=...)
+$envFile = __DIR__ . '/../../.env';
+if (file_exists($envFile)) {
+    foreach (file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        if (strpos($line, '#') === 0) continue;
+        if (strpos($line, '=') === false) continue;
+        list($k, $v) = explode('=', $line, 2);
+        putenv(trim($k) . '=' . trim($v, " \t\n\r\0\x0B\"'"));
+    }
+}
+define('ADMIN_PASSWORD', getenv('ESHOP_ADMIN_PASSWORD') ?: 'ZMEN_HESLO_V_ENV_SOUBORU');
 
 // Přihlášení / odhlášení
 if (isset($_POST['admin_login'])) {
