@@ -115,6 +115,7 @@
     .pix-header-item {
         display: none;
     }
+    .pix_nav_menu:has(#pix-navbar-collapse.in) .pix-header-item,
     body.menu-open .pix-header-item {
         display: block;
     }
@@ -226,6 +227,7 @@
         display: none;
     }
 
+    .pix_nav_menu:has(#pix-navbar-collapse.in) .pix-header-item,
     body.menu-open .pix-header-item {
         display: block;
     }
@@ -1251,6 +1253,8 @@
     display: none !important;
   }
 
+  /* CSS-only: show button when Bootstrap collapse has .in class */
+  .pix_nav_menu:has(#pix-navbar-collapse.in) #pix-header-btn,
   body.menu-open #pix-header-btn {
     display: block !important;
     margin-top: 10px !important;
