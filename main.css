@@ -109,8 +109,13 @@
 
 @media (max-width: 768px) {
     #pix-header-btn .btn {
-        transform: scale(0.8);
-        transform-origin: top right;
+        font-size: 10px !important;
+        padding: 5px 12px !important;
+        letter-spacing: .5px;
+    }
+    #pix-header-btn {
+        margin-top: 0 !important;
+        padding: 0;
     }
     .pix-header-item {
         display: none;
@@ -1249,15 +1254,18 @@
 }
 
 @media (max-width: 768px) {
-  #pix-header-btn {
+  /* Hide entire column wrapper, not just the inner div */
+  .pix_nav_menu [class*="col-"]:has(#pix-header-btn) {
     display: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
-  /* CSS-only: show button when Bootstrap collapse has .in class */
-  .pix_nav_menu:has(#pix-navbar-collapse.in) #pix-header-btn,
-  body.menu-open #pix-header-btn {
+  /* Show when mobile menu is expanded */
+  .pix_nav_menu:has(#pix-navbar-collapse.in) [class*="col-"]:has(#pix-header-btn),
+  body.menu-open .pix_nav_menu [class*="col-"]:has(#pix-header-btn) {
     display: block !important;
-    margin-top: 10px !important;
+    padding: 0 10px !important;
   }
 
   .pix_nav_menu .navbar-collapse,
