@@ -43,7 +43,7 @@
   font-size: 13px;
 }
 .blog-article-hero .blog-reading-time {
-  color: #666;
+  color: rgba(255,255,255,0.6);
   font-family: Montserrat, sans-serif;
   font-size: 13px;
 }
@@ -137,7 +137,7 @@
 }
 .blog-article-layout p {
   margin: 0 0 24px;
-  color: #333;
+  color: #FFFFFF;
 }
 .blog-article-layout strong {
   color: #111;
@@ -189,7 +189,7 @@
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #666;
+  color: rgba(255,255,255,0.6);
   margin: 0 0 14px;
 }
 .blog-toc ol {
@@ -201,7 +201,7 @@
   font-size: 15px;
 }
 .blog-toc a {
-  color: #333;
+  color: #FFFFFF;
   text-decoration: none;
   font-family: Montserrat, sans-serif;
   font-weight: 500;
@@ -258,7 +258,7 @@
   font-family: Montserrat, sans-serif;
   font-size: 13px;
   font-weight: 600;
-  color: #666;
+  color: rgba(255,255,255,0.6);
 }
 
 /* FAQ in article */

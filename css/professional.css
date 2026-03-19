@@ -78,12 +78,12 @@ html {
 
 /* ── Typography Polish ── */
 h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   font-family: var(--ph-font-sans);
 }
 
 h1 {
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.15;
 }
 
@@ -95,6 +95,29 @@ h2 {
 h3 {
   font-weight: 700;
   line-height: 1.3;
+}
+
+/* Brand typography overrides for dark sections */
+.gray-dark-bg h1, .gray-dark-bg h2, .gray-dark-bg h3,
+.gray-dark-bg h4, .gray-dark-bg h5, .gray-dark-bg h6 {
+  color: #fff;
+}
+
+/* Tag/label typography */
+.pix-brown, .pix-brown-2 {
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.15em !important;
+}
+
+/* Muted/perex text */
+.pix-black-gray-light,
+.pix-slight-white {
+  font-family: var(--ph-font-sans);
+}
+
+body {
+  font-family: var(--ph-font-sans);
 }
 
 .pix-content p {
@@ -202,13 +225,16 @@ h3 {
   padding: 8px 20px !important;
   font-size: 12px !important;
   font-weight: 700 !important;
-  letter-spacing: .8px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  background: var(--ph-accent) !important;
+  color: #0F0F0F !important;
+  border-color: var(--ph-accent) !important;
   transition: all var(--ph-transition-base) !important;
 }
 
 #pix-header-btn .btn:hover {
-  background: var(--ph-accent) !important;
+  background: #c8f03a !important;
   color: #000 !important;
   box-shadow: var(--ph-shadow-accent) !important;
   transform: translateY(-1px);
