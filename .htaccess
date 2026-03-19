@@ -68,11 +68,29 @@
     RewriteCond %{HTTP_HOST} ^plushouse\.cz$ [NC]
     RewriteRule ^(.*)$ https://www.plushouse.cz/$1 [L,R=301]
 
-    # Clean URL for PlusConnect
+    # Clean URLs — directory format serves the .html version
     RewriteRule ^plusconnect/?$ /plusconnect.html [L]
-
-    # Clean URL for Audio
     RewriteRule ^audio/?$ /audio.html [L]
+    RewriteRule ^pms/?$ /pms.html [L]
+    RewriteRule ^trafostanice/?$ /trafostanice.html [L]
+    RewriteRule ^fotovoltaika/?$ /fotovoltaika.html [L]
+
+    # 301 redirects for duplicate .html ↔ /index.html pages
+    # Canonical: /kontakt → kontakt.html (internal rewrite)
+    RewriteCond %{REQUEST_URI} ^/kontakt/?$
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^kontakt/?$ /kontakt.html [L]
+
+    # Redirect /chytra-domacnost-loxone/ to canonical /chytra-domacnost-loxone/
+    # (the /index.html version is canonical for this one — it has full CSS)
+    RewriteRule ^chytra-domacnost-loxone\.html$ /chytra-domacnost-loxone/ [R=301,L]
+
+    # Redirect /chytra-domacnost-olomouc.html to /chytra-domacnost-olomouc/
+    RewriteRule ^chytra-domacnost-olomouc\.html$ /chytra-domacnost-olomouc/ [R=301,L]
+
+    # Redirect /plusconnect/index.html (already handled by clean URL above)
+    # Redirect /kontakt/index.html explicitly
+    RewriteRule ^kontakt/index\.html$ /kontakt [R=301,L]
 </IfModule>
 
 # === ERROR PAGES ===
