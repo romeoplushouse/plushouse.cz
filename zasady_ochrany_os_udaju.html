@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="uploads/pix-favicon.ico">  
 	<meta name="description" content="">
 	<meta name="keywords" content="">
@@ -32,7 +32,7 @@
 }
 .dropdown-menu{
     font-weight: 600 !important;
-    font: white;
+    color: white;
     background-color: black !important;
     padding: 5px 15px !important; 
     padding-bottom: 10px !important;
@@ -83,7 +83,7 @@ svg {
 
 .hotspot {
   cursor: pointer;
-  //make the hit targets bigger for mobile
+  /* make the hit targets bigger for mobile */
   padding: 20px;
 }
 
@@ -100,21 +100,21 @@ svg {
   position: absolute;
   right: 5vw;
   top: 40vh;
-  table {
-    margin-top: 10px;
-  }
-  td {
-    width: 15%;
-    height: 30px;
-    &:first-child {
-      font-weight: bold;
-    }
-  }
-  h2 {
-    margin: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #7B848E;
-  }
+}
+.text-info table {
+  margin-top: 10px;
+}
+.text-info td {
+  width: 15%;
+  height: 30px;
+}
+.text-info td:first-child {
+  font-weight: bold;
+}
+.text-info h2 {
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #7B848E;
 }
 
 .x-out {
@@ -160,6 +160,21 @@ svg {
 
   gtag('config', 'G-GVQ2MF6LY5');
 </script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1417475208778687');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1417475208778687&ev=PageView&noscript=1" /></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 <div class="container" style="padding-top:20px;"><p><strong>Fulfillment informace:</strong> U objednávek Loxone hardware předává PLUS HOUSE nezbytné dodací údaje fulfillment partnerovi (distribuční sklad Loxone / partner store) pouze za účelem doručení. PLUS HOUSE zůstává prodejcem a kontaktním místem pro vrácení zboží i reklamace (RMA).</p></div>
