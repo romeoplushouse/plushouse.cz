@@ -16,6 +16,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteRule ^data/ - [F,L]
+    RewriteRule ^data/fve-leads/ - [F,L]
+    RewriteRule ^data/pricing-backups/ - [F,L]
 </IfModule>
 
 # Security headers

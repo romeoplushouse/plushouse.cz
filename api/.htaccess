@@ -1,0 +1,19 @@
+# Allow PHP execution for API endpoints
+<FilesMatch "\.php$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# CORS for plusconnect.cz
+<IfModule mod_headers.c>
+    SetEnvIf Origin "https?://(www\.)?(plusconnect\.cz|plushouse\.cz)" ORIGIN=$0
+    Header set Access-Control-Allow-Origin "%{ORIGIN}e" env=ORIGIN
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-API-Key"
+    Header set Access-Control-Max-Age "3600"
+</IfModule>
+
+# Handle OPTIONS preflight
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
