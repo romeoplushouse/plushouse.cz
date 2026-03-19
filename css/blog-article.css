@@ -4,7 +4,7 @@
   margin: 0 auto;
   padding: 0 20px 80px;
   font-family: 'Georgia', 'Times New Roman', serif;
-  color: #1a1a1a;
+  color: rgba(255,255,255,0.85);
   line-height: 1.8;
   font-size: 18px;
 }
@@ -38,7 +38,7 @@
   border-radius: 999px;
 }
 .blog-article-hero .blog-date {
-  color: #888;
+  color: rgba(255,255,255,0.6);
   font-family: Montserrat, sans-serif;
   font-size: 13px;
 }
@@ -56,7 +56,7 @@
   margin: 0 0 20px;
 }
 .blog-article-hero .blog-excerpt {
-  color: #aaa;
+  color: rgba(255,255,255,0.7);
   font-size: 19px;
   line-height: 1.6;
   font-family: Montserrat, sans-serif;
@@ -228,7 +228,7 @@
   padding: 0;
 }
 .blog-article-cta p {
-  color: #888;
+  color: rgba(255,255,255,0.6);
   font-size: 15px;
   margin: 0 0 24px;
 }

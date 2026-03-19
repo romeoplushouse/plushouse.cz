@@ -967,3 +967,16 @@ select:focus {
     color: #000;
   }
 }
+
+/* ── Dark Theme Overrides (Bootstrap + legacy) ── */
+body { color: rgba(255,255,255,0.85); }
+a { color: var(--ph-accent); }
+a:hover, a:focus { color: #d4f75a; }
+.text-muted { color: rgba(255,255,255,0.5) !important; }
+caption { color: rgba(255,255,255,0.5); }
+.table > thead > tr > th,
+.table > tbody > tr > td { border-color: #2a2a2a; color: rgba(255,255,255,0.85); }
+.table > thead > tr > th { background: #111827; color: #fff; }
+h1, h2, h3, h4, h5, h6 { color: #fff; }
+.form-control { background-color: #1f2937; border-color: #374151; color: #fff; }
+.form-control:focus { border-color: var(--ph-accent); box-shadow: 0 0 0 2px var(--ph-accent-glow); }

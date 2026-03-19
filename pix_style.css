@@ -27,8 +27,8 @@
 	.icon_box .image_wrapper { text-align: center; margin: 0px 10px;margin-bottom: 15px;border-radius: 3px; }
 	.icon_box .image_wrapper img { border-radius: 3px;margin: auto; }
 	.icon_box .desc_wrapper { text-align: center; }
-	.icon_box .desc_wrapper h5 { font-weight: bold;color: #9aa1a9;margin-bottom: 20px;}
-	.icon_box .desc_wrapper .desc{ position: relative;top: -10px;color: #9aa1a9;}
+	.icon_box .desc_wrapper h5 { font-weight: bold;color: rgba(255,255,255,0.8);margin-bottom: 20px;}
+	.icon_box .desc_wrapper .desc{ position: relative;top: -10px;color: rgba(255,255,255,0.7);}
 
 
 
@@ -124,7 +124,7 @@
     }
     #right_sidebar .nav-tabs li:last-child a {border-right: 0px;}
     #right_sidebar .nav-tabs li.active a {
-        color: #444;
+        color: #fff;
     }
     #right_sidebar label {
         font-family: 'Open Sans', sans-serif;   
