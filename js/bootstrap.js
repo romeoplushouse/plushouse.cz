@@ -1,16 +1,13 @@
 /*!
- * Bootstrap v3.4.1 - Dropdown Plugin (minimal)
- * Compatible with jQuery 3.x
+ * Bootstrap v3.4.1 - Dropdown & Collapse plugins
+ * Fixed for jQuery 3.x event handler ordering
  */
 +function ($) {
   'use strict';
 
-  // DROPDOWN CLASS
-  var backdrop = '.dropdown-backdrop';
-  var toggle   = '[data-toggle="dropdown"]';
-  var Dropdown = function (element) {
-    $(element).on('click.bs.dropdown', this.toggle);
-  };
+  // ── DROPDOWN ──────────────────────────────────────────────
+
+  var toggle = '[data-toggle="dropdown"]';
 
   function getParent($this) {
     var selector = $this.attr('data-target');
@@ -22,93 +19,107 @@
     return $parent && $parent.length ? $parent : $this.parent();
   }
 
-  function clearMenus(e) {
-    if (e && e.which === 3) return;
-    $(backdrop).remove();
+  function clearMenus(except) {
     $(toggle).each(function () {
       var $this = $(this);
       var $parent = getParent($this);
-      var relatedTarget = { relatedTarget: this };
       if (!$parent.hasClass('open')) return;
-      if (e && e.type === 'click' && /input|textarea/i.test(e.target.tagName) && $.contains($parent[0], e.target)) return;
-      $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget));
-      if (e.isDefaultPrevented()) return;
+      if (except && except[0] === $parent[0]) return;
       $this.attr('aria-expanded', 'false');
-      $parent.removeClass('open').trigger($.Event('hidden.bs.dropdown', relatedTarget));
+      $parent.removeClass('open');
     });
   }
 
-  Dropdown.prototype.toggle = function (e) {
-    var $this = $(this);
-    if ($this.is('.disabled, :disabled')) return;
-    var $parent = getParent($this);
-    var isActive = $parent.hasClass('open');
-    clearMenus();
-    if (!isActive) {
-      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
-        $(document.createElement('div'))
-          .addClass('dropdown-backdrop')
-          .insertAfter($(this))
-          .on('click', clearMenus);
-      }
-      var relatedTarget = { relatedTarget: this };
-      $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget));
-      if (e.isDefaultPrevented()) return;
-      $this.trigger('focus').attr('aria-expanded', 'true');
-      $parent.toggleClass('open').trigger($.Event('shown.bs.dropdown', relatedTarget));
-    }
-    return false;
-  };
+  // Single document click handler — avoids jQuery 3.x ordering issues
+  // where separate direct + delegated handlers fire in binding order
+  $(document).on('click.bs.dropdown.data-api', function (e) {
+    if (e.which === 3) return; // ignore right-click
 
-  Dropdown.prototype.keydown = function (e) {
+    var $clicked = $(e.target).closest(toggle);
+
+    if ($clicked.length) {
+      // Click on a dropdown toggle
+      e.preventDefault();
+      if ($clicked.is('.disabled, :disabled')) return;
+
+      var $parent = getParent($clicked);
+      var isActive = $parent.hasClass('open');
+
+      // Close all other menus
+      clearMenus($parent);
+
+      if (isActive) {
+        // Close this menu
+        $clicked.attr('aria-expanded', 'false');
+        $parent.removeClass('open');
+      } else {
+        // Open this menu
+        $clicked.attr('aria-expanded', 'true');
+        $parent.addClass('open');
+      }
+      return;
+    }
+
+    // Click on .dropdown form — don't close
+    if ($(e.target).closest('.dropdown form').length) return;
+
+    // Click elsewhere — close all menus
+    clearMenus();
+  });
+
+  // Keyboard navigation
+  $(document).on('keydown.bs.dropdown.data-api', toggle + ', .dropdown-menu', function (e) {
     if (!/(38|40|27|32)/.test(e.which) || /input|textarea/i.test(e.target.tagName)) return;
-    var $this = $(this);
+
+    var $this = $(this).closest('.dropdown').find(toggle);
     e.preventDefault();
     e.stopPropagation();
     if ($this.is('.disabled, :disabled')) return;
+
     var $parent = getParent($this);
     var isActive = $parent.hasClass('open');
-    if (!isActive && e.which !== 27 || isActive && e.which === 27) {
-      if (e.which === 27) $parent.find(toggle).trigger('focus');
-      return $this.trigger('click');
+
+    if (e.which === 27) {
+      // Escape — close and focus toggle
+      clearMenus();
+      $this.trigger('focus');
+      return;
     }
-    var desc = ' li:not(.disabled):visible a';
-    var $items = $parent.find('.dropdown-menu' + desc);
+
+    if (!isActive) {
+      $this.trigger('click');
+      return;
+    }
+
+    var $items = $parent.find('.dropdown-menu li:not(.disabled):visible a');
     if (!$items.length) return;
+
     var index = $items.index(e.target);
     if (e.which === 38 && index > 0) index--;
     if (e.which === 40 && index < $items.length - 1) index++;
     if (!~index) index = 0;
     $items.eq(index).trigger('focus');
-  };
+  });
 
-  // DROPDOWN PLUGIN
-  function Plugin(option) {
-    return this.each(function () {
-      var $this = $(this);
-      var data = $this.data('bs.dropdown');
-      if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)));
-      if (typeof option === 'string') data[option].call($this);
-    });
-  }
+  // Desktop: open dropdowns on hover
+  $(document).on('mouseenter.bs.dropdown', '.pix-header-nav .dropdown', function () {
+    if (window.innerWidth < 768) return;
+    var $this = $(this);
+    clearMenus($this);
+    $this.addClass('open');
+    $this.find(toggle).attr('aria-expanded', 'true');
+  });
 
-  var old = $.fn.dropdown;
-  $.fn.dropdown = Plugin;
-  $.fn.dropdown.Constructor = Dropdown;
-  $.fn.dropdown.noConflict = function () {
-    $.fn.dropdown = old;
-    return this;
-  };
+  $(document).on('mouseleave.bs.dropdown', '.pix-header-nav .dropdown', function () {
+    if (window.innerWidth < 768) return;
+    var $this = $(this);
+    $this.removeClass('open');
+    $this.find(toggle).attr('aria-expanded', 'false');
+  });
 
-  // APPLY TO DOM
-  $(document)
-    .on('click.bs.dropdown.data-api', clearMenus)
-    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation(); })
-    .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
-    .on('keydown.bs.dropdown.data-api', toggle, Dropdown.prototype.keydown)
-    .on('keydown.bs.dropdown.data-api', '.dropdown-menu', Dropdown.prototype.keydown);
 
-  // COLLAPSE CLASS (for mobile nav)
+  // ── COLLAPSE ──────────────────────────────────────────────
+
   var Collapse = function (element, options) {
     this.$element = $(element);
     this.options = $.extend({}, { toggle: true }, options);
