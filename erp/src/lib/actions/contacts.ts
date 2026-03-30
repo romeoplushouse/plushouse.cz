@@ -96,6 +96,13 @@ export async function getContactStats() {
   return { customers, suppliers, subcontractors };
 }
 
+export async function deleteContact(id: string) {
+  return prisma.contact.update({
+    where: { id },
+    data: { isActive: false },
+  });
+}
+
 export async function searchContacts(query: string) {
   return prisma.contact.findMany({
     where: {

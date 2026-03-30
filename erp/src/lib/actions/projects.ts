@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { generateDocumentNumber } from "@/lib/utils";
+import { revalidatePath } from "next/cache";
 
 export async function getProjects(
   filter?: { status?: string },
@@ -49,7 +50,7 @@ export async function createProject(data: {
   });
   const projectNumber = generateDocumentNumber("ZAK", year, count + 1);
 
-  return prisma.project.create({
+  const project = await prisma.project.create({
     data: {
       projectNumber,
       name: data.name,
@@ -63,6 +64,8 @@ export async function createProject(data: {
       lng: data.lng,
     },
   });
+  revalidatePath("/zakazky");
+  return project;
 }
 
 export async function addProjectTask(
@@ -75,7 +78,7 @@ export async function addProjectTask(
     priority?: number;
   }
 ) {
-  return prisma.projectTask.create({
+  const task = await prisma.projectTask.create({
     data: {
       projectId,
       title: data.title,
@@ -85,6 +88,8 @@ export async function addProjectTask(
       priority: data.priority ?? 0,
     },
   });
+  revalidatePath(`/zakazky/${projectId}`);
+  return task;
 }
 
 export async function addMediaEvidence(
@@ -98,9 +103,11 @@ export async function addMediaEvidence(
     uploadedBy?: string;
   }
 ) {
-  return prisma.mediaEvidence.create({
+  const media = await prisma.mediaEvidence.create({
     data: { projectId, ...data },
   });
+  revalidatePath(`/zakazky/${projectId}`);
+  return media;
 }
 
 export async function addQualityCheck(
@@ -117,7 +124,7 @@ export async function addQualityCheck(
     }>;
   }
 ) {
-  return prisma.qualityCheck.create({
+  const check = await prisma.qualityCheck.create({
     data: {
       projectId,
       inspectorId: data.inspectorId,
@@ -127,6 +134,8 @@ export async function addQualityCheck(
     },
     include: { items: true },
   });
+  revalidatePath(`/zakazky/${projectId}`);
+  return check;
 }
 
 export async function addProjectMaterial(
@@ -141,7 +150,7 @@ export async function addProjectMaterial(
     invoiceRef?: string;
   }
 ) {
-  return prisma.projectMaterial.create({
+  const material = await prisma.projectMaterial.create({
     data: {
       projectId,
       materialId: data.materialId,
@@ -153,6 +162,97 @@ export async function addProjectMaterial(
       supplierId: data.supplierId,
       invoiceRef: data.invoiceRef,
     },
+  });
+  revalidatePath(`/zakazky/${projectId}`);
+  return material;
+}
+
+export async function getProjectById(id: string) {
+  return prisma.project.findUnique({
+    where: { id },
+    include: {
+      contact: true,
+      tasks: {
+        orderBy: { createdAt: "desc" },
+        include: { assignee: true },
+      },
+      materials: { orderBy: { date: "desc" } },
+      mediaEvidence: { orderBy: { uploadedAt: "desc" } },
+      qualityChecks: {
+        orderBy: { checkDate: "desc" },
+        include: { items: true },
+      },
+      projectWorkers: {
+        include: { employee: true, subcontractor: { include: { contact: true } } },
+      },
+      invoices: { orderBy: { issueDate: "desc" }, take: 10 },
+    },
+  });
+}
+
+export async function updateProjectStatus(
+  id: string,
+  status: "NEW" | "QUOTED" | "IN_PROGRESS" | "ON_HOLD" | "COMPLETED" | "CANCELLED"
+) {
+  const project = await prisma.project.update({
+    where: { id },
+    data: { status },
+  });
+  revalidatePath(`/zakazky/${id}`);
+  revalidatePath("/zakazky");
+  return project;
+}
+
+export async function updateTaskStatus(
+  taskId: string,
+  status: "TODO" | "IN_PROGRESS" | "REVIEW" | "DONE" | "CANCELLED"
+) {
+  const task = await prisma.projectTask.update({
+    where: { id: taskId },
+    data: {
+      status,
+      completedAt: status === "DONE" ? new Date() : null,
+    },
+    include: { project: { select: { id: true } } },
+  });
+  revalidatePath(`/zakazky/${task.project.id}`);
+  return task;
+}
+
+export async function addProjectWorker(
+  projectId: string,
+  data: {
+    employeeId?: string;
+    subcontractorId?: string;
+    role?: string;
+  }
+) {
+  const worker = await prisma.projectWorker.create({
+    data: {
+      projectId,
+      employeeId: data.employeeId || null,
+      subcontractorId: data.subcontractorId || null,
+      role: data.role,
+    },
+    include: { employee: true, subcontractor: { include: { contact: true } } },
+  });
+  revalidatePath(`/zakazky/${projectId}`);
+  return worker;
+}
+
+export async function removeProjectWorker(id: string) {
+  const worker = await prisma.projectWorker.delete({
+    where: { id },
+    include: { project: { select: { id: true } } },
+  });
+  revalidatePath(`/zakazky/${worker.project.id}`);
+  return worker;
+}
+
+export async function getEmployees() {
+  return prisma.employee.findMany({
+    where: { isActive: true },
+    orderBy: { lastName: "asc" },
   });
 }
 

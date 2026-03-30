@@ -83,6 +83,55 @@ export async function getChartOfAccounts() {
   });
 }
 
+export async function getAccountingStats() {
+  const [journalCount, accountCount, postedCount] = await Promise.all([
+    prisma.journalEntry.count(),
+    prisma.chartOfAccounts.count({ where: { isActive: true } }),
+    prisma.journalEntry.count({ where: { isPosted: true } }),
+  ]);
+
+  const currentYear = new Date().getFullYear();
+
+  return { journalCount, accountCount, postedCount, currentYear };
+}
+
+export async function getGeneralLedger(
+  accountCode: string,
+  dateFrom?: string,
+  dateTo?: string
+) {
+  const dateFilter: Record<string, unknown> = {};
+  if (dateFrom) dateFilter.gte = new Date(dateFrom);
+  if (dateTo) dateFilter.lte = new Date(dateTo);
+
+  const items = await prisma.journalEntryItem.findMany({
+    where: {
+      accountCode,
+      journalEntry: {
+        isPosted: true,
+        ...(Object.keys(dateFilter).length > 0
+          ? { date: dateFilter }
+          : {}),
+      },
+    },
+    include: {
+      journalEntry: true,
+      account: true,
+    },
+    orderBy: { journalEntry: { date: "asc" } },
+  });
+
+  return items.map((item) => ({
+    id: item.id,
+    date: item.journalEntry.date.toISOString(),
+    entryNumber: item.journalEntry.entryNumber,
+    description: item.description || item.journalEntry.description,
+    documentRef: item.journalEntry.documentRef,
+    debit: Number(item.debit),
+    credit: Number(item.credit),
+  }));
+}
+
 export async function getTrialBalance(dateFrom?: string, dateTo?: string) {
   const where: Record<string, unknown> = { isPosted: true };
   if (dateFrom || dateTo) {

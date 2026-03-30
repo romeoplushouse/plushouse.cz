@@ -1,4 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+export const dynamic = "force-dynamic";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -9,17 +10,63 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Plus, Download, FileText, Receipt, FileCheck } from "lucide-react";
+import { Plus, Download, FileText } from "lucide-react";
 import Link from "next/link";
+import { getInvoices, getInvoiceStats } from "@/lib/actions/invoices";
+import { formatCurrency, formatDate } from "@/lib/utils";
 
-export default function InvoicesPage() {
+const STATUS_MAP: Record<
+  string,
+  { label: string; variant: "secondary" | "default" | "success" | "destructive" }
+> = {
+  DRAFT: { label: "Koncept", variant: "secondary" },
+  SENT: { label: "Odeslana", variant: "default" },
+  PARTIALLY_PAID: { label: "Castecne uhrazena", variant: "default" },
+  PAID: { label: "Uhrazena", variant: "success" },
+  OVERDUE: { label: "Po splatnosti", variant: "destructive" },
+  CANCELLED: { label: "Zrusena", variant: "secondary" },
+};
+
+const TYPE_MAP: Record<string, string> = {
+  ISSUED: "Vydana",
+  RECEIVED: "Prijata",
+  ADVANCE: "Zalohova",
+  PROFORMA: "Proforma",
+  CREDIT_NOTE: "Dobropis",
+  TAX_DOCUMENT: "Danovy doklad",
+};
+
+const FILTER_TABS = [
+  { label: "Vsechny", type: undefined },
+  { label: "Vydane", type: "ISSUED" },
+  { label: "Prijate", type: "RECEIVED" },
+  { label: "Zalohove", type: "ADVANCE" },
+  { label: "Danove doklady", type: "TAX_DOCUMENT" },
+  { label: "Dobropisy", type: "CREDIT_NOTE" },
+];
+
+export default async function InvoicesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const resolvedParams = await searchParams;
+  const activeType = typeof resolvedParams.type === "string" ? resolvedParams.type : undefined;
+  const activeStatus = typeof resolvedParams.status === "string" ? resolvedParams.status : undefined;
+  const page = typeof resolvedParams.page === "string" ? parseInt(resolvedParams.page, 10) : 1;
+
+  const [{ invoices, total, pages }, stats] = await Promise.all([
+    getInvoices({ type: activeType, status: activeStatus }, page),
+    getInvoiceStats(),
+  ]);
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Faktury</h1>
           <p className="text-gray-500">
-            Vydané a přijaté faktury, zálohové faktury, daňové doklady
+            Vydane a prijate faktury, zalohove faktury, danove doklady
           </p>
         </div>
         <div className="flex gap-2">
@@ -27,51 +74,77 @@ export default function InvoicesPage() {
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            Nová faktura
-          </Button>
+          <Link href="/faktury/nova">
+            <Button>
+              <Plus className="h-4 w-4 mr-2" />
+              Nova faktura
+            </Button>
+          </Link>
         </div>
       </div>
 
       {/* Filter tabs */}
       <div className="flex gap-2 border-b pb-2">
-        <Button variant="default" size="sm">Všechny</Button>
-        <Button variant="ghost" size="sm">Vydané</Button>
-        <Button variant="ghost" size="sm">Přijaté</Button>
-        <Button variant="ghost" size="sm">Zálohové</Button>
-        <Button variant="ghost" size="sm">Daňové doklady</Button>
-        <Button variant="ghost" size="sm">Dobropisy</Button>
+        {FILTER_TABS.map((tab) => {
+          const isActive = activeType === tab.type || (!activeType && !tab.type);
+          const href = tab.type ? `/faktury?type=${tab.type}` : "/faktury";
+          return (
+            <Link key={tab.label} href={href}>
+              <Button
+                variant={isActive ? "default" : "ghost"}
+                size="sm"
+              >
+                {tab.label}
+              </Button>
+            </Link>
+          );
+        })}
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Neuhrazené vydané</p>
-            <p className="text-xl font-bold text-blue-600">0 Kč</p>
-            <p className="text-xs text-gray-400">0 faktur</p>
+            <p className="text-sm text-gray-500">Neuhrazene vydane</p>
+            <p className="text-xl font-bold text-blue-600">
+              {formatCurrency(stats.unpaidIssued.amount)}
+            </p>
+            <p className="text-xs text-gray-400">
+              {stats.unpaidIssued.count} faktur
+            </p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-gray-500">Po splatnosti</p>
-            <p className="text-xl font-bold text-red-600">0 Kč</p>
-            <p className="text-xs text-gray-400">0 faktur</p>
+            <p className="text-xl font-bold text-red-600">
+              {formatCurrency(stats.overdue.amount)}
+            </p>
+            <p className="text-xs text-gray-400">
+              {stats.overdue.count} faktur
+            </p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Uhrazené tento měsíc</p>
-            <p className="text-xl font-bold text-green-600">0 Kč</p>
-            <p className="text-xs text-gray-400">0 faktur</p>
+            <p className="text-sm text-gray-500">Uhrazene tento mesic</p>
+            <p className="text-xl font-bold text-green-600">
+              {formatCurrency(stats.paidThisMonth.amount)}
+            </p>
+            <p className="text-xs text-gray-400">
+              {stats.paidThisMonth.count} faktur
+            </p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Neuhrazené přijaté</p>
-            <p className="text-xl font-bold text-orange-600">0 Kč</p>
-            <p className="text-xs text-gray-400">0 faktur</p>
+            <p className="text-sm text-gray-500">Neuhrazene prijate</p>
+            <p className="text-xl font-bold text-orange-600">
+              {formatCurrency(stats.unpaidReceived.amount)}
+            </p>
+            <p className="text-xs text-gray-400">
+              {stats.unpaidReceived.count} faktur
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -82,30 +155,106 @@ export default function InvoicesPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Číslo</TableHead>
+                <TableHead>Cislo</TableHead>
                 <TableHead>Typ</TableHead>
-                <TableHead>Odběratel / Dodavatel</TableHead>
-                <TableHead>Datum vystavení</TableHead>
+                <TableHead>Odberatel / Dodavatel</TableHead>
+                <TableHead>Datum vystaveni</TableHead>
                 <TableHead>Splatnost</TableHead>
-                <TableHead className="text-right">Částka</TableHead>
+                <TableHead className="text-right">Castka</TableHead>
                 <TableHead>Stav</TableHead>
                 <TableHead></TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell colSpan={8} className="text-center text-gray-500 py-12">
-                  <FileText className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                  <p className="font-medium">Zatím žádné faktury</p>
-                  <p className="text-sm mt-1">
-                    Vytvořte první fakturu kliknutím na tlačítko &quot;Nová faktura&quot;
-                  </p>
-                </TableCell>
-              </TableRow>
+              {invoices.length === 0 ? (
+                <TableRow>
+                  <TableCell
+                    colSpan={8}
+                    className="text-center text-gray-500 py-12"
+                  >
+                    <FileText className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+                    <p className="font-medium">Zatim zadne faktury</p>
+                    <p className="text-sm mt-1">
+                      Vytvorte prvni fakturu kliknutim na tlacitko &quot;Nova
+                      faktura&quot;
+                    </p>
+                  </TableCell>
+                </TableRow>
+              ) : (
+                invoices.map((invoice) => {
+                  const contact = invoice.customer || invoice.supplier;
+                  const contactName = contact
+                    ? contact.companyName ||
+                      [contact.firstName, contact.lastName]
+                        .filter(Boolean)
+                        .join(" ")
+                    : "-";
+                  const statusInfo = STATUS_MAP[invoice.status] || {
+                    label: invoice.status,
+                    variant: "secondary" as const,
+                  };
+
+                  return (
+                    <TableRow key={invoice.id}>
+                      <TableCell className="font-medium">
+                        <Link
+                          href={`/faktury/${invoice.id}`}
+                          className="text-blue-600 hover:underline"
+                        >
+                          {invoice.invoiceNumber}
+                        </Link>
+                      </TableCell>
+                      <TableCell>
+                        {TYPE_MAP[invoice.type] || invoice.type}
+                      </TableCell>
+                      <TableCell>{contactName}</TableCell>
+                      <TableCell>{formatDate(invoice.issueDate)}</TableCell>
+                      <TableCell>{formatDate(invoice.dueDate)}</TableCell>
+                      <TableCell className="text-right font-medium">
+                        {formatCurrency(Number(invoice.total))}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={statusInfo.variant}>
+                          {statusInfo.label}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Link href={`/faktury/${invoice.id}`}>
+                          <Button variant="ghost" size="sm">
+                            Detail
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })
+              )}
             </TableBody>
           </Table>
         </CardContent>
       </Card>
+
+      {/* Pagination */}
+      {pages > 1 && (
+        <div className="flex justify-center gap-2">
+          {Array.from({ length: pages }, (_, i) => i + 1).map((p) => {
+            const params = new URLSearchParams();
+            if (activeType) params.set("type", activeType);
+            if (activeStatus) params.set("status", activeStatus);
+            params.set("page", String(p));
+            return (
+              <Link key={p} href={`/faktury?${params.toString()}`}>
+                <Button
+                  variant={p === page ? "default" : "outline"}
+                  size="sm"
+                >
+                  {p}
+                </Button>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

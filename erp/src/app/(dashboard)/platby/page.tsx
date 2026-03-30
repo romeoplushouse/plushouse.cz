@@ -1,46 +1,50 @@
+export const dynamic = "force-dynamic";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 import { CreditCard, ArrowDownLeft, ArrowUpRight, QrCode, Plus } from "lucide-react";
+import Link from "next/link";
+import { getPaymentHistory } from "@/lib/actions/payments";
+import { formatCurrency, formatDate } from "@/lib/utils";
 
-export default function PaymentsPage() {
+export default async function PaymentsPage() {
+  const { payments, total } = await getPaymentHistory();
+
+  const incomingTotal = payments
+    .filter((p) => p.type === "INCOMING")
+    .reduce((sum, p) => sum + Number(p.amount), 0);
+  const outgoingTotal = payments
+    .filter((p) => p.type === "OUTGOING")
+    .reduce((sum, p) => sum + Number(p.amount), 0);
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Platby</h1>
-          <p className="text-gray-500">
-            Evidence plateb, bankovní notifikace, QR platby
-          </p>
+          <p className="text-gray-500">Evidence plateb, bankovní notifikace, QR platby</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline">
-            <QrCode className="h-4 w-4 mr-2" />
-            QR platba
-          </Button>
-          <Button>
-            <Plus className="h-4 w-4 mr-2" />
-            Nová platba
-          </Button>
+          <Link href="/platby/nova">
+            <Button>
+              <Plus className="h-4 w-4 mr-2" />
+              Nová platba
+            </Button>
+          </Link>
         </div>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <ArrowDownLeft className="h-6 w-6 text-green-600" />
               <div>
-                <p className="text-sm text-gray-500">Přijaté platby (měsíc)</p>
-                <p className="text-xl font-bold text-green-600">0 Kč</p>
+                <p className="text-sm text-gray-500">Přijaté platby</p>
+                <p className="text-xl font-bold text-green-600">{formatCurrency(incomingTotal)}</p>
               </div>
             </div>
           </CardContent>
@@ -50,8 +54,8 @@ export default function PaymentsPage() {
             <div className="flex items-center gap-3">
               <ArrowUpRight className="h-6 w-6 text-red-600" />
               <div>
-                <p className="text-sm text-gray-500">Odeslané platby (měsíc)</p>
-                <p className="text-xl font-bold text-red-600">0 Kč</p>
+                <p className="text-sm text-gray-500">Odeslané platby</p>
+                <p className="text-xl font-bold text-red-600">{formatCurrency(outgoingTotal)}</p>
               </div>
             </div>
           </CardContent>
@@ -61,19 +65,16 @@ export default function PaymentsPage() {
             <div className="flex items-center gap-3">
               <CreditCard className="h-6 w-6 text-blue-600" />
               <div>
-                <p className="text-sm text-gray-500">Nespárované notifikace</p>
-                <p className="text-xl font-bold">0</p>
+                <p className="text-sm text-gray-500">Celkem plateb</p>
+                <p className="text-xl font-bold">{total}</p>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Payments Table */}
       <Card>
-        <CardHeader>
-          <CardTitle>Historie plateb</CardTitle>
-        </CardHeader>
+        <CardHeader><CardTitle>Historie plateb</CardTitle></CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
@@ -88,11 +89,51 @@ export default function PaymentsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow>
-                <TableCell colSpan={7} className="text-center text-gray-500 py-8">
-                  Zatím žádné platby
-                </TableCell>
-              </TableRow>
+              {payments.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={7} className="text-center text-gray-500 py-8">
+                    <CreditCard className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+                    <p className="font-medium">Zatím žádné platby</p>
+                    <p className="text-sm mt-1">
+                      <Link href="/platby/nova" className="text-blue-600 hover:underline">
+                        Zaznamenejte první platbu
+                      </Link>
+                    </p>
+                  </TableCell>
+                </TableRow>
+              ) : (
+                payments.map((payment) => (
+                  <TableRow key={payment.id}>
+                    <TableCell>{formatDate(payment.date)}</TableCell>
+                    <TableCell>
+                      <Badge variant={payment.type === "INCOMING" ? "success" : "destructive"}>
+                        {payment.type === "INCOMING" ? "Příjem" : "Výdaj"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      {payment.contact
+                        ? payment.contact.companyName ||
+                          `${payment.contact.firstName ?? ""} ${payment.contact.lastName ?? ""}`
+                        : "—"}
+                    </TableCell>
+                    <TableCell className="font-mono">{payment.variableSymbol ?? "—"}</TableCell>
+                    <TableCell>{payment.method}</TableCell>
+                    <TableCell className={`text-right font-bold ${payment.type === "INCOMING" ? "text-green-600" : "text-red-600"}`}>
+                      {payment.type === "INCOMING" ? "+" : "-"}
+                      {formatCurrency(Number(payment.amount))}
+                    </TableCell>
+                    <TableCell>
+                      {payment.invoice ? (
+                        <Link href={`/faktury/${payment.invoice.id}`} className="text-blue-600 hover:underline">
+                          {payment.invoice.invoiceNumber}
+                        </Link>
+                      ) : (
+                        "—"
+                      )}
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </CardContent>

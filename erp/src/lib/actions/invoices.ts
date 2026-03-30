@@ -154,6 +154,36 @@ export async function updateInvoiceStatus(
   });
 }
 
+export async function getInvoicesByContact(
+  contactId: string,
+  page = 1,
+  pageSize = 20
+) {
+  const skip = (page - 1) * pageSize;
+  const [invoices, total] = await Promise.all([
+    prisma.invoice.findMany({
+      where: {
+        OR: [{ customerId: contactId }, { supplierId: contactId }],
+      },
+      include: {
+        customer: true,
+        supplier: true,
+        items: true,
+      },
+      orderBy: { issueDate: "desc" },
+      skip,
+      take: pageSize,
+    }),
+    prisma.invoice.count({
+      where: {
+        OR: [{ customerId: contactId }, { supplierId: contactId }],
+      },
+    }),
+  ]);
+
+  return { invoices, total, pages: Math.ceil(total / pageSize) };
+}
+
 export async function getInvoiceStats() {
   const now = new Date();
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
