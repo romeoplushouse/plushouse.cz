@@ -791,6 +791,8 @@ model Employee {
   projectWorkers  ProjectWorker[]
   craftRatings    CraftRating[]
   sosAlerts       SosAlert[]
+  tachographFiles TachographFile[]
+  tachographActivities TachographActivity[]
 
   @@map("employees")
 }
@@ -889,8 +891,10 @@ model Vehicle {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
-  usages        VehicleUsage[]
-  geofenceAlerts GeofenceAlert[]
+  usages            VehicleUsage[]
+  geofenceAlerts    GeofenceAlert[]
+  tachographFiles   TachographFile[]
+  tachographActivities TachographActivity[]
 
   @@map("vehicles")
 }
@@ -965,6 +969,165 @@ model WorkTrip {
   employee Employee @relation(fields: [employeeId], references: [id])
 
   @@map("work_trips")
+}
+
+// ============================================================================
+// DIGITAL TACHOGRAPH (Gen 2 / Smart Tachograph EU)
+// ============================================================================
+
+model TachographFile {
+  id            String   @id @default(cuid())
+  vehicleId     String?
+  employeeId    String?  // Driver
+  fileType      TachographFileType
+  fileName      String
+  fileUrl       String?  // Stored file path/URL
+  fileSize      Int?
+  fileHash      String?  // SHA256 for deduplication
+  cardNumber    String?  // Driver/company card number
+  downloadedAt  DateTime // When downloaded from tachograph
+  periodFrom    DateTime
+  periodTo      DateTime
+  isProcessed   Boolean  @default(false)
+  processedAt   DateTime?
+  errorMessage  String?
+  createdAt     DateTime @default(now())
+
+  vehicle    Vehicle?  @relation(fields: [vehicleId], references: [id])
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+  activities TachographActivity[]
+
+  @@index([vehicleId, periodFrom])
+  @@index([employeeId, periodFrom])
+  @@index([fileHash])
+  @@map("tachograph_files")
+}
+
+model TachographActivity {
+  id              String   @id @default(cuid())
+  fileId          String?
+  vehicleId       String?
+  employeeId      String?  // Driver
+  activityType    DriverActivity
+  startTime       DateTime
+  endTime         DateTime
+  durationMinutes Int
+  // Location data (Gen 2 tachograph records GPS)
+  startLat        Float?
+  startLng        Float?
+  endLat          Float?
+  endLng          Float?
+  startCountry    String?  // ISO country code
+  endCountry      String?
+  // Driving data
+  distanceKm      Decimal? @db.Decimal(10, 1)
+  maxSpeedKmh     Decimal? @db.Decimal(6, 1)
+  avgSpeedKmh     Decimal? @db.Decimal(6, 1)
+  // Card slot (driver 1 or driver 2 for team driving)
+  cardSlot        Int      @default(1) // 1 or 2
+  isTeamDriving   Boolean  @default(false)
+  createdAt       DateTime @default(now())
+
+  file     TachographFile? @relation(fields: [fileId], references: [id], onDelete: SetNull)
+  vehicle  Vehicle?        @relation(fields: [vehicleId], references: [id])
+  employee Employee?       @relation(fields: [employeeId], references: [id])
+
+  @@index([employeeId, startTime])
+  @@index([vehicleId, startTime])
+  @@index([activityType, startTime])
+  @@map("tachograph_activities")
+}
+
+model TachographViolation {
+  id              String   @id @default(cuid())
+  employeeId      String?
+  vehicleId       String?
+  violationType   TachographViolationType
+  severity        String   // MINOR, SERIOUS, VERY_SERIOUS (EU classification)
+  description     String
+  occurredAt      DateTime
+  drivingTime     Int?     // Minutes of continuous driving when violation occurred
+  restDeficit     Int?     // Minutes of rest deficit
+  lat             Float?
+  lng             Float?
+  isAcknowledged  Boolean  @default(false)
+  acknowledgedBy  String?
+  acknowledgedAt  DateTime?
+  notes           String?
+  createdAt       DateTime @default(now())
+
+  @@index([employeeId, occurredAt])
+  @@index([severity])
+  @@map("tachograph_violations")
+}
+
+model TachographBorderCrossing {
+  id          String   @id @default(cuid())
+  employeeId  String?
+  vehicleId   String?
+  fromCountry String   // ISO 3166-1 alpha-2
+  toCountry   String
+  crossedAt   DateTime
+  lat         Float?
+  lng         Float?
+  odometerKm  Decimal? @db.Decimal(10, 1)
+  createdAt   DateTime @default(now())
+
+  @@index([employeeId, crossedAt])
+  @@index([vehicleId, crossedAt])
+  @@map("tachograph_border_crossings")
+}
+
+model TachographDailySummary {
+  id                    String   @id @default(cuid())
+  employeeId            String
+  vehicleId             String?
+  date                  DateTime @db.Date
+  totalDrivingMinutes   Int      @default(0)
+  totalWorkMinutes      Int      @default(0)
+  totalAvailMinutes     Int      @default(0)
+  totalRestMinutes      Int      @default(0)
+  totalDistanceKm       Decimal  @default(0) @db.Decimal(10, 1)
+  maxSpeedKmh           Decimal? @db.Decimal(6, 1)
+  continuousDrivingMax  Int?     // Max continuous driving in minutes
+  dailyDrivingExceeded  Boolean  @default(false) // > 9h (or 10h 2x/week)
+  weeklyDrivingExceeded Boolean  @default(false) // > 56h
+  biweeklyDrivingExceeded Boolean @default(false) // > 90h per 2 weeks
+  restViolation         Boolean  @default(false)  // < 11h daily rest
+  countriesVisited      String[] // ISO codes
+  createdAt             DateTime @default(now())
+
+  @@unique([employeeId, date])
+  @@index([date])
+  @@map("tachograph_daily_summaries")
+}
+
+enum TachographFileType {
+  VEHICLE_DDD   // Vehicle unit download (.ddd)
+  DRIVER_DDD    // Driver card download (.ddd)
+  COMPANY_DDD   // Company card download
+  WORKSHOP_DDD  // Workshop card download
+}
+
+enum DriverActivity {
+  DRIVING       // Řízení
+  WORK          // Práce (jiná než řízení)
+  AVAILABILITY  // Pohotovost
+  REST          // Odpočinek
+  BREAK         // Přestávka
+}
+
+enum TachographViolationType {
+  CONTINUOUS_DRIVING     // Překročení nepřetržitého řízení (> 4.5h)
+  DAILY_DRIVING          // Překročení denní doby řízení (> 9h / 10h)
+  WEEKLY_DRIVING         // Překročení týdenní doby řízení (> 56h)
+  BIWEEKLY_DRIVING       // Překročení 2-týdenní doby řízení (> 90h)
+  DAILY_REST             // Nedodržení denního odpočinku (< 11h)
+  WEEKLY_REST            // Nedodržení týdenního odpočinku (< 45h)
+  BREAK_VIOLATION        // Nedodržení přestávky po 4.5h řízení
+  SPEED_LIMIT            // Překročení rychlostního limitu
+  CARD_NOT_INSERTED      // Řízení bez vložené karty
+  MANIPULATION           // Pokus o manipulaci s tachografem
 }
 
 // ============================================================================

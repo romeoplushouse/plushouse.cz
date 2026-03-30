@@ -16,6 +16,7 @@ import {
   Settings,
   Receipt,
   Building2,
+  Gauge,
 } from "lucide-react";
 
 const navigation = [
@@ -29,6 +30,7 @@ const navigation = [
   { name: "Subdodavatelé", href: "/subdodavatele", icon: Hammer },
   { name: "Zaměstnanci", href: "/mzdy", icon: Building2 },
   { name: "GPS Sledování", href: "/sledovani", icon: MapPin },
+  { name: "Tachograf", href: "/sledovani/tachograf", icon: Gauge },
   { name: "Daně", href: "/ucetnictvi/dane", icon: Calculator },
   { name: "Nastavení", href: "/nastaveni", icon: Settings },
 ];
