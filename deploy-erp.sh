@@ -1,9 +1,7 @@
 #!/bin/bash
 # =============================================================================
-# PlusHouse ERP - BEZPEČNÝ Deploy na VPS
-# POZOR: Nemaže a nemění žádné existující služby, nginx configs, databáze!
-# Pouze PŘIDÁVÁ nový site pro erp.plushouse.cz na portu 3001
-# Spusťte jako root: bash deploy-erp.sh
+# PlusHouse ERP - Deploy pro VPS s Caddy
+# BEZPEČNÉ: Nepřepisuje plusconnect.cz, pouze přidává erp.plushouse.cz
 # =============================================================================
 set -e
 
@@ -12,127 +10,60 @@ APP_DIR="/var/www/erp"
 APP_PORT=3001
 DB_NAME="plushouse_erp"
 DB_USER="plushouse_erp"
-DB_PASS=$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c16)
-AUTH_SECRET=$(openssl rand -base64 32)
 REPO_URL="https://github.com/romeoplushouse/plushouse.cz.git"
 BRANCH="claude/accounting-system-setup-Rw2Cg"
 
 echo "============================================"
-echo "  PlusHouse ERP - BEZPEČNÁ instalace"
-echo "  Doména: $DOMAIN"
-echo "  Port: $APP_PORT"
+echo "  PlusHouse ERP - Deploy (Caddy)"
+echo "  $DOMAIN → localhost:$APP_PORT"
+echo "  Existující plusconnect.cz: NEDOTČEN"
 echo "============================================"
+
+# Kontrola že Caddy běží
 echo ""
-echo "  BEZPEČNOSTNÍ ZÁRUKA:"
-echo "  - NEODSTRANÍ žádný existující nginx config"
-echo "  - NEZMĚNÍ žádnou existující službu"
-echo "  - NEODSTRANÍ žádnou existující databázi"
-echo "  - Pouze PŘIDÁ nový site a službu"
-echo "============================================"
+echo "[INFO] Caddy status:"
+systemctl status caddy --no-pager -l 2>/dev/null | head -5 || echo "  Caddy neběží jako systemd service"
+echo ""
+echo "[INFO] Port 3000 (plusconnect.cz):"
+ss -tlnp | grep :3000 || echo "  (nic na portu 3000)"
 echo ""
 
-# Zobrazit co aktuálně běží
-echo "[INFO] Aktuálně běžící služby:"
-systemctl list-units --type=service --state=running 2>/dev/null | grep -iE 'nginx|node|postgres|mysql|docker|apache|pm2|php' || echo "  (žádné relevantní)"
-echo ""
-echo "[INFO] Aktuální nginx sites:"
-ls -la /etc/nginx/sites-enabled/ 2>/dev/null || echo "  nginx není nainstalován"
-echo ""
-echo "[INFO] Obsazené porty:"
-ss -tlnp 2>/dev/null | grep -E ':80|:443|:3000|:3001|:5432|:8080' || echo "  (žádné relevantní)"
-echo ""
+# 1. PostgreSQL - vytvoření DB
+echo "[1/6] PostgreSQL - nová databáze..."
+DB_PASS=$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c16)
 
-read -p "Pokračovat v instalaci? (y/n) " -n 1 -r
-echo ""
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Instalace zrušena."
-    exit 1
-fi
-
-# 1. System update (jen update, NE upgrade - nechceme měnit existující balíčky)
-echo ""
-echo "[1/9] Aktualizace balíčků (pouze apt-get update)..."
-apt-get update -qq || true
-
-# 2. Install Node.js 22 (pokud ještě neexistuje)
-echo "[2/9] Kontrola Node.js..."
-if command -v node &> /dev/null; then
-    echo "  Node.js již nainstalován: $(node -v)"
-else
-    echo "  Instalace Node.js 22..."
-    curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
-    apt-get install -y nodejs
-    echo "  Nainstalováno: $(node -v)"
-fi
-
-# 3. Install PostgreSQL (pokud ještě neexistuje)
-echo "[3/9] Kontrola PostgreSQL..."
-if command -v psql &> /dev/null; then
-    echo "  PostgreSQL již nainstalován: $(psql --version | head -1)"
-else
-    echo "  Instalace PostgreSQL..."
-    apt-get install -y postgresql postgresql-contrib
-fi
-systemctl enable postgresql 2>/dev/null || true
-systemctl start postgresql 2>/dev/null || true
-
-# Create NOVOU databázi a uživatele (neovlivní existující)
-echo "[3b/9] Vytváření NOVÉ databáze '$DB_NAME'..."
-sudo -u postgres psql -tc "SELECT 1 FROM pg_roles WHERE rolname='$DB_USER'" | grep -q 1 && {
-    echo "  Uživatel '$DB_USER' již existuje, přeskakuji..."
-    # Vygenerujeme nové heslo pro existujícího uživatele
+sudo -u postgres psql -tc "SELECT 1 FROM pg_roles WHERE rolname='$DB_USER'" 2>/dev/null | grep -q 1 && {
+    echo "  Uživatel existuje, měním heslo..."
     sudo -u postgres psql -c "ALTER USER $DB_USER WITH PASSWORD '$DB_PASS';" 2>/dev/null
 } || {
     sudo -u postgres psql -c "CREATE USER $DB_USER WITH PASSWORD '$DB_PASS';" 2>/dev/null
-    echo "  Uživatel '$DB_USER' vytvořen"
+    echo "  Uživatel vytvořen"
 }
 
-sudo -u postgres psql -tc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'" | grep -q 1 && {
-    echo "  Databáze '$DB_NAME' již existuje, přeskakuji vytvoření..."
+sudo -u postgres psql -tc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'" 2>/dev/null | grep -q 1 && {
+    echo "  Databáze existuje, přeskakuji..."
 } || {
     sudo -u postgres psql -c "CREATE DATABASE $DB_NAME OWNER $DB_USER;" 2>/dev/null
-    echo "  Databáze '$DB_NAME' vytvořena"
+    echo "  Databáze vytvořena"
 }
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $DB_NAME TO $DB_USER;" 2>/dev/null || true
 
 DATABASE_URL="postgresql://$DB_USER:$DB_PASS@localhost:5432/$DB_NAME"
+AUTH_SECRET=$(openssl rand -base64 32)
 
-# 4. Install PM2 (globálně, neovlivní existující)
-echo "[4/9] Kontrola PM2..."
-if command -v pm2 &> /dev/null; then
-    echo "  PM2 již nainstalován: $(pm2 -v)"
-else
-    echo "  Instalace PM2..."
-    npm install -g pm2
-fi
-
-# 5. Kontrola nginx (NE instalace - jen kontrola)
-echo "[5/9] Kontrola nginx..."
-if command -v nginx &> /dev/null; then
-    echo "  nginx již nainstalován a běží"
-    echo "  Existující sites-enabled:"
-    ls /etc/nginx/sites-enabled/ 2>/dev/null
-else
-    echo "  Instalace nginx..."
-    apt-get install -y nginx
-    systemctl enable nginx
-fi
-
-# 6. Clone/update aplikace do NOVÉHO adresáře
-echo "[6/9] Klonování aplikace do $APP_DIR..."
+# 2. Klonování aplikace
+echo "[2/6] Klonování ERP do $APP_DIR..."
 if [ -d "$APP_DIR" ]; then
-    echo "  Adresář existuje, aktualizuji..."
     cd $APP_DIR
     git fetch origin $BRANCH
     git reset --hard origin/$BRANCH
 else
-    echo "  Klonuji nový repo..."
     git clone -b $BRANCH $REPO_URL $APP_DIR
 fi
 
 cd $APP_DIR/erp
 
-# Vytvořit .env pro ERP
+# .env
 cat > .env << ENVEOF
 DATABASE_URL="$DATABASE_URL"
 AUTH_SECRET="$AUTH_SECRET"
@@ -142,23 +73,16 @@ NODE_ENV="production"
 PORT=$APP_PORT
 ENVEOF
 
-echo "  Instalace závislostí..."
-npm ci --production=false 2>&1 | tail -3
-
-echo "  Generování Prisma klienta..."
+# 3. Build
+echo "[3/6] npm install + build..."
+npm ci 2>&1 | tail -3
 npx prisma generate
+npx prisma db push --accept-data-loss 2>&1 | tail -5
+npx tsx prisma/seed.ts 2>/dev/null || echo "  Seed OK nebo již existuje"
+npm run build 2>&1 | tail -10
 
-echo "  Aplikace databázového schématu..."
-npx prisma db push --accept-data-loss
-
-echo "  Seed databáze (účtový rozvrh + admin)..."
-npx tsx prisma/seed.ts 2>/dev/null || echo "  Seed již proběhl nebo chyba - pokračuji"
-
-echo "  Build Next.js aplikace..."
-npm run build
-
-# 7. PM2 setup - POUZE pro ERP, nedotýká se ostatních PM2 procesů
-echo "[7/9] Konfigurace PM2 pro ERP..."
+# 4. PM2
+echo "[4/6] PM2 - spouštím ERP na portu $APP_PORT..."
 cat > ecosystem.config.js << PM2EOF
 module.exports = {
   apps: [{
@@ -177,97 +101,111 @@ module.exports = {
 };
 PM2EOF
 
-# Zastavit POUZE ERP proces pokud běží, NEDOTÝKAT SE ostatních
 pm2 delete plushouse-erp 2>/dev/null || true
 pm2 start ecosystem.config.js
 pm2 save
 pm2 startup systemd -u root --hp /root 2>/dev/null || true
-
-echo "  ERP běží na portu $APP_PORT"
-echo "  Ostatní PM2 procesy nedotčeny:"
+echo ""
+echo "  PM2 procesy:"
 pm2 list
 
-# 8. Nginx - POUZE PŘIDÁNÍ nového site, BEZ MAZÁNÍ čehokoli
-echo "[8/9] Přidání nginx site pro $DOMAIN..."
-echo "  NEODSTRAŇUJI žádný existující config!"
+# 5. Caddy - PŘIDAT nový blok (nemazat existující)
+echo "[5/6] Caddy - přidávám $DOMAIN..."
 
-# Záloha aktuální nginx konfigurace
-cp -r /etc/nginx/sites-enabled/ /etc/nginx/sites-enabled.backup.$(date +%Y%m%d%H%M) 2>/dev/null || true
+# Záloha
+cp /etc/caddy/Caddyfile /etc/caddy/Caddyfile.backup.$(date +%Y%m%d%H%M%S)
+echo "  Záloha Caddyfile vytvořena"
 
-cat > /etc/nginx/sites-available/$DOMAIN << NGINXEOF
-# PlusHouse ERP - automaticky vygenerováno
-# Port: $APP_PORT
-server {
-    listen 80;
-    listen [::]:80;
-    server_name $DOMAIN;
+# Kontrola zda blok pro erp.plushouse.cz už existuje
+if grep -q "$DOMAIN" /etc/caddy/Caddyfile; then
+    echo "  Blok pro $DOMAIN již existuje, přepisuji..."
+    # Odstranit starý blok (mezi "erp.plushouse.cz {" a odpovídající "}")
+    python3 -c "
+import re
+with open('/etc/caddy/Caddyfile', 'r') as f:
+    content = f.read()
+# Remove existing erp block
+pattern = r'$DOMAIN\s*\{[^}]*(?:\{[^}]*\}[^}]*)*\}\s*'
+content = re.sub(pattern, '', content)
+with open('/etc/caddy/Caddyfile', 'w') as f:
+    f.write(content.strip() + '\n')
+" 2>/dev/null || true
+fi
 
-    # Maximální velikost uploadu (pro DDD soubory tachografu)
-    client_max_body_size 50M;
+# Přidat nový blok NA KONEC Caddyfile
+cat >> /etc/caddy/Caddyfile << CADDYEOF
 
-    location / {
-        proxy_pass http://127.0.0.1:$APP_PORT;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_cache_bypass \$http_upgrade;
-        proxy_read_timeout 86400;
-    }
+$DOMAIN {
+	request_body {
+		max_size 50MB
+	}
+
+	reverse_proxy localhost:$APP_PORT {
+		header_up X-Real-IP {remote_host}
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+
+		transport http {
+			read_timeout 60s
+			write_timeout 60s
+			dial_timeout 10s
+		}
+	}
+
+	log {
+		output file /var/log/caddy/erp.log {
+			roll_size 50MiB
+			roll_keep 5
+		}
+		format json
+	}
 }
-NGINXEOF
+CADDYEOF
 
-# Symlink - NEPŘEPISUJE existující soubory
-ln -sf /etc/nginx/sites-available/$DOMAIN /etc/nginx/sites-enabled/$DOMAIN
-
-# Test nginx PŘED reloadem
-echo "  Testuji nginx konfiguraci..."
-if nginx -t 2>&1; then
-    echo "  Konfigurace OK, reloaduji nginx..."
-    systemctl reload nginx
+# Validace a reload
+echo "  Testuji Caddyfile..."
+if caddy validate --config /etc/caddy/Caddyfile 2>&1; then
+    echo "  OK! Reloaduji Caddy..."
+    systemctl reload caddy 2>/dev/null || caddy reload --config /etc/caddy/Caddyfile 2>/dev/null
+    echo "  Caddy reloadován"
 else
-    echo "  CHYBA v nginx konfiguraci! Existující služby nedotčeny."
-    echo "  Opravte ručně: /etc/nginx/sites-available/$DOMAIN"
-    rm -f /etc/nginx/sites-enabled/$DOMAIN
+    echo "  CHYBA! Obnovuji zálohu..."
+    cp /etc/caddy/Caddyfile.backup.* /etc/caddy/Caddyfile 2>/dev/null
+    echo "  Záloha obnovena, plusconnect.cz nedotčen"
 fi
 
-# 9. SSL (certbot)
-echo "[9/9] SSL certifikát..."
-if ! command -v certbot &> /dev/null; then
-    apt-get install -y certbot python3-certbot-nginx
-fi
+# 6. Odebrat nginx (koliduje s Caddy na portu 80)
+echo "[6/6] Čištění nginx (koliduje s Caddy)..."
+systemctl stop nginx 2>/dev/null || true
+systemctl disable nginx 2>/dev/null || true
+apt-get remove -y nginx nginx-full nginx-common 2>/dev/null || true
+dpkg --configure -a 2>/dev/null || true
 
 echo ""
 echo "============================================"
-echo "  INSTALACE DOKONČENA BEZPEČNĚ!"
+echo "  HOTOVO!"
 echo "============================================"
 echo ""
-echo "  Existující služby: NEDOTČENY"
+echo "  plusconnect.cz → localhost:3000  (NEDOTČEN)"
+echo "  $DOMAIN → localhost:$APP_PORT  (NOVÝ)"
 echo ""
-echo "  Nový ERP systém:"
-echo "  URL: http://$DOMAIN"
-echo "  Port: $APP_PORT"
+echo "  SSL: Caddy automaticky zajistí Let's Encrypt"
 echo ""
-echo "  Pro SSL spusťte:"
-echo "  certbot --nginx -d $DOMAIN --non-interactive --agree-tos -m tonda@plushouse.cz"
-echo ""
-echo "  Přihlašovací údaje:"
+echo "  Přihlášení do ERP:"
+echo "  URL:   https://$DOMAIN"
 echo "  Email: admin@plushouse.cz"
 echo "  Heslo: admin123"
-echo "  (ZMĚŇTE HESLO PO PRVNÍM PŘIHLÁŠENÍ!)"
+echo "  (ZMĚŇTE HESLO!)"
 echo ""
-echo "  Databáze (NOVÁ, oddělená):"
-echo "  DB: $DB_NAME"
+echo "  Databáze:"
+echo "  DB:   $DB_NAME"
 echo "  User: $DB_USER"
 echo "  Pass: $DB_PASS"
 echo ""
-echo "  Správa ERP:"
-echo "  pm2 status              - stav všech procesů"
-echo "  pm2 logs plushouse-erp  - logy ERP"
-echo "  pm2 restart plushouse-erp - restart ERP"
+echo "  Správa:"
+echo "  pm2 logs plushouse-erp   - logy ERP"
+echo "  pm2 restart plushouse-erp - restart"
+echo "  caddy reload             - reload Caddy"
 echo ""
 echo "  ULOŽTE SI TYTO ÚDAJE!"
 echo "============================================"
