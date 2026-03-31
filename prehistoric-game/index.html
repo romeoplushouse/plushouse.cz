@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prehistoric KDE Game | PLUS HOUSE</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #1b1e20;
+            font-family: 'Noto Sans', 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #eff0f1;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+            color: #3daee9;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 16px;
+        }
+
+        #gameCanvas {
+            border: 2px solid #3daee9;
+            border-radius: 6px;
+            background: #232629;
+            display: block;
+            max-width: 100%;
+            image-rendering: pixelated;
+        }
+
+        .controls {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+
+        .controls kbd {
+            background: #31363b;
+            border: 1px solid #4d4d4d;
+            border-radius: 3px;
+            padding: 2px 8px;
+            font-family: monospace;
+            color: #eff0f1;
+        }
+
+        #score-display {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        a.back {
+            margin-top: 20px;
+            color: #3daee9;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        a.back:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Prehistoric KDE</h1>
+    <p class="subtitle">Pomoz Konqi utéct před meteority!</p>
+    <canvas id="gameCanvas" width="800" height="300"></canvas>
+    <p class="controls">
+        <kbd>Mezerník</kbd> / <kbd>&#x2191;</kbd> / klik = skok &nbsp;&middot;&nbsp;
+        <kbd>&#x2193;</kbd> = skrčení
+    </p>
+    <div id="score-display"></div>
+    <a class="back" href="/">&#8592; Zpět na plushouse.cz</a>
+
+<script>
+(function() {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('score-display');
+
+    // KDE Breeze colors
+    const C = {
+        sky1: '#232629', sky2: '#2d3136',
+        ground: '#31363b', groundLine: '#3daee9',
+        konqi: '#27ae60', konqiDark: '#1d8348',
+        konqiEye: '#eff0f1', konqiPupil: '#1b1e20',
+        meteor: '#da4453', meteorGlow: '#ed6b75',
+        cactus: '#7f8c8d', cactusLight: '#95a5a6',
+        cloud: '#3d4349',
+        text: '#eff0f1', accent: '#3daee9',
+        ptero: '#f67400', pteroWing: '#fdbc4b'
+    };
+
+    const GROUND_Y = 240;
+    const W = 800, H = 300;
+
+    let dino, obstacles, clouds, particles, score, highScore, speed, gameOver, started, frame;
+
+    highScore = parseInt(localStorage.getItem('prehistoric-kde-hs') || '0');
+
+    function reset() {
+        dino = {
+            x: 80, y: GROUND_Y, w: 40, h: 44,
+            vy: 0, jumping: false, ducking: false,
+            legFrame: 0
+        };
+        obstacles = [];
+        clouds = [];
+        particles = [];
+        score = 0;
+        speed = 5;
+        gameOver = false;
+        started = false;
+        frame = 0;
+
+        for (let i = 0; i < 4; i++) {
+            clouds.push({
+                x: Math.random() * W,
+                y: 30 + Math.random() * 80,
+                w: 40 + Math.random() * 60,
+                speed: 0.3 + Math.random() * 0.5
+            });
+        }
+    }
+
+    reset();
+
+    // Drawing functions
+    function drawKonqi(d) {
+        const x = d.x, bh = d.ducking ? 26 : d.h;
+        const y = d.ducking ? GROUND_Y - 26 : d.y - d.h;
+
+        ctx.save();
+
+        // Body
+        ctx.fillStyle = C.konqi;
+        ctx.beginPath();
+        ctx.roundRect(x, y + 8, d.w - 4, bh - 8, 8);
+        ctx.fill();
+
+        // Belly
+        ctx.fillStyle = '#2ecc71';
+        ctx.beginPath();
+        ctx.ellipse(x + 14, y + bh - 12, 10, bh * 0.3, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Head
+        if (!d.ducking) {
+            ctx.fillStyle = C.konqi;
+            ctx.beginPath();
+            ctx.roundRect(x + 6, y - 2, 24, 18, 6);
+            ctx.fill();
+
+            // Spikes on head
+            ctx.fillStyle = C.konqiDark;
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(x + 10 + i * 8, y - 2);
+                ctx.lineTo(x + 14 + i * 8, y - 10);
+                ctx.lineTo(x + 18 + i * 8, y - 2);
+                ctx.fill();
+            }
+
+            // Eye
+            ctx.fillStyle = C.konqiEye;
+            ctx.beginPath();
+            ctx.arc(x + 24, y + 6, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = C.konqiPupil;
+            ctx.beginPath();
+            ctx.arc(x + 25, y + 6, 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Mouth
+            ctx.strokeStyle = C.konqiDark;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(x + 28, y + 12);
+            ctx.lineTo(x + 34, y + 10);
+            ctx.stroke();
+        } else {
+            // Ducking head (flat)
+            ctx.fillStyle = C.konqi;
+            ctx.beginPath();
+            ctx.roundRect(x + 20, y + 2, 24, 14, 5);
+            ctx.fill();
+
+            ctx.fillStyle = C.konqiEye;
+            ctx.beginPath();
+            ctx.arc(x + 38, y + 8, 3, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = C.konqiPupil;
+            ctx.beginPath();
+            ctx.arc(x + 39, y + 8, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // Back spikes
+        ctx.fillStyle = C.konqiDark;
+        const spikes = d.ducking ? 4 : 3;
+        for (let i = 0; i < spikes; i++) {
+            const sx = x + 4 + i * 9;
+            const sy = y + (d.ducking ? 0 : 6);
+            ctx.beginPath();
+            ctx.moveTo(sx, sy + 4);
+            ctx.lineTo(sx + 4, sy - 5);
+            ctx.lineTo(sx + 8, sy + 4);
+            ctx.fill();
+        }
+
+        // Tail
+        ctx.fillStyle = C.konqi;
+        ctx.beginPath();
+        ctx.moveTo(x, y + bh - 10);
+        ctx.quadraticCurveTo(x - 16, y + bh - 20, x - 12, y + bh - 30);
+        ctx.lineTo(x - 6, y + bh - 24);
+        ctx.quadraticCurveTo(x - 8, y + bh - 14, x, y + bh - 6);
+        ctx.fill();
+
+        // Legs
+        ctx.fillStyle = C.konqiDark;
+        const legOff = Math.sin(d.legFrame * 0.3) * 4;
+        if (!d.ducking) {
+            ctx.fillRect(x + 8, y + bh - 2, 6, 8 + legOff);
+            ctx.fillRect(x + 22, y + bh - 2, 6, 8 - legOff);
+            // Feet
+            ctx.fillStyle = C.konqi;
+            ctx.fillRect(x + 5, y + bh + 5 + legOff, 12, 4);
+            ctx.fillRect(x + 19, y + bh + 5 - legOff, 12, 4);
+        }
+
+        ctx.restore();
+    }
+
+    function drawMeteor(o) {
+        ctx.save();
+
+        // Glow
+        const grd = ctx.createRadialGradient(o.x + o.w / 2, o.y + o.h / 2, 2, o.x + o.w / 2, o.y + o.h / 2, o.w);
+        grd.addColorStop(0, 'rgba(218,68,83,0.4)');
+        grd.addColorStop(1, 'rgba(218,68,83,0)');
+        ctx.fillStyle = grd;
+        ctx.fillRect(o.x - o.w, o.y - o.h, o.w * 3, o.h * 3);
+
+        // Body
+        ctx.fillStyle = C.meteor;
+        ctx.beginPath();
+        ctx.arc(o.x + o.w / 2, o.y + o.h / 2, o.w / 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Crater details
+        ctx.fillStyle = C.meteorGlow;
+        ctx.beginPath();
+        ctx.arc(o.x + o.w * 0.35, o.y + o.h * 0.35, o.w * 0.15, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(o.x + o.w * 0.65, o.y + o.h * 0.55, o.w * 0.1, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    function drawCactus(o) {
+        const x = o.x, y = GROUND_Y - o.h;
+        ctx.fillStyle = C.cactus;
+
+        // Main trunk
+        ctx.fillRect(x + o.w * 0.3, y, o.w * 0.4, o.h);
+
+        // Left arm
+        ctx.fillRect(x, y + o.h * 0.25, o.w * 0.3, o.w * 0.25);
+        ctx.fillRect(x, y + o.h * 0.1, o.w * 0.25, o.h * 0.2);
+
+        // Right arm
+        ctx.fillRect(x + o.w * 0.7, y + o.h * 0.4, o.w * 0.3, o.w * 0.25);
+        ctx.fillRect(x + o.w * 0.75, y + o.h * 0.2, o.w * 0.25, o.h * 0.25);
+
+        // Highlight
+        ctx.fillStyle = C.cactusLight;
+        ctx.fillRect(x + o.w * 0.45, y + 2, o.w * 0.1, o.h - 4);
+    }
+
+    function drawPtero(o) {
+        const x = o.x, y = o.y;
+        const wingUp = Math.sin(frame * 0.2) > 0;
+
+        ctx.fillStyle = C.ptero;
+        // Body
+        ctx.beginPath();
+        ctx.ellipse(x + 15, y + 12, 15, 6, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Head
+        ctx.beginPath();
+        ctx.ellipse(x + 32, y + 8, 6, 5, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Beak
+        ctx.fillStyle = '#e74c3c';
+        ctx.beginPath();
+        ctx.moveTo(x + 37, y + 6);
+        ctx.lineTo(x + 46, y + 9);
+        ctx.lineTo(x + 37, y + 11);
+        ctx.fill();
+
+        // Eye
+        ctx.fillStyle = '#fff';
+        ctx.beginPath();
+        ctx.arc(x + 34, y + 7, 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Wings
+        ctx.fillStyle = C.pteroWing;
+        ctx.beginPath();
+        if (wingUp) {
+            ctx.moveTo(x + 5, y + 10);
+            ctx.lineTo(x + 20, y + 10);
+            ctx.lineTo(x + 12, y - 12);
+        } else {
+            ctx.moveTo(x + 5, y + 14);
+            ctx.lineTo(x + 20, y + 14);
+            ctx.lineTo(x + 12, y + 30);
+        }
+        ctx.fill();
+    }
+
+    function spawnObstacle() {
+        const minGap = 300 / speed * 10;
+        if (obstacles.length > 0) {
+            const last = obstacles[obstacles.length - 1];
+            if (last.x > W - minGap) return;
+        }
+
+        const r = Math.random();
+        if (r < 0.4) {
+            // Small meteor
+            const s = 20 + Math.random() * 15;
+            obstacles.push({ type: 'meteor', x: W, y: GROUND_Y - s, w: s, h: s });
+        } else if (r < 0.7) {
+            // Cactus
+            const h = 30 + Math.random() * 25;
+            obstacles.push({ type: 'cactus', x: W, y: GROUND_Y - h, w: 24, h: h });
+        } else if (score > 300) {
+            // Flying pterodactyl (after score 300)
+            const fly_y = GROUND_Y - 60 - Math.random() * 50;
+            obstacles.push({ type: 'ptero', x: W, y: fly_y, w: 46, h: 24 });
+        } else {
+            const s = 22 + Math.random() * 18;
+            obstacles.push({ type: 'meteor', x: W, y: GROUND_Y - s, w: s, h: s });
+        }
+    }
+
+    function addParticles(x, y) {
+        for (let i = 0; i < 8; i++) {
+            particles.push({
+                x: x, y: y,
+                vx: (Math.random() - 0.5) * 6,
+                vy: -Math.random() * 4,
+                life: 20 + Math.random() * 15,
+                color: Math.random() > 0.5 ? C.meteor : '#fdbc4b'
+            });
+        }
+    }
+
+    function collides(a, o) {
+        const ax = a.x + 6, ay = a.ducking ? GROUND_Y - 26 : a.y - a.h;
+        const aw = a.w - 12, ah = a.ducking ? 26 : a.h;
+        const ox = o.x + 4, oy = o.type === 'cactus' ? GROUND_Y - o.h : o.y;
+        const ow = o.w - 8, oh = o.h;
+
+        return ax < ox + ow && ax + aw > ox && ay < oy + oh && ay + ah > oy;
+    }
+
+    function update() {
+        if (gameOver || !started) return;
+
+        frame++;
+        score = Math.floor(frame / 3);
+        speed = 5 + score / 200;
+
+        // Dino physics
+        if (dino.jumping) {
+            dino.vy += 0.65;
+            dino.y += dino.vy;
+            if (dino.y >= GROUND_Y) {
+                dino.y = GROUND_Y;
+                dino.jumping = false;
+                dino.vy = 0;
+            }
+        }
+
+        dino.legFrame++;
+
+        // Obstacles
+        if (frame % Math.max(40, 80 - Math.floor(score / 20)) === 0) {
+            spawnObstacle();
+        }
+
+        for (let i = obstacles.length - 1; i >= 0; i--) {
+            obstacles[i].x -= speed;
+            if (obstacles[i].x + obstacles[i].w < 0) {
+                obstacles.splice(i, 1);
+                continue;
+            }
+            if (collides(dino, obstacles[i])) {
+                gameOver = true;
+                addParticles(dino.x + 20, dino.y - 20);
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem('prehistoric-kde-hs', highScore);
+                }
+            }
+        }
+
+        // Clouds
+        clouds.forEach(c => {
+            c.x -= c.speed;
+            if (c.x + c.w < 0) { c.x = W + 20; c.y = 30 + Math.random() * 80; }
+        });
+
+        // Particles
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.2;
+            p.life--;
+            if (p.life <= 0) particles.splice(i, 1);
+        }
+    }
+
+    function draw() {
+        // Sky gradient
+        const skyGrd = ctx.createLinearGradient(0, 0, 0, GROUND_Y);
+        skyGrd.addColorStop(0, '#1a1d21');
+        skyGrd.addColorStop(1, C.sky1);
+        ctx.fillStyle = skyGrd;
+        ctx.fillRect(0, 0, W, H);
+
+        // Stars
+        ctx.fillStyle = 'rgba(239,240,241,0.3)';
+        for (let i = 0; i < 30; i++) {
+            const sx = (i * 137 + 50) % W;
+            const sy = (i * 97 + 10) % (GROUND_Y - 20);
+            ctx.fillRect(sx, sy, 1.5, 1.5);
+        }
+
+        // Clouds
+        clouds.forEach(c => {
+            ctx.fillStyle = C.cloud;
+            ctx.beginPath();
+            ctx.ellipse(c.x + c.w * 0.5, c.y, c.w * 0.5, 10, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(c.x + c.w * 0.3, c.y - 4, c.w * 0.3, 8, 0, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Ground
+        ctx.fillStyle = C.ground;
+        ctx.fillRect(0, GROUND_Y, W, H - GROUND_Y);
+
+        // Ground line
+        ctx.strokeStyle = C.groundLine;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, GROUND_Y);
+        ctx.lineTo(W, GROUND_Y);
+        ctx.stroke();
+
+        // Ground texture
+        ctx.fillStyle = '#3a3f44';
+        const groundOff = (frame * speed) % 20;
+        for (let i = -1; i < W / 20 + 1; i++) {
+            const gx = i * 20 - groundOff;
+            ctx.fillRect(gx, GROUND_Y + 8, 8, 2);
+            ctx.fillRect(gx + 12, GROUND_Y + 16, 5, 1.5);
+        }
+
+        // Obstacles
+        obstacles.forEach(o => {
+            if (o.type === 'meteor') drawMeteor(o);
+            else if (o.type === 'cactus') drawCactus(o);
+            else if (o.type === 'ptero') drawPtero(o);
+        });
+
+        // Dino
+        drawKonqi(dino);
+
+        // Particles
+        particles.forEach(p => {
+            ctx.globalAlpha = p.life / 30;
+            ctx.fillStyle = p.color;
+            ctx.fillRect(p.x, p.y, 4, 4);
+        });
+        ctx.globalAlpha = 1;
+
+        // HUD
+        ctx.fillStyle = C.accent;
+        ctx.font = 'bold 16px monospace';
+        ctx.textAlign = 'right';
+        ctx.fillText('SKÓRE: ' + String(score).padStart(5, '0'), W - 16, 28);
+
+        if (highScore > 0) {
+            ctx.fillStyle = '#7f8c8d';
+            ctx.font = '12px monospace';
+            ctx.fillText('REKORD: ' + String(highScore).padStart(5, '0'), W - 16, 46);
+        }
+
+        // Start / Game Over
+        ctx.textAlign = 'center';
+        if (!started) {
+            ctx.fillStyle = 'rgba(0,0,0,0.5)';
+            ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = C.accent;
+            ctx.font = 'bold 28px monospace';
+            ctx.fillText('PREHISTORIC KDE', W / 2, H / 2 - 30);
+            ctx.fillStyle = C.text;
+            ctx.font = '16px monospace';
+            ctx.fillText('Stiskni MEZERNÍK pro start', W / 2, H / 2 + 10);
+            ctx.fillStyle = '#7f8c8d';
+            ctx.font = '12px monospace';
+            ctx.fillText('Pomoz maskotu Konqi utéct před meteority!', W / 2, H / 2 + 40);
+        }
+
+        if (gameOver) {
+            ctx.fillStyle = 'rgba(0,0,0,0.6)';
+            ctx.fillRect(0, 0, W, H);
+            ctx.fillStyle = C.meteor;
+            ctx.font = 'bold 28px monospace';
+            ctx.fillText('KONEC HRY', W / 2, H / 2 - 20);
+            ctx.fillStyle = C.text;
+            ctx.font = '16px monospace';
+            ctx.fillText('Skóre: ' + score, W / 2, H / 2 + 15);
+            ctx.fillStyle = '#7f8c8d';
+            ctx.font = '14px monospace';
+            ctx.fillText('Stiskni MEZERNÍK pro restart', W / 2, H / 2 + 45);
+        }
+
+        scoreEl.textContent = gameOver ? (score > highScore - 1 ? 'Nový rekord! ' + score : '') : '';
+    }
+
+    function jump() {
+        if (!started) { started = true; return; }
+        if (gameOver) { reset(); started = true; return; }
+        if (!dino.jumping) {
+            dino.jumping = true;
+            dino.vy = -12;
+            dino.ducking = false;
+        }
+    }
+
+    function setDuck(v) {
+        if (!started || gameOver) return;
+        dino.ducking = v && !dino.jumping;
+    }
+
+    // Input
+    document.addEventListener('keydown', e => {
+        if (e.code === 'Space' || e.code === 'ArrowUp') {
+            e.preventDefault();
+            jump();
+        }
+        if (e.code === 'ArrowDown') {
+            e.preventDefault();
+            setDuck(true);
+        }
+    });
+
+    document.addEventListener('keyup', e => {
+        if (e.code === 'ArrowDown') setDuck(false);
+    });
+
+    canvas.addEventListener('click', jump);
+    canvas.addEventListener('touchstart', e => { e.preventDefault(); jump(); });
+
+    // Game loop
+    function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+    }
+    loop();
+})();
+</script>
+</body>
+</html>
