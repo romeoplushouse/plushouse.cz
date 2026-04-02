@@ -20,6 +20,7 @@ import {
   LogOut,
   X,
   DollarSign,
+  Route,
 } from "lucide-react";
 
 const navSections = [
@@ -51,6 +52,7 @@ const navSections = [
     label: "LIDÉ",
     items: [
       { name: "Zaměstnanci", href: "/mzdy", icon: Building2 },
+      { name: "Kniha jízd", href: "/kniha-jizd", icon: Route },
       { name: "GPS Sledování", href: "/sledovani", icon: MapPin },
       { name: "Tachograf", href: "/sledovani/tachograf", icon: Gauge },
     ],
