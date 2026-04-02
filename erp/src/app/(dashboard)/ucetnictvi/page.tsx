@@ -28,9 +28,9 @@ export default async function AccountingPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Ucetnictvi</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Účetnictví</h1>
           <p className="text-gray-500">
-            Podvojne ucetnictvi - ucetni denik, hlavni kniha, predvaha
+            Podvojné účetnictví - účetní deník, hlavní kniha, předvaha
           </p>
         </div>
         <div className="flex gap-2">
@@ -41,7 +41,7 @@ export default async function AccountingPage() {
           <Link href="/ucetnictvi/denik/novy">
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              Novy zapis
+              Nový zápis
             </Button>
           </Link>
         </div>
@@ -54,9 +54,9 @@ export default async function AccountingPage() {
             <div className="flex items-center gap-3">
               <BookOpen className="h-8 w-8 text-blue-600" />
               <div>
-                <p className="text-sm text-gray-500">Ucetni denik</p>
+                <p className="text-sm text-gray-500">Účetní deník</p>
                 <p className="text-xl font-bold">
-                  {stats.journalCount} zapisu
+                  {stats.journalCount} zápisů
                 </p>
               </div>
             </div>
@@ -67,8 +67,8 @@ export default async function AccountingPage() {
             <div className="flex items-center gap-3">
               <FileSpreadsheet className="h-8 w-8 text-green-600" />
               <div>
-                <p className="text-sm text-gray-500">Uctovy rozvrh</p>
-                <p className="text-xl font-bold">{stats.accountCount} uctu</p>
+                <p className="text-sm text-gray-500">Účtový rozvrh</p>
+                <p className="text-xl font-bold">{stats.accountCount} účtů</p>
               </div>
             </div>
           </CardContent>
@@ -78,7 +78,7 @@ export default async function AccountingPage() {
             <div className="flex items-center gap-3">
               <FileSpreadsheet className="h-8 w-8 text-purple-600" />
               <div>
-                <p className="text-sm text-gray-500">Obdobi</p>
+                <p className="text-sm text-gray-500">Období</p>
                 <p className="text-xl font-bold">{stats.currentYear}</p>
               </div>
             </div>
@@ -92,9 +92,9 @@ export default async function AccountingPage() {
           <Card className="hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
               <BookOpen className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-              <h3 className="font-medium">Ucetni denik</h3>
+              <h3 className="font-medium">Účetní deník</h3>
               <p className="text-xs text-gray-500 mt-1">
-                Chronologicke zapisy
+                Chronologické zápisy
               </p>
             </CardContent>
           </Card>
@@ -103,8 +103,8 @@ export default async function AccountingPage() {
           <Card className="hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
               <FileSpreadsheet className="h-8 w-8 text-green-600 mx-auto mb-2" />
-              <h3 className="font-medium">Hlavni kniha</h3>
-              <p className="text-xs text-gray-500 mt-1">Ucty a obraty</p>
+              <h3 className="font-medium">Hlavní kniha</h3>
+              <p className="text-xs text-gray-500 mt-1">Účty a obraty</p>
             </CardContent>
           </Card>
         </Link>
@@ -112,7 +112,7 @@ export default async function AccountingPage() {
           <Card className="hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
               <FileSpreadsheet className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-              <h3 className="font-medium">Predvaha</h3>
+              <h3 className="font-medium">Předvaha</h3>
               <p className="text-xs text-gray-500 mt-1">Trial balance</p>
             </CardContent>
           </Card>
@@ -121,7 +121,7 @@ export default async function AccountingPage() {
           <Card className="hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
               <FileSpreadsheet className="h-8 w-8 text-orange-600 mx-auto mb-2" />
-              <h3 className="font-medium">Uctovy rozvrh</h3>
+              <h3 className="font-medium">Účtový rozvrh</h3>
               <p className="text-xs text-gray-500 mt-1">Chart of accounts</p>
             </CardContent>
           </Card>
@@ -131,18 +131,18 @@ export default async function AccountingPage() {
       {/* Recent Journal Entries */}
       <Card>
         <CardHeader>
-          <CardTitle>Posledni zapisy v deniku</CardTitle>
+          <CardTitle>Poslední zápisy v deníku</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Cislo</TableHead>
+                <TableHead>Číslo</TableHead>
                 <TableHead>Datum</TableHead>
                 <TableHead>Popis</TableHead>
                 <TableHead>Doklad</TableHead>
-                <TableHead className="text-right">MD (Kc)</TableHead>
-                <TableHead className="text-right">D (Kc)</TableHead>
+                <TableHead className="text-right">MD (Kč)</TableHead>
+                <TableHead className="text-right">D (Kč)</TableHead>
                 <TableHead>Stav</TableHead>
               </TableRow>
             </TableHeader>
@@ -153,8 +153,8 @@ export default async function AccountingPage() {
                     colSpan={7}
                     className="text-center text-gray-500 py-8"
                   >
-                    Zatim zadne ucetni zapisy. Kliknete na &quot;Novy
-                    zapis&quot; pro vytvoreni prvniho zaznamu.
+                    Zatím žádné účetní zápisy. Klikněte na &quot;Nový
+                    zápis&quot; pro vytvoření prvního záznamu.
                   </TableCell>
                 </TableRow>
               ) : (
@@ -190,7 +190,7 @@ export default async function AccountingPage() {
                       </TableCell>
                       <TableCell>
                         {entry.isPosted ? (
-                          <Badge variant="success">Zauctovano</Badge>
+                          <Badge variant="success">Zaúčtováno</Badge>
                         ) : (
                           <Badge variant="warning">Koncept</Badge>
                         )}

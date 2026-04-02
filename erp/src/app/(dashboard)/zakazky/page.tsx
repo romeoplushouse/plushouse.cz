@@ -24,11 +24,11 @@ import { formatCurrency, formatDate } from "@/lib/utils";
 
 const statusLabels: Record<string, string> = {
   NEW: "Nová",
-  QUOTED: "Nacen\u011Bno",
+  QUOTED: "Naceněno",
   IN_PROGRESS: "V realizaci",
   ON_HOLD: "Pozastaveno",
-  COMPLETED: "Dokon\u010Deno",
-  CANCELLED: "Zru\u0161eno",
+  COMPLETED: "Dokončeno",
+  CANCELLED: "Zrušeno",
 };
 
 const statusVariants: Record<
@@ -53,15 +53,15 @@ export default async function ProjectsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Zak\u00e1zky</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Zakázky</h1>
           <p className="text-gray-500">
-            Evidence zak\u00e1zek, \u00fakol\u016f, materi\u00e1lu a kontroly kvality
+            Evidence zakázek, úkolů, materiálu a kontroly kvality
           </p>
         </div>
         <Link href="/zakazky/nova">
           <Button>
             <Plus className="h-4 w-4 mr-2" />
-            Nov\u00e1 zak\u00e1zka
+            Nová zakázka
           </Button>
         </Link>
       </div>
@@ -73,7 +73,7 @@ export default async function ProjectsPage() {
             <div className="flex items-center gap-3">
               <FolderKanban className="h-6 w-6 text-blue-600" />
               <div>
-                <p className="text-sm text-gray-500">Nov\u00e9</p>
+                <p className="text-sm text-gray-500">Nové</p>
                 <p className="text-xl font-bold">{stats.new}</p>
               </div>
             </div>
@@ -95,7 +95,7 @@ export default async function ProjectsPage() {
             <div className="flex items-center gap-3">
               <Pause className="h-6 w-6 text-orange-600" />
               <div>
-                <p className="text-sm text-gray-500">Pozastaven\u00e9</p>
+                <p className="text-sm text-gray-500">Pozastavené</p>
                 <p className="text-xl font-bold">{stats.onHold}</p>
               </div>
             </div>
@@ -106,7 +106,7 @@ export default async function ProjectsPage() {
             <div className="flex items-center gap-3">
               <CheckCircle className="h-6 w-6 text-green-600" />
               <div>
-                <p className="text-sm text-gray-500">Dokon\u010Den\u00e9</p>
+                <p className="text-sm text-gray-500">Dokončené</p>
                 <p className="text-xl font-bold">{stats.completed}</p>
               </div>
             </div>
@@ -119,14 +119,14 @@ export default async function ProjectsPage() {
         <Card>
           <CardContent className="py-12 text-center">
             <FolderKanban className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-            <p className="font-medium text-gray-600">Zat\u00edm \u017e\u00e1dn\u00e9 zak\u00e1zky</p>
+            <p className="font-medium text-gray-600">Zatím žádné zakázky</p>
             <p className="text-sm text-gray-500 mt-1">
-              Vytvo\u0159te prvn\u00ed zak\u00e1zku s \u00fakoly, p\u0159i\u0159azen\u00edm pracovn\u00edk\u016f a sledov\u00e1n\u00edm pr\u016fb\u011bhu
+              Vytvořte první zakázku s úkoly, přiřazením pracovníků a sledováním průběhu
             </p>
             <Link href="/zakazky/nova">
               <Button className="mt-4">
                 <Plus className="h-4 w-4 mr-2" />
-                Vytvo\u0159it zak\u00e1zku
+                Vytvořit zakázku
               </Button>
             </Link>
           </CardContent>
@@ -137,13 +137,13 @@ export default async function ProjectsPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>\u010C\u00edslo</TableHead>
-                  <TableHead>N\u00e1zev</TableHead>
-                  <TableHead>Z\u00e1kazn\u00edk</TableHead>
+                  <TableHead>Číslo</TableHead>
+                  <TableHead>Název</TableHead>
+                  <TableHead>Zákazník</TableHead>
                   <TableHead>Stav</TableHead>
-                  <TableHead>Rozpo\u010Det</TableHead>
-                  <TableHead>Za\u010D\u00e1tek</TableHead>
-                  <TableHead>\u00dakoly</TableHead>
+                  <TableHead>Rozpočet</TableHead>
+                  <TableHead>Začátek</TableHead>
+                  <TableHead>Úkoly</TableHead>
                   <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
@@ -161,7 +161,7 @@ export default async function ProjectsPage() {
                         [project.contact?.firstName, project.contact?.lastName]
                           .filter(Boolean)
                           .join(" ") ||
-                        "\u2014"}
+                        "—"}
                     </TableCell>
                     <TableCell>
                       <Badge variant={statusVariants[project.status] ?? "secondary"}>
@@ -171,12 +171,12 @@ export default async function ProjectsPage() {
                     <TableCell>
                       {project.budget
                         ? formatCurrency(Number(project.budget))
-                        : "\u2014"}
+                        : "—"}
                     </TableCell>
                     <TableCell>
                       {project.startDate
                         ? formatDate(project.startDate)
-                        : "\u2014"}
+                        : "—"}
                     </TableCell>
                     <TableCell>
                       {project.tasks.length}

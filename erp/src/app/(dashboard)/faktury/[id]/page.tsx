@@ -22,20 +22,20 @@ const STATUS_MAP: Record<
   { label: string; variant: "secondary" | "default" | "success" | "destructive" }
 > = {
   DRAFT: { label: "Koncept", variant: "secondary" },
-  SENT: { label: "Odeslana", variant: "default" },
-  PARTIALLY_PAID: { label: "Castecne uhrazena", variant: "default" },
-  PAID: { label: "Uhrazena", variant: "success" },
+  SENT: { label: "Odeslaná", variant: "default" },
+  PARTIALLY_PAID: { label: "Částečně uhrazená", variant: "default" },
+  PAID: { label: "Uhrazená", variant: "success" },
   OVERDUE: { label: "Po splatnosti", variant: "destructive" },
-  CANCELLED: { label: "Zrusena", variant: "secondary" },
+  CANCELLED: { label: "Zrušená", variant: "secondary" },
 };
 
 const TYPE_MAP: Record<string, string> = {
-  ISSUED: "Vydana faktura",
-  RECEIVED: "Prijata faktura",
-  ADVANCE: "Zalohova faktura",
+  ISSUED: "Vydaná faktura",
+  RECEIVED: "Přijatá faktura",
+  ADVANCE: "Zálohová faktura",
   PROFORMA: "Proforma faktura",
   CREDIT_NOTE: "Dobropis",
-  TAX_DOCUMENT: "Danovy doklad",
+  TAX_DOCUMENT: "Daňový doklad",
 };
 
 export default async function InvoiceDetailPage({
@@ -104,19 +104,19 @@ export default async function InvoiceDetailPage({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <h3 className="text-sm font-medium text-gray-500 mb-2">
-                    {invoice.type === "RECEIVED" ? "Dodavatel" : "Odberatel"}
+                    {invoice.type === "RECEIVED" ? "Dodavatel" : "Odběratel"}
                   </h3>
                   {contactName ? (
                     <div>
                       <p className="font-medium text-gray-900">{contactName}</p>
                       {contact?.ico && (
                         <p className="text-sm text-gray-500">
-                          ICO: {contact.ico}
+                          IČO: {contact.ico}
                         </p>
                       )}
                       {contact?.dic && (
                         <p className="text-sm text-gray-500">
-                          DIC: {contact.dic}
+                          DIČ: {contact.dic}
                         </p>
                       )}
                       {contact?.street && (
@@ -133,7 +133,7 @@ export default async function InvoiceDetailPage({
                 </div>
                 <div className="space-y-3">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">Datum vystaveni:</span>
+                    <span className="text-gray-500">Datum vystavení:</span>
                     <span className="font-medium">
                       {formatDate(invoice.issueDate)}
                     </span>
@@ -154,7 +154,7 @@ export default async function InvoiceDetailPage({
                   )}
                   {invoice.variableSymbol && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">Variabilni symbol:</span>
+                      <span className="text-gray-500">Variabilní symbol:</span>
                       <span className="font-medium">
                         {invoice.variableSymbol}
                       </span>
@@ -162,7 +162,7 @@ export default async function InvoiceDetailPage({
                   )}
                   {invoice.bankAccount && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">Bankovni ucet:</span>
+                      <span className="text-gray-500">Bankovní účet:</span>
                       <span className="font-medium">
                         {invoice.bankAccount}
                       </span>
@@ -170,10 +170,10 @@ export default async function InvoiceDetailPage({
                   )}
                   {invoice.paymentMethod && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">Zpusob uhrady:</span>
+                      <span className="text-gray-500">Způsob úhrady:</span>
                       <span className="font-medium">
                         {invoice.paymentMethod === "BANK_TRANSFER"
-                          ? "Bankovni prevod"
+                          ? "Bankovní převod"
                           : invoice.paymentMethod === "CASH"
                           ? "Hotovost"
                           : invoice.paymentMethod === "CARD"
@@ -190,18 +190,18 @@ export default async function InvoiceDetailPage({
           {/* Line items table */}
           <Card>
             <CardHeader>
-              <CardTitle>Polozky</CardTitle>
+              <CardTitle>Položky</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead>Popis</TableHead>
-                    <TableHead className="text-right">Mnozstvi</TableHead>
+                    <TableHead className="text-right">Množství</TableHead>
                     <TableHead>Jednotka</TableHead>
                     <TableHead className="text-right">Cena za j.</TableHead>
                     <TableHead className="text-right">DPH</TableHead>
-                    <TableHead className="text-right">DPH castka</TableHead>
+                    <TableHead className="text-right">DPH částka</TableHead>
                     <TableHead className="text-right">Celkem</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -234,7 +234,7 @@ export default async function InvoiceDetailPage({
               <div className="border-t p-4">
                 <div className="flex flex-col items-end space-y-1">
                   <div className="flex justify-between w-72 text-sm">
-                    <span className="text-gray-500">Zaklad bez DPH:</span>
+                    <span className="text-gray-500">Základ bez DPH:</span>
                     <span className="font-medium">
                       {formatCurrency(Number(invoice.subtotal))}
                     </span>
@@ -246,7 +246,7 @@ export default async function InvoiceDetailPage({
                     </span>
                   </div>
                   <div className="flex justify-between w-72 text-lg border-t pt-2 mt-1">
-                    <span className="font-semibold">Celkem k uhrade:</span>
+                    <span className="font-semibold">Celkem k úhradě:</span>
                     <span className="font-bold text-blue-600">
                       {formatCurrency(Number(invoice.total))}
                     </span>
@@ -260,7 +260,7 @@ export default async function InvoiceDetailPage({
           {invoice.notes && (
             <Card>
               <CardHeader>
-                <CardTitle>Poznamky</CardTitle>
+                <CardTitle>Poznámky</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-gray-700 whitespace-pre-wrap">
@@ -281,9 +281,9 @@ export default async function InvoiceDetailPage({
                   <TableHeader>
                     <TableRow>
                       <TableHead>Datum</TableHead>
-                      <TableHead className="text-right">Castka</TableHead>
-                      <TableHead>Zpusob</TableHead>
-                      <TableHead>Poznamka</TableHead>
+                      <TableHead className="text-right">Částka</TableHead>
+                      <TableHead>Způsob</TableHead>
+                      <TableHead>Poznámka</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -303,7 +303,7 @@ export default async function InvoiceDetailPage({
                 </Table>
               ) : (
                 <p className="text-sm text-gray-400">
-                  Zatim zadne zaznamenane platby
+                  Zatím žádné zaznamenané platby
                 </p>
               )}
             </CardContent>
@@ -332,7 +332,7 @@ export default async function InvoiceDetailPage({
                   {invoice.qrPaymentCode}
                 </div>
                 <p className="text-xs text-gray-400 mt-2">
-                  Tento kod lze pouzit pro QR platbu v mobilni aplikaci banky
+                  Tento kód lze použít pro QR platbu v mobilní aplikaci banky
                 </p>
               </CardContent>
             </Card>
@@ -342,7 +342,7 @@ export default async function InvoiceDetailPage({
           {invoice.project && (
             <Card>
               <CardHeader>
-                <CardTitle>Zakazka</CardTitle>
+                <CardTitle>Zakázka</CardTitle>
               </CardHeader>
               <CardContent>
                 <Link

@@ -17,18 +17,18 @@ export default function QuotesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Cenove nabidky</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Cenové nabídky</h1>
           <p className="text-gray-500">
-            Prehled vsech cenovych nabidek a jejich stavu
+            Přehled všech cenových nabídek a jejich stavu
           </p>
         </div>
         <div className="flex gap-2">
           <Link href="/faktury">
-            <Button variant="outline">Zpet na faktury</Button>
+            <Button variant="outline">Zpět na faktury</Button>
           </Link>
           <Button disabled>
             <Plus className="h-4 w-4 mr-2" />
-            Nova nabidka
+            Nová nabídka
           </Button>
         </div>
       </div>
@@ -36,16 +36,16 @@ export default function QuotesPage() {
       {/* Filter tabs */}
       <div className="flex gap-2 border-b pb-2">
         <Button variant="default" size="sm">
-          Vsechny
+          Všechny
         </Button>
         <Button variant="ghost" size="sm">
-          Otevrene
+          Otevřené
         </Button>
         <Button variant="ghost" size="sm">
-          Prijate
+          Přijaté
         </Button>
         <Button variant="ghost" size="sm">
-          Odmitnute
+          Odmítnuté
         </Button>
         <Button variant="ghost" size="sm">
           Expirované
@@ -56,19 +56,19 @@ export default function QuotesPage() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Otevrene nabidky</p>
+            <p className="text-sm text-gray-500">Otevřené nabídky</p>
             <p className="text-xl font-bold text-blue-600">0</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Prijate tento mesic</p>
+            <p className="text-sm text-gray-500">Přijaté tento měsíc</p>
             <p className="text-xl font-bold text-green-600">0</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Uspesnost</p>
+            <p className="text-sm text-gray-500">Úspěšnost</p>
             <p className="text-xl font-bold text-gray-600">- %</p>
           </CardContent>
         </Card>
@@ -80,12 +80,12 @@ export default function QuotesPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Cislo</TableHead>
-                <TableHead>Zakaznik</TableHead>
+                <TableHead>Číslo</TableHead>
+                <TableHead>Zákazník</TableHead>
                 <TableHead>Popis</TableHead>
-                <TableHead>Datum vytvoreni</TableHead>
+                <TableHead>Datum vytvoření</TableHead>
                 <TableHead>Platnost do</TableHead>
-                <TableHead className="text-right">Castka</TableHead>
+                <TableHead className="text-right">Částka</TableHead>
                 <TableHead>Stav</TableHead>
                 <TableHead></TableHead>
               </TableRow>
@@ -97,9 +97,9 @@ export default function QuotesPage() {
                   className="text-center text-gray-500 py-12"
                 >
                   <FileText className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                  <p className="font-medium">Zatim zadne cenove nabidky</p>
+                  <p className="font-medium">Zatím žádné cenové nabídky</p>
                   <p className="text-sm mt-1">
-                    Modul cenovych nabidek bude brzy dostupny
+                    Modul cenových nabídek bude brzy dostupný
                   </p>
                 </TableCell>
               </TableRow>

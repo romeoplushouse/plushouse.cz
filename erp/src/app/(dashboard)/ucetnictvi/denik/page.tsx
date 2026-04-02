@@ -22,15 +22,15 @@ export default async function JournalEntriesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Ucetni denik</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Účetní deník</h1>
           <p className="text-gray-500">
-            Chronologicky prehled vsech ucetnich zapisu ({total} celkem)
+            Chronologický přehled všech účetních zápisů ({total} celkem)
           </p>
         </div>
         <Link href="/ucetnictvi/denik/novy">
           <Button>
             <Plus className="h-4 w-4 mr-2" />
-            Novy zapis
+            Nový zápis
           </Button>
         </Link>
       </div>
@@ -40,12 +40,12 @@ export default async function JournalEntriesPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Cislo</TableHead>
+                <TableHead>Číslo</TableHead>
                 <TableHead>Datum</TableHead>
                 <TableHead>Popis</TableHead>
                 <TableHead>Doklad</TableHead>
-                <TableHead className="text-right">MD (Kc)</TableHead>
-                <TableHead className="text-right">D (Kc)</TableHead>
+                <TableHead className="text-right">MD (Kč)</TableHead>
+                <TableHead className="text-right">D (Kč)</TableHead>
                 <TableHead>Stav</TableHead>
               </TableRow>
             </TableHeader>
@@ -56,8 +56,8 @@ export default async function JournalEntriesPage() {
                     colSpan={7}
                     className="text-center text-gray-500 py-8"
                   >
-                    Zatim zadne ucetni zapisy. Kliknete na &quot;Novy
-                    zapis&quot; pro vytvoreni prvniho zaznamu.
+                    Zatím žádné účetní zápisy. Klikněte na &quot;Nový
+                    zápis&quot; pro vytvoření prvního záznamu.
                   </TableCell>
                 </TableRow>
               ) : (

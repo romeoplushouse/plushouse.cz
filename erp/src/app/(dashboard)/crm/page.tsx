@@ -15,18 +15,18 @@ import { getContacts, getContactStats } from "@/lib/actions/contacts";
 import Link from "next/link";
 
 const TYPE_MAP: Record<string, { label: string; variant: "default" | "success" | "secondary" | "warning" | "destructive" }> = {
-  CUSTOMER: { label: "Zakaznik", variant: "default" },
+  CUSTOMER: { label: "Zákazník", variant: "default" },
   SUPPLIER: { label: "Dodavatel", variant: "success" },
   SUBCONTRACTOR: { label: "Subdodavatel", variant: "warning" },
-  EMPLOYEE_CONTACT: { label: "Zamestnanec", variant: "secondary" },
-  OTHER: { label: "Ostatni", variant: "secondary" },
+  EMPLOYEE_CONTACT: { label: "Zaměstnanec", variant: "secondary" },
+  OTHER: { label: "Ostatní", variant: "secondary" },
 };
 
 const FILTER_TABS = [
-  { label: "Vsechny", type: undefined },
-  { label: "Zakaznici", type: "CUSTOMER" },
-  { label: "Dodavatele", type: "SUPPLIER" },
-  { label: "Subdodavatele", type: "SUBCONTRACTOR" },
+  { label: "Všechny", type: undefined },
+  { label: "Zákazníci", type: "CUSTOMER" },
+  { label: "Dodavatelé", type: "SUPPLIER" },
+  { label: "Subdodavatelé", type: "SUBCONTRACTOR" },
 ] as const;
 
 export default async function CRMPage({
@@ -47,9 +47,9 @@ export default async function CRMPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">CRM / Adresar</h1>
+          <h1 className="text-2xl font-bold text-gray-900">CRM / Adresář</h1>
           <p className="text-gray-500">
-            Zakaznici, dodavatele, kontakty a komunikace
+            Zákazníci, dodavatelé, kontakty a komunikace
           </p>
         </div>
         <div className="flex gap-2">
@@ -60,7 +60,7 @@ export default async function CRMPage({
           <Link href="/crm/novy">
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              Novy kontakt
+              Nový kontakt
             </Button>
           </Link>
         </div>
@@ -91,7 +91,7 @@ export default async function CRMPage({
             <div className="flex items-center gap-3">
               <Users className="h-8 w-8 text-blue-600" />
               <div>
-                <p className="text-sm text-gray-500">Zakaznici</p>
+                <p className="text-sm text-gray-500">Zákazníci</p>
                 <p className="text-xl font-bold">{stats.customers}</p>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default async function CRMPage({
             <div className="flex items-center gap-3">
               <Building className="h-8 w-8 text-green-600" />
               <div>
-                <p className="text-sm text-gray-500">Dodavatele</p>
+                <p className="text-sm text-gray-500">Dodavatelé</p>
                 <p className="text-xl font-bold">{stats.suppliers}</p>
               </div>
             </div>
@@ -113,7 +113,7 @@ export default async function CRMPage({
             <div className="flex items-center gap-3">
               <UserCheck className="h-8 w-8 text-purple-600" />
               <div>
-                <p className="text-sm text-gray-500">Subdodavatele</p>
+                <p className="text-sm text-gray-500">Subdodavatelé</p>
                 <p className="text-xl font-bold">{stats.subcontractors}</p>
               </div>
             </div>
@@ -127,12 +127,12 @@ export default async function CRMPage({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nazev / Jmeno</TableHead>
+                <TableHead>Název / Jméno</TableHead>
                 <TableHead>Typ</TableHead>
-                <TableHead>ICO</TableHead>
+                <TableHead>IČO</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Telefon</TableHead>
-                <TableHead>Mesto</TableHead>
+                <TableHead>Město</TableHead>
                 <TableHead></TableHead>
               </TableRow>
             </TableHeader>
@@ -141,9 +141,9 @@ export default async function CRMPage({
                 <TableRow>
                   <TableCell colSpan={7} className="text-center text-gray-500 py-12">
                     <Users className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                    <p className="font-medium">Zatim zadne kontakty</p>
+                    <p className="font-medium">Zatím žádné kontakty</p>
                     <p className="text-sm mt-1">
-                      Pridejte prvni kontakt kliknutim na &quot;Novy kontakt&quot;
+                      Přidejte první kontakt kliknutím na &quot;Nový kontakt&quot;
                     </p>
                   </TableCell>
                 </TableRow>
@@ -152,7 +152,7 @@ export default async function CRMPage({
                   const displayName =
                     contact.companyName ||
                     [contact.firstName, contact.lastName].filter(Boolean).join(" ") ||
-                    "Bez nazvu";
+                    "Bez názvu";
                   const typeInfo = TYPE_MAP[contact.type] || TYPE_MAP.OTHER;
 
                   return (
@@ -221,7 +221,7 @@ export default async function CRMPage({
       )}
 
       <p className="text-sm text-gray-500 text-center">
-        Celkem {total} kontaktu
+        Celkem {total} kontaktů
       </p>
     </div>
   );

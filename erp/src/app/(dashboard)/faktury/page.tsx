@@ -20,28 +20,28 @@ const STATUS_MAP: Record<
   { label: string; variant: "secondary" | "default" | "success" | "destructive" }
 > = {
   DRAFT: { label: "Koncept", variant: "secondary" },
-  SENT: { label: "Odeslana", variant: "default" },
-  PARTIALLY_PAID: { label: "Castecne uhrazena", variant: "default" },
-  PAID: { label: "Uhrazena", variant: "success" },
+  SENT: { label: "Odeslaná", variant: "default" },
+  PARTIALLY_PAID: { label: "Částečně uhrazená", variant: "default" },
+  PAID: { label: "Uhrazená", variant: "success" },
   OVERDUE: { label: "Po splatnosti", variant: "destructive" },
-  CANCELLED: { label: "Zrusena", variant: "secondary" },
+  CANCELLED: { label: "Zrušená", variant: "secondary" },
 };
 
 const TYPE_MAP: Record<string, string> = {
-  ISSUED: "Vydana",
-  RECEIVED: "Prijata",
-  ADVANCE: "Zalohova",
+  ISSUED: "Vydaná",
+  RECEIVED: "Přijatá",
+  ADVANCE: "Zálohová",
   PROFORMA: "Proforma",
   CREDIT_NOTE: "Dobropis",
-  TAX_DOCUMENT: "Danovy doklad",
+  TAX_DOCUMENT: "Daňový doklad",
 };
 
 const FILTER_TABS = [
-  { label: "Vsechny", type: undefined },
-  { label: "Vydane", type: "ISSUED" },
-  { label: "Prijate", type: "RECEIVED" },
-  { label: "Zalohove", type: "ADVANCE" },
-  { label: "Danove doklady", type: "TAX_DOCUMENT" },
+  { label: "Všechny", type: undefined },
+  { label: "Vydané", type: "ISSUED" },
+  { label: "Přijaté", type: "RECEIVED" },
+  { label: "Zálohové", type: "ADVANCE" },
+  { label: "Daňové doklady", type: "TAX_DOCUMENT" },
   { label: "Dobropisy", type: "CREDIT_NOTE" },
 ];
 
@@ -66,7 +66,7 @@ export default async function InvoicesPage({
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Faktury</h1>
           <p className="text-gray-500">
-            Vydane a prijate faktury, zalohove faktury, danove doklady
+            Vydané a přijaté faktury, zálohové faktury, daňové doklady
           </p>
         </div>
         <div className="flex gap-2">
@@ -77,7 +77,7 @@ export default async function InvoicesPage({
           <Link href="/faktury/nova">
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              Nova faktura
+              Nová faktura
             </Button>
           </Link>
         </div>
@@ -105,7 +105,7 @@ export default async function InvoicesPage({
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Neuhrazene vydane</p>
+            <p className="text-sm text-gray-500">Neuhrazené vydané</p>
             <p className="text-xl font-bold text-blue-600">
               {formatCurrency(stats.unpaidIssued.amount)}
             </p>
@@ -127,7 +127,7 @@ export default async function InvoicesPage({
         </Card>
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Uhrazene tento mesic</p>
+            <p className="text-sm text-gray-500">Uhrazené tento měsíc</p>
             <p className="text-xl font-bold text-green-600">
               {formatCurrency(stats.paidThisMonth.amount)}
             </p>
@@ -138,7 +138,7 @@ export default async function InvoicesPage({
         </Card>
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm text-gray-500">Neuhrazene prijate</p>
+            <p className="text-sm text-gray-500">Neuhrazené přijaté</p>
             <p className="text-xl font-bold text-orange-600">
               {formatCurrency(stats.unpaidReceived.amount)}
             </p>
@@ -155,12 +155,12 @@ export default async function InvoicesPage({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Cislo</TableHead>
+                <TableHead>Číslo</TableHead>
                 <TableHead>Typ</TableHead>
-                <TableHead>Odberatel / Dodavatel</TableHead>
-                <TableHead>Datum vystaveni</TableHead>
+                <TableHead>Odběratel / Dodavatel</TableHead>
+                <TableHead>Datum vystavení</TableHead>
                 <TableHead>Splatnost</TableHead>
-                <TableHead className="text-right">Castka</TableHead>
+                <TableHead className="text-right">Částka</TableHead>
                 <TableHead>Stav</TableHead>
                 <TableHead></TableHead>
               </TableRow>
@@ -173,9 +173,9 @@ export default async function InvoicesPage({
                     className="text-center text-gray-500 py-12"
                   >
                     <FileText className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-                    <p className="font-medium">Zatim zadne faktury</p>
+                    <p className="font-medium">Zatím žádné faktury</p>
                     <p className="text-sm mt-1">
-                      Vytvorte prvni fakturu kliknutim na tlacitko &quot;Nova
+                      Vytvořte první fakturu kliknutím na tlačítko &quot;Nová
                       faktura&quot;
                     </p>
                   </TableCell>
