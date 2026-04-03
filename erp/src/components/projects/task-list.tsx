@@ -25,11 +25,11 @@ type Employee = {
 };
 
 const statusLabels: Record<string, string> = {
-  TODO: "K ud\u011bl\u00e1n\u00ed",
-  IN_PROGRESS: "Prob\u00edh\u00e1",
+  TODO: "K udělání",
+  IN_PROGRESS: "Probíhá",
   REVIEW: "Ke kontrole",
   DONE: "Hotovo",
-  CANCELLED: "Zru\u0161eno",
+  CANCELLED: "Zrušeno",
 };
 
 const statusVariants: Record<
@@ -44,9 +44,9 @@ const statusVariants: Record<
 };
 
 const priorityLabels: Record<number, string> = {
-  0: "Norm\u00e1ln\u00ed",
-  1: "Vysok\u00e1",
-  2: "Kritick\u00e1",
+  0: "Normální",
+  1: "Vysoká",
+  2: "Kritická",
 };
 
 export function TaskList({
@@ -102,11 +102,11 @@ export function TaskList({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="font-semibold text-gray-900">
-          \u00dakoly ({tasks.length})
+          Úkoly ({tasks.length})
         </h3>
         <Button size="sm" onClick={() => setShowForm(!showForm)}>
           <Plus className="h-4 w-4 mr-1" />
-          P\u0159idat \u00fakol
+          Přidat úkol
         </Button>
       </div>
 
@@ -115,7 +115,7 @@ export function TaskList({
           action={handleAddTask}
           className="p-4 border border-gray-200 rounded-lg space-y-3 bg-gray-50"
         >
-          <Input name="title" placeholder="N\u00e1zev \u00fakolu *" required />
+          <Input name="title" placeholder="Název úkolu *" required />
           <textarea
             name="description"
             rows={2}
@@ -125,13 +125,13 @@ export function TaskList({
           <div className="grid grid-cols-3 gap-3">
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                P\u0159i\u0159adit
+                Přiřadit
               </label>
               <select
                 name="assigneeId"
                 className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="">-- Nep\u0159i\u0159azeno --</option>
+                <option value="">-- Nepřiřazeno --</option>
                 {employees.map((e) => (
                   <option key={e.id} value={e.id}>
                     {e.firstName} {e.lastName}
@@ -141,7 +141,7 @@ export function TaskList({
             </div>
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                Term\u00edn
+                Termín
               </label>
               <Input name="dueDate" type="date" />
             </div>
@@ -153,9 +153,9 @@ export function TaskList({
                 name="priority"
                 className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="0">Norm\u00e1ln\u00ed</option>
-                <option value="1">Vysok\u00e1</option>
-                <option value="2">Kritick\u00e1</option>
+                <option value="0">Normální</option>
+                <option value="1">Vysoká</option>
+                <option value="2">Kritická</option>
               </select>
             </div>
           </div>
@@ -164,7 +164,7 @@ export function TaskList({
               {isPending && (
                 <Loader2 className="h-3 w-3 mr-1 animate-spin" />
               )}
-              Ulo\u017eit
+              Uložit
             </Button>
             <Button
               type="button"
@@ -172,7 +172,7 @@ export function TaskList({
               size="sm"
               onClick={() => setShowForm(false)}
             >
-              Zru\u0161it
+              Zrušit
             </Button>
           </div>
         </form>
@@ -180,7 +180,7 @@ export function TaskList({
 
       {tasks.length === 0 ? (
         <p className="text-sm text-gray-500 text-center py-6">
-          Zat\u00edm \u017e\u00e1dn\u00e9 \u00fakoly. P\u0159idejte prvn\u00ed \u00fakol.
+          Zatím žádné úkoly. Přidejte první úkol.
         </p>
       ) : (
         <div className="space-y-2">
@@ -205,7 +205,7 @@ export function TaskList({
                 title={
                   task.status === "DONE"
                     ? "Hotovo"
-                    : `P\u0159epnout na: ${statusLabels[nextStatus[task.status]] ?? ""}`
+                    : `Přepnout na: ${statusLabels[nextStatus[task.status]] ?? ""}`
                 }
               >
                 {updatingTaskId === task.id ? (

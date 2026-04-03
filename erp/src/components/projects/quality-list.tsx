@@ -18,10 +18,10 @@ type QualityCheckType = {
 };
 
 const statusLabels: Record<string, string> = {
-  PENDING: "\u010Cek\u00e1 na kontrolu",
-  PASSED: "Schv\u00e1leno",
-  FAILED: "Neschv\u00e1leno",
-  NEEDS_REWORK: "Vy\u017eaduje p\u0159epracov\u00e1n\u00ed",
+  PENDING: "Čeká na kontrolu",
+  PASSED: "Schváleno",
+  FAILED: "Neschváleno",
+  NEEDS_REWORK: "Vyžaduje přepracování",
 };
 
 const statusVariants: Record<string, "default" | "success" | "destructive" | "warning"> = {
@@ -76,7 +76,7 @@ export function QualityList({
         </h3>
         <Button size="sm" onClick={() => setShowForm(!showForm)}>
           <Plus className="h-4 w-4 mr-1" />
-          Nov\u00e1 kontrola
+          Nová kontrola
         </Button>
       </div>
 
@@ -85,17 +85,17 @@ export function QualityList({
           action={handleAdd}
           className="p-4 border border-gray-200 rounded-lg space-y-3 bg-gray-50"
         >
-          <Input name="criteria" placeholder="Krit\u00e9rium kontroly *" required />
+          <Input name="criteria" placeholder="Kritérium kontroly *" required />
           <div className="grid grid-cols-3 gap-3">
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                Sk\u00f3re (1-5)
+                Skóre (1-5)
               </label>
               <Input name="score" type="number" min="1" max="5" step="0.5" placeholder="5" />
             </div>
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                V\u00fdsledek
+                Výsledek
               </label>
               <select
                 name="passed"
@@ -107,17 +107,17 @@ export function QualityList({
             </div>
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                Z\u00e1va\u017enost
+                Závažnost
               </label>
               <select
                 name="severity"
                 className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">--</option>
-                <option value="LOW">N\u00edzk\u00e1</option>
-                <option value="MEDIUM">St\u0159edn\u00ed</option>
-                <option value="HIGH">Vysok\u00e1</option>
-                <option value="CRITICAL">Kritick\u00e1</option>
+                <option value="LOW">Nízká</option>
+                <option value="MEDIUM">Střední</option>
+                <option value="HIGH">Vysoká</option>
+                <option value="CRITICAL">Kritická</option>
               </select>
             </div>
           </div>
@@ -125,21 +125,21 @@ export function QualityList({
             name="notes"
             rows={2}
             className="flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Pozn\u00e1mky ke kontrole..."
+            placeholder="Poznámky ke kontrole..."
           />
           <textarea
             name="itemNotes"
             rows={2}
             className="flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Pozn\u00e1mky ke krit\u00e9riu..."
+            placeholder="Poznámky ke kritériu..."
           />
           <p className="text-xs text-gray-400">
-            Fotografie bude mo\u017en\u00e9 p\u0159idat v z\u00e1lo\u017ece Fotodokumentace.
+            Fotografie bude možné přidat v záložce Fotodokumentace.
           </p>
           <div className="flex gap-2">
             <Button type="submit" size="sm" disabled={isPending}>
               {isPending && <Loader2 className="h-3 w-3 mr-1 animate-spin" />}
-              Ulo\u017eit
+              Uložit
             </Button>
             <Button
               type="button"
@@ -147,7 +147,7 @@ export function QualityList({
               size="sm"
               onClick={() => setShowForm(false)}
             >
-              Zru\u0161it
+              Zrušit
             </Button>
           </div>
         </form>
@@ -157,7 +157,7 @@ export function QualityList({
         <div className="text-center py-6">
           <ClipboardCheck className="h-8 w-8 text-gray-300 mx-auto mb-2" />
           <p className="text-sm text-gray-500">
-            Zat\u00edm \u017e\u00e1dn\u00e9 kontroly kvality.
+            Zatím žádné kontroly kvality.
           </p>
         </div>
       ) : (
@@ -198,7 +198,7 @@ export function QualityList({
                           item.passed ? "text-green-600" : "text-red-600"
                         }
                       >
-                        {item.passed ? "\u2713" : "\u2717"}
+                        {item.passed ? "✓" : "✗"}
                       </span>
                       <span>{item.criteria}</span>
                       {item.notes && (

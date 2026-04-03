@@ -23,12 +23,12 @@ import { WorkerList } from "@/components/projects/worker-list";
 import { StatusChanger } from "@/components/projects/status-changer";
 
 const statusLabels: Record<string, string> = {
-  NEW: "Nov\u00e1",
-  QUOTED: "Nacen\u011bno",
+  NEW: "Nová",
+  QUOTED: "Naceněno",
   IN_PROGRESS: "V realizaci",
   ON_HOLD: "Pozastaveno",
-  COMPLETED: "Dokon\u010deno",
-  CANCELLED: "Zru\u0161eno",
+  COMPLETED: "Dokončeno",
+  CANCELLED: "Zrušeno",
 };
 
 const statusVariants: Record<
@@ -100,13 +100,13 @@ export default async function ProjectDetailPage({
         tabs={[
           {
             id: "prehled",
-            label: "P\u0159ehled",
+            label: "Přehled",
             content: (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Project info */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Informace o zak\u00e1zce</CardTitle>
+                    <CardTitle>Informace o zakázce</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {project.description && (
@@ -120,12 +120,12 @@ export default async function ProjectDetailPage({
                         <Calendar className="h-4 w-4 text-gray-400 mt-0.5" />
                         <div>
                           <p className="text-xs text-gray-500">
-                            Zah\u00e1jen\u00ed
+                            Zahájení
                           </p>
                           <p className="text-sm">
                             {project.startDate
                               ? formatDate(project.startDate)
-                              : "\u2014"}
+                              : "—"}
                           </p>
                         </div>
                       </div>
@@ -133,12 +133,12 @@ export default async function ProjectDetailPage({
                         <Calendar className="h-4 w-4 text-gray-400 mt-0.5" />
                         <div>
                           <p className="text-xs text-gray-500">
-                            Ukon\u010den\u00ed
+                            Ukončení
                           </p>
                           <p className="text-sm">
                             {project.endDate
                               ? formatDate(project.endDate)
-                              : "\u2014"}
+                              : "—"}
                           </p>
                         </div>
                       </div>
@@ -146,12 +146,12 @@ export default async function ProjectDetailPage({
                         <Wallet className="h-4 w-4 text-gray-400 mt-0.5" />
                         <div>
                           <p className="text-xs text-gray-500">
-                            Rozpo\u010det
+                            Rozpočet
                           </p>
                           <p className="text-sm font-medium">
                             {project.budget
                               ? formatCurrency(Number(project.budget))
-                              : "\u2014"}
+                              : "—"}
                           </p>
                         </div>
                       </div>
@@ -159,7 +159,7 @@ export default async function ProjectDetailPage({
                         <Wallet className="h-4 w-4 text-gray-400 mt-0.5" />
                         <div>
                           <p className="text-xs text-gray-500">
-                            N\u00e1klady na materi\u00e1l
+                            Náklady na materiál
                           </p>
                           <p className="text-sm font-medium">
                             {formatCurrency(materialTotal)}
@@ -187,7 +187,7 @@ export default async function ProjectDetailPage({
                       <Hash className="h-4 w-4 text-gray-400 mt-0.5" />
                       <div>
                         <p className="text-xs text-gray-500">
-                          \u010c\u00edslo zak\u00e1zky
+                          Číslo zakázky
                         </p>
                         <p className="text-sm font-mono">
                           {project.projectNumber}
@@ -200,7 +200,7 @@ export default async function ProjectDetailPage({
                 {/* Contact info */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Z\u00e1kazn\u00edk</CardTitle>
+                    <CardTitle>Zákazník</CardTitle>
                   </CardHeader>
                   <CardContent>
                     {project.contact ? (
@@ -213,7 +213,7 @@ export default async function ProjectDetailPage({
                             </p>
                             {project.contact.ico && (
                               <p className="text-xs text-gray-500">
-                                I\u010cO: {project.contact.ico}
+                                IČO: {project.contact.ico}
                               </p>
                             )}
                           </div>
@@ -242,7 +242,7 @@ export default async function ProjectDetailPage({
                       </div>
                     ) : (
                       <p className="text-sm text-gray-500 text-center py-4">
-                        Bez p\u0159i\u0159azen\u00e9ho z\u00e1kazn\u00edka
+                        Bez přiřazeného zákazníka
                       </p>
                     )}
                   </CardContent>
@@ -256,31 +256,31 @@ export default async function ProjectDetailPage({
                         <p className="text-2xl font-bold text-gray-900">
                           {project.tasks.length}
                         </p>
-                        <p className="text-xs text-gray-500">\u00dakol\u016f</p>
+                        <p className="text-xs text-gray-500">Úkolů</p>
                       </div>
                       <div>
                         <p className="text-2xl font-bold text-green-600">
                           {project.tasks.filter((t) => t.status === "DONE").length}
                         </p>
-                        <p className="text-xs text-gray-500">Hotov\u00fdch</p>
+                        <p className="text-xs text-gray-500">Hotových</p>
                       </div>
                       <div>
                         <p className="text-2xl font-bold text-gray-900">
                           {project.materials.length}
                         </p>
-                        <p className="text-xs text-gray-500">Materi\u00e1l\u016f</p>
+                        <p className="text-xs text-gray-500">Materiálů</p>
                       </div>
                       <div>
                         <p className="text-2xl font-bold text-gray-900">
                           {project.projectWorkers.length}
                         </p>
-                        <p className="text-xs text-gray-500">Pracovn\u00edk\u016f</p>
+                        <p className="text-xs text-gray-500">Pracovníků</p>
                       </div>
                       <div>
                         <p className="text-2xl font-bold text-gray-900">
                           {project.mediaEvidence.length}
                         </p>
-                        <p className="text-xs text-gray-500">Fotek/Vide\u00ed</p>
+                        <p className="text-xs text-gray-500">Fotek/Videí</p>
                       </div>
                     </div>
                   </CardContent>
@@ -290,7 +290,7 @@ export default async function ProjectDetailPage({
           },
           {
             id: "ukoly",
-            label: `\u00dakoly (${project.tasks.length})`,
+            label: `Úkoly (${project.tasks.length})`,
             content: (
               <TaskList
                 projectId={project.id}
@@ -301,7 +301,7 @@ export default async function ProjectDetailPage({
           },
           {
             id: "material",
-            label: `Materi\u00e1l (${project.materials.length})`,
+            label: `Materiál (${project.materials.length})`,
             content: (
               <MaterialList
                 projectId={project.id}
@@ -331,7 +331,7 @@ export default async function ProjectDetailPage({
           },
           {
             id: "pracovnici",
-            label: `Pracovn\u00edci (${project.projectWorkers.length})`,
+            label: `Pracovníci (${project.projectWorkers.length})`,
             content: (
               <WorkerList
                 projectId={project.id}

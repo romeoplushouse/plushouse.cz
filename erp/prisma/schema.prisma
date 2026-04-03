@@ -1246,3 +1246,245 @@ model Notification {
   @@index([userId, isRead])
   @@map("notifications")
 }
+
+// ============================================================================
+// PROJECT COMMUNICATION & MESSAGING
+// ============================================================================
+
+model ProjectMessage {
+  id          String   @id @default(cuid())
+  projectId   String
+  authorId    String?  // User ID (internal)
+  authorName  String   // Display name (for external users too)
+  authorRole  String   // ADMIN, MANAGER, WORKER, SUBCONTRACTOR, CLIENT
+  content     String
+  isInternal  Boolean  @default(false) // True = only visible to company staff
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  attachments ProjectDocument[]
+
+  @@index([projectId, createdAt])
+  @@map("project_messages")
+}
+
+// ============================================================================
+// DOCUMENT MANAGEMENT SYSTEM
+// ============================================================================
+
+model ProjectDocument {
+  id            String       @id @default(cuid())
+  projectId     String
+  messageId     String?      // If attached to a message
+  category      DocCategory
+  title         String
+  description   String?
+  fileName      String
+  fileUrl       String
+  fileSize      Int?
+  mimeType      String?
+  version       Int          @default(1)
+  uploadedBy    String?
+  uploadedByName String?
+  // Access control
+  visibleToClient       Boolean @default(false)
+  visibleToSubcontractor Boolean @default(false)
+  requiresSignature     Boolean @default(false)
+  signedAt              DateTime?
+  signedBy              String?
+  signatureData         String?  // Base64 canvas signature
+  createdAt     DateTime @default(now())
+
+  message ProjectMessage? @relation(fields: [messageId], references: [id])
+
+  @@index([projectId, category])
+  @@map("project_documents")
+}
+
+enum DocCategory {
+  INVOICE           // Faktura
+  ADVANCE_INVOICE   // Zálohová faktura
+  QUOTE             // Cenová nabídka
+  HANDOVER_PROTOCOL // Předávací protokol
+  REVISION_REPORT   // Revizní zpráva
+  DELIVERY_NOTE     // Dodací list
+  PROJECT_DOCS      // Projektová dokumentace
+  MANUAL            // Návod
+  CONTRACT          // Smlouva
+  PHOTO_EVIDENCE    // Fotodokumentace
+  OTHER             // Ostatní
+}
+
+// ============================================================================
+// ON-SITE WORK TRACKING (Zaznamenávač práce na místě)
+// ============================================================================
+
+model WorkSession {
+  id              String   @id @default(cuid())
+  projectId       String
+  employeeId      String?
+  subcontractorId String?
+  // Check-in/out
+  checkInTime     DateTime
+  checkOutTime    DateTime?
+  checkInLat      Float?
+  checkInLng      Float?
+  checkOutLat     Float?
+  checkOutLng     Float?
+  isAutoCheckin   Boolean  @default(false) // Geofence triggered
+  // Duration
+  durationMinutes Int?
+  breakMinutes    Int      @default(0)
+  // Health stats (Apple Health / HealthKit)
+  steps           Int?
+  distanceWalked  Float?   // meters
+  avgHeartRate    Int?
+  caloriesBurned  Float?
+  // Work summary
+  workDescription String?
+  status          WorkSessionStatus @default(ACTIVE)
+  // Quality checklist completion
+  checklistScore  Float?   // 0-100%
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  checklistItems WorkSessionChecklist[]
+
+  @@index([projectId, checkInTime])
+  @@index([employeeId, checkInTime])
+  @@map("work_sessions")
+}
+
+model WorkSessionChecklist {
+  id            String  @id @default(cuid())
+  workSessionId String
+  item          String
+  isCompleted   Boolean @default(false)
+  completedAt   DateTime?
+  photoUrl      String?
+  notes         String?
+
+  workSession WorkSession @relation(fields: [workSessionId], references: [id], onDelete: Cascade)
+
+  @@map("work_session_checklists")
+}
+
+enum WorkSessionStatus {
+  ACTIVE        // Na místě, pracuje
+  ON_BREAK      // Přestávka
+  COMPLETED     // Dokončeno
+  CANCELLED     // Zrušeno
+}
+
+// ============================================================================
+// ON-SITE DOCUMENT GENERATION
+// ============================================================================
+
+model HandoverProtocol {
+  id              String   @id @default(cuid())
+  projectId       String
+  protocolNumber  String   @unique
+  type            ProtocolType
+  // Parties
+  handedOverBy    String   // Kdo předává
+  receivedBy      String   // Kdo přebírá
+  // Content
+  description     String
+  items           String?  // JSON array of items/works
+  defects         String?  // Zjištěné vady
+  conditions      String?  // Podmínky převzetí
+  // Signatures
+  handoverSignature   String?  // Base64 canvas
+  receiverSignature   String?  // Base64 canvas
+  signedAt            DateTime?
+  // Status
+  status          String   @default("DRAFT") // DRAFT, SIGNED, ARCHIVED
+  pdfUrl          String?
+  createdAt       DateTime @default(now())
+
+  @@index([projectId])
+  @@map("handover_protocols")
+}
+
+enum ProtocolType {
+  HANDOVER        // Předávací protokol
+  DELIVERY        // Dodací list
+  SERVICE         // Servisní protokol
+  REVISION        // Revizní zpráva
+  ACCEPTANCE      // Protokol o převzetí
+}
+
+// ============================================================================
+// CLIENT PORTAL & REVIEWS
+// ============================================================================
+
+model ClientPortalAccess {
+  id          String   @id @default(cuid())
+  contactId   String
+  projectId   String
+  accessToken String   @unique
+  email       String
+  isActive    Boolean  @default(true)
+  lastAccess  DateTime?
+  createdAt   DateTime @default(now())
+
+  @@unique([contactId, projectId])
+  @@map("client_portal_access")
+}
+
+model ClientReview {
+  id          String   @id @default(cuid())
+  projectId   String
+  contactId   String
+  // Rating
+  overallRating    Int    // 1-5
+  qualityRating    Int?   // 1-5
+  communicationRating Int? // 1-5
+  timelinessRating Int?   // 1-5
+  priceRating      Int?   // 1-5
+  // Review text
+  review      String?
+  wouldRecommend Boolean?
+  // Meta
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@unique([projectId, contactId])
+  @@map("client_reviews")
+}
+
+// ============================================================================
+// ON-SITE PAYMENTS (NFC / Tap to Pay)
+// ============================================================================
+
+model OnSitePayment {
+  id            String   @id @default(cuid())
+  projectId     String?
+  invoiceId     String?
+  amount        Decimal  @db.Decimal(15, 2)
+  currency      String   @default("CZK")
+  method        OnSitePaymentMethod
+  // NFC / Card details
+  cardLast4     String?
+  cardBrand     String?  // VISA, MASTERCARD, etc.
+  transactionId String?  // Payment gateway transaction ID
+  // Status
+  status        String   @default("PENDING") // PENDING, COMPLETED, FAILED, REFUNDED
+  completedAt   DateTime?
+  // Location
+  lat           Float?
+  lng           Float?
+  collectedBy   String?  // Employee ID
+  createdAt     DateTime @default(now())
+
+  @@index([projectId])
+  @@map("onsite_payments")
+}
+
+enum OnSitePaymentMethod {
+  NFC_TAP_TO_PAY  // iPhone Tap to Pay
+  CARD_READER     // External card reader
+  QR_CODE         // QR platba
+  CASH            // Hotovost
+  BANK_TRANSFER   // Převodem (na místě dohodnutý)
+}

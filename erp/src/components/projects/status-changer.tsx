@@ -10,29 +10,29 @@ type Status = "NEW" | "QUOTED" | "IN_PROGRESS" | "ON_HOLD" | "COMPLETED" | "CANC
 
 const transitions: Record<string, { label: string; target: Status; variant: "default" | "outline" | "destructive" | "secondary" }[]> = {
   NEW: [
-    { label: "Zah\u00e1jit realizaci", target: "IN_PROGRESS", variant: "default" },
+    { label: "Zahájit realizaci", target: "IN_PROGRESS", variant: "default" },
     { label: "Nacenit", target: "QUOTED", variant: "outline" },
-    { label: "Zru\u0161it", target: "CANCELLED", variant: "destructive" },
+    { label: "Zrušit", target: "CANCELLED", variant: "destructive" },
   ],
   QUOTED: [
-    { label: "Zah\u00e1jit realizaci", target: "IN_PROGRESS", variant: "default" },
-    { label: "Zp\u011bt na Novou", target: "NEW", variant: "outline" },
-    { label: "Zru\u0161it", target: "CANCELLED", variant: "destructive" },
+    { label: "Zahájit realizaci", target: "IN_PROGRESS", variant: "default" },
+    { label: "Zpět na Novou", target: "NEW", variant: "outline" },
+    { label: "Zrušit", target: "CANCELLED", variant: "destructive" },
   ],
   IN_PROGRESS: [
-    { label: "Dokon\u010Dit", target: "COMPLETED", variant: "default" },
+    { label: "Dokončit", target: "COMPLETED", variant: "default" },
     { label: "Pozastavit", target: "ON_HOLD", variant: "secondary" },
-    { label: "Zru\u0161it", target: "CANCELLED", variant: "destructive" },
+    { label: "Zrušit", target: "CANCELLED", variant: "destructive" },
   ],
   ON_HOLD: [
     { label: "Obnovit realizaci", target: "IN_PROGRESS", variant: "default" },
-    { label: "Zru\u0161it", target: "CANCELLED", variant: "destructive" },
+    { label: "Zrušit", target: "CANCELLED", variant: "destructive" },
   ],
   COMPLETED: [
-    { label: "Znovu otev\u0159\u00edt", target: "IN_PROGRESS", variant: "outline" },
+    { label: "Znovu otevřít", target: "IN_PROGRESS", variant: "outline" },
   ],
   CANCELLED: [
-    { label: "Znovu otev\u0159\u00edt", target: "NEW", variant: "outline" },
+    { label: "Znovu otevřít", target: "NEW", variant: "outline" },
   ],
 };
 

@@ -19,8 +19,8 @@ type MediaItem = {
 };
 
 const phaseLabels: Record<string, string> = {
-  BEFORE: "P\u0159ed",
-  DURING: "B\u011bhem",
+  BEFORE: "Před",
+  DURING: "Během",
   AFTER: "Po",
 };
 
@@ -60,7 +60,7 @@ export function MediaList({
         </h3>
         <Button size="sm" onClick={() => setShowForm(!showForm)}>
           <Plus className="h-4 w-4 mr-1" />
-          P\u0159idat z\u00e1znam
+          Přidat záznam
         </Button>
       </div>
 
@@ -82,21 +82,21 @@ export function MediaList({
             </div>
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                F\u00e1ze
+                Fáze
               </label>
               <select
                 name="phase"
                 className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
-                <option value="">-- Nespecifikov\u00e1no --</option>
-                <option value="BEFORE">P\u0159ed</option>
-                <option value="DURING">B\u011bhem</option>
+                <option value="">-- Nespecifikováno --</option>
+                <option value="BEFORE">Před</option>
+                <option value="DURING">Během</option>
                 <option value="AFTER">Po</option>
               </select>
             </div>
           </div>
           <Input name="url" placeholder="URL souboru *" required />
-          <Input name="thumbnailUrl" placeholder="URL n\u00e1hledu (voliteln\u00e9)" />
+          <Input name="thumbnailUrl" placeholder="URL náhledu (volitelné)" />
           <textarea
             name="description"
             rows={2}
@@ -106,7 +106,7 @@ export function MediaList({
           <div className="flex gap-2">
             <Button type="submit" size="sm" disabled={isPending}>
               {isPending && <Loader2 className="h-3 w-3 mr-1 animate-spin" />}
-              Ulo\u017eit
+              Uložit
             </Button>
             <Button
               type="button"
@@ -114,7 +114,7 @@ export function MediaList({
               size="sm"
               onClick={() => setShowForm(false)}
             >
-              Zru\u0161it
+              Zrušit
             </Button>
           </div>
         </form>
@@ -124,7 +124,7 @@ export function MediaList({
         <div className="text-center py-6">
           <Image className="h-8 w-8 text-gray-300 mx-auto mb-2" />
           <p className="text-sm text-gray-500">
-            Zat\u00edm \u017e\u00e1dn\u00e1 fotodokumentace.
+            Zatím žádná fotodokumentace.
           </p>
         </div>
       ) : (

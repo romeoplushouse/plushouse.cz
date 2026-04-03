@@ -69,11 +69,11 @@ export function MaterialList({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="font-semibold text-gray-900">
-          Materi\u00e1l ({materials.length})
+          Materiál ({materials.length})
         </h3>
         <Button size="sm" onClick={() => setShowForm(!showForm)}>
           <Plus className="h-4 w-4 mr-1" />
-          P\u0159idat materi\u00e1l
+          Přidat materiál
         </Button>
       </div>
 
@@ -82,11 +82,11 @@ export function MaterialList({
           action={handleAdd}
           className="p-4 border border-gray-200 rounded-lg space-y-3 bg-gray-50"
         >
-          <Input name="name" placeholder="N\u00e1zev materi\u00e1lu *" required />
+          <Input name="name" placeholder="Název materiálu *" required />
           <div className="grid grid-cols-4 gap-3">
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                Mno\u017estv\u00ed *
+                Množství *
               </label>
               <Input
                 name="quantity"
@@ -107,8 +107,8 @@ export function MaterialList({
               >
                 <option value="ks">ks</option>
                 <option value="m">m</option>
-                <option value="m2">m\u00b2</option>
-                <option value="m3">m\u00b3</option>
+                <option value="m2">m²</option>
+                <option value="m3">m³</option>
                 <option value="kg">kg</option>
                 <option value="l">l</option>
                 <option value="bal">bal</option>
@@ -116,7 +116,7 @@ export function MaterialList({
             </div>
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                Cena za jednotku (K\u010d) *
+                Cena za jednotku (Kč) *
               </label>
               <Input
                 name="unitCost"
@@ -139,7 +139,7 @@ export function MaterialList({
               {isPending && (
                 <Loader2 className="h-3 w-3 mr-1 animate-spin" />
               )}
-              Ulo\u017eit
+              Uložit
             </Button>
             <Button
               type="button"
@@ -147,7 +147,7 @@ export function MaterialList({
               size="sm"
               onClick={() => setShowForm(false)}
             >
-              Zru\u0161it
+              Zrušit
             </Button>
           </div>
         </form>
@@ -157,7 +157,7 @@ export function MaterialList({
         <div className="text-center py-6">
           <Package className="h-8 w-8 text-gray-300 mx-auto mb-2" />
           <p className="text-sm text-gray-500">
-            Zat\u00edm \u017e\u00e1dn\u00fd materi\u00e1l.
+            Zatím žádný materiál.
           </p>
         </div>
       ) : (
@@ -165,8 +165,8 @@ export function MaterialList({
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>N\u00e1zev</TableHead>
-                <TableHead className="text-right">Mno\u017estv\u00ed</TableHead>
+                <TableHead>Název</TableHead>
+                <TableHead className="text-right">Množství</TableHead>
                 <TableHead>Jednotka</TableHead>
                 <TableHead className="text-right">
                   Cena/ks

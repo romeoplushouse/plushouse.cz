@@ -66,11 +66,11 @@ export function WorkerList({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="font-semibold text-gray-900">
-          Pracovn\u00edci ({workers.length})
+          Pracovníci ({workers.length})
         </h3>
         <Button size="sm" onClick={() => setShowForm(!showForm)}>
           <Plus className="h-4 w-4 mr-1" />
-          P\u0159idat pracovn\u00edka
+          Přidat pracovníka
         </Button>
       </div>
 
@@ -82,7 +82,7 @@ export function WorkerList({
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-xs text-gray-500 mb-1">
-                Zam\u011bstnanec *
+                Zaměstnanec *
               </label>
               <select
                 name="employeeId"
@@ -99,13 +99,13 @@ export function WorkerList({
             </div>
             <div>
               <label className="block text-xs text-gray-500 mb-1">Role</label>
-              <Input name="role" placeholder="Nap\u0159. vedouc\u00ed, tesa\u0159..." />
+              <Input name="role" placeholder="Např. vedoucí, tesař..." />
             </div>
           </div>
           <div className="flex gap-2">
             <Button type="submit" size="sm" disabled={isPending}>
               {isPending && <Loader2 className="h-3 w-3 mr-1 animate-spin" />}
-              P\u0159idat
+              Přidat
             </Button>
             <Button
               type="button"
@@ -113,7 +113,7 @@ export function WorkerList({
               size="sm"
               onClick={() => setShowForm(false)}
             >
-              Zru\u0161it
+              Zrušit
             </Button>
           </div>
         </form>
@@ -123,7 +123,7 @@ export function WorkerList({
         <div className="text-center py-6">
           <Users className="h-8 w-8 text-gray-300 mx-auto mb-2" />
           <p className="text-sm text-gray-500">
-            Zat\u00edm \u017e\u00e1dn\u00ed p\u0159i\u0159azen\u00ed pracovn\u00edci.
+            Zatím žádní přiřazení pracovníci.
           </p>
         </div>
       ) : (
@@ -136,7 +136,7 @@ export function WorkerList({
                   [w.subcontractor.contact.firstName, w.subcontractor.contact.lastName]
                     .filter(Boolean)
                     .join(" ")
-                : "Nezn\u00e1m\u00fd";
+                : "Neznámý";
 
             return (
               <div

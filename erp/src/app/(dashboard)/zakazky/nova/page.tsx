@@ -65,7 +65,7 @@ export default function NewProjectPage() {
     setError(null);
     const name = formData.get("name") as string;
     if (!name?.trim()) {
-      setError("N\u00e1zev zak\u00e1zky je povinn\u00fd");
+      setError("Název zakázky je povinný");
       return;
     }
 
@@ -88,7 +88,7 @@ export default function NewProjectPage() {
         });
         router.push(`/zakazky/${project.id}`);
       } catch {
-        setError("Nepoda\u0159ilo se vytvo\u0159it zak\u00e1zku. Zkuste to znovu.");
+        setError("Nepodařilo se vytvořit zakázku. Zkuste to znovu.");
       }
     });
   }
@@ -103,15 +103,15 @@ export default function NewProjectPage() {
         </Link>
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            Nov\u00e1 zak\u00e1zka
+            Nová zakázka
           </h1>
-          <p className="text-gray-500">Vytvo\u0159te novou zak\u00e1zku</p>
+          <p className="text-gray-500">Vytvořte novou zakázku</p>
         </div>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>Z\u00e1kladn\u00ed \u00fadaje</CardTitle>
+          <CardTitle>Základní údaje</CardTitle>
         </CardHeader>
         <CardContent>
           <form action={handleSubmit} className="space-y-4">
@@ -123,9 +123,9 @@ export default function NewProjectPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                N\u00e1zev zak\u00e1zky *
+                Název zakázky *
               </label>
-              <Input name="name" placeholder="Nap\u0159. Rekonstrukce koupelny" required />
+              <Input name="name" placeholder="Např. Rekonstrukce koupelny" required />
             </div>
 
             <div>
@@ -136,14 +136,14 @@ export default function NewProjectPage() {
                 name="description"
                 rows={3}
                 className="flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Popis zak\u00e1zky..."
+                placeholder="Popis zakázky..."
               />
             </div>
 
             {/* Contact search */}
             <div className="relative">
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Z\u00e1kazn\u00edk / Kontakt
+                Zákazník / Kontakt
               </label>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
@@ -153,7 +153,7 @@ export default function NewProjectPage() {
                   onFocus={() =>
                     contactResults.length > 0 && setShowContactDropdown(true)
                   }
-                  placeholder="Hledejte podle n\u00e1zvu, I\u010CO, emailu..."
+                  placeholder="Hledejte podle názvu, IČO, emailu..."
                   className="pl-9"
                 />
                 {searchingContacts && (
@@ -187,7 +187,7 @@ export default function NewProjectPage() {
               {selectedContact && (
                 <div className="mt-1 flex items-center gap-2">
                   <span className="text-xs text-green-600">
-                    Vybr\u00e1no:{" "}
+                    Vybráno:{" "}
                     {selectedContact.companyName ||
                       [selectedContact.firstName, selectedContact.lastName]
                         .filter(Boolean)
@@ -210,13 +210,13 @@ export default function NewProjectPage() {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Datum zah\u00e1jen\u00ed
+                  Datum zahájení
                 </label>
                 <Input name="startDate" type="date" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Datum ukon\u010Den\u00ed
+                  Datum ukončení
                 </label>
                 <Input name="endDate" type="date" />
               </div>
@@ -224,7 +224,7 @@ export default function NewProjectPage() {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Rozpo\u010Det (K\u010D)
+                Rozpočet (Kč)
               </label>
               <Input
                 name="budget"
@@ -239,13 +239,13 @@ export default function NewProjectPage() {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Adresa stavby
               </label>
-              <Input name="address" placeholder="Ulice, m\u011bsto" />
+              <Input name="address" placeholder="Ulice, město" />
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Zem\u011bpisn\u00e1 \u0161\u00ed\u0159ka (lat)
+                  Zeměpisná šířka (lat)
                 </label>
                 <Input
                   name="lat"
@@ -256,7 +256,7 @@ export default function NewProjectPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Zem\u011bpisn\u00e1 d\u00e9lka (lng)
+                  Zeměpisná délka (lng)
                 </label>
                 <Input
                   name="lng"
@@ -270,11 +270,11 @@ export default function NewProjectPage() {
             <div className="flex gap-3 pt-4">
               <Button type="submit" disabled={isPending}>
                 {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-                Vytvo\u0159it zak\u00e1zku
+                Vytvořit zakázku
               </Button>
               <Link href="/zakazky">
                 <Button type="button" variant="outline">
-                  Zru\u0161it
+                  Zrušit
                 </Button>
               </Link>
             </div>
