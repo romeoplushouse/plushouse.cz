@@ -1254,16 +1254,16 @@
 }
 
 @media (max-width: 768px) {
-  /* Hide entire column wrapper, not just the inner div */
-  .pix_nav_menu [class*="col-"]:has(#pix-header-btn) {
+  /* Hide CTA button column on mobile when menu is collapsed */
+  .pix-header-btn-col {
     display: none !important;
     padding: 0 !important;
     margin: 0 !important;
   }
 
   /* Show when mobile menu is expanded */
-  .pix_nav_menu:has(#pix-navbar-collapse.in) [class*="col-"]:has(#pix-header-btn),
-  body.menu-open .pix_nav_menu [class*="col-"]:has(#pix-header-btn) {
+  .pix_nav_menu .navbar-collapse.in ~ .pix-header-btn-col,
+  body.menu-open .pix-header-btn-col {
     display: block !important;
     padding: 0 10px !important;
   }
