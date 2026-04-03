@@ -1488,3 +1488,203 @@ enum OnSitePaymentMethod {
   CASH            // Hotovost
   BANK_TRANSFER   // Převodem (na místě dohodnutý)
 }
+
+// ============================================================================
+// ELECTRONIC CONTRACT SIGNING (eIDAS / BankID / Qualified Electronic Signature)
+// Zákonné náležitosti dle:
+// - Zákon č. 297/2016 Sb. o službách vytvářejících důvěru
+// - Nařízení EU č. 910/2014 (eIDAS)
+// - Zákon č. 89/2012 Sb. občanský zákoník (§ 561-564)
+// ============================================================================
+
+model Contract {
+  id              String   @id @default(cuid())
+  contractNumber  String   @unique
+  type            ContractType
+  title           String
+  // Content
+  htmlContent     String?  // HTML template with fillable fields
+  pdfUrl          String?  // Generated PDF
+  templateId      String?  // Reference to template used
+  // Parties
+  partyAName      String   // Naše firma
+  partyAIco       String?
+  partyADic       String?
+  partyAAddress   String?
+  partyARepresentative String? // Zastupující osoba
+  partyBName      String   // Druhá strana
+  partyBIco       String?
+  partyBDic       String?
+  partyBAddress   String?
+  partyBRepresentative String?
+  // Linked entities
+  contactId       String?
+  employeeId      String?
+  projectId       String?
+  // Status
+  status          ContractStatus @default(DRAFT)
+  // Validity
+  validFrom       DateTime?
+  validTo         DateTime?
+  // Financial
+  totalAmount     Decimal? @db.Decimal(15, 2)
+  currency        String   @default("CZK")
+  // Metadata
+  createdBy       String?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  signingRequests ContractSigningRequest[]
+  fillableFields  ContractFillableField[]
+  auditTrail      ContractAuditEntry[]
+
+  @@index([contactId])
+  @@index([employeeId])
+  @@index([status])
+  @@map("contracts")
+}
+
+model ContractFillableField {
+  id          String  @id @default(cuid())
+  contractId  String
+  fieldName   String  // e.g., "id_card_number", "birth_date"
+  fieldLabel  String  // e.g., "Číslo občanského průkazu"
+  fieldType   String  // TEXT, DATE, NUMBER, SIGNATURE, CHECKBOX
+  isRequired  Boolean @default(true)
+  filledValue String?
+  filledAt    DateTime?
+  filledBy    String? // Which party filled it
+
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@map("contract_fillable_fields")
+}
+
+model ContractSigningRequest {
+  id              String   @id @default(cuid())
+  contractId      String
+  signerEmail     String
+  signerName      String
+  signerRole      String   // PARTY_A, PARTY_B, WITNESS
+  signingOrder    Int      @default(1) // Sequential signing order
+  // Access
+  accessToken     String   @unique
+  accessUrl       String?  // Full URL sent via email
+  // Signing status
+  status          SigningStatus @default(PENDING)
+  sentAt          DateTime?
+  viewedAt        DateTime?
+  signedAt        DateTime?
+  rejectedAt      DateTime?
+  rejectionReason String?
+  expiresAt       DateTime
+  // Identity verification (BankID / eIDAS)
+  verificationMethod  VerificationMethod?
+  bankIdVerified      Boolean @default(false)
+  bankIdProvider      String?  // Banka použitá k ověření (ČS, KB, ČSOB, etc.)
+  bankIdTransactionId String?  // ID transakce BankID
+  bankIdVerifiedAt    DateTime?
+  bankIdVerifiedName  String?  // Jméno ověřené bankou
+  // Identity documents
+  idCardNumber    String?  // Číslo občanského průkazu
+  idCardType      String?  // OP, Pas, Řidičský průkaz
+  secondIdNumber  String?  // Číslo druhého dokladu
+  secondIdType    String?  // Typ druhého dokladu
+  // Signature data
+  signatureType   SignatureType?
+  signatureData   String?  // Base64 canvas signature / certificate data
+  signatureHash   String?  // SHA256 hash of signed content
+  signerIp        String?
+  signerUserAgent String?
+  // Certificate (for qualified signatures)
+  certificateData String?
+  certificateIssuer String?
+  certificateSerial String?
+  createdAt       DateTime @default(now())
+
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([accessToken])
+  @@index([contractId, signerRole])
+  @@map("contract_signing_requests")
+}
+
+model ContractAuditEntry {
+  id          String   @id @default(cuid())
+  contractId  String
+  action      String   // CREATED, SENT, VIEWED, FIELD_FILLED, IDENTITY_VERIFIED, SIGNED, REJECTED, DOWNLOADED
+  actor       String   // Email or user name
+  actorIp     String?
+  actorAgent  String?
+  details     String?  // JSON details
+  timestamp   DateTime @default(now())
+
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([contractId, timestamp])
+  @@map("contract_audit_entries")
+}
+
+model ContractTemplate {
+  id          String   @id @default(cuid())
+  type        ContractType
+  name        String
+  description String?
+  htmlContent String   // HTML with {{placeholders}}
+  fields      String?  // JSON array of field definitions
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("contract_templates")
+}
+
+enum ContractType {
+  EMPLOYMENT_SOD      // Smlouva o dílo
+  EMPLOYMENT_RS       // Rámcová smlouva
+  EMPLOYMENT_DPC      // Dohoda o pracovní činnosti
+  EMPLOYMENT_DPP      // Dohoda o provedení práce
+  EMPLOYMENT_HPP      // Hlavní pracovní poměr
+  SUBCONTRACTOR       // Smlouva se subdodavatelem
+  NDA                 // Dohoda o mlčenlivosti
+  SERVICE             // Smlouva o poskytování služeb
+  LEASE               // Nájemní smlouva
+  OTHER               // Jiná smlouva
+}
+
+enum ContractStatus {
+  DRAFT               // Koncept
+  PENDING_FIELDS      // Čeká na vyplnění polí druhou stranou
+  PENDING_SIGNATURE   // Čeká na podpis
+  PARTIALLY_SIGNED    // Částečně podepsáno (jedna strana)
+  SIGNED              // Plně podepsáno oběma stranami
+  REJECTED            // Odmítnuto
+  EXPIRED             // Vypršela platnost
+  CANCELLED           // Zrušeno
+  ARCHIVED            // Archivováno
+}
+
+enum SigningStatus {
+  PENDING             // Čeká na podpis
+  VIEWED              // Zobrazeno podpisovateli
+  FIELDS_FILLED       // Pole vyplněna
+  IDENTITY_VERIFIED   // Totožnost ověřena (BankID)
+  SIGNED              // Podepsáno
+  REJECTED            // Odmítnuto
+  EXPIRED             // Vypršelo
+}
+
+enum VerificationMethod {
+  BANK_ID             // Bankovní identita (BankID)
+  MOJE_ID             // MojeID
+  E_CITIZEN           // eObčanka (NIA)
+  SMS_OTP             // SMS OTP kód
+  NONE                // Bez ověření (jednoduchý podpis)
+}
+
+enum SignatureType {
+  SIMPLE              // Jednoduchý elektronický podpis (canvas)
+  ADVANCED            // Zaručený elektronický podpis
+  QUALIFIED           // Kvalifikovaný elektronický podpis (eIDAS)
+}

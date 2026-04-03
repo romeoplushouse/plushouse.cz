@@ -21,6 +21,7 @@ import {
   X,
   DollarSign,
   Route,
+  FileSignature,
 } from "lucide-react";
 
 const navSections = [
@@ -36,6 +37,7 @@ const navSections = [
       { name: "Účetnictví", href: "/ucetnictvi", icon: BookOpen },
       { name: "Faktury", href: "/faktury", icon: FileText },
       { name: "Nabídky", href: "/faktury/nabidky", icon: Receipt },
+      { name: "Smlouvy", href: "/smlouvy", icon: FileSignature },
       { name: "Platby", href: "/platby", icon: CreditCard },
       { name: "Daně", href: "/ucetnictvi/dane", icon: DollarSign },
     ],
