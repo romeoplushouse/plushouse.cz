@@ -46,52 +46,52 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-[#0f1117]">
       {/* Left Brand Panel */}
       <div
         className="hidden lg:flex lg:w-[60%] relative overflow-hidden flex-col items-center justify-center px-16"
-        style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)" }}
+        style={{ background: "linear-gradient(135deg, #0a0c10 0%, #1a1d24 100%)" }}
       >
-        {/* Decorative grid pattern */}
+        {/* Animated dot grid pattern */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
+              "radial-gradient(rgba(181, 225, 38, 0.06) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
           }}
         />
 
-        {/* Decorative circles */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-[0.03]"
-          style={{ background: "radial-gradient(circle, #3b82f6, transparent 70%)" }}
+        {/* Decorative glows */}
+        <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full opacity-[0.08]"
+          style={{ background: "radial-gradient(circle, #B5E126, transparent 70%)" }}
         />
         <div className="absolute -bottom-48 -right-48 w-[500px] h-[500px] rounded-full opacity-[0.05]"
-          style={{ background: "radial-gradient(circle, #6366f1, transparent 70%)" }}
+          style={{ background: "radial-gradient(circle, #B5E126, transparent 70%)" }}
         />
 
         {/* Content */}
         <div className="relative z-10 max-w-lg text-center">
-          {/* Logo monogram */}
-          <div className="mx-auto mb-8 w-24 h-24 rounded-full flex items-center justify-center shadow-2xl"
-            style={{ background: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)" }}
-          >
-            <span className="text-white text-4xl font-bold tracking-tight">PH</span>
+          {/* Logo text */}
+          <div className="mb-8">
+            <h1 className="text-5xl font-bold tracking-tight text-[#B5E126]" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+              PLUS HOUSE
+            </h1>
+            <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full bg-[#B5E126]/10 border border-[#B5E126]/20">
+              <span className="text-xs font-semibold text-[#B5E126] tracking-widest uppercase">ERP System</span>
+            </div>
           </div>
 
-          <h1 className="text-white text-4xl font-bold tracking-tight mb-3">
-            PlusHouse ERP
-          </h1>
           <p className="text-gray-400 text-lg mb-16">
             Kompletní řízení vaší firmy
           </p>
 
-          {/* Feature bullets */}
-          <div className="grid grid-cols-2 gap-x-8 gap-y-6 text-left">
+          {/* Feature bullets - glassmorphism */}
+          <div className="grid grid-cols-2 gap-x-6 gap-y-4 text-left">
             {features.map((f) => (
-              <div key={f.label} className="flex items-start gap-3">
-                <div className="mt-0.5 w-9 h-9 rounded-lg bg-white/[0.07] flex items-center justify-center flex-shrink-0">
-                  <f.icon className="w-4.5 h-4.5 text-blue-400" />
+              <div key={f.label} className="flex items-start gap-3 p-3 rounded-xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.05] transition-all hover:bg-white/[0.06] hover:border-[#B5E126]/10">
+                <div className="mt-0.5 w-9 h-9 rounded-lg bg-[#B5E126]/10 flex items-center justify-center flex-shrink-0">
+                  <f.icon className="w-4.5 h-4.5 text-[#B5E126]" />
                 </div>
                 <div>
                   <p className="text-white text-sm font-semibold">{f.label}</p>
@@ -104,25 +104,22 @@ export default function LoginPage() {
       </div>
 
       {/* Right Login Panel */}
-      <div className="w-full lg:w-[40%] bg-white flex flex-col items-center justify-center px-6 sm:px-12 py-12 relative">
-        {/* Mobile logo — shown only when left panel is hidden */}
+      <div className="w-full lg:w-[40%] bg-[#0f1117] flex flex-col items-center justify-center px-6 sm:px-12 py-12 relative">
+        {/* Mobile logo */}
         <div className="lg:hidden mb-10 flex flex-col items-center">
-          <div
-            className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg mb-4"
-            style={{ background: "linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)" }}
-          >
-            <span className="text-white text-2xl font-bold">PH</span>
-          </div>
-          <h2 className="text-xl font-bold text-gray-900">PlusHouse ERP</h2>
+          <h2 className="text-2xl font-bold text-[#B5E126] mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+            PLUS HOUSE
+          </h2>
+          <span className="text-xs font-semibold text-gray-500 tracking-widest uppercase">ERP System</span>
         </div>
 
         <div className="w-full max-w-sm">
-          <h2 className="text-2xl font-bold text-gray-900 mb-1">Přihlášení</h2>
+          <h2 className="text-2xl font-bold text-gray-100 mb-1">Přihlášení</h2>
           <p className="text-gray-500 text-sm mb-8">Zadejte své přístupové údaje</p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
-              <div className="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3 rounded-lg">
+              <div className="flex items-center gap-2 bg-red-500/10 border border-red-500/20 text-red-400 text-sm px-4 py-3 rounded-xl">
                 <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                 </svg>
@@ -132,11 +129,11 @@ export default function LoginPage() {
 
             {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+              <label className="block text-sm font-medium text-gray-300 mb-1.5">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
                 <Input
                   type="email"
                   value={email}
@@ -150,11 +147,11 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">
+              <label className="block text-sm font-medium text-gray-300 mb-1.5">
                 Heslo
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
                 <Input
                   type={showPassword ? "text" : "password"}
                   value={password}
@@ -166,7 +163,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 focus:outline-none"
                   tabIndex={-1}
                 >
                   {showPassword ? (
@@ -185,9 +182,9 @@ export default function LoginPage() {
                 type="checkbox"
                 checked={remember}
                 onChange={(e) => setRemember(e.target.checked)}
-                className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer"
+                className="w-4 h-4 rounded border-[#2a2d35] bg-[#1a1d24] text-[#B5E126] focus:ring-[#B5E126]/30 cursor-pointer"
               />
-              <label htmlFor="remember" className="text-sm text-gray-600 select-none cursor-pointer">
+              <label htmlFor="remember" className="text-sm text-gray-400 select-none cursor-pointer">
                 Zapamatovat si mě
               </label>
             </div>
@@ -196,8 +193,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-11 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
-              style={{ background: "linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)" }}
+              className="w-full h-11 text-sm font-bold shadow-lg shadow-[#B5E126]/20 hover:shadow-[#B5E126]/30"
             >
               {loading ? (
                 <>
@@ -212,7 +208,7 @@ export default function LoginPage() {
         </div>
 
         {/* Footer */}
-        <p className="absolute bottom-6 text-xs text-gray-400 select-none">
+        <p className="absolute bottom-6 text-xs text-gray-600 select-none">
           PlusHouse ERP v0.1.0
         </p>
       </div>

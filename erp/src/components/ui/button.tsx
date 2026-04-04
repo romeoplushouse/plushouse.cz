@@ -3,28 +3,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer active:scale-[0.98]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B5E126]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f1117] disabled:pointer-events-none disabled:opacity-50 cursor-pointer active:scale-[0.97]",
   {
     variants: {
       variant: {
         default:
-          "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-sm shadow-blue-500/25 hover:from-blue-700 hover:to-blue-800 hover:shadow-md hover:shadow-blue-500/30",
+          "bg-[#B5E126] text-[#0f1117] font-bold shadow-sm shadow-[#B5E126]/20 hover:bg-[#b5e154] hover:shadow-md hover:shadow-[#B5E126]/30",
         destructive:
-          "bg-gradient-to-r from-red-600 to-red-700 text-white shadow-sm shadow-red-500/25 hover:from-red-700 hover:to-red-800",
+          "bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 hover:border-red-500/30",
         outline:
-          "border border-gray-200 bg-white text-gray-700 shadow-sm hover:bg-gray-50 hover:border-gray-300 hover:text-gray-900",
+          "border border-[#2a2d35] bg-transparent text-gray-300 hover:border-[#B5E126]/40 hover:text-[#B5E126] hover:bg-[#B5E126]/5",
         secondary:
-          "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900",
+          "bg-[#1a1d24] text-gray-300 border border-[#2a2d35] hover:bg-[#2a2d35] hover:text-gray-100",
         ghost:
-          "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+          "text-gray-400 hover:bg-[#1a1d24] hover:text-gray-200",
         link:
-          "text-blue-600 underline-offset-4 hover:underline",
+          "text-[#B5E126] underline-offset-4 hover:underline",
         success:
-          "bg-gradient-to-r from-green-600 to-green-700 text-white shadow-sm shadow-green-500/25 hover:from-green-700 hover:to-green-800",
+          "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 hover:border-emerald-500/30",
       },
       size: {
         default: "h-10 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
+        sm: "h-8 rounded-lg px-3 text-xs",
         lg: "h-12 rounded-xl px-8 text-base",
         icon: "h-10 w-10",
       },

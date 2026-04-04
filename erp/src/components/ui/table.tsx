@@ -5,7 +5,7 @@ const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="relative w-full overflow-auto rounded-lg">
+  <div className="relative w-full overflow-auto rounded-xl">
     <table
       ref={ref}
       className={cn("w-full caption-bottom text-sm", className)}
@@ -21,7 +21,7 @@ const TableHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
-    className={cn("bg-gray-50/80 [&_tr]:border-b [&_tr]:border-gray-100", className)}
+    className={cn("bg-[#0f1117] [&_tr]:border-b [&_tr]:border-[#2a2d35]", className)}
     {...props}
   />
 ));
@@ -46,7 +46,7 @@ const TableRow = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      "border-b border-gray-50 transition-colors hover:bg-blue-50/30 data-[state=selected]:bg-blue-50",
+      "border-b border-[#2a2d35]/50 transition-colors hover:bg-[#B5E126]/5 data-[state=selected]:bg-[#B5E126]/10",
       className
     )}
     {...props}
@@ -61,7 +61,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-11 px-4 text-left align-middle text-xs font-semibold uppercase tracking-wider text-gray-500 [&:has([role=checkbox])]:pr-0",
+      "h-11 px-4 text-left align-middle text-xs font-semibold uppercase tracking-wider text-gray-400 [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}
@@ -76,7 +76,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "px-4 py-3 align-middle text-gray-700 [&:has([role=checkbox])]:pr-0",
+      "px-4 py-3 align-middle text-gray-300 [&:has([role=checkbox])]:pr-0",
       className
     )}
     {...props}
