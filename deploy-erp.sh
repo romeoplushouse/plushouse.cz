@@ -7,7 +7,7 @@ set -e
 
 DOMAIN="erp.plushouse.cz"
 APP_DIR="/var/www/erp"
-APP_PORT=3007
+APP_PORT=3777
 DB_NAME="plushouse_erp"
 DB_USER="plushouse_erp"
 REPO_URL="https://github.com/romeoplushouse/plushouse.cz.git"

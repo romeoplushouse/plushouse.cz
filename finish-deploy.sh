@@ -19,7 +19,7 @@ AUTH_SECRET="${GEN_SECRET}"
 AUTH_URL="https://erp.plushouse.cz"
 NEXTAUTH_URL="https://erp.plushouse.cz"
 NODE_ENV="production"
-PORT=3007
+PORT=3777
 ENVGEN
   echo "Generated new .env with unique secrets"
   # Update DB password to match
@@ -34,7 +34,7 @@ npx tsx prisma/seed.ts || echo "Seed OK"
 npm run build
 echo "=== PM2 ==="
 pm2 delete plushouse-erp 2>/dev/null || true
-PORT=3007 pm2 start npm --name "plushouse-erp" -- start
+PORT=3777 pm2 start npm --name "plushouse-erp" -- start
 pm2 save
 echo "=== Caddy ==="
 cp /etc/caddy/Caddyfile /etc/caddy/Caddyfile.bak
@@ -42,7 +42,7 @@ if ! grep -q "erp.plushouse.cz" /etc/caddy/Caddyfile; then
 cat >> /etc/caddy/Caddyfile << 'C'
 
 erp.plushouse.cz {
-	reverse_proxy localhost:3007
+	reverse_proxy localhost:3777
 }
 C
 fi
