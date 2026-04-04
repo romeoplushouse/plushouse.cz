@@ -74,7 +74,7 @@ export default function LoginPage() {
         <div className="relative z-10 max-w-lg text-center">
           {/* Logo text */}
           <div className="mb-8">
-            <h1 className="text-5xl font-bold tracking-tight text-[#B5E126]" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+            <h1 className="text-5xl font-bold tracking-tight text-[#B5E126]">
               PLUS HOUSE
             </h1>
             <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full bg-[#B5E126]/10 border border-[#B5E126]/20">
@@ -107,7 +107,7 @@ export default function LoginPage() {
       <div className="w-full lg:w-[40%] bg-[#0f1117] flex flex-col items-center justify-center px-6 sm:px-12 py-12 relative">
         {/* Mobile logo */}
         <div className="lg:hidden mb-10 flex flex-col items-center">
-          <h2 className="text-2xl font-bold text-[#B5E126] mb-1" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+          <h2 className="text-2xl font-bold text-[#B5E126] mb-1">
             PLUS HOUSE
           </h2>
           <span className="text-xs font-semibold text-gray-500 tracking-widest uppercase">ERP System</span>

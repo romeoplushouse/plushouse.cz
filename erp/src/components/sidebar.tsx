@@ -97,7 +97,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         <div className="flex h-16 items-center justify-between px-5 shrink-0">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="flex flex-col">
-              <span className="text-[16px] font-bold text-[#B5E126] tracking-tight leading-tight" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+              <span className="text-[16px] font-bold text-[#B5E126] tracking-tight leading-tight">
                 PLUS HOUSE
               </span>
               <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-gray-500 flex items-center gap-1.5">
