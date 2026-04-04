@@ -5,6 +5,7 @@
     var totalSteps = 4;
     var uploadedFiles = [];
     var maxUploadSize = 25 * 1024 * 1024; // 25MB
+    var currentSubStep = null; // 'save' or 'consult'
 
     // Price ranges per feature [min, max]
     var priceRanges = {
@@ -62,12 +63,13 @@
         bindNavigation();
         bindFeatureCards();
         bindFileUpload();
-        bindFormSubmit();
+        bindActions();
     }
 
     // --- Step Navigation ---
     function showStep(step) {
         currentStep = step;
+        currentSubStep = null;
         $('.shc-step').hide();
         $('#shc-step-' + step).fadeIn(300);
 
@@ -79,17 +81,24 @@
             else if (i === step) $el.addClass('active');
         }
 
-        // Update buttons
+        // Update nav buttons
         $('#shc-btn-prev').toggle(step > 1);
+        $('#shc-btn-next').toggle(step < totalSteps);
+        $('.shc-nav-buttons').toggle(step <= totalSteps && !currentSubStep);
+
         if (step === totalSteps) {
             $('#shc-btn-next').hide();
-            $('#shc-btn-submit').show();
             updateSummary();
-        } else {
-            $('#shc-btn-next').show();
-            $('#shc-btn-submit').hide();
         }
 
+        $('html, body').animate({ scrollTop: $('#shc-configurator').offset().top - 80 }, 300);
+    }
+
+    function showSubStep(type) {
+        currentSubStep = type;
+        $('.shc-step').hide();
+        $('.shc-nav-buttons').hide();
+        $('#shc-step-' + type).fadeIn(300);
         $('html, body').animate({ scrollTop: $('#shc-configurator').offset().top - 80 }, 300);
     }
 
@@ -135,31 +144,50 @@
         } else if (step === 3) {
             var selected = getSelectedFeatures();
             if (selected.length === 0) {
-                showError($('.shc-features-grid').first(), 'Vyberte alespoň jednu funkci');
+                showError($('.shc-feature-category').first(), 'Vyberte alespoň jednu technologii');
                 valid = false;
             }
-        } else if (step === 4) {
-            var nameVal = $('[name="name"]').val();
-            var emailVal = $('[name="email"]').val();
-            var phoneVal = $('[name="phone"]').val();
-            var consent = $('[name="consent"]').is(':checked');
+        }
+        return valid;
+    }
 
-            if (!nameVal || nameVal.trim() === '') {
-                showError($('[name="name"]'), 'Vyplňte jméno a příjmení');
-                valid = false;
-            }
-            if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-                showError($('[name="email"]'), 'Zadejte platný email');
-                valid = false;
-            }
-            if (!phoneVal || phoneVal.replace(/\s/g, '').length < 9) {
-                showError($('[name="phone"]'), 'Zadejte platné telefonní číslo');
-                valid = false;
-            }
-            if (!consent) {
-                showError($('[name="consent"]').parent(), 'Souhlas je povinný');
-                valid = false;
-            }
+    function validateSave() {
+        var valid = true;
+        $('.shc-error').remove();
+        var email = $('[name="save_email"]').val();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showError($('[name="save_email"]'), 'Zadejte platný email');
+            valid = false;
+        }
+        if (!$('[name="consent_save"]').is(':checked')) {
+            showError($('[name="consent_save"]').parent(), 'Souhlas je povinný');
+            valid = false;
+        }
+        return valid;
+    }
+
+    function validateConsult() {
+        var valid = true;
+        $('.shc-error').remove();
+        var name = $('[name="name"]').val();
+        var email = $('[name="email"]').val();
+        var phone = $('[name="phone"]').val();
+
+        if (!name || name.trim() === '') {
+            showError($('[name="name"]'), 'Vyplňte jméno a příjmení');
+            valid = false;
+        }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showError($('[name="email"]'), 'Zadejte platný email');
+            valid = false;
+        }
+        if (!phone || phone.replace(/\s/g, '').length < 9) {
+            showError($('[name="phone"]'), 'Zadejte platné telefonní číslo');
+            valid = false;
+        }
+        if (!$('[name="consent_consult"]').is(':checked')) {
+            showError($('[name="consent_consult"]').parent(), 'Souhlas je povinný');
+            valid = false;
         }
         return valid;
     }
@@ -203,7 +231,6 @@
             }
         });
 
-        // Area multiplier
         var area = parseInt($('[name="area"]').val()) || 100;
         var multiplier = Math.max(1.0, area / 100);
         totalMin = Math.round(totalMin * multiplier);
@@ -227,49 +254,37 @@
         var $zone = $('#shc-drop-zone');
         var $input = $('#shc-file-input');
 
-        $zone.on('click', function() {
-            $input.trigger('click');
-        });
-
-        $input.on('change', function() {
-            handleFiles(this.files);
-        });
+        $zone.on('click', function() { $input.trigger('click'); });
+        $input.on('change', function() { handleFiles(this.files); });
 
         $zone.on('dragover', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault(); e.stopPropagation();
             $(this).addClass('drag-over');
         });
         $zone.on('dragleave drop', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault(); e.stopPropagation();
             $(this).removeClass('drag-over');
         });
         $zone.on('drop', function(e) {
-            var files = e.originalEvent.dataTransfer.files;
-            handleFiles(files);
+            handleFiles(e.originalEvent.dataTransfer.files);
         });
     }
 
     function handleFiles(files) {
         var allowedExt = ['pdf', 'dwg', 'jpg', 'jpeg', 'png', 'zip', 'doc', 'docx'];
-
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
             var ext = file.name.split('.').pop().toLowerCase();
-
             if (allowedExt.indexOf(ext) === -1) {
                 alert('Nepodporovaný formát: ' + file.name + '\nPovolené: ' + allowedExt.join(', '));
                 continue;
             }
-
             var totalSize = file.size;
             uploadedFiles.forEach(function(f) { totalSize += f.size; });
             if (totalSize > maxUploadSize) {
                 alert('Celková velikost souborů překračuje 25 MB');
                 break;
             }
-
             uploadedFiles.push(file);
         }
         renderFileList();
@@ -278,27 +293,21 @@
     function renderFileList() {
         var $list = $('#shc-file-list');
         $list.empty();
-
-        if (uploadedFiles.length === 0) {
-            $list.hide();
-            return;
-        }
-
+        if (uploadedFiles.length === 0) { $list.hide(); return; }
         $list.show();
         uploadedFiles.forEach(function(file, idx) {
             var sizeKB = Math.round(file.size / 1024);
-            var $item = $('<div class="shc-file-item">' +
+            $list.append(
+                '<div class="shc-file-item">' +
                 '<i class="fa fa-file-o"></i> ' +
                 '<span>' + file.name + ' (' + sizeKB + ' KB)</span>' +
                 '<a href="#" class="shc-file-remove" data-idx="' + idx + '"><i class="fa fa-times"></i></a>' +
-                '</div>');
-            $list.append($item);
+                '</div>'
+            );
         });
-
         $list.find('.shc-file-remove').on('click', function(e) {
             e.preventDefault();
-            var idx = parseInt($(this).data('idx'));
-            uploadedFiles.splice(idx, 1);
+            uploadedFiles.splice(parseInt($(this).data('idx')), 1);
             renderFileList();
         });
     }
@@ -308,77 +317,91 @@
         var selected = getSelectedFeatures();
         var $list = $('#shc-summary-features');
         $list.empty();
-
         selected.forEach(function(f) {
-            var label = featureLabels[f] || f;
-            $list.append('<li>' + label + '</li>');
+            $list.append('<li>' + (featureLabels[f] || f) + '</li>');
         });
 
         updatePriceEstimate();
 
-        // Building summary
-        var buildingType = $('[name="building_type"] option:selected').text();
-        var area = $('[name="area"]').val() || '-';
-        var location = $('[name="location"]').val() || '-';
-        var floors = $('[name="floors"] option:selected').text();
-        var phase = $('[name="phase"] option:selected').text();
-
         $('#shc-summary-building').html(
-            '<li><strong>Typ:</strong> ' + buildingType + '</li>' +
-            '<li><strong>Plocha:</strong> ' + area + ' m²</li>' +
-            '<li><strong>Podlaží:</strong> ' + floors + '</li>' +
-            '<li><strong>Fáze:</strong> ' + phase + '</li>' +
-            '<li><strong>Lokalita:</strong> ' + location + '</li>'
+            '<li><strong>Typ:</strong> ' + $('[name="building_type"] option:selected').text() + '</li>' +
+            '<li><strong>Plocha:</strong> ' + ($('[name="area"]').val() || '-') + ' m²</li>' +
+            '<li><strong>Podlaží:</strong> ' + $('[name="floors"] option:selected').text() + '</li>' +
+            '<li><strong>Fáze:</strong> ' + $('[name="phase"] option:selected').text() + '</li>' +
+            '<li><strong>Lokalita:</strong> ' + ($('[name="location"]').val() || '-') + '</li>'
         );
 
         if (uploadedFiles.length > 0) {
-            var filesHtml = '';
-            uploadedFiles.forEach(function(f) {
-                filesHtml += '<li>' + f.name + '</li>';
-            });
-            $('#shc-summary-files').html(filesHtml).parent().show();
+            var html = '';
+            uploadedFiles.forEach(function(f) { html += '<li>' + f.name + '</li>'; });
+            $('#shc-summary-files').html(html);
+            $('#shc-summary-files-wrap').show();
         } else {
-            $('#shc-summary-files').parent().hide();
+            $('#shc-summary-files-wrap').hide();
         }
     }
 
-    // --- Form Submit ---
-    function bindFormSubmit() {
-        $('#shc-btn-submit').on('click', function(e) {
+    // --- Build FormData with config ---
+    function buildFormData(action) {
+        var formData = new FormData();
+        formData.append('action', action);
+
+        // Building info
+        formData.append('building_type', $('[name="building_type"]').val());
+        formData.append('area', $('[name="area"]').val());
+        formData.append('floors', $('[name="floors"]').val());
+        formData.append('rooms', $('[name="rooms"]').val() || 0);
+        formData.append('phase', $('[name="phase"]').val());
+        formData.append('location', $('[name="location"]').val());
+        formData.append('notes', $('[name="notes"]').val());
+
+        // Features & price
+        formData.append('features', JSON.stringify(getSelectedFeatures()));
+        formData.append('price_min', $('#shc-price-min').val() || 0);
+        formData.append('price_max', $('#shc-price-max').val() || 0);
+
+        // Files
+        uploadedFiles.forEach(function(file) {
+            formData.append('documents[]', file);
+        });
+
+        return formData;
+    }
+
+    // --- Actions (Save / Consult) ---
+    function bindActions() {
+        // Open save sub-step
+        $('#shc-btn-save').on('click', function() {
+            showSubStep('save');
+        });
+
+        // Open consult sub-step
+        $('#shc-btn-consult').on('click', function() {
+            showSubStep('consult');
+        });
+
+        // Back buttons
+        $('#shc-btn-save-back, #shc-btn-consult-back').on('click', function() {
+            showStep(4);
+        });
+
+        // After saving, user can also request consultation
+        $('#shc-btn-after-save-consult').on('click', function(e) {
             e.preventDefault();
-            if (!validateStep(4)) return;
+            $('#shc-thank-save').hide();
+            $('#shc-configurator').show();
+            showSubStep('consult');
+        });
 
+        // SAVE submit
+        $('#shc-btn-save-submit').on('click', function() {
+            if (!validateSave()) return;
             var $btn = $(this);
-            $btn.prop('disabled', true).text('ODESÍLÁNÍ...');
+            $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Ukládání...');
 
-            var formData = new FormData();
-
-            // Contact info
-            formData.append('name', $('[name="name"]').val());
-            formData.append('email', $('[name="email"]').val());
-            formData.append('phone', $('[name="phone"]').val());
-            formData.append('contact_preference', $('[name="contact_preference"]').val());
-
-            // Building info
-            formData.append('building_type', $('[name="building_type"]').val());
-            formData.append('area', $('[name="area"]').val());
-            formData.append('floors', $('[name="floors"]').val());
-            formData.append('rooms', $('[name="rooms"]').val() || 0);
-            formData.append('phase', $('[name="phase"]').val());
-            formData.append('location', $('[name="location"]').val());
-            formData.append('notes', $('[name="notes"]').val());
-
-            // Features
-            formData.append('features', JSON.stringify(getSelectedFeatures()));
-
-            // Price
-            formData.append('price_min', $('#shc-price-min').val() || 0);
-            formData.append('price_max', $('#shc-price-max').val() || 0);
-
-            // Files
-            uploadedFiles.forEach(function(file) {
-                formData.append('documents[]', file);
-            });
+            var formData = buildFormData('save');
+            formData.append('save_email', $('[name="save_email"]').val());
+            formData.append('newsletter_consent', $('[name="newsletter_consent"]').is(':checked') ? '1' : '0');
 
             $.ajax({
                 url: 'smart-home-config.php',
@@ -390,19 +413,57 @@
                 success: function(resp) {
                     if (resp.type === 'message') {
                         $('#shc-configurator').hide();
-                        $('#shc-thank-you').fadeIn(400);
-                        $('html, body').animate({ scrollTop: $('#shc-thank-you').offset().top - 100 }, 300);
-                        // Track conversion
-                        if (typeof fbq === 'function') fbq('track', 'Lead');
-                        if (typeof gtag === 'function') gtag('event', 'generate_lead', { event_category: 'smart_home_config' });
+                        $('#shc-thank-save').fadeIn(400);
+                        $('html, body').animate({ scrollTop: $('#shc-thank-save').offset().top - 100 }, 300);
+                        if (typeof gtag === 'function') gtag('event', 'config_saved', { event_category: 'muj_dum' });
                     } else {
-                        alert(resp.text || 'Nastala chyba při odesílání.');
-                        $btn.prop('disabled', false).text('ODESLAT KONFIGURACI A ZÍSKAT NABÍDKU');
+                        alert(resp.text || 'Nastala chyba.');
+                        $btn.prop('disabled', false).html('<i class="fa fa-check"></i> Uložit a odeslat');
                     }
                 },
                 error: function() {
-                    alert('Nastala chyba při komunikaci se serverem. Zkuste to prosím znovu.');
-                    $btn.prop('disabled', false).text('ODESLAT KONFIGURACI A ZÍSKAT NABÍDKU');
+                    alert('Chyba při komunikaci se serverem.');
+                    $btn.prop('disabled', false).html('<i class="fa fa-check"></i> Uložit a odeslat');
+                }
+            });
+        });
+
+        // CONSULT submit
+        $('#shc-btn-consult-submit').on('click', function() {
+            if (!validateConsult()) return;
+            var $btn = $(this);
+            $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Odesílání...');
+
+            var formData = buildFormData('consult');
+            formData.append('name', $('[name="name"]').val());
+            formData.append('email', $('[name="email"]').val());
+            formData.append('phone', $('[name="phone"]').val());
+            formData.append('contact_preference', $('[name="contact_preference"]').val());
+            formData.append('consult_note', $('[name="consult_note"]').val());
+            formData.append('newsletter_consent', $('[name="newsletter_consent_consult"]').is(':checked') ? '1' : '0');
+
+            $.ajax({
+                url: 'smart-home-config.php',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function(resp) {
+                    if (resp.type === 'message') {
+                        $('#shc-configurator').hide();
+                        $('#shc-thank-consult').fadeIn(400);
+                        $('html, body').animate({ scrollTop: $('#shc-thank-consult').offset().top - 100 }, 300);
+                        if (typeof fbq === 'function') fbq('track', 'Lead');
+                        if (typeof gtag === 'function') gtag('event', 'generate_lead', { event_category: 'muj_dum' });
+                    } else {
+                        alert(resp.text || 'Nastala chyba.');
+                        $btn.prop('disabled', false).html('<i class="fa fa-paper-plane"></i> Odeslat žádost o konzultaci');
+                    }
+                },
+                error: function() {
+                    alert('Chyba při komunikaci se serverem.');
+                    $btn.prop('disabled', false).html('<i class="fa fa-paper-plane"></i> Odeslat žádost o konzultaci');
                 }
             });
         });

@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Konfigurátor chytré domácnosti | PLUS HOUSE</title>
-<meta name="description" content="Nakonfigurujte si chytrou domácnost od PLUS HOUSE. Vyberte požadované funkce, nahrajte dokumentaci a získejte orientační nabídku.">
-<meta name="keywords" content="konfigurátor,chytrá domácnost,loxone,automatizace,smart home,plus house">
-<meta property="og:title" content="Konfigurátor chytré domácnosti | PLUS HOUSE">
+<title>Můj dům — konfigurátor chytré domácnosti | PLUS HOUSE</title>
+<meta name="description" content="Navrhněte si chytrou domácnost krok za krokem. Zadejte parametry domu, vyberte technologie a zjistěte, co vše je možné automatizovat.">
+<meta name="keywords" content="můj dům,konfigurátor,chytrá domácnost,loxone,automatizace,smart home,plus house">
+<meta property="og:title" content="Můj dům — konfigurátor chytré domácnosti | PLUS HOUSE">
 <meta property="og:site_name" content="PlusHouse">
-<meta property="og:url" content="https://plushouse.cz/konfigurator-chytra-domacnost">
-<meta property="og:description" content="Nakonfigurujte si chytrou domácnost od PLUS HOUSE. Vyberte funkce a získejte orientační nabídku.">
+<meta property="og:url" content="https://plushouse.cz/muj-dum">
+<meta property="og:description" content="Navrhněte si chytrou domácnost krok za krokem. Zjistěte, co vše je možné automatizovat ve vašem domě.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://www.plushouse.cz/uploads/uploads/ogfoto.jpg">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -41,7 +41,7 @@ fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1417475208778687&ev=PageView&noscript=1" /></noscript>
 <!-- End Meta Pixel Code -->
-<link rel="canonical" href="https://www.plushouse.cz/konfigurator-chytra-domacnost">
+<link rel="canonical" href="https://www.plushouse.cz/muj-dum">
 <link rel="apple-touch-icon" sizes="57x57" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-72x72.png">
@@ -147,9 +147,18 @@ gtag('config', 'G-GVQ2MF6LY5');
 .shc-thank-you h2 { color: #333; font-size: 32px; margin-bottom: 15px; }
 .shc-thank-you p { color: #666; font-size: 17px; max-width: 600px; margin: 0 auto 10px; line-height: 1.6; }
 
+/* Action Cards */
+.shc-action-card { border: 2px solid #e8e8e8; border-radius: 10px; padding: 30px 25px; text-align: center; margin-bottom: 20px; transition: all 0.3s; }
+.shc-action-card:hover { border-color: #B5E126; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+.shc-action-highlight { border-color: #B5E126; background: rgba(181,225,38,0.03); }
+.shc-action-icon { margin-bottom: 15px; }
+.shc-action-icon i { font-size: 40px; color: #B5E126; }
+.shc-action-card h3 { color: #333; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+.shc-action-card p { color: #777; font-size: 14px; line-height: 1.5; margin-bottom: 20px; }
+
 /* Consent */
-.shc-consent-wrap { margin: 20px 0; }
-.shc-consent-wrap label { cursor: pointer; color: #555; font-size: 14px; }
+.shc-consent-wrap { margin: 12px 0; }
+.shc-consent-wrap label { cursor: pointer; color: #555; font-size: 13px; line-height: 1.4; }
 .shc-consent-wrap input[type="checkbox"] { margin-right: 8px; }
 </style>
 </head>
@@ -222,8 +231,8 @@ gtag('config', 'G-GVQ2MF6LY5');
 <!-- Hero -->
 <div class="shc-hero">
  <div class="container">
-  <h1>Konfigurátor chytré domácnosti</h1>
-  <p>Nakonfigurujte si chytrou domácnost přesně podle svých potřeb. Vyplňte údaje o stavbě, vyberte požadované funkce a během pár minut získáte orientační nabídku.</p>
+  <h1>Můj dům</h1>
+  <p>Prozkoumejte možnosti chytré domácnosti. Zadejte parametry svého domu, vyberte technologie, které vás zajímají, a podívejte se, jak může váš domov fungovat chytřeji.</p>
  </div>
 </div>
 
@@ -246,7 +255,7 @@ gtag('config', 'G-GVQ2MF6LY5');
  <div class="shc-progress-line"></div>
  <div class="shc-progress-step" data-step="4">
   <div class="shc-step-num">4</div>
-  <div class="shc-step-label">Shrnutí</div>
+  <div class="shc-step-label">Můj dům</div>
  </div>
 </div>
 <!-- Configurator Form -->
@@ -258,7 +267,7 @@ gtag('config', 'G-GVQ2MF6LY5');
     <!-- STEP 1: Building Info -->
     <div class="shc-step" id="shc-step-1">
      <h2>Údaje o stavbě</h2>
-     <p class="shc-step-desc">Řekněte nám více o vaší nemovitosti, abychom mohli připravit přesnou nabídku.</p>
+     <p class="shc-step-desc">Zadejte základní údaje o vaší nemovitosti. Pomůže nám to lépe navrhnout technologie pro váš dům.</p>
 
      <div class="form-group">
       <label>Typ stavby *</label>
@@ -342,7 +351,7 @@ gtag('config', 'G-GVQ2MF6LY5');
     <!-- STEP 3: Features -->
     <div class="shc-step" id="shc-step-3">
      <h2>Požadované funkce</h2>
-     <p class="shc-step-desc">Vyberte funkce, které chcete ve své chytré domácnosti. Kliknutím na kartu ji vyberete.</p>
+     <p class="shc-step-desc">Jaké technologie vás zajímají? Kliknutím na kartu ji přidáte do své konfigurace.</p>
 
      <!-- Heating & Climate -->
      <div class="shc-feature-category">
@@ -592,66 +601,150 @@ gtag('config', 'G-GVQ2MF6LY5');
      <input type="hidden" id="shc-price-min" value="0">
      <input type="hidden" id="shc-price-max" value="0">
     </div>
-    <!-- STEP 4: Contact & Summary -->
+    <!-- STEP 4: Summary + Actions -->
     <div class="shc-step" id="shc-step-4">
-     <h2>Kontaktní údaje a shrnutí</h2>
-     <p class="shc-step-desc">Vyplňte kontaktní údaje a zkontrolujte svou konfiguraci.</p>
+     <h2>Vaše konfigurace</h2>
+     <p class="shc-step-desc">Tady je přehled vašeho domu. Konfiguraci si můžete uložit nebo rovnou zažádat o nezávaznou konzultaci.</p>
 
+     <!-- Summary -->
      <div class="row">
       <div class="col-md-6">
-       <h3 style="margin-top:0;">Vaše údaje</h3>
-       <div class="form-group">
-        <label>Jméno a příjmení *</label>
-        <input type="text" name="name" class="form-control" placeholder="Jan Novák" required>
-       </div>
-       <div class="form-group">
-        <label>Email *</label>
-        <input type="email" name="email" class="form-control" placeholder="jan@email.cz" required>
-       </div>
-       <div class="form-group">
-        <label>Telefon *</label>
-        <input type="tel" name="phone" class="form-control" placeholder="+420 XXX XXX XXX" required>
-       </div>
-       <div class="form-group">
-        <label>Preferovaný způsob kontaktu</label>
-        <select name="contact_preference" class="form-control">
-         <option value="email">Email</option>
-         <option value="phone">Telefon</option>
-         <option value="both" selected>Obojí</option>
-        </select>
-       </div>
-      </div>
-      <div class="col-md-6">
-       <h3 style="margin-top:0;">Shrnutí konfigurace</h3>
-
        <div class="shc-summary-section">
         <h4><i class="fa fa-building-o"></i> Stavba</h4>
         <ul id="shc-summary-building"></ul>
        </div>
-
+      </div>
+      <div class="col-md-6">
        <div class="shc-summary-section">
-        <h4><i class="fa fa-check-square-o"></i> Vybrané funkce</h4>
+        <h4><i class="fa fa-check-square-o"></i> Vybrané technologie</h4>
         <ul id="shc-summary-features"></ul>
-       </div>
-
-       <div class="shc-summary-section" style="display:none;">
-        <h4><i class="fa fa-file-o"></i> Nahrané soubory</h4>
-        <ul id="shc-summary-files"></ul>
-       </div>
-
-       <div class="shc-price-box">
-        <div class="shc-price-label">Orientační cena</div>
-        <div class="shc-price-value" id="shc-price-estimate-summary">---</div>
-        <div class="shc-price-note">*Nezávazný odhad</div>
        </div>
       </div>
      </div>
 
-     <div class="shc-consent-wrap">
-      <label>
-       <input type="checkbox" name="consent" required>
-       Souhlasím se zpracováním osobních údajů za účelem přípravy nabídky chytré domácnosti. Údaje budou použity výhradně pro komunikaci ohledně této poptávky.
-      </label>
+     <div class="shc-summary-section" id="shc-summary-files-wrap" style="display:none;">
+      <h4><i class="fa fa-file-o"></i> Nahrané soubory</h4>
+      <ul id="shc-summary-files"></ul>
+     </div>
+
+     <div class="shc-price-box">
+      <div class="shc-price-label">Orientační cenový rozsah</div>
+      <div class="shc-price-value" id="shc-price-estimate-summary">---</div>
+      <div class="shc-price-note">*Nezávazný odhad pro představu. Přesná cena závisí na konkrétním řešení.</div>
+     </div>
+
+     <!-- Two action cards -->
+     <div class="row" style="margin-top:30px;">
+      <div class="col-md-6">
+       <div class="shc-action-card" id="shc-action-save">
+        <div class="shc-action-icon"><i class="fa fa-bookmark-o"></i></div>
+        <h3>Uložit konfiguraci</h3>
+        <p>Pošleme vám přehled na email. Můžete se k němu kdykoliv vrátit.</p>
+        <button type="button" class="shc-btn shc-btn-secondary" id="shc-btn-save" style="margin:0;width:100%;">
+         <i class="fa fa-envelope-o"></i> Uložit a poslat na email
+        </button>
+       </div>
+      </div>
+      <div class="col-md-6">
+       <div class="shc-action-card shc-action-highlight" id="shc-action-consult">
+        <div class="shc-action-icon"><i class="fa fa-comments-o"></i></div>
+        <h3>Zažádat o konzultaci</h3>
+        <p>Náš specialista se vám ozve a projde s vámi možnosti pro váš dům.</p>
+        <button type="button" class="shc-btn shc-btn-primary" id="shc-btn-consult" style="margin:0;width:100%;">
+         <i class="fa fa-paper-plane"></i> Chci konzultaci zdarma
+        </button>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <!-- SAVE MODAL (inline) -->
+    <div class="shc-step" id="shc-step-save" style="display:none;">
+     <h2><i class="fa fa-bookmark-o"></i> Uložit konfiguraci</h2>
+     <p class="shc-step-desc">Zadejte svůj email a pošleme vám přehled vaší konfigurace.</p>
+
+     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="padding:0;">
+      <div class="form-group">
+       <label>Váš email *</label>
+       <input type="email" name="save_email" class="form-control" placeholder="jan@email.cz" required>
+      </div>
+
+      <div class="shc-consent-wrap">
+       <label>
+        <input type="checkbox" name="consent_save" required>
+        Souhlasím se zpracováním emailu za účelem uložení a zaslání konfigurace.
+       </label>
+      </div>
+      <div class="shc-consent-wrap">
+       <label>
+        <input type="checkbox" name="newsletter_consent">
+        Chci dostávat novinky a tipy k chytrým domácnostem (newsletter). Souhlas můžete kdykoliv odvolat.
+       </label>
+      </div>
+
+      <div style="margin-top:20px;">
+       <button type="button" class="shc-btn shc-btn-secondary" id="shc-btn-save-back" style="margin-right:10px;">
+        <i class="fa fa-arrow-left"></i> Zpět
+       </button>
+       <button type="button" class="shc-btn shc-btn-primary" id="shc-btn-save-submit">
+        <i class="fa fa-check"></i> Uložit a odeslat
+       </button>
+      </div>
+     </div>
+    </div>
+
+    <!-- CONSULT MODAL (inline) -->
+    <div class="shc-step" id="shc-step-consult" style="display:none;">
+     <h2><i class="fa fa-comments-o"></i> Zažádat o konzultaci</h2>
+     <p class="shc-step-desc">Vyplňte kontaktní údaje a my se vám ozveme. Konzultace je nezávazná a zdarma.</p>
+
+     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1" style="padding:0;">
+      <div class="form-group">
+       <label>Jméno a příjmení *</label>
+       <input type="text" name="name" class="form-control" placeholder="Jan Novák" required>
+      </div>
+      <div class="form-group">
+       <label>Email *</label>
+       <input type="email" name="email" class="form-control" placeholder="jan@email.cz" required>
+      </div>
+      <div class="form-group">
+       <label>Telefon *</label>
+       <input type="tel" name="phone" class="form-control" placeholder="+420 XXX XXX XXX" required>
+      </div>
+      <div class="form-group">
+       <label>Preferovaný způsob kontaktu</label>
+       <select name="contact_preference" class="form-control">
+        <option value="email">Email</option>
+        <option value="phone">Telefon</option>
+        <option value="both" selected>Obojí</option>
+       </select>
+      </div>
+      <div class="form-group">
+       <label>Poznámka (nepovinné)</label>
+       <textarea name="consult_note" class="form-control" rows="3" placeholder="Máte nějaké specifické požadavky nebo otázky?"></textarea>
+      </div>
+
+      <div class="shc-consent-wrap">
+       <label>
+        <input type="checkbox" name="consent_consult" required>
+        Souhlasím se zpracováním osobních údajů za účelem nezávazné konzultace.
+       </label>
+      </div>
+      <div class="shc-consent-wrap">
+       <label>
+        <input type="checkbox" name="newsletter_consent_consult">
+        Chci dostávat novinky a tipy k chytrým domácnostem (newsletter).
+       </label>
+      </div>
+
+      <div style="margin-top:20px;">
+       <button type="button" class="shc-btn shc-btn-secondary" id="shc-btn-consult-back" style="margin-right:10px;">
+        <i class="fa fa-arrow-left"></i> Zpět
+       </button>
+       <button type="button" class="shc-btn shc-btn-primary" id="shc-btn-consult-submit">
+        <i class="fa fa-paper-plane"></i> Odeslat žádost o konzultaci
+       </button>
+      </div>
      </div>
     </div>
 
@@ -663,9 +756,6 @@ gtag('config', 'G-GVQ2MF6LY5');
      <button type="button" class="shc-btn shc-btn-primary" id="shc-btn-next">
       Další <i class="fa fa-arrow-right"></i>
      </button>
-     <button type="button" class="shc-btn shc-btn-submit" id="shc-btn-submit" style="display:none;">
-      ODESLAT KONFIGURACI A ZÍSKAT NABÍDKU
-     </button>
     </div>
 
    </div>
@@ -673,12 +763,25 @@ gtag('config', 'G-GVQ2MF6LY5');
  </div>
 </div>
 
-<!-- Thank You -->
-<div class="shc-thank-you" id="shc-thank-you">
+<!-- Thank You - Save -->
+<div class="shc-thank-you" id="shc-thank-save">
+ <div class="container">
+  <i class="fa fa-bookmark" style="color:#B5E126;font-size:80px;"></i>
+  <h2>Konfigurace uložena!</h2>
+  <p>Na váš email jsme odeslali přehled vaší konfigurace „Můj dům". Můžete se k němu kdykoliv vrátit.</p>
+  <p style="margin-top:30px;">
+   <a href="https://www.plushouse.cz/" class="shc-btn shc-btn-secondary" style="margin-right:10px;">Zpět na hlavní stránku</a>
+   <a href="#" class="shc-btn shc-btn-primary" id="shc-btn-after-save-consult">Chci i konzultaci</a>
+  </p>
+ </div>
+</div>
+
+<!-- Thank You - Consult -->
+<div class="shc-thank-you" id="shc-thank-consult">
  <div class="container">
   <i class="fa fa-check-circle"></i>
-  <h2>Děkujeme za vaši konfiguraci!</h2>
-  <p>Vaši poptávku jsme úspěšně přijali. Náš specialista na chytré domácnosti se vám ozve <strong>do 24 hodin</strong> s podrobnou nabídkou přesně na míru.</p>
+  <h2>Žádost o konzultaci odeslána!</h2>
+  <p>Děkujeme za váš zájem. Náš specialista se vám ozve <strong>do 24 hodin</strong> a společně projdete možnosti pro váš dům.</p>
   <p>Na váš email jsme zaslali potvrzení s přehledem vaší konfigurace.</p>
   <p style="margin-top:30px;">
    <a href="https://www.plushouse.cz/" class="shc-btn shc-btn-primary">Zpět na hlavní stránku</a>
