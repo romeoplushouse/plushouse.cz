@@ -9,14 +9,24 @@ echo "=== Build ==="
 rm -rf /var/www/erp
 cp -r /tmp/erp-deploy /var/www/erp
 cd /var/www/erp/erp
-cat > .env << 'E'
-DATABASE_URL="postgresql://plushouse_erp:PlusH0use2026@localhost:5432/plushouse_erp"
-AUTH_SECRET="x7k9m2p4q8r1t6u3w5y0z4a8b6c"
+# Preserve existing .env or generate new one with unique secrets
+if [ ! -f .env ]; then
+  GEN_SECRET=$(openssl rand -base64 32 | tr -dc 'a-zA-Z0-9' | head -c32)
+  GEN_DBPASS=$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c16)
+  cat > .env << ENVGEN
+DATABASE_URL="postgresql://plushouse_erp:${GEN_DBPASS}@localhost:5432/plushouse_erp"
+AUTH_SECRET="${GEN_SECRET}"
 AUTH_URL="https://erp.plushouse.cz"
 NEXTAUTH_URL="https://erp.plushouse.cz"
 NODE_ENV="production"
 PORT=3007
-E
+ENVGEN
+  echo "Generated new .env with unique secrets"
+  # Update DB password to match
+  su - postgres -c "psql -c \"ALTER USER plushouse_erp WITH PASSWORD '${GEN_DBPASS}';\"" 2>/dev/null || true
+else
+  echo "Using existing .env"
+fi
 npm ci
 npx prisma generate
 npx prisma db push --accept-data-loss

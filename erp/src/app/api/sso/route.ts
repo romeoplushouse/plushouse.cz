@@ -25,6 +25,25 @@ const ALLOWED_ORIGINS = [
   "http://localhost:3007",
 ];
 
+// Allowed redirect URLs (prevents open redirect)
+const ALLOWED_REDIRECT_HOSTS = [
+  "plushouse.cz",
+  "www.plushouse.cz",
+  "plusconnect.cz",
+  "www.plusconnect.cz",
+  "erp.plushouse.cz",
+  "localhost",
+];
+
+function isAllowedRedirectUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return ALLOWED_REDIRECT_HOSTS.includes(parsed.hostname);
+  } catch {
+    return false;
+  }
+}
+
 function corsHeaders(origin: string | null) {
   const headers = new Headers();
   if (origin && ALLOWED_ORIGINS.includes(origin)) {
@@ -192,8 +211,8 @@ export async function GET(request: NextRequest) {
   });
 
   if (!session || new Date() > session.expiresAt) {
-    // If return_url provided, redirect to login
-    if (returnUrl) {
+    // If return_url provided, redirect to login (validate first)
+    if (returnUrl && isAllowedRedirectUrl(returnUrl)) {
       return NextResponse.redirect(
         `https://erp.plushouse.cz/prihlaseni?return_url=${encodeURIComponent(returnUrl)}`
       );
@@ -204,8 +223,8 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // If return_url, redirect back with token
-  if (returnUrl) {
+  // If return_url, redirect back with token (validate first)
+  if (returnUrl && isAllowedRedirectUrl(returnUrl)) {
     const separator = returnUrl.includes("?") ? "&" : "?";
     return NextResponse.redirect(`${returnUrl}${separator}sso_token=${token}`);
   }
