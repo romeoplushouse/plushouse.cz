@@ -34,9 +34,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $features = json_decode($features_json, true);
     if (!is_array($features)) $features = array();
 
-    // Price estimate
-    $price_min = isset($_POST['price_min']) ? intval($_POST['price_min']) : 0;
-    $price_max = isset($_POST['price_max']) ? intval($_POST['price_max']) : 0;
+    // Server-side price calculation (ignore client-supplied values)
+    $price_ranges = array(
+        'heating' => array(25000, 45000), 'cooling' => array(20000, 35000),
+        'heat_pump' => array(15000, 25000), 'recuperation' => array(15000, 25000),
+        'photovoltaics' => array(30000, 50000), 'battery' => array(20000, 40000),
+        'energy_monitor' => array(8000, 15000), 'ev_charger' => array(15000, 30000),
+        'irrigation' => array(12000, 22000), 'water_leak' => array(8000, 15000),
+        'hot_water' => array(10000, 18000), 'smart_lights' => array(20000, 40000),
+        'outdoor_lights' => array(12000, 22000), 'light_scenes' => array(8000, 15000),
+        'cameras' => array(25000, 50000), 'alarm' => array(20000, 35000),
+        'access' => array(15000, 30000), 'doorbell' => array(8000, 18000),
+        'blinds' => array(18000, 35000), 'multiroom' => array(25000, 50000),
+        'cinema' => array(30000, 60000), 'voice' => array(10000, 20000)
+    );
+    $price_min = 0;
+    $price_max = 0;
+    foreach ($features as $f) {
+        if (isset($price_ranges[$f])) {
+            $price_min += $price_ranges[$f][0];
+            $price_max += $price_ranges[$f][1];
+        }
+    }
+    $area_multiplier = max(1.0, $area / 100);
+    $price_min = round($price_min * $area_multiplier);
+    $price_max = round($price_max * $area_multiplier);
 
     // Newsletter consent
     $newsletter = isset($_POST['newsletter_consent']) && $_POST['newsletter_consent'] === '1';
@@ -90,9 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!in_array($ext, $allowed_ext)) {
                     die(json_encode(array('type' => 'error', 'text' => 'Nepodporovaný formát: ' . $orig_name)));
                 }
-                $safe_name = preg_replace('/[^a-zA-Z0-9._-]/', '_', $orig_name);
+                $safe_name = $i . '_' . substr(md5(uniqid(mt_rand(), true)), 0, 6) . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $orig_name);
                 if (move_uploaded_file($_FILES['documents']['tmp_name'][$i], $upload_dir . '/' . $safe_name)) {
-                    $uploaded_files[] = array('name' => $orig_name, 'size' => $size);
+                    $uploaded_files[] = array('name' => $orig_name, 'size' => $size, 'disk_name' => $safe_name);
                 }
             }
         }
@@ -135,7 +157,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->Subject = 'Vase konfigurace Muj dum - PLUS HOUSE';
         $mail->Body = $client_body;
         $mail->AltBody = "Vase konfigurace Muj dum byla ulozena.\nOrientacni cena: $price_str\n\nPLUS HOUSE | info@plushouse.cz | +420 734 38 48 58";
-        $mail->send();
+
+        if (!$mail->send()) {
+            die(json_encode(array('type' => 'error', 'text' => 'Chyba při odesílání emailu: ' . $mail->ErrorInfo)));
+        }
 
         // Notify admin (lightweight - no attachment for save)
         $mail2 = new PHPMailer;
@@ -235,8 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Attach uploaded files
         foreach ($uploaded_files as $uf) {
-            $safe = preg_replace('/[^a-zA-Z0-9._-]/', '_', $uf['name']);
-            $filepath = $upload_dir . '/' . $safe;
+            $filepath = $upload_dir . '/' . $uf['disk_name'];
             if (file_exists($filepath)) $mail->addAttachment($filepath, $uf['name']);
         }
 
