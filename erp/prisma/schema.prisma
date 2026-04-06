@@ -1,0 +1,1690 @@
+// PlusHouse ERP - Database Schema
+// Comprehensive accounting, CRM, project management, HR, fleet management system
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================================================
+// AUTHENTICATION & USERS
+// ============================================================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  passwordHash  String
+  role          UserRole  @default(USER)
+  isActive      Boolean   @default(true)
+  phone         String?
+  avatarUrl     String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions      Session[]
+  employee      Employee?
+  auditLogs     AuditLog[]
+  comments      Comment[]
+  notifications Notification[]
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  token        String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  ACCOUNTANT
+  WORKER
+  USER
+}
+
+// ============================================================================
+// ORGANIZATION
+// ============================================================================
+
+model Organization {
+  id              String   @id @default(cuid())
+  name            String
+  ico             String?  @unique // IČO
+  dic             String?  @unique // DIČ
+  street          String?
+  city            String?
+  zip             String?
+  country         String   @default("CZ")
+  phone           String?
+  email           String?
+  website         String?
+  bankAccount     String?  // IBAN
+  bankCode        String?
+  logoUrl         String?
+  registrationNote String? // Zápis v OR
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("organizations")
+}
+
+// ============================================================================
+// ADDRESS BOOK (CRM)
+// ============================================================================
+
+model Contact {
+  id              String      @id @default(cuid())
+  type            ContactType
+  companyName     String?
+  firstName       String?
+  lastName        String?
+  ico             String?     // IČO
+  dic             String?     // DIČ
+  street          String?
+  city            String?
+  zip             String?
+  country         String      @default("CZ")
+  email           String?
+  phone           String?
+  website         String?
+  bankAccount     String?
+  bankCode        String?
+  notes           String?
+  isActive        Boolean     @default(true)
+  rating          Float?      // Customer/supplier rating
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  // Relations
+  issuedInvoices      Invoice[]      @relation("InvoiceCustomer")
+  receivedInvoices    Invoice[]      @relation("InvoiceSupplier")
+  quotes              Quote[]
+  projects            Project[]
+  payments            Payment[]
+  subcontractor       Subcontractor?
+  contactPersons      ContactPerson[]
+  communications      Communication[]
+  tags                ContactTag[]
+
+  @@map("contacts")
+}
+
+model ContactPerson {
+  id        String   @id @default(cuid())
+  contactId String
+  name      String
+  role      String?
+  email     String?
+  phone     String?
+
+  contact Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@map("contact_persons")
+}
+
+model ContactTag {
+  id        String @id @default(cuid())
+  contactId String
+  tag       String
+
+  contact Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@index([tag])
+  @@map("contact_tags")
+}
+
+model Communication {
+  id        String            @id @default(cuid())
+  contactId String
+  type      CommunicationType
+  subject   String?
+  content   String?
+  date      DateTime          @default(now())
+
+  contact Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@map("communications")
+}
+
+enum ContactType {
+  CUSTOMER
+  SUPPLIER
+  SUBCONTRACTOR
+  EMPLOYEE_CONTACT
+  OTHER
+}
+
+enum CommunicationType {
+  EMAIL
+  PHONE
+  MEETING
+  NOTE
+}
+
+// ============================================================================
+// ACCOUNTING - DOUBLE ENTRY (PODVOJNÉ ÚČETNICTVÍ)
+// ============================================================================
+
+model ChartOfAccounts {
+  id          String      @id @default(cuid())
+  code        String      @unique // e.g., "211", "321", "601"
+  name        String               // e.g., "Pokladna", "Dodavatelé"
+  type        AccountType
+  group       String?              // Account group (e.g., "21 - Peníze")
+  isAnalytic  Boolean     @default(false)
+  parentCode  String?
+  isActive    Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+
+  journalItems JournalEntryItem[]
+
+  @@map("chart_of_accounts")
+}
+
+model JournalEntry {
+  id            String   @id @default(cuid())
+  entryNumber   String   @unique // Sequential: "UD-2026-0001"
+  date          DateTime
+  description   String
+  documentRef   String?  // Reference to invoice, receipt, etc.
+  documentType  String?  // INVOICE, RECEIPT, BANK_STATEMENT, etc.
+  isPosted      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  items JournalEntryItem[]
+
+  @@index([date])
+  @@map("journal_entries")
+}
+
+model JournalEntryItem {
+  id             String  @id @default(cuid())
+  journalEntryId String
+  accountCode    String
+  debit          Decimal @default(0) @db.Decimal(15, 2)
+  credit         Decimal @default(0) @db.Decimal(15, 2)
+  description    String?
+
+  journalEntry JournalEntry    @relation(fields: [journalEntryId], references: [id], onDelete: Cascade)
+  account      ChartOfAccounts @relation(fields: [accountCode], references: [code])
+
+  @@map("journal_entry_items")
+}
+
+enum AccountType {
+  ASSET       // Aktiva
+  LIABILITY   // Pasiva
+  EQUITY      // Vlastní kapitál
+  REVENUE     // Výnosy
+  EXPENSE     // Náklady
+}
+
+// ============================================================================
+// TAX RECORDS (DAŇOVÁ EVIDENCE)
+// ============================================================================
+
+model TaxRecord {
+  id            String        @id @default(cuid())
+  date          DateTime
+  type          TaxRecordType
+  documentRef   String?
+  description   String
+  amountTotal   Decimal       @db.Decimal(15, 2)
+  amountVat     Decimal       @default(0) @db.Decimal(15, 2)
+  amountBase    Decimal       @db.Decimal(15, 2)
+  vatRate       Decimal?      @db.Decimal(5, 2)
+  category      String?       // Tax category
+  createdAt     DateTime      @default(now())
+
+  @@index([date])
+  @@map("tax_records")
+}
+
+enum TaxRecordType {
+  INCOME       // Příjem
+  EXPENSE      // Výdaj
+}
+
+// ============================================================================
+// VAT & TAX REPORTING
+// ============================================================================
+
+model VatReturn {
+  id            String        @id @default(cuid())
+  period        String        // "2026-Q1" or "2026-03"
+  periodFrom    DateTime
+  periodTo      DateTime
+  status        VatReturnStatus @default(DRAFT)
+  totalBase21   Decimal       @default(0) @db.Decimal(15, 2)
+  totalVat21    Decimal       @default(0) @db.Decimal(15, 2)
+  totalBase15   Decimal       @default(0) @db.Decimal(15, 2)
+  totalVat15    Decimal       @default(0) @db.Decimal(15, 2)
+  totalBase12   Decimal       @default(0) @db.Decimal(15, 2)
+  totalVat12    Decimal       @default(0) @db.Decimal(15, 2)
+  totalBase0    Decimal       @default(0) @db.Decimal(15, 2)
+  xmlExport     String?       // Generated XML for tax authority
+  generatedBy   String?       // AI or manual
+  generatedAt   DateTime?
+  submittedAt   DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  items VatReturnItem[]
+
+  @@map("vat_returns")
+}
+
+model VatReturnItem {
+  id          String  @id @default(cuid())
+  vatReturnId String
+  invoiceId   String?
+  line        Int     // Line number in DPH form
+  base        Decimal @db.Decimal(15, 2)
+  vat         Decimal @db.Decimal(15, 2)
+  rate        Decimal @db.Decimal(5, 2)
+
+  vatReturn VatReturn @relation(fields: [vatReturnId], references: [id], onDelete: Cascade)
+
+  @@map("vat_return_items")
+}
+
+model ControlReport {
+  id          String              @id @default(cuid())
+  period      String
+  periodFrom  DateTime
+  periodTo    DateTime
+  status      VatReturnStatus     @default(DRAFT)
+  xmlExport   String?
+  generatedAt DateTime?
+  submittedAt DateTime?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  items ControlReportItem[]
+
+  @@map("control_reports")
+}
+
+model ControlReportItem {
+  id              String @id @default(cuid())
+  controlReportId String
+  section         String // A.1, A.2, A.3, A.4, A.5, B.1, B.2, B.3
+  invoiceId       String?
+  partnerDic      String?
+  documentNumber  String?
+  date            DateTime?
+  base            Decimal @db.Decimal(15, 2)
+  vat             Decimal @db.Decimal(15, 2)
+  vatRate         Decimal @db.Decimal(5, 2)
+  code            String? // Code of supply type
+
+  controlReport ControlReport @relation(fields: [controlReportId], references: [id], onDelete: Cascade)
+
+  @@map("control_report_items")
+}
+
+model IncomeTaxReturn {
+  id              String           @id @default(cuid())
+  year            Int
+  status          VatReturnStatus  @default(DRAFT)
+  totalRevenue    Decimal          @default(0) @db.Decimal(15, 2)
+  totalExpenses   Decimal          @default(0) @db.Decimal(15, 2)
+  taxableIncome   Decimal          @default(0) @db.Decimal(15, 2)
+  taxRate         Decimal          @default(21) @db.Decimal(5, 2)
+  taxAmount       Decimal          @default(0) @db.Decimal(15, 2)
+  xmlExport       String?
+  generatedBy     String?
+  generatedAt     DateTime?
+  submittedAt     DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@unique([year])
+  @@map("income_tax_returns")
+}
+
+enum VatReturnStatus {
+  DRAFT
+  GENERATED
+  REVIEWED
+  SUBMITTED
+  ACCEPTED
+}
+
+// ============================================================================
+// INVOICING & DOCUMENTS
+// ============================================================================
+
+model Invoice {
+  id               String        @id @default(cuid())
+  invoiceNumber    String        @unique
+  type             InvoiceType
+  status           InvoiceStatus @default(DRAFT)
+  customerId       String?
+  supplierId       String?
+  issueDate        DateTime
+  dueDate          DateTime
+  taxDate          DateTime?     // DUZP - Datum uskutečnění zdanitelného plnění
+  deliveryDate     DateTime?
+  subtotal         Decimal       @db.Decimal(15, 2)
+  vatAmount        Decimal       @default(0) @db.Decimal(15, 2)
+  total            Decimal       @db.Decimal(15, 2)
+  currency         String        @default("CZK")
+  exchangeRate     Decimal       @default(1) @db.Decimal(10, 4)
+  paymentMethod    String?
+  bankAccount      String?
+  variableSymbol   String?       // VS
+  constantSymbol   String?       // KS
+  specificSymbol   String?       // SS
+  notes            String?
+  internalNote     String?
+  paidAmount       Decimal       @default(0) @db.Decimal(15, 2)
+  paidAt           DateTime?
+  qrPaymentCode    String?       // QR code for payment
+  relatedInvoiceId String?       // For credit notes, tax documents linked to advance invoices
+  projectId        String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  customer     Contact?      @relation("InvoiceCustomer", fields: [customerId], references: [id])
+  supplier     Contact?      @relation("InvoiceSupplier", fields: [supplierId], references: [id])
+  project      Project?      @relation(fields: [projectId], references: [id])
+  items        InvoiceItem[]
+  payments     Payment[]
+  attachments  Attachment[]  @relation("InvoiceAttachments")
+
+  @@index([status])
+  @@index([customerId])
+  @@index([dueDate])
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id          String  @id @default(cuid())
+  invoiceId   String
+  description String
+  quantity    Decimal @db.Decimal(10, 3)
+  unit        String  @default("ks")
+  unitPrice   Decimal @db.Decimal(15, 2)
+  vatRate     Decimal @default(21) @db.Decimal(5, 2)
+  vatAmount   Decimal @default(0) @db.Decimal(15, 2)
+  total       Decimal @db.Decimal(15, 2)
+  sortOrder   Int     @default(0)
+
+  invoice Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  @@map("invoice_items")
+}
+
+enum InvoiceType {
+  ISSUED           // Vydaná faktura
+  RECEIVED         // Přijatá faktura
+  ADVANCE          // Zálohová faktura
+  TAX_DOCUMENT     // Daňový doklad k záloze
+  CREDIT_NOTE      // Dobropis
+  PROFORMA         // Proforma
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+// ============================================================================
+// QUOTES (CENOVÉ NABÍDKY)
+// ============================================================================
+
+model Quote {
+  id          String      @id @default(cuid())
+  quoteNumber String      @unique
+  contactId   String
+  projectId   String?
+  status      QuoteStatus @default(DRAFT)
+  issueDate   DateTime    @default(now())
+  validUntil  DateTime
+  subtotal    Decimal     @db.Decimal(15, 2)
+  vatAmount   Decimal     @default(0) @db.Decimal(15, 2)
+  total       Decimal     @db.Decimal(15, 2)
+  currency    String      @default("CZK")
+  notes       String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  contact Contact  @relation(fields: [contactId], references: [id])
+  project Project? @relation(fields: [projectId], references: [id])
+  items   QuoteItem[]
+
+  @@map("quotes")
+}
+
+model QuoteItem {
+  id          String  @id @default(cuid())
+  quoteId     String
+  description String
+  quantity    Decimal @db.Decimal(10, 3)
+  unit        String  @default("ks")
+  unitPrice   Decimal @db.Decimal(15, 2)
+  vatRate     Decimal @default(21) @db.Decimal(5, 2)
+  total       Decimal @db.Decimal(15, 2)
+  sortOrder   Int     @default(0)
+
+  quote Quote @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+
+  @@map("quote_items")
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+  INVOICED
+}
+
+// ============================================================================
+// PAYMENTS & BANKING
+// ============================================================================
+
+model Payment {
+  id               String        @id @default(cuid())
+  invoiceId        String?
+  contactId        String?
+  date             DateTime
+  amount           Decimal       @db.Decimal(15, 2)
+  currency         String        @default("CZK")
+  type             PaymentType
+  method           PaymentMethod
+  variableSymbol   String?
+  bankReference    String?       // Reference from bank notification
+  note             String?
+  isMatched        Boolean       @default(false) // Auto-matched with invoice
+  createdAt        DateTime      @default(now())
+
+  invoice Invoice? @relation(fields: [invoiceId], references: [id])
+  contact Contact? @relation(fields: [contactId], references: [id])
+
+  @@index([date])
+  @@index([variableSymbol])
+  @@map("payments")
+}
+
+model BankNotification {
+  id                String   @id @default(cuid())
+  bankAccount       String
+  transactionId     String   @unique
+  date              DateTime
+  amount            Decimal  @db.Decimal(15, 2)
+  currency          String   @default("CZK")
+  counterpartAccount String?
+  counterpartName    String?
+  variableSymbol    String?
+  constantSymbol    String?
+  specificSymbol    String?
+  message           String?
+  isProcessed       Boolean  @default(false)
+  matchedPaymentId  String?
+  createdAt         DateTime @default(now())
+
+  @@index([isProcessed])
+  @@map("bank_notifications")
+}
+
+enum PaymentType {
+  INCOMING  // Příjem
+  OUTGOING  // Výdaj
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER
+  CASH
+  CARD
+  QR_PAYMENT
+  OTHER
+}
+
+// ============================================================================
+// PROJECTS & ORDERS (EVIDENCE ZAKÁZEK)
+// ============================================================================
+
+model Project {
+  id            String        @id @default(cuid())
+  projectNumber String        @unique
+  name          String
+  description   String?
+  contactId     String?
+  status        ProjectStatus @default(NEW)
+  priority      Int           @default(0)
+  startDate     DateTime?
+  endDate       DateTime?
+  budget        Decimal?      @db.Decimal(15, 2)
+  address       String?       // Project location
+  lat           Float?
+  lng           Float?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  contact           Contact?           @relation(fields: [contactId], references: [id])
+  tasks             ProjectTask[]
+  invoices          Invoice[]
+  quotes            Quote[]
+  materials         ProjectMaterial[]
+  mediaEvidence     MediaEvidence[]
+  qualityChecks     QualityCheck[]
+  projectWorkers    ProjectWorker[]
+  customerRating    CustomerRating?
+
+  @@map("projects")
+}
+
+model ProjectTask {
+  id          String          @id @default(cuid())
+  projectId   String
+  title       String
+  description String?
+  status      TaskStatus      @default(TODO)
+  priority    Int             @default(0)
+  assigneeId  String?
+  dueDate     DateTime?
+  completedAt DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  project  Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignee Employee? @relation(fields: [assigneeId], references: [id])
+
+  @@map("project_tasks")
+}
+
+model ProjectWorker {
+  id         String   @id @default(cuid())
+  projectId  String
+  employeeId String?
+  subcontractorId String?
+  role       String?
+  hoursWorked Decimal @default(0) @db.Decimal(8, 2)
+
+  project       Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  employee      Employee?      @relation(fields: [employeeId], references: [id])
+  subcontractor Subcontractor? @relation(fields: [subcontractorId], references: [id])
+
+  @@map("project_workers")
+}
+
+model ProjectMaterial {
+  id          String  @id @default(cuid())
+  projectId   String
+  materialId  String?
+  name        String
+  quantity    Decimal @db.Decimal(10, 3)
+  unit        String  @default("ks")
+  unitCost    Decimal @db.Decimal(15, 2)
+  totalCost   Decimal @db.Decimal(15, 2)
+  supplierId  String?
+  invoiceRef  String?
+  date        DateTime @default(now())
+
+  project  Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  material Material? @relation(fields: [materialId], references: [id])
+
+  @@map("project_materials")
+}
+
+enum ProjectStatus {
+  NEW
+  QUOTED
+  IN_PROGRESS
+  ON_HOLD
+  COMPLETED
+  CANCELLED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  REVIEW
+  DONE
+  CANCELLED
+}
+
+// ============================================================================
+// QUALITY CONTROL
+// ============================================================================
+
+model QualityCheck {
+  id          String   @id @default(cuid())
+  projectId   String
+  checkDate   DateTime @default(now())
+  inspectorId String?
+  status      String   @default("PENDING") // PENDING, PASSED, FAILED, NEEDS_REWORK
+  score       Float?   // 1-5
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  project Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  items   QualityCheckItem[]
+
+  @@map("quality_checks")
+}
+
+model QualityCheckItem {
+  id             String  @id @default(cuid())
+  qualityCheckId String
+  criteria       String
+  passed         Boolean
+  notes          String?
+  severity       String? // LOW, MEDIUM, HIGH, CRITICAL
+
+  qualityCheck QualityCheck @relation(fields: [qualityCheckId], references: [id], onDelete: Cascade)
+
+  @@map("quality_check_items")
+}
+
+model MediaEvidence {
+  id          String   @id @default(cuid())
+  projectId   String
+  type        MediaType
+  phase       String?  // BEFORE, DURING, AFTER
+  url         String
+  thumbnailUrl String?
+  description String?
+  uploadedAt  DateTime @default(now())
+  uploadedBy  String?
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("media_evidence")
+}
+
+model CustomerRating {
+  id          String   @id @default(cuid())
+  projectId   String   @unique
+  rating      Float    // 1-5
+  review      String?
+  ratedAt     DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@map("customer_ratings")
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+}
+
+// ============================================================================
+// MATERIALS
+// ============================================================================
+
+model Material {
+  id          String  @id @default(cuid())
+  code        String  @unique
+  name        String
+  description String?
+  unit        String  @default("ks")
+  unitPrice   Decimal @db.Decimal(15, 2)
+  stockQty    Decimal @default(0) @db.Decimal(10, 3)
+  minStockQty Decimal @default(0) @db.Decimal(10, 3)
+  supplierId  String?
+  category    String?
+  isActive    Boolean @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  projectMaterials ProjectMaterial[]
+
+  @@map("materials")
+}
+
+// ============================================================================
+// EMPLOYEES & HR
+// ============================================================================
+
+model Employee {
+  id              String   @id @default(cuid())
+  userId          String?  @unique
+  employeeNumber  String   @unique
+  firstName       String
+  lastName        String
+  email           String?
+  phone           String?
+  personalId      String?  // Rodné číslo (encrypted)
+  birthDate       DateTime?
+  street          String?
+  city            String?
+  zip             String?
+  position        String?
+  department      String?
+  hireDate        DateTime
+  terminationDate DateTime?
+  hourlyRate      Decimal? @db.Decimal(10, 2)
+  monthlySalary   Decimal? @db.Decimal(15, 2)
+  bankAccount     String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user            User?              @relation(fields: [userId], references: [id])
+  tasks           ProjectTask[]
+  payrolls        Payroll[]
+  locationLogs    LocationLog[]
+  workTrips       WorkTrip[]
+  vehicleUsages   VehicleUsage[]
+  projectWorkers  ProjectWorker[]
+  craftRatings    CraftRating[]
+  sosAlerts       SosAlert[]
+  tachographFiles TachographFile[]
+  tachographActivities TachographActivity[]
+
+  @@map("employees")
+}
+
+model Payroll {
+  id              String   @id @default(cuid())
+  employeeId      String
+  period          String   // "2026-03"
+  grossSalary     Decimal  @db.Decimal(15, 2)
+  socialInsurance Decimal  @default(0) @db.Decimal(15, 2) // Sociální pojištění
+  healthInsurance Decimal  @default(0) @db.Decimal(15, 2) // Zdravotní pojištění
+  incomeTax       Decimal  @default(0) @db.Decimal(15, 2) // Daň z příjmů
+  deductions      Decimal  @default(0) @db.Decimal(15, 2) // Srážky
+  bonuses         Decimal  @default(0) @db.Decimal(15, 2) // Odměny
+  netSalary       Decimal  @db.Decimal(15, 2)
+  status          String   @default("DRAFT") // DRAFT, APPROVED, PAID
+  paidAt          DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@unique([employeeId, period])
+  @@map("payrolls")
+}
+
+model CraftRating {
+  id          String   @id @default(cuid())
+  employeeId  String
+  projectId   String?
+  rating      Float    // 1-5
+  review      String?
+  ratedBy     String?  // Customer name or ID
+  ratedAt     DateTime @default(now())
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@map("craft_ratings")
+}
+
+// ============================================================================
+// GPS TRACKING & FLEET MANAGEMENT
+// ============================================================================
+
+model LocationLog {
+  id          String   @id @default(cuid())
+  employeeId  String
+  lat         Float
+  lng         Float
+  altitude    Float?
+  speed       Float?   // km/h
+  accuracy    Float?   // meters
+  heading     Float?   // degrees
+  heartRate   Int?     // BPM from health device
+  timestamp   DateTime @default(now())
+  source      String?  // PHONE, WATCH, VEHICLE
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@index([employeeId, timestamp])
+  @@map("location_logs")
+}
+
+model SosAlert {
+  id          String    @id @default(cuid())
+  employeeId  String
+  lat         Float
+  lng         Float
+  type        String    // MANUAL, APPLE_SOS, FALL_DETECTION, CRASH_DETECTION
+  heartRate   Int?
+  speed       Float?
+  message     String?
+  isResolved  Boolean   @default(false)
+  resolvedAt  DateTime?
+  resolvedBy  String?
+  createdAt   DateTime  @default(now())
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@map("sos_alerts")
+}
+
+model Vehicle {
+  id                String   @id @default(cuid())
+  licensePlate      String   @unique
+  make              String
+  model             String
+  year              Int?
+  vin               String?  @unique
+  fuelType          String?  // GASOLINE, DIESEL, ELECTRIC, HYBRID
+  odometerKm        Decimal  @default(0) @db.Decimal(10, 1)
+  isCompanyCar      Boolean  @default(true)
+  personalUseAllowed Boolean @default(false)
+  geofenceRegion    String?  // Allowed region: "CZ", "JIHOMORAVSKY_KRAJ", etc.
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  usages            VehicleUsage[]
+  geofenceAlerts    GeofenceAlert[]
+  tachographFiles   TachographFile[]
+  tachographActivities TachographActivity[]
+
+  @@map("vehicles")
+}
+
+model VehicleUsage {
+  id             String   @id @default(cuid())
+  vehicleId      String
+  employeeId     String
+  purpose        VehicleUsePurpose
+  startDate      DateTime
+  endDate        DateTime?
+  startOdometer  Decimal  @db.Decimal(10, 1)
+  endOdometer    Decimal? @db.Decimal(10, 1)
+  distanceKm     Decimal? @db.Decimal(10, 1)
+  fuelConsumed   Decimal? @db.Decimal(8, 2) // liters
+  notes          String?
+  createdAt      DateTime @default(now())
+
+  vehicle  Vehicle  @relation(fields: [vehicleId], references: [id])
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@map("vehicle_usages")
+}
+
+model GeofenceAlert {
+  id          String   @id @default(cuid())
+  vehicleId   String
+  employeeId  String?
+  type        String   // LEFT_REGION, LEFT_COUNTRY, SPEED_LIMIT
+  lat         Float
+  lng         Float
+  speed       Float?
+  message     String
+  isReviewed  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+
+  @@map("geofence_alerts")
+}
+
+enum VehicleUsePurpose {
+  BUSINESS
+  PERSONAL
+  COMMUTE
+}
+
+// ============================================================================
+// WORK TRIPS
+// ============================================================================
+
+model WorkTrip {
+  id             String   @id @default(cuid())
+  employeeId     String
+  vehicleId      String?
+  purpose        String
+  startLocation  String
+  endLocation    String
+  startDate      DateTime
+  endDate        DateTime?
+  distanceKm     Decimal  @db.Decimal(10, 1)
+  avgSpeedKmh    Decimal? @db.Decimal(6, 1)
+  maxSpeedKmh    Decimal? @db.Decimal(6, 1)
+  hardBrakeCount Int      @default(0)
+  fuelCost       Decimal? @db.Decimal(10, 2)
+  otherCosts     Decimal? @db.Decimal(10, 2)
+  mealAllowance  Decimal? @db.Decimal(10, 2) // Stravné
+  status         String   @default("DRAFT") // DRAFT, SUBMITTED, APPROVED
+  notes          String?
+  createdAt      DateTime @default(now())
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@map("work_trips")
+}
+
+// ============================================================================
+// DIGITAL TACHOGRAPH (Gen 2 / Smart Tachograph EU)
+// ============================================================================
+
+model TachographFile {
+  id            String   @id @default(cuid())
+  vehicleId     String?
+  employeeId    String?  // Driver
+  fileType      TachographFileType
+  fileName      String
+  fileUrl       String?  // Stored file path/URL
+  fileSize      Int?
+  fileHash      String?  // SHA256 for deduplication
+  cardNumber    String?  // Driver/company card number
+  downloadedAt  DateTime // When downloaded from tachograph
+  periodFrom    DateTime
+  periodTo      DateTime
+  isProcessed   Boolean  @default(false)
+  processedAt   DateTime?
+  errorMessage  String?
+  createdAt     DateTime @default(now())
+
+  vehicle    Vehicle?  @relation(fields: [vehicleId], references: [id])
+  employee   Employee? @relation(fields: [employeeId], references: [id])
+  activities TachographActivity[]
+
+  @@index([vehicleId, periodFrom])
+  @@index([employeeId, periodFrom])
+  @@index([fileHash])
+  @@map("tachograph_files")
+}
+
+model TachographActivity {
+  id              String   @id @default(cuid())
+  fileId          String?
+  vehicleId       String?
+  employeeId      String?  // Driver
+  activityType    DriverActivity
+  startTime       DateTime
+  endTime         DateTime
+  durationMinutes Int
+  // Location data (Gen 2 tachograph records GPS)
+  startLat        Float?
+  startLng        Float?
+  endLat          Float?
+  endLng          Float?
+  startCountry    String?  // ISO country code
+  endCountry      String?
+  // Driving data
+  distanceKm      Decimal? @db.Decimal(10, 1)
+  maxSpeedKmh     Decimal? @db.Decimal(6, 1)
+  avgSpeedKmh     Decimal? @db.Decimal(6, 1)
+  // Card slot (driver 1 or driver 2 for team driving)
+  cardSlot        Int      @default(1) // 1 or 2
+  isTeamDriving   Boolean  @default(false)
+  createdAt       DateTime @default(now())
+
+  file     TachographFile? @relation(fields: [fileId], references: [id], onDelete: SetNull)
+  vehicle  Vehicle?        @relation(fields: [vehicleId], references: [id])
+  employee Employee?       @relation(fields: [employeeId], references: [id])
+
+  @@index([employeeId, startTime])
+  @@index([vehicleId, startTime])
+  @@index([activityType, startTime])
+  @@map("tachograph_activities")
+}
+
+model TachographViolation {
+  id              String   @id @default(cuid())
+  employeeId      String?
+  vehicleId       String?
+  violationType   TachographViolationType
+  severity        String   // MINOR, SERIOUS, VERY_SERIOUS (EU classification)
+  description     String
+  occurredAt      DateTime
+  drivingTime     Int?     // Minutes of continuous driving when violation occurred
+  restDeficit     Int?     // Minutes of rest deficit
+  lat             Float?
+  lng             Float?
+  isAcknowledged  Boolean  @default(false)
+  acknowledgedBy  String?
+  acknowledgedAt  DateTime?
+  notes           String?
+  createdAt       DateTime @default(now())
+
+  @@index([employeeId, occurredAt])
+  @@index([severity])
+  @@map("tachograph_violations")
+}
+
+model TachographBorderCrossing {
+  id          String   @id @default(cuid())
+  employeeId  String?
+  vehicleId   String?
+  fromCountry String   // ISO 3166-1 alpha-2
+  toCountry   String
+  crossedAt   DateTime
+  lat         Float?
+  lng         Float?
+  odometerKm  Decimal? @db.Decimal(10, 1)
+  createdAt   DateTime @default(now())
+
+  @@index([employeeId, crossedAt])
+  @@index([vehicleId, crossedAt])
+  @@map("tachograph_border_crossings")
+}
+
+model TachographDailySummary {
+  id                    String   @id @default(cuid())
+  employeeId            String
+  vehicleId             String?
+  date                  DateTime @db.Date
+  totalDrivingMinutes   Int      @default(0)
+  totalWorkMinutes      Int      @default(0)
+  totalAvailMinutes     Int      @default(0)
+  totalRestMinutes      Int      @default(0)
+  totalDistanceKm       Decimal  @default(0) @db.Decimal(10, 1)
+  maxSpeedKmh           Decimal? @db.Decimal(6, 1)
+  continuousDrivingMax  Int?     // Max continuous driving in minutes
+  dailyDrivingExceeded  Boolean  @default(false) // > 9h (or 10h 2x/week)
+  weeklyDrivingExceeded Boolean  @default(false) // > 56h
+  biweeklyDrivingExceeded Boolean @default(false) // > 90h per 2 weeks
+  restViolation         Boolean  @default(false)  // < 11h daily rest
+  countriesVisited      String[] // ISO codes
+  createdAt             DateTime @default(now())
+
+  @@unique([employeeId, date])
+  @@index([date])
+  @@map("tachograph_daily_summaries")
+}
+
+enum TachographFileType {
+  VEHICLE_DDD   // Vehicle unit download (.ddd)
+  DRIVER_DDD    // Driver card download (.ddd)
+  COMPANY_DDD   // Company card download
+  WORKSHOP_DDD  // Workshop card download
+}
+
+enum DriverActivity {
+  DRIVING       // Řízení
+  WORK          // Práce (jiná než řízení)
+  AVAILABILITY  // Pohotovost
+  REST          // Odpočinek
+  BREAK         // Přestávka
+}
+
+enum TachographViolationType {
+  CONTINUOUS_DRIVING     // Překročení nepřetržitého řízení (> 4.5h)
+  DAILY_DRIVING          // Překročení denní doby řízení (> 9h / 10h)
+  WEEKLY_DRIVING         // Překročení týdenní doby řízení (> 56h)
+  BIWEEKLY_DRIVING       // Překročení 2-týdenní doby řízení (> 90h)
+  DAILY_REST             // Nedodržení denního odpočinku (< 11h)
+  WEEKLY_REST            // Nedodržení týdenního odpočinku (< 45h)
+  BREAK_VIOLATION        // Nedodržení přestávky po 4.5h řízení
+  SPEED_LIMIT            // Překročení rychlostního limitu
+  CARD_NOT_INSERTED      // Řízení bez vložené karty
+  MANIPULATION           // Pokus o manipulaci s tachografem
+}
+
+// ============================================================================
+// SUBCONTRACTORS
+// ============================================================================
+
+model Subcontractor {
+  id               String   @id @default(cuid())
+  contactId        String   @unique
+  specialization   String?  // Elektro, Vodo-topo, SDK, Malíř, etc.
+  trade            String?  // Obor
+  hourlyRate       Decimal? @db.Decimal(10, 2)
+  dailyRate        Decimal? @db.Decimal(10, 2)
+  rating           Float?   // 1-5
+  hasFrameworkAgreement Boolean @default(false)
+  agreementValidFrom  DateTime?
+  agreementValidTo    DateTime?
+  agreementDocUrl     String?
+  insuranceValidTo    DateTime?
+  certifications      String?
+  notes            String?
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  contact         Contact         @relation(fields: [contactId], references: [id])
+  priceListItems  SubcontractorPrice[]
+  projectWorkers  ProjectWorker[]
+
+  @@map("subcontractors")
+}
+
+model SubcontractorPrice {
+  id              String  @id @default(cuid())
+  subcontractorId String
+  description     String
+  unit            String  @default("ks")
+  unitPrice       Decimal @db.Decimal(15, 2)
+  category        String?
+
+  subcontractor Subcontractor @relation(fields: [subcontractorId], references: [id], onDelete: Cascade)
+
+  @@map("subcontractor_prices")
+}
+
+// ============================================================================
+// ATTACHMENTS & DOCUMENTS
+// ============================================================================
+
+model Attachment {
+  id          String   @id @default(cuid())
+  fileName    String
+  fileUrl     String
+  fileSize    Int?
+  mimeType    String?
+  uploadedAt  DateTime @default(now())
+  uploadedBy  String?
+
+  invoices Invoice[] @relation("InvoiceAttachments")
+
+  @@map("attachments")
+}
+
+// ============================================================================
+// AUDIT LOG
+// ============================================================================
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String   // CREATE, UPDATE, DELETE
+  entity     String   // Invoice, Contact, Payment, etc.
+  entityId   String
+  changes    String?  // JSON of changes
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([entity, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ============================================================================
+// COMMENTS & NOTIFICATIONS
+// ============================================================================
+
+model Comment {
+  id        String   @id @default(cuid())
+  userId    String
+  entity    String   // Project, Invoice, etc.
+  entityId  String
+  content   String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([entity, entityId])
+  @@map("comments")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      String   // INVOICE_DUE, SOS_ALERT, GEOFENCE, PAYMENT_RECEIVED, etc.
+  entityType String?
+  entityId  String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+// ============================================================================
+// PROJECT COMMUNICATION & MESSAGING
+// ============================================================================
+
+model ProjectMessage {
+  id          String   @id @default(cuid())
+  projectId   String
+  authorId    String?  // User ID (internal)
+  authorName  String   // Display name (for external users too)
+  authorRole  String   // ADMIN, MANAGER, WORKER, SUBCONTRACTOR, CLIENT
+  content     String
+  isInternal  Boolean  @default(false) // True = only visible to company staff
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  attachments ProjectDocument[]
+
+  @@index([projectId, createdAt])
+  @@map("project_messages")
+}
+
+// ============================================================================
+// DOCUMENT MANAGEMENT SYSTEM
+// ============================================================================
+
+model ProjectDocument {
+  id            String       @id @default(cuid())
+  projectId     String
+  messageId     String?      // If attached to a message
+  category      DocCategory
+  title         String
+  description   String?
+  fileName      String
+  fileUrl       String
+  fileSize      Int?
+  mimeType      String?
+  version       Int          @default(1)
+  uploadedBy    String?
+  uploadedByName String?
+  // Access control
+  visibleToClient       Boolean @default(false)
+  visibleToSubcontractor Boolean @default(false)
+  requiresSignature     Boolean @default(false)
+  signedAt              DateTime?
+  signedBy              String?
+  signatureData         String?  // Base64 canvas signature
+  createdAt     DateTime @default(now())
+
+  message ProjectMessage? @relation(fields: [messageId], references: [id])
+
+  @@index([projectId, category])
+  @@map("project_documents")
+}
+
+enum DocCategory {
+  INVOICE           // Faktura
+  ADVANCE_INVOICE   // Zálohová faktura
+  QUOTE             // Cenová nabídka
+  HANDOVER_PROTOCOL // Předávací protokol
+  REVISION_REPORT   // Revizní zpráva
+  DELIVERY_NOTE     // Dodací list
+  PROJECT_DOCS      // Projektová dokumentace
+  MANUAL            // Návod
+  CONTRACT          // Smlouva
+  PHOTO_EVIDENCE    // Fotodokumentace
+  OTHER             // Ostatní
+}
+
+// ============================================================================
+// ON-SITE WORK TRACKING (Zaznamenávač práce na místě)
+// ============================================================================
+
+model WorkSession {
+  id              String   @id @default(cuid())
+  projectId       String
+  employeeId      String?
+  subcontractorId String?
+  // Check-in/out
+  checkInTime     DateTime
+  checkOutTime    DateTime?
+  checkInLat      Float?
+  checkInLng      Float?
+  checkOutLat     Float?
+  checkOutLng     Float?
+  isAutoCheckin   Boolean  @default(false) // Geofence triggered
+  // Duration
+  durationMinutes Int?
+  breakMinutes    Int      @default(0)
+  // Health stats (Apple Health / HealthKit)
+  steps           Int?
+  distanceWalked  Float?   // meters
+  avgHeartRate    Int?
+  caloriesBurned  Float?
+  // Work summary
+  workDescription String?
+  status          WorkSessionStatus @default(ACTIVE)
+  // Quality checklist completion
+  checklistScore  Float?   // 0-100%
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  checklistItems WorkSessionChecklist[]
+
+  @@index([projectId, checkInTime])
+  @@index([employeeId, checkInTime])
+  @@map("work_sessions")
+}
+
+model WorkSessionChecklist {
+  id            String  @id @default(cuid())
+  workSessionId String
+  item          String
+  isCompleted   Boolean @default(false)
+  completedAt   DateTime?
+  photoUrl      String?
+  notes         String?
+
+  workSession WorkSession @relation(fields: [workSessionId], references: [id], onDelete: Cascade)
+
+  @@map("work_session_checklists")
+}
+
+enum WorkSessionStatus {
+  ACTIVE        // Na místě, pracuje
+  ON_BREAK      // Přestávka
+  COMPLETED     // Dokončeno
+  CANCELLED     // Zrušeno
+}
+
+// ============================================================================
+// ON-SITE DOCUMENT GENERATION
+// ============================================================================
+
+model HandoverProtocol {
+  id              String   @id @default(cuid())
+  projectId       String
+  protocolNumber  String   @unique
+  type            ProtocolType
+  // Parties
+  handedOverBy    String   // Kdo předává
+  receivedBy      String   // Kdo přebírá
+  // Content
+  description     String
+  items           String?  // JSON array of items/works
+  defects         String?  // Zjištěné vady
+  conditions      String?  // Podmínky převzetí
+  // Signatures
+  handoverSignature   String?  // Base64 canvas
+  receiverSignature   String?  // Base64 canvas
+  signedAt            DateTime?
+  // Status
+  status          String   @default("DRAFT") // DRAFT, SIGNED, ARCHIVED
+  pdfUrl          String?
+  createdAt       DateTime @default(now())
+
+  @@index([projectId])
+  @@map("handover_protocols")
+}
+
+enum ProtocolType {
+  HANDOVER        // Předávací protokol
+  DELIVERY        // Dodací list
+  SERVICE         // Servisní protokol
+  REVISION        // Revizní zpráva
+  ACCEPTANCE      // Protokol o převzetí
+}
+
+// ============================================================================
+// CLIENT PORTAL & REVIEWS
+// ============================================================================
+
+model ClientPortalAccess {
+  id          String   @id @default(cuid())
+  contactId   String
+  projectId   String
+  accessToken String   @unique
+  email       String
+  isActive    Boolean  @default(true)
+  lastAccess  DateTime?
+  createdAt   DateTime @default(now())
+
+  @@unique([contactId, projectId])
+  @@map("client_portal_access")
+}
+
+model ClientReview {
+  id          String   @id @default(cuid())
+  projectId   String
+  contactId   String
+  // Rating
+  overallRating    Int    // 1-5
+  qualityRating    Int?   // 1-5
+  communicationRating Int? // 1-5
+  timelinessRating Int?   // 1-5
+  priceRating      Int?   // 1-5
+  // Review text
+  review      String?
+  wouldRecommend Boolean?
+  // Meta
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@unique([projectId, contactId])
+  @@map("client_reviews")
+}
+
+// ============================================================================
+// ON-SITE PAYMENTS (NFC / Tap to Pay)
+// ============================================================================
+
+model OnSitePayment {
+  id            String   @id @default(cuid())
+  projectId     String?
+  invoiceId     String?
+  amount        Decimal  @db.Decimal(15, 2)
+  currency      String   @default("CZK")
+  method        OnSitePaymentMethod
+  // NFC / Card details
+  cardLast4     String?
+  cardBrand     String?  // VISA, MASTERCARD, etc.
+  transactionId String?  // Payment gateway transaction ID
+  // Status
+  status        String   @default("PENDING") // PENDING, COMPLETED, FAILED, REFUNDED
+  completedAt   DateTime?
+  // Location
+  lat           Float?
+  lng           Float?
+  collectedBy   String?  // Employee ID
+  createdAt     DateTime @default(now())
+
+  @@index([projectId])
+  @@map("onsite_payments")
+}
+
+enum OnSitePaymentMethod {
+  NFC_TAP_TO_PAY  // iPhone Tap to Pay
+  CARD_READER     // External card reader
+  QR_CODE         // QR platba
+  CASH            // Hotovost
+  BANK_TRANSFER   // Převodem (na místě dohodnutý)
+}
+
+// ============================================================================
+// ELECTRONIC CONTRACT SIGNING (eIDAS / BankID / Qualified Electronic Signature)
+// Zákonné náležitosti dle:
+// - Zákon č. 297/2016 Sb. o službách vytvářejících důvěru
+// - Nařízení EU č. 910/2014 (eIDAS)
+// - Zákon č. 89/2012 Sb. občanský zákoník (§ 561-564)
+// ============================================================================
+
+model Contract {
+  id              String   @id @default(cuid())
+  contractNumber  String   @unique
+  type            ContractType
+  title           String
+  // Content
+  htmlContent     String?  // HTML template with fillable fields
+  pdfUrl          String?  // Generated PDF
+  templateId      String?  // Reference to template used
+  // Parties
+  partyAName      String   // Naše firma
+  partyAIco       String?
+  partyADic       String?
+  partyAAddress   String?
+  partyARepresentative String? // Zastupující osoba
+  partyBName      String   // Druhá strana
+  partyBIco       String?
+  partyBDic       String?
+  partyBAddress   String?
+  partyBRepresentative String?
+  // Linked entities
+  contactId       String?
+  employeeId      String?
+  projectId       String?
+  // Status
+  status          ContractStatus @default(DRAFT)
+  // Validity
+  validFrom       DateTime?
+  validTo         DateTime?
+  // Financial
+  totalAmount     Decimal? @db.Decimal(15, 2)
+  currency        String   @default("CZK")
+  // Metadata
+  createdBy       String?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  signingRequests ContractSigningRequest[]
+  fillableFields  ContractFillableField[]
+  auditTrail      ContractAuditEntry[]
+
+  @@index([contactId])
+  @@index([employeeId])
+  @@index([status])
+  @@map("contracts")
+}
+
+model ContractFillableField {
+  id          String  @id @default(cuid())
+  contractId  String
+  fieldName   String  // e.g., "id_card_number", "birth_date"
+  fieldLabel  String  // e.g., "Číslo občanského průkazu"
+  fieldType   String  // TEXT, DATE, NUMBER, SIGNATURE, CHECKBOX
+  isRequired  Boolean @default(true)
+  filledValue String?
+  filledAt    DateTime?
+  filledBy    String? // Which party filled it
+
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@map("contract_fillable_fields")
+}
+
+model ContractSigningRequest {
+  id              String   @id @default(cuid())
+  contractId      String
+  signerEmail     String
+  signerName      String
+  signerRole      String   // PARTY_A, PARTY_B, WITNESS
+  signingOrder    Int      @default(1) // Sequential signing order
+  // Access
+  accessToken     String   @unique
+  accessUrl       String?  // Full URL sent via email
+  // Signing status
+  status          SigningStatus @default(PENDING)
+  sentAt          DateTime?
+  viewedAt        DateTime?
+  signedAt        DateTime?
+  rejectedAt      DateTime?
+  rejectionReason String?
+  expiresAt       DateTime
+  // Identity verification (BankID / eIDAS)
+  verificationMethod  VerificationMethod?
+  bankIdVerified      Boolean @default(false)
+  bankIdProvider      String?  // Banka použitá k ověření (ČS, KB, ČSOB, etc.)
+  bankIdTransactionId String?  // ID transakce BankID
+  bankIdVerifiedAt    DateTime?
+  bankIdVerifiedName  String?  // Jméno ověřené bankou
+  // Identity documents
+  idCardNumber    String?  // Číslo občanského průkazu
+  idCardType      String?  // OP, Pas, Řidičský průkaz
+  secondIdNumber  String?  // Číslo druhého dokladu
+  secondIdType    String?  // Typ druhého dokladu
+  // Signature data
+  signatureType   SignatureType?
+  signatureData   String?  // Base64 canvas signature / certificate data
+  signatureHash   String?  // SHA256 hash of signed content
+  signerIp        String?
+  signerUserAgent String?
+  // Certificate (for qualified signatures)
+  certificateData String?
+  certificateIssuer String?
+  certificateSerial String?
+  createdAt       DateTime @default(now())
+
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([accessToken])
+  @@index([contractId, signerRole])
+  @@map("contract_signing_requests")
+}
+
+model ContractAuditEntry {
+  id          String   @id @default(cuid())
+  contractId  String
+  action      String   // CREATED, SENT, VIEWED, FIELD_FILLED, IDENTITY_VERIFIED, SIGNED, REJECTED, DOWNLOADED
+  actor       String   // Email or user name
+  actorIp     String?
+  actorAgent  String?
+  details     String?  // JSON details
+  timestamp   DateTime @default(now())
+
+  contract Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+
+  @@index([contractId, timestamp])
+  @@map("contract_audit_entries")
+}
+
+model ContractTemplate {
+  id          String   @id @default(cuid())
+  type        ContractType
+  name        String
+  description String?
+  htmlContent String   // HTML with {{placeholders}}
+  fields      String?  // JSON array of field definitions
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("contract_templates")
+}
+
+enum ContractType {
+  EMPLOYMENT_SOD      // Smlouva o dílo
+  EMPLOYMENT_RS       // Rámcová smlouva
+  EMPLOYMENT_DPC      // Dohoda o pracovní činnosti
+  EMPLOYMENT_DPP      // Dohoda o provedení práce
+  EMPLOYMENT_HPP      // Hlavní pracovní poměr
+  SUBCONTRACTOR       // Smlouva se subdodavatelem
+  NDA                 // Dohoda o mlčenlivosti
+  SERVICE             // Smlouva o poskytování služeb
+  LEASE               // Nájemní smlouva
+  OTHER               // Jiná smlouva
+}
+
+enum ContractStatus {
+  DRAFT               // Koncept
+  PENDING_FIELDS      // Čeká na vyplnění polí druhou stranou
+  PENDING_SIGNATURE   // Čeká na podpis
+  PARTIALLY_SIGNED    // Částečně podepsáno (jedna strana)
+  SIGNED              // Plně podepsáno oběma stranami
+  REJECTED            // Odmítnuto
+  EXPIRED             // Vypršela platnost
+  CANCELLED           // Zrušeno
+  ARCHIVED            // Archivováno
+}
+
+enum SigningStatus {
+  PENDING             // Čeká na podpis
+  VIEWED              // Zobrazeno podpisovateli
+  FIELDS_FILLED       // Pole vyplněna
+  IDENTITY_VERIFIED   // Totožnost ověřena (BankID)
+  SIGNED              // Podepsáno
+  REJECTED            // Odmítnuto
+  EXPIRED             // Vypršelo
+}
+
+enum VerificationMethod {
+  BANK_ID             // Bankovní identita (BankID)
+  MOJE_ID             // MojeID
+  E_CITIZEN           // eObčanka (NIA)
+  SMS_OTP             // SMS OTP kód
+  NONE                // Bez ověření (jednoduchý podpis)
+}
+
+enum SignatureType {
+  SIMPLE              // Jednoduchý elektronický podpis (canvas)
+  ADVANCED            // Zaručený elektronický podpis
+  QUALIFIED           // Kvalifikovaný elektronický podpis (eIDAS)
+}
