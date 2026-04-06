@@ -1,0 +1,183 @@
+# PLUS HOUSE s.r.o. - Kompletní přehled
+
+> Integrujeme chytré domácnosti, fotovoltaiku, tepelná čerpadla a elektroinstalace na Moravě. Loxone Gold Partner s kompletním servisem od návrhu po realizaci.
+
+## O firmě
+
+PLUS HOUSE s.r.o. je česká firma specializující se na automatizaci budov, obnovitelné zdroje energie a inteligentní elektroinstalace. Firma byla založena s cílem přinášet moderní technologie do domácností i komerčních objektů na Moravě.
+
+**Kontaktní údaje:**
+- Web: https://www.plushouse.cz
+- E-mail: info@plushouse.cz
+- Telefon: +420 734 384 858
+- Adresa: Mladeč 61, 783 21 Mladeč, Česká republika
+- Provozní doba: Po-Pá 08:00-17:00
+- Facebook: https://www.facebook.com/plushouse.cz
+- Instagram: https://www.instagram.com/plushouse.cz
+- LinkedIn: https://www.linkedin.com/company/plushouse
+
+**Oblast působnosti:**
+- Olomoucký kraj (Olomouc, Šternberk, Prostějov, Přerov, Šumperk)
+- Jihomoravský kraj (Brno, Blansko, Vyškov, Znojmo, Břeclav)
+- Zlínský kraj (Zlín, Vsetín, Kroměříž, Uherské Hradiště)
+
+---
+
+## Proč PLUS HOUSE
+
+### Konkurenční výhody
+
+1. **Loxone Gold Partner** - Certifikovaný partner s nejvyšší úrovní oprávnění pro systém Loxone. Máme přístup k nejnovějším technologiím a školením přímo od výrobce.
+
+2. **Kompletní řešení na klíč** - Zajišťujeme celý proces od prvotní konzultace, přes návrh a projekt, až po realizaci a pozáruční servis. Zákazník dostane jedno kontaktní místo pro vše.
+
+3. **Integrace více systémů** - Propojujeme fotovoltaiku, tepelná čerpadla, chytrou domácnost, nabíjecí stanice a elektroinstalaci do jednoho celku řízeného systémem Loxone. Díky tomu zákazník maximalizuje úspory a komfort.
+
+4. **Vlastní certifikovaný tým** - Vlastní technici s certifikacemi Loxone, Victron a Viessmann. Nepoužíváme subdodavatele pro klíčové instalace.
+
+5. **Konzultace zdarma** - Každý zájemce může využít bezplatnou konzultaci, kde probereme jeho potřeby a navrhneme optimální řešení.
+
+6. **Online FVE konfigurátor** - Interaktivní nástroj na webu, kde si zákazník může nakonfigurovat fotovoltaickou elektrárnu a okamžitě vidět orientační cenu.
+
+7. **Regionální zaměření** - Díky zaměření na Moravu dokážeme rychle reagovat, zajistit osobní přístup a poskytnout lokální servis.
+
+---
+
+## Služby - podrobný popis
+
+### Chytré domácnosti Loxone
+
+PLUS HOUSE realizuje kompletní automatizaci budov pomocí systému Loxone. Loxone je evropský lídr v oblasti chytrých domácností - český miniserver řídí osvětlení, vytápění, stínění, bezpečnost, audio a další systémy z jedné aplikace.
+
+**Co automatizujeme:**
+- Osvětlení - scény, časové plány, přizpůsobení dennímu světlu
+- Vytápění a chlazení - inteligentní regulace po místnostech
+- Stínění - automatické ovládání žaluzií a rolet podle slunce
+- Bezpečnost - pohybová čidla, dveřní kontakty, alarmy, kamery
+- Audio a multiroom - hudba v celém domě
+- Přístupové systémy - NFC, otisky prstů, kódy
+- Energetický management - optimalizace spotřeby s FVE
+
+**Pro koho je to vhodné:**
+- Novostavby rodinných domů
+- Rekonstrukce starších domů a bytů
+- Bytové domy
+- Hotely a ubytovací zařízení (PMS integrace s Previo)
+- Komerční budovy a kanceláře
+
+Více: https://www.plushouse.cz/chytra-domacnost-loxone/
+
+### Fotovoltaické elektrárny (FVE)
+
+Navrhujeme a instalujeme fotovoltaické elektrárny pro rodinné domy a firmy. Používáme prémiové komponenty a zajišťujeme kompletní dodávku na klíč včetně projektu, vyřízení dotací a připojení k síti.
+
+**Co nabízíme:**
+- Návrh a projekce FVE na míru
+- Instalace panelů a střídačů
+- Bateriová úložiště Victron Energy (ESS)
+- AC/DC rozvaděče pro FVE
+- Připojení k distribuční síti
+- Vyřízení dotací (Nová zelená úsporám)
+- Servis a monitoring
+
+**Proč Victron Energy:**
+- Švédská kvalita s 5letou zárukou
+- Modulární systém - lze rozšiřovat
+- Kompatibilita s Loxone pro energetický management
+- Off-grid i on-grid řešení
+
+Více: https://www.plushouse.cz/fotovoltaika.html
+Konfigurátor: https://www.plushouse.cz/fve-configurator/
+
+### Tepelná čerpadla
+
+Instalujeme tepelná čerpadla Viessmann - prémiového německého výrobce. Zajišťujeme kompletní dodávku včetně projektu, elektroinstalace a napojení na systém Loxone pro inteligentní regulaci.
+
+**Typy tepelných čerpadel:**
+- Vzduch-voda split
+- Vzduch-voda monoblok
+- Země-voda (geotermální)
+
+**Co zajistíme:**
+- Návrh a dimenzování
+- Projekt a stavební povolení
+- Instalace a uvedení do provozu
+- Elektroinstalace a připojení
+- Regulace přes Loxone
+- Servis a údržba
+
+Více: https://www.plushouse.cz/tepelna-cerpadla.html
+
+### Nabíjecí stanice pro elektromobily
+
+Dodáváme a instalujeme wallboxy a nabíjecí stanice pro domácnosti i firmy. Nabíjecí stanice lze integrovat s fotovoltaikou a systémem Loxone pro chytré nabíjení (nabíjení z přebytků FVE).
+
+Více: https://www.plushouse.cz/nabijeci-stanice.html
+
+### PMS integrace pro hotely
+
+Specializujeme se na automatizaci hotelů s napojením na Property Management Systémy (PMS). Integrujeme Loxone s PMS Previo - při check-inu se automaticky nastaví teplota, osvětlení a přístup na pokoji.
+
+Více: https://www.plushouse.cz/pms.html
+
+### Elektroinstalace a rozvaděče
+
+Navrhujeme a vyrábíme rozvaděče na zakázku (AC i DC) pro fotovoltaické elektrárny, tepelná čerpadla i komplexní elektroinstalace. Zajišťujeme také MaR (měření a regulace) pro komerční budovy.
+
+Více: https://www.plushouse.cz/chytra-elektroinstalace/
+
+---
+
+## eShop - Loxone balíčky
+
+Nabízíme předpřipravené balíčky pro rychlý start s chytrou domácností:
+
+- **Start Kit Loxone** (28 990 Kč) - Základní sada pro ovládání osvětlení a vytápění
+- **Energy Kit Victron + Loxone** (44 990 Kč) - Energetický management s bateriovým úložištěm
+- **Security Kit Loxone** (54 990 Kč) - Kompletní bezpečnostní řešení
+
+Více: https://www.plushouse.cz/eshop/loxone/balicky/
+
+---
+
+## Realizace a reference
+
+### Fotovoltaické realizace
+- **Olomouc 10 kWp** - FVE s Victron ESS bateriovým úložištěm pro rodinný dům
+- **Brno 12 kWp** - Fotovoltaická elektrárna na klíč s kompletní elektroinstalací
+- **Zlín 8 kWp** - FVE s Victron zálohou pro rodinný dům
+
+### Chytré domácnosti
+- Reference z Olomouce, Brna a Zlína - rodinné domy i byty s kompletní automatizací Loxone
+
+Více: https://www.plushouse.cz/reference/chytra-domacnost/
+
+---
+
+## Často kladené otázky
+
+**Kolik stojí chytrá domácnost?**
+Cena závisí na rozsahu automatizace. Základní řešení pro rodinný dům začíná kolem 100 000 Kč. Přesnou kalkulaci připravíme po bezplatné konzultaci.
+
+**Kolik stojí fotovoltaická elektrárna?**
+Cena FVE závisí na výkonu a konfiguraci. Orientační cenu si můžete spočítat v našem online konfigurátoru: https://www.plushouse.cz/fve-configurator/
+
+**Vyřizujete dotace?**
+Ano, pomáháme s vyřízením dotací z programu Nová zelená úsporám a dalších dotačních titulů.
+
+**Jak dlouho trvá realizace?**
+Typická instalace FVE trvá 1-3 dny. Chytrá domácnost v novostavbě 2-4 týdny podle rozsahu. Přesný harmonogram stanovíme po konzultaci.
+
+**Poskytujete servis?**
+Ano, zajišťujeme kompletní pozáruční servis pro všechny naše instalace.
+
+---
+
+## Kontakt
+
+Pro nezávaznou konzultaci zdarma nás kontaktujte:
+
+- Telefon: +420 734 384 858
+- E-mail: info@plushouse.cz
+- Web: https://www.plushouse.cz/kontakt
+- Provozní doba: Po-Pá 08:00-17:00

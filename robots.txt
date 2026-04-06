@@ -21,3 +21,24 @@ Disallow: /recaptchalib.php
 
 Sitemap: https://www.plushouse.cz/sitemap.xml
 Sitemap: https://www.plushouse.cz/blog/sitemap.xml
+
+# AI LLM crawlers
+User-agent: GPTBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /
