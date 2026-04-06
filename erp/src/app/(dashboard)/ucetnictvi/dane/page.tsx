@@ -102,7 +102,7 @@ export default function TaxPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Daňová přiznání</h1>
+          <h1 className="text-2xl font-bold text-white">Daňová přiznání</h1>
           <p className="text-gray-500">DPH, kontrolní hlášení, daň z příjmů PO</p>
         </div>
       </div>
@@ -112,11 +112,11 @@ export default function TaxPage() {
         <CardContent className="p-4">
           <div className="flex items-end gap-4">
             <div>
-              <label className="text-sm font-medium text-gray-700">Období od</label>
+              <label className="text-sm font-medium text-gray-400">Období od</label>
               <Input type="date" value={periodFrom} onChange={(e) => setPeriodFrom(e.target.value)} className="mt-1" />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Období do</label>
+              <label className="text-sm font-medium text-gray-400">Období do</label>
               <Input type="date" value={periodTo} onChange={(e) => setPeriodTo(e.target.value)} className="mt-1" />
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function TaxPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Calculator className="h-5 w-5 text-blue-600" />
+              <Calculator className="h-5 w-5 text-blue-400" />
               Přiznání k DPH
             </CardTitle>
             <CardDescription>Měsíční/čtvrtletní přiznání</CardDescription>
@@ -144,7 +144,7 @@ export default function TaxPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-green-600" />
+              <FileText className="h-5 w-5 text-emerald-400" />
               Kontrolní hlášení
             </CardTitle>
             <CardDescription>Měsíční kontrolní hlášení k DPH</CardDescription>
@@ -160,7 +160,7 @@ export default function TaxPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Calculator className="h-5 w-5 text-purple-600" />
+              <Calculator className="h-5 w-5 text-purple-400" />
               Daň z příjmů PO
             </CardTitle>
             <CardDescription>Roční přiznání (21 % sazba)</CardDescription>
@@ -193,7 +193,7 @@ export default function TaxPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <pre className="text-xs bg-gray-50 p-4 rounded-lg overflow-auto max-h-64 font-mono">
+            <pre className="text-xs bg-[#1a1d24] p-4 rounded-lg overflow-auto max-h-64 font-mono">
               {xmlPreview}
             </pre>
           </CardContent>

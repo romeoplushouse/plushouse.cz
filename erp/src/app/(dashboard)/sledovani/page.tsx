@@ -22,7 +22,7 @@ export default async function TrackingPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">GPS Sledování</h1>
+          <h1 className="text-2xl font-bold text-white">GPS Sledování</h1>
           <p className="text-gray-500">
             Realtime poloha zaměstnanců, vozidel, SOS signály, geofencing
           </p>
@@ -47,7 +47,7 @@ export default async function TrackingPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <MapPin className="h-6 w-6 text-green-600" />
+              <MapPin className="h-6 w-6 text-emerald-400" />
               <div>
                 <p className="text-sm text-gray-500">Online zaměstnanci</p>
                 <p className="text-xl font-bold">0</p>
@@ -58,7 +58,7 @@ export default async function TrackingPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Car className="h-6 w-6 text-blue-600" />
+              <Car className="h-6 w-6 text-blue-400" />
               <div>
                 <p className="text-sm text-gray-500">Registrovaná vozidla</p>
                 <p className="text-xl font-bold">{vehicles.length}</p>
@@ -69,7 +69,7 @@ export default async function TrackingPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <AlertTriangle className="h-6 w-6 text-red-600" />
+              <AlertTriangle className="h-6 w-6 text-red-400" />
               <div>
                 <p className="text-sm text-gray-500">SOS upozornění</p>
                 <p className="text-xl font-bold">{sosAlerts.length}</p>
@@ -80,7 +80,7 @@ export default async function TrackingPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Shield className="h-6 w-6 text-orange-600" />
+              <Shield className="h-6 w-6 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-500">Geofence výstrahy</p>
                 <p className="text-xl font-bold">{geofenceAlerts.length}</p>
@@ -99,7 +99,7 @@ export default async function TrackingPage() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="bg-gray-100 rounded-lg h-96 flex items-center justify-center">
+          <div className="bg-[#1a1d24] rounded-lg h-96 flex items-center justify-center">
             <div className="text-center text-gray-500">
               <MapPin className="h-16 w-16 mx-auto mb-3 text-gray-300" />
               <p className="font-medium">Mapa bude zobrazena po propojení s mobilními zařízeními</p>
@@ -113,9 +113,9 @@ export default async function TrackingPage() {
 
       {/* SOS Alerts */}
       {sosAlerts.length > 0 && (
-        <Card className="border-red-200">
+        <Card className="border-red-500/20">
           <CardHeader>
-            <CardTitle className="text-red-600 flex items-center gap-2">
+            <CardTitle className="text-red-400 flex items-center gap-2">
               <AlertTriangle className="h-5 w-5" />
               Aktivní SOS upozornění
             </CardTitle>
@@ -134,7 +134,7 @@ export default async function TrackingPage() {
               </TableHeader>
               <TableBody>
                 {sosAlerts.map((alert) => (
-                  <TableRow key={alert.id} className="bg-red-50">
+                  <TableRow key={alert.id} className="bg-red-500/10">
                     <TableCell className="font-medium">
                       {alert.employee.firstName} {alert.employee.lastName}
                     </TableCell>
@@ -161,21 +161,21 @@ export default async function TrackingPage() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardContent className="p-6">
-            <Activity className="h-8 w-8 text-red-600 mb-3" />
+            <Activity className="h-8 w-8 text-red-400 mb-3" />
             <h3 className="font-medium">Zdravotní monitoring</h3>
             <p className="text-sm text-gray-500 mt-1">Tepová frekvence, detekce pádu, Apple SOS</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
-            <Car className="h-8 w-8 text-blue-600 mb-3" />
+            <Car className="h-8 w-8 text-blue-400 mb-3" />
             <h3 className="font-medium">Fleet management</h3>
             <p className="text-sm text-gray-500 mt-1">Sledování vozidel, km, osobní/služební účely</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
-            <Shield className="h-8 w-8 text-orange-600 mb-3" />
+            <Shield className="h-8 w-8 text-amber-400 mb-3" />
             <h3 className="font-medium">Geofencing</h3>
             <p className="text-sm text-gray-500 mt-1">Upozornění při opuštění kraje, republiky</p>
           </CardContent>

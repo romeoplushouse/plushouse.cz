@@ -45,7 +45,7 @@ export default async function ContractsPage() {
     <div className="page-enter space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Smlouvy</h1>
+          <h1 className="text-2xl font-bold text-white">Smlouvy</h1>
           <p className="text-gray-500">Elektronické podepisování smluv s BankID ověřením</p>
         </div>
         <Link href="/smlouvy/nova">
@@ -57,7 +57,7 @@ export default async function ContractsPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
-        <Card className="card-hover overflow-hidden rounded-2xl border-0 shadow-sm">
+        <Card className="card-hover overflow-hidden rounded-2xl border-[#2a2d35] shadow-none">
           <div className="flex">
             <div className="w-1 shrink-0 bg-gradient-to-b from-blue-500 to-blue-600" />
             <CardContent className="p-5 flex-1">
@@ -66,7 +66,7 @@ export default async function ContractsPage() {
             </CardContent>
           </div>
         </Card>
-        <Card className="card-hover overflow-hidden rounded-2xl border-0 shadow-sm">
+        <Card className="card-hover overflow-hidden rounded-2xl border-[#2a2d35] shadow-none">
           <div className="flex">
             <div className="w-1 shrink-0 bg-gradient-to-b from-amber-500 to-orange-600" />
             <CardContent className="p-5 flex-1">
@@ -75,7 +75,7 @@ export default async function ContractsPage() {
             </CardContent>
           </div>
         </Card>
-        <Card className="card-hover overflow-hidden rounded-2xl border-0 shadow-sm">
+        <Card className="card-hover overflow-hidden rounded-2xl border-[#2a2d35] shadow-none">
           <div className="flex">
             <div className="w-1 shrink-0 bg-gradient-to-b from-green-500 to-emerald-600" />
             <CardContent className="p-5 flex-1">
@@ -84,7 +84,7 @@ export default async function ContractsPage() {
             </CardContent>
           </div>
         </Card>
-        <Card className="card-hover overflow-hidden rounded-2xl border-0 shadow-sm">
+        <Card className="card-hover overflow-hidden rounded-2xl border-[#2a2d35] shadow-none">
           <div className="flex">
             <div className="w-1 shrink-0 bg-gradient-to-b from-red-500 to-rose-600" />
             <CardContent className="p-5 flex-1">
@@ -95,7 +95,7 @@ export default async function ContractsPage() {
         </Card>
       </div>
 
-      <Card className="rounded-2xl border-0 shadow-sm">
+      <Card className="rounded-2xl border-[#2a2d35] shadow-none">
         <CardContent className="p-0">
           <Table>
             <TableHeader>
@@ -117,7 +117,7 @@ export default async function ContractsPage() {
                     <FileSignature className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                     <p className="font-medium">Zatím žádné smlouvy</p>
                     <p className="text-sm mt-1">
-                      <Link href="/smlouvy/nova" className="text-blue-600 hover:underline">
+                      <Link href="/smlouvy/nova" className="text-[#B5E126] hover:underline">
                         Vytvořte první smlouvu
                       </Link>
                     </p>

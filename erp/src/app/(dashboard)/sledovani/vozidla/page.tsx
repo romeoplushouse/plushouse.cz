@@ -47,7 +47,7 @@ export default function VehiclesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Vozidla</h1>
+          <h1 className="text-2xl font-bold text-white">Vozidla</h1>
           <p className="text-gray-500">Firemní vozový park, osobní využití, geofencing</p>
         </div>
         <Button onClick={() => setShowForm(true)}>
@@ -63,30 +63,30 @@ export default function VehiclesPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">SPZ <span className="text-red-500">*</span></label>
+                  <label className="text-sm font-medium text-gray-400">SPZ <span className="text-red-500">*</span></label>
                   <Input name="licensePlate" required placeholder="1B2 3456" className="mt-1" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Značka <span className="text-red-500">*</span></label>
+                  <label className="text-sm font-medium text-gray-400">Značka <span className="text-red-500">*</span></label>
                   <Input name="make" required placeholder="Škoda" className="mt-1" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Model <span className="text-red-500">*</span></label>
+                  <label className="text-sm font-medium text-gray-400">Model <span className="text-red-500">*</span></label>
                   <Input name="model" required placeholder="Octavia" className="mt-1" />
                 </div>
               </div>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Rok výroby</label>
+                  <label className="text-sm font-medium text-gray-400">Rok výroby</label>
                   <Input name="year" type="number" className="mt-1" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">VIN</label>
+                  <label className="text-sm font-medium text-gray-400">VIN</label>
                   <Input name="vin" className="mt-1" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Palivo</label>
-                  <select name="fuelType" className="mt-1 flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                  <label className="text-sm font-medium text-gray-400">Palivo</label>
+                  <select name="fuelType" className="mt-1 flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm">
                     <option value="GASOLINE">Benzín</option>
                     <option value="DIESEL">Nafta</option>
                     <option value="ELECTRIC">Elektro</option>
@@ -96,8 +96,8 @@ export default function VehiclesPage() {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Geofence region</label>
-                  <select name="geofenceRegion" className="mt-1 flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                  <label className="text-sm font-medium text-gray-400">Geofence region</label>
+                  <select name="geofenceRegion" className="mt-1 flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm">
                     <option value="">Bez omezení</option>
                     <option value="CZ">Česká republika</option>
                     <option value="JIHOMORAVSKY_KRAJ">Jihomoravský kraj</option>
@@ -107,7 +107,7 @@ export default function VehiclesPage() {
                 </div>
                 <div className="flex items-center gap-2 pt-6">
                   <input type="checkbox" name="personalUseAllowed" id="personalUse" />
-                  <label htmlFor="personalUse" className="text-sm font-medium text-gray-700">
+                  <label htmlFor="personalUse" className="text-sm font-medium text-gray-400">
                     Povolit osobní využití
                   </label>
                 </div>

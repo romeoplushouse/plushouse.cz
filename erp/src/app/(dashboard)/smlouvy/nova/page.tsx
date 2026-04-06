@@ -66,9 +66,9 @@ export default function NewContractPage() {
 
   return (
     <div className="max-w-2xl mx-auto page-enter">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Nová smlouva</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">Nová smlouva</h1>
       <form onSubmit={handleSubmit}>
-        {error && <div className="bg-red-50 border border-red-200 text-red-700 text-sm p-3 rounded-lg mb-4">{error}</div>}
+        {error && <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm p-3 rounded-lg mb-4">{error}</div>}
 
         <Card className="mb-4 rounded-xl">
           <CardHeader><CardTitle>Typ smlouvy</CardTitle></CardHeader>
@@ -79,7 +79,7 @@ export default function NewContractPage() {
                   key={t.value}
                   type="button"
                   onClick={() => setSelectedType(t.value)}
-                  className={`p-3 rounded-lg border text-left text-sm transition-all ${selectedType === t.value ? "border-blue-500 bg-blue-50 text-blue-700 font-medium" : "border-gray-200 hover:border-gray-300"}`}
+                  className={`p-3 rounded-lg border text-left text-sm transition-all ${selectedType === t.value ? "border-[#B5E126] bg-[#B5E126]/10 text-[#B5E126] font-medium" : "border-[#2a2d35] hover:border-gray-500"}`}
                 >
                   {t.label}
                 </button>
@@ -92,7 +92,7 @@ export default function NewContractPage() {
           <CardHeader><CardTitle>Druhá smluvní strana</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <div className="relative">
-              <label className="text-sm font-medium text-gray-700">Vyhledat v kontaktech</label>
+              <label className="text-sm font-medium text-gray-400">Vyhledat v kontaktech</label>
               <Input
                 value={contactSearch}
                 onChange={(e) => setContactSearch(e.target.value)}
@@ -100,13 +100,13 @@ export default function NewContractPage() {
                 className="mt-1"
               />
               {contacts.length > 0 && (
-                <div className="absolute z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                <div className="absolute z-10 w-full mt-1 bg-[#1a1d24] border border-[#2a2d35] rounded-lg shadow-lg max-h-48 overflow-y-auto">
                   {contacts.map((c) => (
                     <button
                       key={c.id}
                       type="button"
                       onClick={() => selectContact(c)}
-                      className="w-full text-left px-3 py-2 hover:bg-gray-50 text-sm"
+                      className="w-full text-left px-3 py-2 hover:bg-[#2a2d35] text-sm text-gray-200"
                     >
                       <span className="font-medium">{c.companyName || `${c.firstName} ${c.lastName}`}</span>
                       {c.ico && <span className="text-gray-400 ml-2">IČO: {c.ico}</span>}
@@ -116,33 +116,33 @@ export default function NewContractPage() {
               )}
             </div>
             {selectedContact && (
-              <div className="p-3 bg-blue-50 rounded-lg text-sm">
+              <div className="p-3 bg-blue-500/10 rounded-lg text-sm">
                 Vybrán: <strong>{selectedContact.companyName || `${selectedContact.firstName} ${selectedContact.lastName}`}</strong>
                 {selectedContact.ico && ` • IČO: ${selectedContact.ico}`}
               </div>
             )}
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Název / Jméno <span className="text-red-500">*</span></label>
+                <label className="text-sm font-medium text-gray-400">Název / Jméno <span className="text-red-500">*</span></label>
                 <Input name="partyBName" required defaultValue={selectedContact?.companyName || `${selectedContact?.firstName ?? ""} ${selectedContact?.lastName ?? ""}`.trim()} className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">IČO</label>
+                <label className="text-sm font-medium text-gray-400">IČO</label>
                 <Input name="partyBIco" defaultValue={selectedContact?.ico ?? ""} className="mt-1" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">DIČ</label>
+                <label className="text-sm font-medium text-gray-400">DIČ</label>
                 <Input name="partyBDic" defaultValue={selectedContact?.dic ?? ""} className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">Zastupující osoba</label>
+                <label className="text-sm font-medium text-gray-400">Zastupující osoba</label>
                 <Input name="partyBRepresentative" className="mt-1" />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Adresa</label>
+              <label className="text-sm font-medium text-gray-400">Adresa</label>
               <Input name="partyBAddress" defaultValue={[selectedContact?.street, selectedContact?.city, selectedContact?.zip].filter(Boolean).join(", ")} className="mt-1" />
             </div>
           </CardContent>
@@ -152,26 +152,26 @@ export default function NewContractPage() {
           <CardHeader><CardTitle>Podmínky smlouvy</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-gray-700">Vlastní název smlouvy</label>
+              <label className="text-sm font-medium text-gray-400">Vlastní název smlouvy</label>
               <Input name="title" placeholder="Automaticky dle typu" className="mt-1" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Platnost od</label>
+                <label className="text-sm font-medium text-gray-400">Platnost od</label>
                 <Input name="validFrom" type="date" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">Platnost do</label>
+                <label className="text-sm font-medium text-gray-400">Platnost do</label>
                 <Input name="validTo" type="date" className="mt-1" />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Celková částka (Kč)</label>
+              <label className="text-sm font-medium text-gray-400">Celková částka (Kč)</label>
               <Input name="totalAmount" type="number" step="0.01" className="mt-1" />
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Poznámky</label>
-              <textarea name="notes" rows={2} className="mt-1 flex w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm" />
+              <label className="text-sm font-medium text-gray-400">Poznámky</label>
+              <textarea name="notes" rows={2} className="mt-1 flex w-full rounded-lg border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm" />
             </div>
           </CardContent>
         </Card>

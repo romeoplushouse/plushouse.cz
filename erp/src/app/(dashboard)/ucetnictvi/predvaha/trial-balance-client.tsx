@@ -26,14 +26,14 @@ type TrialBalanceRow = {
 };
 
 const classLabels: Record<string, string> = {
-  "0": "Trida 0 - Dlouhodoby majetek",
-  "1": "Trida 1 - Zasoby",
-  "2": "Trida 2 - Kratky financni majetek",
-  "3": "Trida 3 - Zuctovaci vztahy",
-  "4": "Trida 4 - Kapitalove ucty",
-  "5": "Trida 5 - Naklady",
-  "6": "Trida 6 - Vynosy",
-  "7": "Trida 7 - Zaverkove ucty",
+  "0": "Třída 0 – Dlouhodobý majetek",
+  "1": "Třída 1 – Zásoby",
+  "2": "Třída 2 – Krátkodobý finanční majetek",
+  "3": "Třída 3 – Zúčtovací vztahy",
+  "4": "Třída 4 – Kapitálové účty",
+  "5": "Třída 5 – Náklady",
+  "6": "Třída 6 – Výnosy",
+  "7": "Třída 7 – Závěrkové účty",
 };
 
 export function TrialBalanceClient() {
@@ -43,7 +43,6 @@ export function TrialBalanceClient() {
   const [loaded, setLoaded] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  // Load on mount
   useEffect(() => {
     handleSearch();
   }, []);
@@ -59,13 +58,10 @@ export function TrialBalanceClient() {
     });
   }
 
-  // Group by account class (first digit of code)
   const grouped = new Map<string, TrialBalanceRow[]>();
   for (const row of data) {
     const cls = row.code.charAt(0);
-    if (!grouped.has(cls)) {
-      grouped.set(cls, []);
-    }
+    if (!grouped.has(cls)) grouped.set(cls, []);
     grouped.get(cls)!.push(row);
   }
 
@@ -75,15 +71,14 @@ export function TrialBalanceClient() {
 
   return (
     <div className="space-y-6">
-      {/* Filters */}
       <Card>
         <CardHeader>
-          <CardTitle>Obdobi</CardTitle>
+          <CardTitle>Období</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 items-end">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Datum od
               </label>
               <Input
@@ -93,7 +88,7 @@ export function TrialBalanceClient() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Datum do
               </label>
               <Input
@@ -105,7 +100,7 @@ export function TrialBalanceClient() {
             <div className="flex gap-2">
               <Button onClick={handleSearch} disabled={isPending}>
                 <Search className="h-4 w-4 mr-2" />
-                {isPending ? "Nacitam..." : "Zobrazit"}
+                {isPending ? "Načítám..." : "Zobrazit"}
               </Button>
               <Button variant="outline" disabled>
                 <Download className="h-4 w-4 mr-2" />
@@ -116,18 +111,17 @@ export function TrialBalanceClient() {
         </CardContent>
       </Card>
 
-      {/* Results */}
       {loaded && (
         <Card>
           <CardContent className="p-0">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-20">Ucet</TableHead>
-                  <TableHead>Nazev uctu</TableHead>
-                  <TableHead className="text-right">Obrat MD (Kc)</TableHead>
-                  <TableHead className="text-right">Obrat D (Kc)</TableHead>
-                  <TableHead className="text-right">Zustatek (Kc)</TableHead>
+                  <TableHead className="w-20">Účet</TableHead>
+                  <TableHead>Název účtu</TableHead>
+                  <TableHead className="text-right">Obrat MD (Kč)</TableHead>
+                  <TableHead className="text-right">Obrat D (Kč)</TableHead>
+                  <TableHead className="text-right">Zůstatek (Kč)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -137,8 +131,7 @@ export function TrialBalanceClient() {
                       colSpan={5}
                       className="text-center text-gray-500 py-8"
                     >
-                      Nebyly nalezeny zadne zauctovane zapisy pro zvolene
-                      obdobi.
+                      Nebyly nalezeny žádné zaúčtované zápisy pro zvolené období.
                     </TableCell>
                   </TableRow>
                 ) : (
@@ -146,51 +139,34 @@ export function TrialBalanceClient() {
                     {Array.from(grouped.entries())
                       .sort(([a], [b]) => a.localeCompare(b))
                       .map(([cls, rows]) => {
-                        const classDebit = rows.reduce(
-                          (sum, r) => sum + r.debit,
-                          0
-                        );
-                        const classCredit = rows.reduce(
-                          (sum, r) => sum + r.credit,
-                          0
-                        );
+                        const classDebit = rows.reduce((sum, r) => sum + r.debit, 0);
+                        const classCredit = rows.reduce((sum, r) => sum + r.credit, 0);
 
                         return (
                           <Fragment key={cls}>
-                            {/* Class header */}
-                            <TableRow className="bg-gray-100">
-                              <TableCell
-                                colSpan={5}
-                                className="font-bold text-gray-700"
-                              >
-                                {classLabels[cls] || `Trida ${cls}`}
+                            <TableRow className="bg-[#0f1117]">
+                              <TableCell colSpan={5} className="font-bold text-[#B5E126]">
+                                {classLabels[cls] || `Třída ${cls}`}
                               </TableCell>
                             </TableRow>
 
-                            {/* Account rows */}
                             {rows.map((row) => {
                               const balance = row.debit - row.credit;
                               return (
                                 <TableRow key={row.code}>
-                                  <TableCell className="font-mono font-medium">
+                                  <TableCell className="font-mono font-medium text-gray-200">
                                     {row.code}
                                   </TableCell>
-                                  <TableCell>{row.name}</TableCell>
-                                  <TableCell className="text-right font-mono">
-                                    {row.debit > 0
-                                      ? formatCurrency(row.debit)
-                                      : ""}
+                                  <TableCell className="text-gray-300">{row.name}</TableCell>
+                                  <TableCell className="text-right font-mono text-gray-300">
+                                    {row.debit > 0 ? formatCurrency(row.debit) : ""}
                                   </TableCell>
-                                  <TableCell className="text-right font-mono">
-                                    {row.credit > 0
-                                      ? formatCurrency(row.credit)
-                                      : ""}
+                                  <TableCell className="text-right font-mono text-gray-300">
+                                    {row.credit > 0 ? formatCurrency(row.credit) : ""}
                                   </TableCell>
                                   <TableCell
                                     className={`text-right font-mono font-medium ${
-                                      balance < 0
-                                        ? "text-red-600"
-                                        : "text-gray-900"
+                                      balance < 0 ? "text-red-400" : "text-gray-100"
                                     }`}
                                   >
                                     {formatCurrency(balance)}
@@ -199,19 +175,18 @@ export function TrialBalanceClient() {
                               );
                             })}
 
-                            {/* Class subtotal */}
-                            <TableRow className="bg-gray-50 border-b-2">
+                            <TableRow className="bg-[#1a1d24]/50 border-b-2 border-[#2a2d35]">
                               <TableCell></TableCell>
-                              <TableCell className="font-medium text-gray-600">
-                                Mezisouce trida {cls}
+                              <TableCell className="font-medium text-gray-400">
+                                Mezisoučet třída {cls}
                               </TableCell>
-                              <TableCell className="text-right font-mono font-medium text-gray-600">
+                              <TableCell className="text-right font-mono font-medium text-gray-400">
                                 {formatCurrency(classDebit)}
                               </TableCell>
-                              <TableCell className="text-right font-mono font-medium text-gray-600">
+                              <TableCell className="text-right font-mono font-medium text-gray-400">
                                 {formatCurrency(classCredit)}
                               </TableCell>
-                              <TableCell className="text-right font-mono font-medium text-gray-600">
+                              <TableCell className="text-right font-mono font-medium text-gray-400">
                                 {formatCurrency(classDebit - classCredit)}
                               </TableCell>
                             </TableRow>
@@ -219,34 +194,30 @@ export function TrialBalanceClient() {
                         );
                       })}
 
-                    {/* Grand totals */}
-                    <TableRow className="bg-blue-50 font-bold text-lg">
+                    <TableRow className="bg-[#B5E126]/5 font-bold text-lg">
                       <TableCell></TableCell>
-                      <TableCell className="font-bold">Celkem</TableCell>
-                      <TableCell className="text-right font-mono font-bold">
+                      <TableCell className="font-bold text-white">Celkem</TableCell>
+                      <TableCell className="text-right font-mono font-bold text-white">
                         {formatCurrency(grandTotalDebit)}
                       </TableCell>
-                      <TableCell className="text-right font-mono font-bold">
+                      <TableCell className="text-right font-mono font-bold text-white">
                         {formatCurrency(grandTotalCredit)}
                       </TableCell>
-                      <TableCell className="text-right font-mono font-bold">
+                      <TableCell className="text-right font-mono font-bold text-white">
                         {formatCurrency(grandTotalDebit - grandTotalCredit)}
                       </TableCell>
                     </TableRow>
 
-                    {/* Balance check */}
                     <TableRow>
                       <TableCell colSpan={5} className="text-center py-3">
                         {isBalanced ? (
                           <Badge variant="success">
-                            Predvaha je vyrovnana (MD = D)
+                            Předvaha je vyrovnaná (MD = D)
                           </Badge>
                         ) : (
                           <Badge variant="destructive">
-                            Predvaha NENI vyrovnana! Rozdil:{" "}
-                            {formatCurrency(
-                              Math.abs(grandTotalDebit - grandTotalCredit)
-                            )}
+                            Předvaha NENÍ vyrovnaná! Rozdíl:{" "}
+                            {formatCurrency(Math.abs(grandTotalDebit - grandTotalCredit))}
                           </Badge>
                         )}
                       </TableCell>
@@ -261,4 +232,3 @@ export function TrialBalanceClient() {
     </div>
   );
 }
-

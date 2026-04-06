@@ -74,7 +74,7 @@ export default function TripDetailPage() {
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold text-white">
               {trip.startLocation} → {trip.endLocation}
             </h1>
             <p className="text-gray-500">
@@ -140,13 +140,13 @@ export default function TripDetailPage() {
             {trip.hardBrakeCount > 0 && (
               <div className="flex justify-between">
                 <span className="text-gray-500">Tvrdé brzdění</span>
-                <span className="font-medium text-red-600">{trip.hardBrakeCount}x</span>
+                <span className="font-medium text-red-400">{trip.hardBrakeCount}x</span>
               </div>
             )}
             {trip.notes && (
               <div className="pt-2 border-t">
                 <span className="text-gray-500">Poznámky:</span>
-                <p className="mt-1 text-gray-700">{trip.notes}</p>
+                <p className="mt-1 text-gray-400">{trip.notes}</p>
               </div>
             )}
           </CardContent>
@@ -159,7 +159,7 @@ export default function TripDetailPage() {
             {trip.fuelCost && Number(trip.fuelCost) > 0 && (
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <Fuel className="h-4 w-4 text-blue-600" />
+                  <Fuel className="h-4 w-4 text-blue-400" />
                   <span className="text-gray-500">PHM</span>
                 </div>
                 <span className="font-medium">{formatCurrency(Number(trip.fuelCost))}</span>
@@ -168,7 +168,7 @@ export default function TripDetailPage() {
             {trip.mealAllowance && Number(trip.mealAllowance) > 0 && (
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-green-600" />
+                  <Clock className="h-4 w-4 text-emerald-400" />
                   <span className="text-gray-500">Stravné</span>
                 </div>
                 <span className="font-medium">{formatCurrency(Number(trip.mealAllowance))}</span>
@@ -177,14 +177,14 @@ export default function TripDetailPage() {
             {trip.otherCosts && Number(trip.otherCosts) > 0 && (
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
-                  <Navigation className="h-4 w-4 text-purple-600" />
+                  <Navigation className="h-4 w-4 text-purple-400" />
                   <span className="text-gray-500">Ostatní</span>
                 </div>
                 <span className="font-medium">{formatCurrency(Number(trip.otherCosts))}</span>
               </div>
             )}
             <div className="pt-3 border-t flex justify-between items-center">
-              <span className="font-medium text-gray-700">Celkem náklady</span>
+              <span className="font-medium text-gray-400">Celkem náklady</span>
               <span className="font-bold text-lg">
                 {formatCurrency(
                   Number(trip.fuelCost ?? 0) +
@@ -194,10 +194,10 @@ export default function TripDetailPage() {
               </span>
             </div>
             {!isPersonal && (
-              <div className="p-3 bg-green-50 rounded-lg mt-3">
+              <div className="p-3 bg-emerald-500/10 rounded-lg mt-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-green-700">Daňový odpočet (5,60 Kč/km)</span>
-                  <span className="font-bold text-green-700">
+                  <span className="text-sm text-emerald-400">Daňový odpočet (5,60 Kč/km)</span>
+                  <span className="font-bold text-emerald-400">
                     {formatCurrency(Number(trip.distanceKm) * 5.6)}
                   </span>
                 </div>
@@ -217,7 +217,7 @@ export default function TripDetailPage() {
         </CardHeader>
         <CardContent>
           {gpsTrack.length === 0 ? (
-            <div className="bg-gray-100 rounded-lg h-48 flex items-center justify-center">
+            <div className="bg-[#1a1d24] rounded-lg h-48 flex items-center justify-center">
               <div className="text-center text-gray-500">
                 <MapPin className="h-8 w-8 mx-auto mb-2 text-gray-300" />
                 <p className="text-sm">Žádná GPS data pro tento den</p>
@@ -225,7 +225,7 @@ export default function TripDetailPage() {
               </div>
             </div>
           ) : (
-            <div className="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
+            <div className="bg-[#1a1d24] rounded-lg h-64 flex items-center justify-center">
               <div className="text-center text-gray-500">
                 <MapPin className="h-8 w-8 mx-auto mb-2 text-blue-500" />
                 <p className="text-sm font-medium">{gpsTrack.length} GPS bodů zaznamenáno</p>

@@ -24,7 +24,7 @@ export default async function SubcontractorsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Subdodavatelé</h1>
+          <h1 className="text-2xl font-bold text-white">Subdodavatelé</h1>
           <p className="text-gray-500">
             Rámcové smlouvy, ceníky, specializace, hodnocení
           </p>
@@ -41,7 +41,7 @@ export default async function SubcontractorsPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Hammer className="h-6 w-6 text-blue-600" />
+              <Hammer className="h-6 w-6 text-blue-400" />
               <div>
                 <p className="text-sm text-gray-500">Aktivní subdodavatelé</p>
                 <p className="text-xl font-bold">{total}</p>
@@ -52,7 +52,7 @@ export default async function SubcontractorsPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <FileSignature className="h-6 w-6 text-green-600" />
+              <FileSignature className="h-6 w-6 text-emerald-400" />
               <div>
                 <p className="text-sm text-gray-500">Platné rámcové smlouvy</p>
                 <p className="text-xl font-bold">{withAgreement}</p>
@@ -96,7 +96,7 @@ export default async function SubcontractorsPage() {
                     <Hammer className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                     <p className="font-medium">Zatím žádní subdodavatelé</p>
                     <p className="text-sm mt-1">
-                      <Link href="/subdodavatele/novy" className="text-blue-600 hover:underline">
+                      <Link href="/subdodavatele/novy" className="text-[#B5E126] hover:underline">
                         Přidejte prvního subdodavatele
                       </Link>
                     </p>

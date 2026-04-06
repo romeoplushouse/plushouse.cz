@@ -48,11 +48,11 @@ export default function NewEmployeePage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Nový zaměstnanec</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">Nový zaměstnanec</h1>
 
       <form onSubmit={handleSubmit}>
         {error && (
-          <div className="bg-red-50 text-red-600 text-sm p-3 rounded-md mb-4">
+          <div className="bg-red-500/10 text-red-400 text-sm p-3 rounded-md mb-4">
             {error}
           </div>
         )}
@@ -64,13 +64,13 @@ export default function NewEmployeePage() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm font-medium text-gray-400">
                   Jméno <span className="text-red-500">*</span>
                 </label>
                 <Input name="firstName" required className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm font-medium text-gray-400">
                   Příjmení <span className="text-red-500">*</span>
                 </label>
                 <Input name="lastName" required className="mt-1" />
@@ -78,26 +78,26 @@ export default function NewEmployeePage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Email</label>
+                <label className="text-sm font-medium text-gray-400">Email</label>
                 <Input name="email" type="email" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">Telefon</label>
+                <label className="text-sm font-medium text-gray-400">Telefon</label>
                 <Input name="phone" className="mt-1" />
               </div>
             </div>
             <div className="grid grid-cols-3 gap-4">
               <div className="col-span-2">
-                <label className="text-sm font-medium text-gray-700">Ulice</label>
+                <label className="text-sm font-medium text-gray-400">Ulice</label>
                 <Input name="street" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">PSČ</label>
+                <label className="text-sm font-medium text-gray-400">PSČ</label>
                 <Input name="zip" className="mt-1" />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Město</label>
+              <label className="text-sm font-medium text-gray-400">Město</label>
               <Input name="city" className="mt-1" />
             </div>
           </CardContent>
@@ -110,16 +110,16 @@ export default function NewEmployeePage() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Pozice</label>
+                <label className="text-sm font-medium text-gray-400">Pozice</label>
                 <Input name="position" placeholder="např. Elektrikář" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">Oddělení</label>
+                <label className="text-sm font-medium text-gray-400">Oddělení</label>
                 <Input name="department" placeholder="např. Realizace" className="mt-1" />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium text-gray-400">
                 Datum nástupu <span className="text-red-500">*</span>
               </label>
               <Input
@@ -132,7 +132,7 @@ export default function NewEmployeePage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm font-medium text-gray-400">
                   Měsíční hrubá mzda (Kč)
                 </label>
                 <Input
@@ -144,7 +144,7 @@ export default function NewEmployeePage() {
                 />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">
+                <label className="text-sm font-medium text-gray-400">
                   Hodinová sazba (Kč)
                 </label>
                 <Input
@@ -157,7 +157,7 @@ export default function NewEmployeePage() {
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Číslo účtu</label>
+              <label className="text-sm font-medium text-gray-400">Číslo účtu</label>
               <Input name="bankAccount" placeholder="1234567890/0100" className="mt-1" />
             </div>
           </CardContent>

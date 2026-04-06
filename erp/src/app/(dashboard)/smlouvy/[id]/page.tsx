@@ -29,11 +29,11 @@ const statusMap: Record<string, { label: string; variant: "secondary" | "default
 
 const signingStatusMap: Record<string, { label: string; color: string }> = {
   PENDING: { label: "Čeká", color: "text-gray-500" },
-  VIEWED: { label: "Zobrazeno", color: "text-blue-600" },
-  FIELDS_FILLED: { label: "Vyplněno", color: "text-amber-600" },
-  IDENTITY_VERIFIED: { label: "Ověřeno BankID", color: "text-purple-600" },
-  SIGNED: { label: "Podepsáno", color: "text-green-600" },
-  REJECTED: { label: "Odmítnuto", color: "text-red-600" },
+  VIEWED: { label: "Zobrazeno", color: "text-blue-400" },
+  FIELDS_FILLED: { label: "Vyplněno", color: "text-amber-400" },
+  IDENTITY_VERIFIED: { label: "Ověřeno BankID", color: "text-purple-400" },
+  SIGNED: { label: "Podepsáno", color: "text-emerald-400" },
+  REJECTED: { label: "Odmítnuto", color: "text-red-400" },
 };
 
 export default function ContractDetailPage() {
@@ -85,7 +85,7 @@ export default function ContractDetailPage() {
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{contract.title}</h1>
+            <h1 className="text-2xl font-bold text-white">{contract.title}</h1>
             <p className="text-gray-500">{contract.contractNumber} • {contract.partyBName}</p>
           </div>
         </div>
@@ -102,41 +102,38 @@ export default function ContractDetailPage() {
 
       {/* Send for signing form */}
       {showSendForm && (
-        <Card className="rounded-xl border-blue-200 bg-blue-50/30">
+        <Card className="rounded-xl border-[#B5E126]/20 bg-[#B5E126]/5">
           <CardHeader><CardTitle>Odeslat k podpisu</CardTitle></CardHeader>
           <CardContent>
             <form onSubmit={handleSend} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Jméno podepisujícího <span className="text-red-500">*</span></label>
+                  <label className="text-sm font-medium text-gray-400">Jméno podepisujícího <span className="text-red-500">*</span></label>
                   <Input name="signerName" required defaultValue={contract.partyBRepresentative ?? contract.partyBName} className="mt-1" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Email <span className="text-red-500">*</span></label>
+                  <label className="text-sm font-medium text-gray-400">Email <span className="text-red-500">*</span></label>
                   <Input name="signerEmail" type="email" required className="mt-1" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Role</label>
-                  <select name="signerRole" className="mt-1 flex h-10 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm">
+                  <label className="text-sm font-medium text-gray-400">Role</label>
+                  <select name="signerRole" className="mt-1 flex h-10 w-full rounded-lg border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm">
                     <option value="PARTY_B">Druhá smluvní strana</option>
                     <option value="PARTY_A">Za naši firmu</option>
                     <option value="WITNESS">Svědek</option>
                   </select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Metoda ověření totožnosti</label>
-                  <select name="verificationMethod" className="mt-1 flex h-10 w-full rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm">
-                    <option value="BANK_ID">Bankovní identita (BankID)</option>
-                    <option value="MOJE_ID">MojeID</option>
-                    <option value="E_CITIZEN">eObčanka (NIA)</option>
-                    <option value="SMS_OTP">SMS ověření</option>
-                    <option value="NONE">Bez ověření (jednoduchý podpis)</option>
+                  <label className="text-sm font-medium text-gray-400">Metoda ověření totožnosti</label>
+                  <select name="verificationMethod" className="mt-1 flex h-10 w-full rounded-lg border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm text-white">
+                    <option value="SMS_OTP">SMS overeni</option>
+                    <option value="NONE">Bez overeni (jednoduchy podpis)</option>
                   </select>
                 </div>
               </div>
-              <div className="p-3 bg-blue-50 rounded-lg text-sm text-blue-700">
+              <div className="p-3 bg-[#B5E126]/10 rounded-lg text-sm text-[#B5E126]">
                 <Shield className="h-4 w-4 inline mr-1" />
                 Podepisující obdrží e-mail s odkazem. Po otevření vyplní požadované údaje, ověří totožnost přes zvolenou metodu a podepíše smlouvu elektronicky dle eIDAS.
               </div>
@@ -156,13 +153,13 @@ export default function ContractDetailPage() {
         <Card className="rounded-xl">
           <CardHeader><CardTitle>Smluvní strany</CardTitle></CardHeader>
           <CardContent className="space-y-4 text-sm">
-            <div className="p-3 bg-gray-50 rounded-lg">
+            <div className="p-3 bg-[#1a1d24] rounded-lg">
               <p className="text-xs text-gray-400 mb-1">STRANA A (my)</p>
               <p className="font-medium">{contract.partyAName}</p>
               {contract.partyAIco && <p className="text-gray-500">IČO: {contract.partyAIco}</p>}
               {contract.partyAAddress && <p className="text-gray-500">{contract.partyAAddress}</p>}
             </div>
-            <div className="p-3 bg-gray-50 rounded-lg">
+            <div className="p-3 bg-[#1a1d24] rounded-lg">
               <p className="text-xs text-gray-400 mb-1">STRANA B</p>
               <p className="font-medium">{contract.partyBName}</p>
               {contract.partyBIco && <p className="text-gray-500">IČO: {contract.partyBIco}</p>}
@@ -205,7 +202,7 @@ export default function ContractDetailPage() {
                             <Shield className="h-3 w-3 mr-1" />BankID ověřeno
                           </Badge>
                         )}
-                        {req.signedAt && <span className="text-green-600 font-medium">Podepsáno: {formatDateTime(req.signedAt)}</span>}
+                        {req.signedAt && <span className="text-emerald-400 font-medium">Podepsáno: {formatDateTime(req.signedAt)}</span>}
                       </div>
                       {req.status === "PENDING" && req.accessUrl && (
                         <div className="mt-2">
@@ -253,7 +250,7 @@ export default function ContractDetailPage() {
                     <TableCell>{f.filledValue ?? <span className="text-gray-400">Nevyplněno</span>}</TableCell>
                     <TableCell>
                       {f.filledAt ? (
-                        <span className="text-green-600 text-sm">{formatDateTime(f.filledAt)}</span>
+                        <span className="text-emerald-400 text-sm">{formatDateTime(f.filledAt)}</span>
                       ) : (
                         <span className="text-gray-400 text-sm">—</span>
                       )}
@@ -280,7 +277,7 @@ export default function ContractDetailPage() {
               <div key={entry.id} className="flex items-center gap-3 text-sm py-2 border-b last:border-0">
                 <span className="text-gray-400 w-36 shrink-0">{formatDateTime(entry.timestamp)}</span>
                 <Badge variant="outline" className="shrink-0">{entry.action}</Badge>
-                <span className="text-gray-600">{entry.actor}</span>
+                <span className="text-gray-400">{entry.actor}</span>
                 {entry.actorIp && <span className="text-gray-400">({entry.actorIp})</span>}
               </div>
             ))}

@@ -67,7 +67,7 @@ export default function ImportContactsPage() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Import kontaktů</h1>
+          <h1 className="text-2xl font-bold text-white">Import kontaktů</h1>
           <p className="text-gray-500">Import z CSV nebo XLSX souboru</p>
         </div>
       </div>
@@ -86,7 +86,7 @@ export default function ImportContactsPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <label className="text-sm font-medium text-gray-700 mb-2 block">Typ importovaných kontaktů</label>
+              <label className="text-sm font-medium text-gray-400 mb-2 block">Typ importovaných kontaktů</label>
               <div className="flex gap-2">
                 {[
                   { value: "CUSTOMER", label: "Zákazníci" },
@@ -99,8 +99,8 @@ export default function ImportContactsPage() {
                     onClick={() => setContactType(t.value as typeof contactType)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       contactType === t.value
-                        ? "bg-blue-600 text-white shadow-sm"
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                        ? "bg-[#B5E126] text-[#0f1117] shadow-sm"
+                        : "bg-[#1a1d24] text-gray-400 hover:bg-[#2a2d35]"
                     }`}
                   >
                     {t.label}
@@ -112,7 +112,7 @@ export default function ImportContactsPage() {
             {/* Drop zone */}
             <div
               onClick={() => fileRef.current?.click()}
-              className="border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center cursor-pointer hover:border-blue-400 hover:bg-blue-50/30 transition-all"
+              className="border-2 border-dashed border-[#2a2d35] rounded-2xl p-12 text-center cursor-pointer hover:border-[#B5E126] hover:bg-[#B5E126]/10 transition-all"
             >
               <input
                 ref={fileRef}
@@ -126,15 +126,15 @@ export default function ImportContactsPage() {
               ) : (
                 <FileSpreadsheet className="h-12 w-12 text-gray-300 mx-auto mb-3" />
               )}
-              <p className="font-medium text-gray-700">
+              <p className="font-medium text-gray-400">
                 {loading ? "Zpracovávám soubor..." : "Klikněte nebo přetáhněte soubor"}
               </p>
               <p className="text-sm text-gray-400 mt-1">.xlsx, .xls, .csv</p>
             </div>
 
             {/* Expected columns */}
-            <div className="p-4 bg-gray-50 rounded-xl">
-              <p className="text-sm font-medium text-gray-700 mb-2">Očekávané sloupce:</p>
+            <div className="p-4 bg-[#1a1d24] rounded-xl">
+              <p className="text-sm font-medium text-gray-400 mb-2">Očekávané sloupce:</p>
               <div className="flex flex-wrap gap-1.5">
                 {["Firma", "IČ", "DIČ / IČ DPH", "DIČ (SK)", "Ulice", "PSČ", "Město", "Stát",
                   "E-mailová adresa", "Další příjemci", "Telefon", "www", "Sleva", "Splatnost",
@@ -206,9 +206,9 @@ export default function ImportContactsPage() {
           </Card>
 
           {parseErrors.length > 0 && (
-            <Card className="rounded-2xl border-amber-200">
+            <Card className="rounded-2xl border-amber-500/20">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-amber-600">
+                <CardTitle className="flex items-center gap-2 text-amber-400">
                   <AlertTriangle className="h-5 w-5" />
                   Chyby ({parseErrors.length})
                 </CardTitle>
@@ -216,7 +216,7 @@ export default function ImportContactsPage() {
               <CardContent>
                 <ul className="space-y-1 text-sm">
                   {parseErrors.slice(0, 10).map((err, i) => (
-                    <li key={i} className="text-amber-700">
+                    <li key={i} className="text-amber-400">
                       Řádek {err.row}: {err.message}
                     </li>
                   ))}
@@ -242,7 +242,7 @@ export default function ImportContactsPage() {
         <Card className="rounded-2xl text-center py-12">
           <CardContent>
             <Loader2 className="h-12 w-12 text-blue-500 mx-auto mb-4 animate-spin" />
-            <p className="font-medium text-gray-700">Importuji {parsedRows.length} kontaktů...</p>
+            <p className="font-medium text-gray-400">Importuji {parsedRows.length} kontaktů...</p>
           </CardContent>
         </Card>
       )}
@@ -252,18 +252,18 @@ export default function ImportContactsPage() {
         <Card className="rounded-2xl text-center py-12">
           <CardContent className="space-y-4">
             <CheckCircle className="h-16 w-16 text-green-500 mx-auto" />
-            <h2 className="text-xl font-bold text-gray-900">Import dokončen</h2>
+            <h2 className="text-xl font-bold text-white">Import dokončen</h2>
             <div className="flex justify-center gap-4">
               <div>
-                <p className="text-3xl font-bold text-green-600">{importResult.imported}</p>
+                <p className="text-3xl font-bold text-emerald-400">{importResult.imported}</p>
                 <p className="text-sm text-gray-500">Importováno</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-amber-600">{importResult.skipped}</p>
+                <p className="text-3xl font-bold text-amber-400">{importResult.skipped}</p>
                 <p className="text-sm text-gray-500">Přeskočeno (duplikáty)</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-red-600">{importResult.errors.length}</p>
+                <p className="text-3xl font-bold text-red-400">{importResult.errors.length}</p>
                 <p className="text-sm text-gray-500">Chyb</p>
               </div>
             </div>

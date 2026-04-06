@@ -64,7 +64,7 @@ export default async function InvoicesPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Faktury</h1>
+          <h1 className="text-2xl font-bold text-white">Faktury</h1>
           <p className="text-gray-500">
             Vydané a přijaté faktury, zálohové faktury, daňové doklady
           </p>
@@ -106,7 +106,7 @@ export default async function InvoicesPage({
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-gray-500">Neuhrazené vydané</p>
-            <p className="text-xl font-bold text-blue-600">
+            <p className="text-xl font-bold text-blue-400">
               {formatCurrency(stats.unpaidIssued.amount)}
             </p>
             <p className="text-xs text-gray-400">
@@ -117,7 +117,7 @@ export default async function InvoicesPage({
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-gray-500">Po splatnosti</p>
-            <p className="text-xl font-bold text-red-600">
+            <p className="text-xl font-bold text-red-400">
               {formatCurrency(stats.overdue.amount)}
             </p>
             <p className="text-xs text-gray-400">
@@ -128,7 +128,7 @@ export default async function InvoicesPage({
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-gray-500">Uhrazené tento měsíc</p>
-            <p className="text-xl font-bold text-green-600">
+            <p className="text-xl font-bold text-emerald-400">
               {formatCurrency(stats.paidThisMonth.amount)}
             </p>
             <p className="text-xs text-gray-400">
@@ -139,7 +139,7 @@ export default async function InvoicesPage({
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-gray-500">Neuhrazené přijaté</p>
-            <p className="text-xl font-bold text-orange-600">
+            <p className="text-xl font-bold text-amber-400">
               {formatCurrency(stats.unpaidReceived.amount)}
             </p>
             <p className="text-xs text-gray-400">
@@ -199,7 +199,7 @@ export default async function InvoicesPage({
                       <TableCell className="font-medium">
                         <Link
                           href={`/faktury/${invoice.id}`}
-                          className="text-blue-600 hover:underline"
+                          className="text-[#B5E126] hover:underline"
                         >
                           {invoice.invoiceNumber}
                         </Link>

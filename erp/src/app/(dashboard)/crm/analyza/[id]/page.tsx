@@ -81,7 +81,7 @@ export default function PartnerAnalysisPage() {
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">Analýza partnera</h1>
+            <h1 className="text-2xl font-bold text-white">Analýza partnera</h1>
             <p className="text-gray-500">{displayName} {contact.ico ? `• IČO: ${contact.ico}` : ""}</p>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function PartnerAnalysisPage() {
         <Card className="rounded-2xl">
           <CardContent className="py-16 text-center">
             <BarChart3 className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-gray-700 mb-2">Analýza obchodního partnera</h2>
+            <h2 className="text-xl font-bold text-gray-400 mb-2">Analýza obchodního partnera</h2>
             <p className="text-gray-500 max-w-md mx-auto mb-6">
               Ověří spolehlivost plátce DPH, insolvenční rejstřík, exekuce, účetní závěrky a vypočítá interní scoring na základě platební morálky.
             </p>
@@ -120,9 +120,9 @@ export default function PartnerAnalysisPage() {
                 <div className="text-7xl font-bold mb-2">{analysis.scoring.grade}</div>
                 <div className="text-xl font-medium opacity-90">{gradeLabels[analysis.scoring.grade]}</div>
                 <div className="mt-3 text-sm opacity-75">Celkové skóre: {analysis.scoring.overallScore}/100</div>
-                <div className="mt-4 w-full bg-white/20 rounded-full h-2">
+                <div className="mt-4 w-full bg-[#1a1d24]/20 rounded-full h-2">
                   <div
-                    className="bg-white rounded-full h-2 transition-all"
+                    className="bg-[#1a1d24] rounded-full h-2 transition-all"
                     style={{ width: `${analysis.scoring.overallScore}%` }}
                   />
                 </div>
@@ -134,12 +134,12 @@ export default function PartnerAnalysisPage() {
               <CardHeader><CardTitle>Rychlý přehled</CardTitle></CardHeader>
               <CardContent className="space-y-4">
                 {/* VAT Reliability */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-[#1a1d24]">
                   <div className="flex items-center gap-3">
                     {analysis.vatReliability?.isReliable === true ? (
-                      <ShieldCheck className="h-6 w-6 text-green-600" />
+                      <ShieldCheck className="h-6 w-6 text-emerald-400" />
                     ) : analysis.vatReliability?.isReliable === false ? (
-                      <ShieldAlert className="h-6 w-6 text-red-600" />
+                      <ShieldAlert className="h-6 w-6 text-red-400" />
                     ) : (
                       <Shield className="h-6 w-6 text-gray-400" />
                     )}
@@ -158,12 +158,12 @@ export default function PartnerAnalysisPage() {
                 </div>
 
                 {/* Insolvency */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-[#1a1d24]">
                   <div className="flex items-center gap-3">
                     {analysis.insolvency?.hasInsolvency ? (
-                      <XCircle className="h-6 w-6 text-red-600" />
+                      <XCircle className="h-6 w-6 text-red-400" />
                     ) : (
-                      <CheckCircle className="h-6 w-6 text-green-600" />
+                      <CheckCircle className="h-6 w-6 text-emerald-400" />
                     )}
                     <div>
                       <p className="font-medium text-sm">Insolvenční rejstřík</p>
@@ -182,9 +182,9 @@ export default function PartnerAnalysisPage() {
                 </div>
 
                 {/* Executions */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-[#1a1d24]">
                   <div className="flex items-center gap-3">
-                    <Scale className="h-6 w-6 text-blue-600" />
+                    <Scale className="h-6 w-6 text-blue-400" />
                     <div>
                       <p className="font-medium text-sm">Exekuce</p>
                       <p className="text-xs text-gray-500">CERD - cedr.mfcr.cz</p>
@@ -196,9 +196,9 @@ export default function PartnerAnalysisPage() {
                 </div>
 
                 {/* Financial statements */}
-                <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
+                <div className="flex items-center justify-between p-3 rounded-lg bg-[#1a1d24]">
                   <div className="flex items-center gap-3">
-                    <FileText className="h-6 w-6 text-purple-600" />
+                    <FileText className="h-6 w-6 text-purple-400" />
                     <div>
                       <p className="font-medium text-sm">Účetní závěrky</p>
                       <p className="text-xs text-gray-500">Sbírka listin OR</p>
@@ -223,28 +223,28 @@ export default function PartnerAnalysisPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <Card className="rounded-xl stat-card-green">
               <CardContent className="p-4 text-center">
-                <Banknote className="h-5 w-5 text-green-600 mx-auto mb-1" />
+                <Banknote className="h-5 w-5 text-emerald-400 mx-auto mb-1" />
                 <p className="text-2xl font-bold">{analysis.scoring.metrics.paymentOnTime}%</p>
                 <p className="text-xs text-gray-500">Placeno včas</p>
               </CardContent>
             </Card>
             <Card className="rounded-xl stat-card-blue">
               <CardContent className="p-4 text-center">
-                <Clock className="h-5 w-5 text-blue-600 mx-auto mb-1" />
+                <Clock className="h-5 w-5 text-blue-400 mx-auto mb-1" />
                 <p className="text-2xl font-bold">{analysis.scoring.metrics.avgPaymentDelay}</p>
                 <p className="text-xs text-gray-500">Průměr zpoždění (dny)</p>
               </CardContent>
             </Card>
             <Card className="rounded-xl stat-card-purple">
               <CardContent className="p-4 text-center">
-                <TrendingUp className="h-5 w-5 text-purple-600 mx-auto mb-1" />
+                <TrendingUp className="h-5 w-5 text-purple-400 mx-auto mb-1" />
                 <p className="text-2xl font-bold">{formatCurrency(analysis.scoring.metrics.totalInvoiced)}</p>
                 <p className="text-xs text-gray-500">Celkem fakturováno</p>
               </CardContent>
             </Card>
             <Card className="rounded-xl stat-card-red">
               <CardContent className="p-4 text-center">
-                <AlertTriangle className="h-5 w-5 text-red-600 mx-auto mb-1" />
+                <AlertTriangle className="h-5 w-5 text-red-400 mx-auto mb-1" />
                 <p className="text-2xl font-bold">{formatCurrency(analysis.scoring.metrics.overdueAmount)}</p>
                 <p className="text-xs text-gray-500">Po splatnosti</p>
               </CardContent>
@@ -261,11 +261,11 @@ export default function PartnerAnalysisPage() {
                     <TableCell className="font-medium text-gray-500">Celkem faktur</TableCell>
                     <TableCell className="text-right font-bold">{analysis.scoring.metrics.invoiceCount}</TableCell>
                     <TableCell className="font-medium text-gray-500">Zaplaceno</TableCell>
-                    <TableCell className="text-right font-bold text-green-600">{analysis.scoring.metrics.paidCount}</TableCell>
+                    <TableCell className="text-right font-bold text-emerald-400">{analysis.scoring.metrics.paidCount}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-gray-500">Po splatnosti</TableCell>
-                    <TableCell className="text-right font-bold text-red-600">{analysis.scoring.metrics.overdueCount}</TableCell>
+                    <TableCell className="text-right font-bold text-red-400">{analysis.scoring.metrics.overdueCount}</TableCell>
                     <TableCell className="font-medium text-gray-500">Nejdelší zpoždění</TableCell>
                     <TableCell className="text-right font-bold">{analysis.scoring.metrics.longestDelay} dní</TableCell>
                   </TableRow>
@@ -273,7 +273,7 @@ export default function PartnerAnalysisPage() {
                     <TableCell className="font-medium text-gray-500">Celkem zaplaceno</TableCell>
                     <TableCell className="text-right font-bold">{formatCurrency(analysis.scoring.metrics.totalPaid)}</TableCell>
                     <TableCell className="font-medium text-gray-500">Neuhrazeno</TableCell>
-                    <TableCell className="text-right font-bold text-orange-600">{formatCurrency(analysis.scoring.metrics.unpaidAmount)}</TableCell>
+                    <TableCell className="text-right font-bold text-amber-400">{formatCurrency(analysis.scoring.metrics.unpaidAmount)}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-medium text-gray-500">Průměrná faktura</TableCell>
@@ -313,7 +313,7 @@ export default function PartnerAnalysisPage() {
                 {analysis.ares.nace && analysis.ares.nace.length > 0 && (
                   <div className="mt-3">
                     <span className="text-gray-500">Činnosti (NACE):</span>
-                    <ul className="mt-1 list-disc list-inside text-gray-700">
+                    <ul className="mt-1 list-disc list-inside text-gray-400">
                       {analysis.ares.nace.slice(0, 5).map((n, i) => (
                         <li key={i}>{n}</li>
                       ))}
@@ -326,9 +326,9 @@ export default function PartnerAnalysisPage() {
 
           {/* Insolvency records */}
           {analysis.insolvency?.hasInsolvency && (
-            <Card className="rounded-2xl border-red-200">
+            <Card className="rounded-2xl border-red-500/20">
               <CardHeader>
-                <CardTitle className="text-red-600 flex items-center gap-2">
+                <CardTitle className="text-red-400 flex items-center gap-2">
                   <XCircle className="h-5 w-5" />
                   Insolvenční záznamy
                 </CardTitle>

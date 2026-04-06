@@ -141,7 +141,7 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Datum *
               </label>
               <Input
@@ -149,13 +149,13 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
                 {...register("date", { required: "Datum je povinne" })}
               />
               {errors.date && (
-                <p className="text-sm text-red-600 mt-1">
+                <p className="text-sm text-red-400 mt-1">
                   {errors.date.message}
                 </p>
               )}
             </div>
             <div className="sm:col-span-2 lg:col-span-3">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Popis *
               </label>
               <Input
@@ -163,7 +163,7 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
                 {...register("description", { required: "Popis je povinny" })}
               />
               {errors.description && (
-                <p className="text-sm text-red-600 mt-1">
+                <p className="text-sm text-red-400 mt-1">
                   {errors.description.message}
                 </p>
               )}
@@ -171,12 +171,12 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Typ dokladu
               </label>
               <select
                 {...register("documentType")}
-                className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#B5E126] focus:border-transparent"
               >
                 {documentTypes.map((t) => (
                   <option key={t.value} value={t.value}>
@@ -186,7 +186,7 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Cislo dokladu
               </label>
               <Input
@@ -233,7 +233,7 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
             {fields.map((field, index) => (
               <div
                 key={field.id}
-                className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-start p-2 rounded-lg bg-gray-50"
+                className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-start p-2 rounded-lg bg-[#1a1d24]"
               >
                 <div className="sm:col-span-4">
                   <label className="block text-xs font-medium text-gray-500 mb-1 sm:hidden">
@@ -289,7 +289,7 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
                       type="button"
                       variant="ghost"
                       size="icon"
-                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                      className="text-red-500 hover:text-red-400 hover:bg-red-500/10"
                       onClick={() => remove(index)}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -302,7 +302,7 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
             {/* Totals */}
             <div className="border-t pt-3 mt-3">
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-center px-2">
-                <div className="sm:col-span-4 font-medium text-gray-700">
+                <div className="sm:col-span-4 font-medium text-gray-400">
                   Celkem
                 </div>
                 <div className="sm:col-span-2 text-right font-mono font-bold">
@@ -329,8 +329,8 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
 
             {/* Balance error */}
             {hasAmounts && !isBalanced && (
-              <div className="rounded-md bg-red-50 border border-red-200 p-3 mt-2">
-                <p className="text-sm text-red-700 font-medium">
+              <div className="rounded-md bg-red-500/10 border border-red-500/20 p-3 mt-2">
+                <p className="text-sm text-red-400 font-medium">
                   Strana MD ({formatCurrency(totalDebit)}) se nerovna strane D (
                   {formatCurrency(totalCredit)}). Ucetni zapis musi byt
                   vyrovnany -- celkova castka na strane MD se musi rovnat
@@ -344,8 +344,8 @@ export function JournalEntryForm({ accounts }: { accounts: Account[] }) {
 
       {/* Server error */}
       {serverError && (
-        <div className="rounded-md bg-red-50 border border-red-200 p-4">
-          <p className="text-sm text-red-700">{serverError}</p>
+        <div className="rounded-md bg-red-500/10 border border-red-500/20 p-4">
+          <p className="text-sm text-red-400">{serverError}</p>
         </div>
       )}
 

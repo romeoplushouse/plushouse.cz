@@ -521,6 +521,57 @@ export async function getContractTypes() {
   ];
 }
 
+export async function renderContractHtml(contract: {
+  htmlContent?: string | null;
+  partyAName?: string | null;
+  partyBName?: string | null;
+  partyAIco?: string | null;
+  partyBIco?: string | null;
+  partyADic?: string | null;
+  partyBDic?: string | null;
+  partyAAddress?: string | null;
+  partyBAddress?: string | null;
+  partyARepresentative?: string | null;
+  partyBRepresentative?: string | null;
+  totalAmount?: number | bigint | null;
+  validFrom?: Date | string | null;
+  validTo?: Date | string | null;
+  contractNumber?: string | null;
+  fillableFields?: Array<{ fieldName: string; filledValue?: string | null }>;
+}): Promise<string> {
+  let html = contract.htmlContent ?? "";
+
+  const replacements: Record<string, string> = {
+    "{{partyAName}}": contract.partyAName ?? "",
+    "{{partyBName}}": contract.partyBName ?? "",
+    "{{partyAIco}}": contract.partyAIco ?? "",
+    "{{partyBIco}}": contract.partyBIco ?? "",
+    "{{partyADic}}": contract.partyADic ?? "",
+    "{{partyBDic}}": contract.partyBDic ?? "",
+    "{{partyAAddress}}": contract.partyAAddress ?? "",
+    "{{partyBAddress}}": contract.partyBAddress ?? "",
+    "{{partyARepresentative}}": contract.partyARepresentative ?? "",
+    "{{partyBRepresentative}}": contract.partyBRepresentative ?? "",
+    "{{totalAmount}}": contract.totalAmount ? Number(contract.totalAmount).toLocaleString("cs-CZ") : "",
+    "{{validFrom}}": contract.validFrom ? new Date(contract.validFrom).toLocaleDateString("cs-CZ") : "",
+    "{{validTo}}": contract.validTo ? new Date(contract.validTo).toLocaleDateString("cs-CZ") : "",
+    "{{contractNumber}}": contract.contractNumber ?? "",
+  };
+
+  for (const [placeholder, value] of Object.entries(replacements)) {
+    html = html.replaceAll(placeholder, value);
+  }
+
+  // Replace {{field:name:label:type}} with filled values or placeholder
+  html = html.replace(/\{\{field:(\w+):([^:]+):(\w+)\}\}/g, (_match, fieldName, label) => {
+    const field = contract.fillableFields?.find((f) => f.fieldName === fieldName);
+    if (field?.filledValue) return `<strong>${field.filledValue}</strong>`;
+    return `[${label}]`;
+  });
+
+  return html;
+}
+
 export async function getContractStats() {
   const [total, pending, signed, expired] = await Promise.all([
     prisma.contract.count(),

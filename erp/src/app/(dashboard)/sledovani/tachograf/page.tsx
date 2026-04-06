@@ -40,10 +40,10 @@ const activityLabels: Record<string, string> = {
 };
 
 const activityColors: Record<string, string> = {
-  DRIVING: "bg-blue-500",
+  DRIVING: "bg-blue-500/100",
   WORK: "bg-yellow-500",
   AVAILABILITY: "bg-purple-500",
-  REST: "bg-green-500",
+  REST: "bg-emerald-500/100",
   BREAK: "bg-gray-400",
 };
 
@@ -188,7 +188,7 @@ export default function TachographPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Digitální tachograf</h1>
+          <h1 className="text-2xl font-bold text-white">Digitální tachograf</h1>
           <p className="text-gray-500">
             Smart tachograph Gen 2 - import DDD, aktivita řidičů, přestupky, hranice
           </p>
@@ -221,7 +221,7 @@ export default function TachographPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <FileText className="h-6 w-6 text-blue-600" />
+                  <FileText className="h-6 w-6 text-blue-400" />
                   <div>
                     <p className="text-sm text-gray-500">DDD soubory</p>
                     <p className="text-xl font-bold">{stats.totalFiles}</p>
@@ -232,7 +232,7 @@ export default function TachographPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <Upload className="h-6 w-6 text-yellow-600" />
+                  <Upload className="h-6 w-6 text-amber-400" />
                   <div>
                     <p className="text-sm text-gray-500">Nezpracované</p>
                     <p className="text-xl font-bold">{stats.unprocessedFiles}</p>
@@ -243,7 +243,7 @@ export default function TachographPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <AlertTriangle className="h-6 w-6 text-red-600" />
+                  <AlertTriangle className="h-6 w-6 text-red-400" />
                   <div>
                     <p className="text-sm text-gray-500">Přestupky (7 dní)</p>
                     <p className="text-xl font-bold">{stats.recentViolations}</p>
@@ -254,7 +254,7 @@ export default function TachographPage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <Gauge className="h-6 w-6 text-orange-600" />
+                  <Gauge className="h-6 w-6 text-amber-400" />
                   <div>
                     <p className="text-sm text-gray-500">Dny s porušením</p>
                     <p className="text-xl font-bold">{stats.daysWithViolations}</p>
@@ -364,11 +364,11 @@ export default function TachographPage() {
             <CardContent className="p-4">
               <div className="flex items-end gap-4">
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Řidič</label>
+                  <label className="text-sm font-medium text-gray-400">Řidič</label>
                   <select
                     value={selectedEmployee}
                     onChange={(e) => setSelectedEmployee(e.target.value)}
-                    className="mt-1 flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm min-w-[200px]"
+                    className="mt-1 flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm min-w-[200px]"
                   >
                     <option value="">Vyberte řidiče</option>
                     {employees.map((e) => (
@@ -379,11 +379,11 @@ export default function TachographPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Od</label>
+                  <label className="text-sm font-medium text-gray-400">Od</label>
                   <Input type="date" value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} className="mt-1" />
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Do</label>
+                  <label className="text-sm font-medium text-gray-400">Do</label>
                   <Input type="date" value={dateTo} onChange={(e) => setDateTo(e.target.value)} className="mt-1" />
                 </div>
                 <Button onClick={loadSummaries}>Zobrazit</Button>
@@ -416,14 +416,14 @@ export default function TachographPage() {
                     </TableRow>
                   ) : (
                     summaries.map((s) => (
-                      <TableRow key={s.id} className={s.dailyDrivingExceeded || s.restViolation ? "bg-red-50" : ""}>
+                      <TableRow key={s.id} className={s.dailyDrivingExceeded || s.restViolation ? "bg-red-500/10" : ""}>
                         <TableCell className="font-medium">{formatDate(s.date)}</TableCell>
-                        <TableCell className={s.dailyDrivingExceeded ? "text-red-600 font-bold" : ""}>
+                        <TableCell className={s.dailyDrivingExceeded ? "text-red-400 font-bold" : ""}>
                           {formatMinutes(s.totalDrivingMinutes)}
                         </TableCell>
                         <TableCell>{formatMinutes(s.totalWorkMinutes)}</TableCell>
                         <TableCell>{formatMinutes(s.totalAvailMinutes)}</TableCell>
-                        <TableCell className={s.restViolation ? "text-red-600 font-bold" : ""}>
+                        <TableCell className={s.restViolation ? "text-red-400 font-bold" : ""}>
                           {formatMinutes(s.totalRestMinutes)}
                         </TableCell>
                         <TableCell>{Number(s.totalDistanceKm).toFixed(0)} km</TableCell>
@@ -453,7 +453,7 @@ export default function TachographPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-red-600" />
+              <AlertTriangle className="h-5 w-5 text-red-400" />
               Přestupky a porušení
             </CardTitle>
           </CardHeader>
@@ -542,22 +542,22 @@ export default function TachographPage() {
               <form onSubmit={handleUploadFile} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Typ souboru <span className="text-red-500">*</span></label>
-                    <select name="fileType" required className="mt-1 flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                    <label className="text-sm font-medium text-gray-400">Typ souboru <span className="text-red-500">*</span></label>
+                    <select name="fileType" required className="mt-1 flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm">
                       <option value="DRIVER_DDD">Karta řidiče (.ddd)</option>
                       <option value="VEHICLE_DDD">Palubní jednotka (.ddd)</option>
                       <option value="COMPANY_DDD">Firemní karta (.ddd)</option>
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Název souboru <span className="text-red-500">*</span></label>
+                    <label className="text-sm font-medium text-gray-400">Název souboru <span className="text-red-500">*</span></label>
                     <Input name="fileName" required placeholder="driver_card_20260330.ddd" className="mt-1" />
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Řidič</label>
-                    <select name="employeeId" className="mt-1 flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                    <label className="text-sm font-medium text-gray-400">Řidič</label>
+                    <select name="employeeId" className="mt-1 flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm">
                       <option value="">Vyberte řidiče</option>
                       {employees.map((e) => (
                         <option key={e.id} value={e.id}>{e.firstName} {e.lastName}</option>
@@ -565,8 +565,8 @@ export default function TachographPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Vozidlo</label>
-                    <select name="vehicleId" className="mt-1 flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                    <label className="text-sm font-medium text-gray-400">Vozidlo</label>
+                    <select name="vehicleId" className="mt-1 flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm">
                       <option value="">Vyberte vozidlo</option>
                       {vehicles.map((v) => (
                         <option key={v.id} value={v.id}>{v.licensePlate} – {v.make} {v.model}</option>
@@ -576,20 +576,20 @@ export default function TachographPage() {
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Číslo karty</label>
+                    <label className="text-sm font-medium text-gray-400">Číslo karty</label>
                     <Input name="cardNumber" placeholder="CZ 0000000000000001" className="mt-1" />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Období od <span className="text-red-500">*</span></label>
+                    <label className="text-sm font-medium text-gray-400">Období od <span className="text-red-500">*</span></label>
                     <Input name="periodFrom" type="date" required className="mt-1" />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Období do <span className="text-red-500">*</span></label>
+                    <label className="text-sm font-medium text-gray-400">Období do <span className="text-red-500">*</span></label>
                     <Input name="periodTo" type="date" required className="mt-1" />
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm font-medium text-gray-700">Staženo z tachografu <span className="text-red-500">*</span></label>
+                  <label className="text-sm font-medium text-gray-400">Staženo z tachografu <span className="text-red-500">*</span></label>
                   <Input name="downloadedAt" type="datetime-local" required className="mt-1" />
                 </div>
                 <Button type="submit">
@@ -615,8 +615,8 @@ export default function TachographPage() {
               <form onSubmit={handleManualImport} className="space-y-4">
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Řidič <span className="text-red-500">*</span></label>
-                    <select name="employeeId" required className="mt-1 flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                    <label className="text-sm font-medium text-gray-400">Řidič <span className="text-red-500">*</span></label>
+                    <select name="employeeId" required className="mt-1 flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm">
                       <option value="">Vyberte řidiče</option>
                       {employees.map((e) => (
                         <option key={e.id} value={e.id}>{e.firstName} {e.lastName}</option>
@@ -624,12 +624,12 @@ export default function TachographPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Datum <span className="text-red-500">*</span></label>
+                    <label className="text-sm font-medium text-gray-400">Datum <span className="text-red-500">*</span></label>
                     <Input name="date" type="date" required defaultValue={new Date().toISOString().split("T")[0]} className="mt-1" />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-700">Vozidlo</label>
-                    <select name="vehicleId" className="mt-1 flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm">
+                    <label className="text-sm font-medium text-gray-400">Vozidlo</label>
+                    <select name="vehicleId" className="mt-1 flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm">
                       <option value="">Vyberte vozidlo</option>
                       {vehicles.map((v) => (
                         <option key={v.id} value={v.id}>{v.licensePlate}</option>
@@ -639,11 +639,11 @@ export default function TachographPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <p className="text-sm font-medium text-gray-700">Časové bloky aktivit:</p>
+                  <p className="text-sm font-medium text-gray-400">Časové bloky aktivit:</p>
                   {[0, 1, 2, 3].map((i) => (
                     <div key={i} className="grid grid-cols-5 gap-2 items-end">
                       <div>
-                        <select name={`act_type_${i}`} className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-2 py-2 text-sm">
+                        <select name={`act_type_${i}`} className="flex h-10 w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-2 py-2 text-sm">
                           <option value="">—</option>
                           <option value="DRIVING">Řízení</option>
                           <option value="WORK">Práce</option>

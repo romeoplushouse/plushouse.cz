@@ -39,7 +39,7 @@ export default function ChartOfAccountsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Účtový rozvrh</h1>
+        <h1 className="text-2xl font-bold text-white">Účtový rozvrh</h1>
         <p className="text-gray-500">
           Český standardní účtový rozvrh dle vyhlášky č. 500/2002 Sb.
         </p>
@@ -48,7 +48,7 @@ export default function ChartOfAccountsPage() {
       <div className="grid grid-cols-5 gap-4">
         <Card>
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-blue-600">
+            <p className="text-2xl font-bold text-blue-400">
               {czechChartOfAccounts.filter((a) => a.type === "ASSET").length}
             </p>
             <p className="text-sm text-gray-500">Aktiva</p>
@@ -56,7 +56,7 @@ export default function ChartOfAccountsPage() {
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-yellow-600">
+            <p className="text-2xl font-bold text-amber-400">
               {czechChartOfAccounts.filter((a) => a.type === "LIABILITY").length}
             </p>
             <p className="text-sm text-gray-500">Pasiva</p>
@@ -64,7 +64,7 @@ export default function ChartOfAccountsPage() {
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-gray-600">
+            <p className="text-2xl font-bold text-gray-400">
               {czechChartOfAccounts.filter((a) => a.type === "EQUITY").length}
             </p>
             <p className="text-sm text-gray-500">Vlastní kapitál</p>
@@ -72,7 +72,7 @@ export default function ChartOfAccountsPage() {
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-green-600">
+            <p className="text-2xl font-bold text-emerald-400">
               {czechChartOfAccounts.filter((a) => a.type === "REVENUE").length}
             </p>
             <p className="text-sm text-gray-500">Výnosy</p>
@@ -80,7 +80,7 @@ export default function ChartOfAccountsPage() {
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-red-600">
+            <p className="text-2xl font-bold text-red-400">
               {czechChartOfAccounts.filter((a) => a.type === "EXPENSE").length}
             </p>
             <p className="text-sm text-gray-500">Náklady</p>

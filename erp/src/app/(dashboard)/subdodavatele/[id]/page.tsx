@@ -71,7 +71,7 @@ export default function SubcontractorDetailPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-white">
             {sub.contact.companyName}
           </h1>
           <p className="text-gray-500">
@@ -153,7 +153,7 @@ export default function SubcontractorDetailPage() {
         </CardHeader>
         <CardContent>
           {showPriceForm && (
-            <form onSubmit={handleAddPriceItem} className="mb-4 p-4 bg-gray-50 rounded-lg">
+            <form onSubmit={handleAddPriceItem} className="mb-4 p-4 bg-[#1a1d24] rounded-lg">
               <div className="grid grid-cols-4 gap-3">
                 <div className="col-span-2">
                   <Input name="description" placeholder="Popis práce" required />
@@ -216,7 +216,7 @@ export default function SubcontractorDetailPage() {
         <Card>
           <CardHeader><CardTitle>Vygenerovaná rámcová smlouva</CardTitle></CardHeader>
           <CardContent>
-            <pre className="whitespace-pre-wrap text-sm bg-gray-50 p-4 rounded-lg font-mono leading-relaxed">
+            <pre className="whitespace-pre-wrap text-sm bg-[#1a1d24] p-4 rounded-lg font-mono leading-relaxed">
               {agreement}
             </pre>
             <div className="mt-4 flex gap-2">

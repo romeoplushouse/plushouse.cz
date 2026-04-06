@@ -102,7 +102,7 @@ export default function NewProjectPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-white">
             Nová zakázka
           </h1>
           <p className="text-gray-500">Vytvořte novou zakázku</p>
@@ -116,33 +116,33 @@ export default function NewProjectPage() {
         <CardContent>
           <form action={handleSubmit} className="space-y-4">
             {error && (
-              <div className="p-3 bg-red-50 text-red-700 rounded-md text-sm">
+              <div className="p-3 bg-red-500/10 text-red-400 rounded-md text-sm">
                 {error}
               </div>
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Název zakázky *
               </label>
               <Input name="name" placeholder="Např. Rekonstrukce koupelny" required />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Popis
               </label>
               <textarea
                 name="description"
                 rows={3}
-                className="flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="flex w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B5E126] focus:border-transparent"
                 placeholder="Popis zakázky..."
               />
             </div>
 
             {/* Contact search */}
             <div className="relative">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Zákazník / Kontakt
               </label>
               <div className="relative">
@@ -161,12 +161,12 @@ export default function NewProjectPage() {
                 )}
               </div>
               {showContactDropdown && contactResults.length > 0 && (
-                <div className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-48 overflow-auto">
+                <div className="absolute z-10 mt-1 w-full bg-[#1a1d24] border border-[#2a2d35] rounded-md shadow-lg max-h-48 overflow-auto">
                   {contactResults.map((contact) => (
                     <button
                       key={contact.id}
                       type="button"
-                      className="w-full text-left px-3 py-2 hover:bg-gray-50 text-sm"
+                      className="w-full text-left px-3 py-2 hover:bg-[#2a2d35] text-sm text-gray-200"
                       onClick={() => selectContact(contact)}
                     >
                       <span className="font-medium">
@@ -186,7 +186,7 @@ export default function NewProjectPage() {
               )}
               {selectedContact && (
                 <div className="mt-1 flex items-center gap-2">
-                  <span className="text-xs text-green-600">
+                  <span className="text-xs text-emerald-400">
                     Vybráno:{" "}
                     {selectedContact.companyName ||
                       [selectedContact.firstName, selectedContact.lastName]
@@ -209,13 +209,13 @@ export default function NewProjectPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-400 mb-1">
                   Datum zahájení
                 </label>
                 <Input name="startDate" type="date" />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-400 mb-1">
                   Datum ukončení
                 </label>
                 <Input name="endDate" type="date" />
@@ -223,7 +223,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Rozpočet (Kč)
               </label>
               <Input
@@ -236,7 +236,7 @@ export default function NewProjectPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Adresa stavby
               </label>
               <Input name="address" placeholder="Ulice, město" />
@@ -244,7 +244,7 @@ export default function NewProjectPage() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-400 mb-1">
                   Zeměpisná šířka (lat)
                 </label>
                 <Input
@@ -255,7 +255,7 @@ export default function NewProjectPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-400 mb-1">
                   Zeměpisná délka (lng)
                 </label>
                 <Input

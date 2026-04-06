@@ -53,7 +53,7 @@ export default async function ProjectsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Zakázky</h1>
+          <h1 className="text-2xl font-bold text-white">Zakázky</h1>
           <p className="text-gray-500">
             Evidence zakázek, úkolů, materiálu a kontroly kvality
           </p>
@@ -71,7 +71,7 @@ export default async function ProjectsPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <FolderKanban className="h-6 w-6 text-blue-600" />
+              <FolderKanban className="h-6 w-6 text-blue-400" />
               <div>
                 <p className="text-sm text-gray-500">Nové</p>
                 <p className="text-xl font-bold">{stats.new}</p>
@@ -82,7 +82,7 @@ export default async function ProjectsPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Clock className="h-6 w-6 text-yellow-600" />
+              <Clock className="h-6 w-6 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-500">V realizaci</p>
                 <p className="text-xl font-bold">{stats.inProgress}</p>
@@ -93,7 +93,7 @@ export default async function ProjectsPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Pause className="h-6 w-6 text-orange-600" />
+              <Pause className="h-6 w-6 text-amber-400" />
               <div>
                 <p className="text-sm text-gray-500">Pozastavené</p>
                 <p className="text-xl font-bold">{stats.onHold}</p>
@@ -104,7 +104,7 @@ export default async function ProjectsPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <CheckCircle className="h-6 w-6 text-green-600" />
+              <CheckCircle className="h-6 w-6 text-emerald-400" />
               <div>
                 <p className="text-sm text-gray-500">Dokončené</p>
                 <p className="text-xl font-bold">{stats.completed}</p>
@@ -119,7 +119,7 @@ export default async function ProjectsPage() {
         <Card>
           <CardContent className="py-12 text-center">
             <FolderKanban className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-            <p className="font-medium text-gray-600">Zatím žádné zakázky</p>
+            <p className="font-medium text-gray-400">Zatím žádné zakázky</p>
             <p className="text-sm text-gray-500 mt-1">
               Vytvořte první zakázku s úkoly, přiřazením pracovníků a sledováním průběhu
             </p>
@@ -156,7 +156,7 @@ export default async function ProjectsPage() {
                     <TableCell className="font-medium">
                       {project.name}
                     </TableCell>
-                    <TableCell className="text-gray-600">
+                    <TableCell className="text-gray-400">
                       {project.contact?.companyName ||
                         [project.contact?.firstName, project.contact?.lastName]
                           .filter(Boolean)

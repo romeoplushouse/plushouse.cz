@@ -15,7 +15,7 @@ export default async function GeneralLedgerPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Hlavni kniha</h1>
+        <h1 className="text-2xl font-bold text-white">Hlavni kniha</h1>
         <p className="text-gray-500">
           Zobrazeni oboru a zustatku na jednotlivych uctech
         </p>

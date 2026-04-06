@@ -77,7 +77,7 @@ export function GeneralLedgerClient({ accounts }: { accounts: Account[] }) {
         <CardContent>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-4 items-end">
             <div className="sm:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Ucet *
               </label>
               <AccountSelector
@@ -88,7 +88,7 @@ export function GeneralLedgerClient({ accounts }: { accounts: Account[] }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Datum od
               </label>
               <Input
@@ -98,7 +98,7 @@ export function GeneralLedgerClient({ accounts }: { accounts: Account[] }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-400 mb-1">
                 Datum do
               </label>
               <Input
@@ -180,8 +180,8 @@ export function GeneralLedgerClient({ accounts }: { accounts: Account[] }) {
                         <TableCell
                           className={`text-right font-mono font-medium ${
                             entry.balance < 0
-                              ? "text-red-600"
-                              : "text-gray-900"
+                              ? "text-red-400"
+                              : "text-white"
                           }`}
                         >
                           {formatCurrency(entry.balance)}
@@ -189,7 +189,7 @@ export function GeneralLedgerClient({ accounts }: { accounts: Account[] }) {
                       </TableRow>
                     ))}
                     {/* Totals row */}
-                    <TableRow className="bg-gray-50 font-bold">
+                    <TableRow className="bg-[#1a1d24] font-bold">
                       <TableCell colSpan={4} className="text-right">
                         Celkem
                       </TableCell>
@@ -201,7 +201,7 @@ export function GeneralLedgerClient({ accounts }: { accounts: Account[] }) {
                       </TableCell>
                       <TableCell
                         className={`text-right font-mono ${
-                          runningBalance < 0 ? "text-red-600" : "text-gray-900"
+                          runningBalance < 0 ? "text-red-400" : "text-white"
                         }`}
                       >
                         {formatCurrency(runningBalance)}

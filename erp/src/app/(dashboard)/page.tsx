@@ -157,7 +157,7 @@ export default async function DashboardPage() {
                   {stats.totalContacts}
                 </p>
               </div>
-              <div className="p-2.5 rounded-xl bg-blue-500/10">
+              <div className="p-2.5 rounded-xl bg-blue-500/100/10">
                 <Users className="h-5 w-5 text-blue-400" />
               </div>
             </div>
@@ -210,9 +210,9 @@ export default async function DashboardPage() {
               {stats.overdueInvoices > 0 && (
                 <Link
                   href="/faktury?status=OVERDUE"
-                  className="flex items-center gap-3 p-4 rounded-xl transition-all hover:shadow-md hover:shadow-[#B5E126]/5 group bg-red-500/5 border border-red-500/10"
+                  className="flex items-center gap-3 p-4 rounded-xl transition-all hover:shadow-md hover:shadow-[#B5E126]/5 group bg-red-500/100/5 border border-red-500/10"
                 >
-                  <div className="p-2 rounded-lg bg-red-500/10">
+                  <div className="p-2 rounded-lg bg-red-500/100/10">
                     <AlertTriangle className="h-4 w-4 text-red-400" />
                   </div>
                   <div className="flex-1">
@@ -223,7 +223,7 @@ export default async function DashboardPage() {
                       Vyžaduje okamžitou pozornost
                     </p>
                   </div>
-                  <ChevronRight className="h-4 w-4 text-gray-600 group-hover:text-gray-400 transition-colors" />
+                  <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-400 transition-colors" />
                 </Link>
               )}
 
@@ -244,9 +244,9 @@ export default async function DashboardPage() {
               {stats.totalContacts === 0 && (
                 <Link
                   href="/crm/novy"
-                  className="flex items-center gap-3 p-4 rounded-xl transition-all hover:shadow-md hover:shadow-[#B5E126]/5 group bg-amber-500/5 border border-amber-500/10"
+                  className="flex items-center gap-3 p-4 rounded-xl transition-all hover:shadow-md hover:shadow-[#B5E126]/5 group bg-amber-500/100/5 border border-amber-500/10"
                 >
-                  <div className="p-2 rounded-lg bg-amber-500/10">
+                  <div className="p-2 rounded-lg bg-amber-500/100/10">
                     <AlertTriangle className="h-4 w-4 text-amber-400" />
                   </div>
                   <div className="flex-1">
@@ -257,7 +257,7 @@ export default async function DashboardPage() {
                       Začněte vytvořením zákazníka nebo dodavatele
                     </p>
                   </div>
-                  <ChevronRight className="h-4 w-4 text-gray-600 group-hover:text-gray-400 transition-colors" />
+                  <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-400 transition-colors" />
                 </Link>
               )}
 
@@ -387,7 +387,7 @@ export default async function DashboardPage() {
                       Vystavit fakturu zákazníkovi
                     </p>
                   </div>
-                  <ChevronRight className="h-5 w-5 text-gray-600 group-hover:text-[#B5E126] transition-colors mt-0.5" />
+                  <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-[#B5E126] transition-colors mt-0.5" />
                 </div>
               </CardContent>
             </Card>
@@ -408,7 +408,7 @@ export default async function DashboardPage() {
                       Přidat zákazníka nebo dodavatele
                     </p>
                   </div>
-                  <ChevronRight className="h-5 w-5 text-gray-600 group-hover:text-[#B5E126] transition-colors mt-0.5" />
+                  <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-[#B5E126] transition-colors mt-0.5" />
                 </div>
               </CardContent>
             </Card>
@@ -429,7 +429,7 @@ export default async function DashboardPage() {
                       Vytvořit nový projekt
                     </p>
                   </div>
-                  <ChevronRight className="h-5 w-5 text-gray-600 group-hover:text-[#B5E126] transition-colors mt-0.5" />
+                  <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-[#B5E126] transition-colors mt-0.5" />
                 </div>
               </CardContent>
             </Card>

@@ -13,7 +13,7 @@ export default function NewInvoicePage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Nova faktura</h1>
+          <h1 className="text-2xl font-bold text-white">Nova faktura</h1>
           <p className="text-gray-500">
             Vyplnte udaje a polozky nove faktury
           </p>

@@ -66,7 +66,7 @@ export default function PayrollCalculationPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Výpočet mezd</h1>
+          <h1 className="text-2xl font-bold text-white">Výpočet mezd</h1>
           <p className="text-gray-500">Hromadný výpočet mezd pro všechny aktivní zaměstnance</p>
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function PayrollCalculationPage() {
         <CardContent className="p-6">
           <div className="flex items-end gap-4">
             <div>
-              <label className="text-sm font-medium text-gray-700">Mzdové období</label>
+              <label className="text-sm font-medium text-gray-400">Mzdové období</label>
               <Input
                 type="month"
                 value={period}
@@ -135,7 +135,7 @@ export default function PayrollCalculationPage() {
                   </TableRow>
                 ))}
                 {payrolls.length > 0 && (
-                  <TableRow className="font-bold bg-gray-50">
+                  <TableRow className="font-bold bg-[#1a1d24]">
                     <TableCell>CELKEM</TableCell>
                     <TableCell className="text-right">{formatMoney(totals.gross)}</TableCell>
                     <TableCell className="text-right">{formatMoney(totals.health)}</TableCell>

@@ -45,58 +45,58 @@ export default function NewSubcontractorPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Nový subdodavatel</h1>
+      <h1 className="text-2xl font-bold text-white mb-6">Nový subdodavatel</h1>
 
       <form onSubmit={handleSubmit}>
         {error && (
-          <div className="bg-red-50 text-red-600 text-sm p-3 rounded-md mb-4">{error}</div>
+          <div className="bg-red-500/10 text-red-400 text-sm p-3 rounded-md mb-4">{error}</div>
         )}
 
         <Card className="mb-4">
           <CardHeader><CardTitle>Firemní údaje</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <label className="text-sm font-medium text-gray-700">
+              <label className="text-sm font-medium text-gray-400">
                 Název firmy <span className="text-red-500">*</span>
               </label>
               <Input name="companyName" required className="mt-1" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">IČO</label>
+                <label className="text-sm font-medium text-gray-400">IČO</label>
                 <Input name="ico" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">DIČ</label>
+                <label className="text-sm font-medium text-gray-400">DIČ</label>
                 <Input name="dic" className="mt-1" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Email</label>
+                <label className="text-sm font-medium text-gray-400">Email</label>
                 <Input name="email" type="email" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">Telefon</label>
+                <label className="text-sm font-medium text-gray-400">Telefon</label>
                 <Input name="phone" className="mt-1" />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Ulice</label>
+              <label className="text-sm font-medium text-gray-400">Ulice</label>
               <Input name="street" className="mt-1" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Město</label>
+                <label className="text-sm font-medium text-gray-400">Město</label>
                 <Input name="city" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">PSČ</label>
+                <label className="text-sm font-medium text-gray-400">PSČ</label>
                 <Input name="zip" className="mt-1" />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Číslo účtu</label>
+              <label className="text-sm font-medium text-gray-400">Číslo účtu</label>
               <Input name="bankAccount" className="mt-1" />
             </div>
           </CardContent>
@@ -107,29 +107,29 @@ export default function NewSubcontractorPage() {
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Specializace</label>
+                <label className="text-sm font-medium text-gray-400">Specializace</label>
                 <Input name="specialization" placeholder="např. Elektro, SDK, Obklady" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">Obor</label>
+                <label className="text-sm font-medium text-gray-400">Obor</label>
                 <Input name="trade" placeholder="např. Stavebnictví" className="mt-1" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Hodinová sazba (Kč)</label>
+                <label className="text-sm font-medium text-gray-400">Hodinová sazba (Kč)</label>
                 <Input name="hourlyRate" type="number" step="10" className="mt-1" />
               </div>
               <div>
-                <label className="text-sm font-medium text-gray-700">Denní sazba (Kč)</label>
+                <label className="text-sm font-medium text-gray-400">Denní sazba (Kč)</label>
                 <Input name="dailyRate" type="number" step="100" className="mt-1" />
               </div>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-700">Poznámky</label>
+              <label className="text-sm font-medium text-gray-400">Poznámky</label>
               <textarea
                 name="notes"
-                className="mt-1 flex w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="mt-1 flex w-full rounded-md border border-[#2a2d35] bg-[#1a1d24] text-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B5E126]"
                 rows={3}
               />
             </div>

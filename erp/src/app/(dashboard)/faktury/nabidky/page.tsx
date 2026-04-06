@@ -17,7 +17,7 @@ export default function QuotesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Cenové nabídky</h1>
+          <h1 className="text-2xl font-bold text-white">Cenové nabídky</h1>
           <p className="text-gray-500">
             Přehled všech cenových nabídek a jejich stavu
           </p>
@@ -57,19 +57,19 @@ export default function QuotesPage() {
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-gray-500">Otevřené nabídky</p>
-            <p className="text-xl font-bold text-blue-600">0</p>
+            <p className="text-xl font-bold text-blue-400">0</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-gray-500">Přijaté tento měsíc</p>
-            <p className="text-xl font-bold text-green-600">0</p>
+            <p className="text-xl font-bold text-emerald-400">0</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-4">
             <p className="text-sm text-gray-500">Úspěšnost</p>
-            <p className="text-xl font-bold text-gray-600">- %</p>
+            <p className="text-xl font-bold text-gray-400">- %</p>
           </CardContent>
         </Card>
       </div>

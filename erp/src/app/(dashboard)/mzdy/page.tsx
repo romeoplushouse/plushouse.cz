@@ -25,7 +25,7 @@ export default async function PayrollPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Zaměstnanci &amp; Mzdy</h1>
+          <h1 className="text-2xl font-bold text-white">Zaměstnanci &amp; Mzdy</h1>
           <p className="text-gray-500">Evidence zaměstnanců, výpočet mezd, výplatní pásky</p>
         </div>
         <div className="flex gap-2">
@@ -48,7 +48,7 @@ export default async function PayrollPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Users className="h-6 w-6 text-blue-600" />
+              <Users className="h-6 w-6 text-blue-400" />
               <div>
                 <p className="text-sm text-gray-500">Aktivní zaměstnanci</p>
                 <p className="text-xl font-bold">{total}</p>
@@ -59,7 +59,7 @@ export default async function PayrollPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Banknote className="h-6 w-6 text-green-600" />
+              <Banknote className="h-6 w-6 text-emerald-400" />
               <div>
                 <p className="text-sm text-gray-500">Mzdové náklady (měsíc)</p>
                 <p className="text-xl font-bold">{formatCurrency(totalSalary)}</p>
@@ -70,7 +70,7 @@ export default async function PayrollPage() {
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Calendar className="h-6 w-6 text-purple-600" />
+              <Calendar className="h-6 w-6 text-purple-400" />
               <div>
                 <p className="text-sm text-gray-500">Aktuální období</p>
                 <p className="text-xl font-bold">{currentPeriod}</p>
@@ -104,7 +104,7 @@ export default async function PayrollPage() {
                     <Users className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                     <p className="font-medium">Zatím žádní zaměstnanci</p>
                     <p className="text-sm mt-1">
-                      <Link href="/mzdy/novy" className="text-blue-600 hover:underline">
+                      <Link href="/mzdy/novy" className="text-[#B5E126] hover:underline">
                         Přidejte prvního zaměstnance
                       </Link>
                     </p>
@@ -115,7 +115,7 @@ export default async function PayrollPage() {
                   <TableRow key={emp.id}>
                     <TableCell className="font-mono">{emp.employeeNumber}</TableCell>
                     <TableCell>
-                      <Link href={`/mzdy/${emp.id}`} className="text-blue-600 hover:underline font-medium">
+                      <Link href={`/mzdy/${emp.id}`} className="text-[#B5E126] hover:underline font-medium">
                         {emp.firstName} {emp.lastName}
                       </Link>
                     </TableCell>

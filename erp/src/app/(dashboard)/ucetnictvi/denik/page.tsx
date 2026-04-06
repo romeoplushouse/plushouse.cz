@@ -22,7 +22,7 @@ export default async function JournalEntriesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Účetní deník</h1>
+          <h1 className="text-2xl font-bold text-white">Účetní deník</h1>
           <p className="text-gray-500">
             Chronologický přehled všech účetních zápisů ({total} celkem)
           </p>

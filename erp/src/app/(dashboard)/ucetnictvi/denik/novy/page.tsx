@@ -15,7 +15,7 @@ export default async function NewJournalEntryPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Novy ucetni zapis</h1>
+        <h1 className="text-2xl font-bold text-white">Novy ucetni zapis</h1>
         <p className="text-gray-500">
           Vytvorte novy zapis do ucetniho deniku
         </p>

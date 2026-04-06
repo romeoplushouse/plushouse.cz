@@ -47,7 +47,7 @@ export default async function CRMPage({
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">CRM / Adresář</h1>
+          <h1 className="text-2xl font-bold text-white">CRM / Adresář</h1>
           <p className="text-gray-500">
             Zákazníci, dodavatelé, kontakty a komunikace
           </p>
@@ -89,7 +89,7 @@ export default async function CRMPage({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Users className="h-8 w-8 text-blue-600" />
+              <Users className="h-8 w-8 text-blue-400" />
               <div>
                 <p className="text-sm text-gray-500">Zákazníci</p>
                 <p className="text-xl font-bold">{stats.customers}</p>
@@ -100,7 +100,7 @@ export default async function CRMPage({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <Building className="h-8 w-8 text-green-600" />
+              <Building className="h-8 w-8 text-emerald-400" />
               <div>
                 <p className="text-sm text-gray-500">Dodavatelé</p>
                 <p className="text-xl font-bold">{stats.suppliers}</p>
@@ -111,7 +111,7 @@ export default async function CRMPage({
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <UserCheck className="h-8 w-8 text-purple-600" />
+              <UserCheck className="h-8 w-8 text-purple-400" />
               <div>
                 <p className="text-sm text-gray-500">Subdodavatelé</p>
                 <p className="text-xl font-bold">{stats.subcontractors}</p>
@@ -160,7 +160,7 @@ export default async function CRMPage({
                       <TableCell>
                         <Link
                           href={`/crm/${contact.id}`}
-                          className="font-medium text-blue-600 hover:underline"
+                          className="font-medium text-[#B5E126] hover:underline"
                         >
                           {displayName}
                         </Link>
@@ -173,16 +173,16 @@ export default async function CRMPage({
                       <TableCell>
                         <Badge variant={typeInfo.variant}>{typeInfo.label}</Badge>
                       </TableCell>
-                      <TableCell className="text-gray-600">
+                      <TableCell className="text-gray-400">
                         {contact.ico || "-"}
                       </TableCell>
-                      <TableCell className="text-gray-600">
+                      <TableCell className="text-gray-400">
                         {contact.email || "-"}
                       </TableCell>
-                      <TableCell className="text-gray-600">
+                      <TableCell className="text-gray-400">
                         {contact.phone || "-"}
                       </TableCell>
-                      <TableCell className="text-gray-600">
+                      <TableCell className="text-gray-400">
                         {contact.city || "-"}
                       </TableCell>
                       <TableCell>

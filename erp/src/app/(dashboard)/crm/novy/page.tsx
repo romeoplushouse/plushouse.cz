@@ -13,7 +13,7 @@ export default function NewContactPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Novy kontakt</h1>
+          <h1 className="text-2xl font-bold text-white">Novy kontakt</h1>
           <p className="text-gray-500">Vyplnte udaje noveho kontaktu</p>
         </div>
       </div>

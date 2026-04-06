@@ -73,7 +73,7 @@ export default async function InvoiceDetailPage({
           </Link>
           <div>
             <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-gray-900">
+              <h1 className="text-2xl font-bold text-white">
                 {invoice.invoiceNumber}
               </h1>
               <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>
@@ -108,7 +108,7 @@ export default async function InvoiceDetailPage({
                   </h3>
                   {contactName ? (
                     <div>
-                      <p className="font-medium text-gray-900">{contactName}</p>
+                      <p className="font-medium text-white">{contactName}</p>
                       {contact?.ico && (
                         <p className="text-sm text-gray-500">
                           IČO: {contact.ico}
@@ -247,7 +247,7 @@ export default async function InvoiceDetailPage({
                   </div>
                   <div className="flex justify-between w-72 text-lg border-t pt-2 mt-1">
                     <span className="font-semibold">Celkem k úhradě:</span>
-                    <span className="font-bold text-blue-600">
+                    <span className="font-bold text-[#B5E126]">
                       {formatCurrency(Number(invoice.total))}
                     </span>
                   </div>
@@ -263,7 +263,7 @@ export default async function InvoiceDetailPage({
                 <CardTitle>Poznámky</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-700 whitespace-pre-wrap">
+                <p className="text-sm text-gray-400 whitespace-pre-wrap">
                   {invoice.notes}
                 </p>
               </CardContent>
@@ -328,7 +328,7 @@ export default async function InvoiceDetailPage({
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="bg-gray-50 border rounded-md p-4 text-xs font-mono break-all">
+                <div className="bg-[#1a1d24] border rounded-md p-4 text-xs font-mono break-all">
                   {invoice.qrPaymentCode}
                 </div>
                 <p className="text-xs text-gray-400 mt-2">
@@ -347,7 +347,7 @@ export default async function InvoiceDetailPage({
               <CardContent>
                 <Link
                   href={`/zakazky/${invoice.project.id}`}
-                  className="text-blue-600 hover:underline text-sm"
+                  className="text-[#B5E126] hover:underline text-sm"
                 >
                   {invoice.project.name}
                 </Link>

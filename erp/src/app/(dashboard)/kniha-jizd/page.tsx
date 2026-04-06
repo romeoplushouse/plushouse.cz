@@ -29,7 +29,7 @@ export default async function TripLogPage() {
     <div className="page-enter space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Kniha jízd</h1>
+          <h1 className="text-2xl font-bold text-white">Kniha jízd</h1>
           <p className="text-gray-500">
             Evidence služebních a soukromých jízd, GPS tracking, náklady
           </p>
@@ -46,64 +46,64 @@ export default async function TripLogPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="card-hover overflow-hidden rounded-2xl border-0 shadow-sm">
+        <Card className="card-hover overflow-hidden rounded-2xl border-[#2a2d35] shadow-none">
           <div className="flex">
             <div className="w-1 shrink-0 bg-gradient-to-b from-blue-500 to-blue-600" />
             <CardContent className="p-5 flex-1">
-              <p className="text-3xl font-bold text-gray-900">{stats.totalTrips}</p>
+              <p className="text-3xl font-bold text-white">{stats.totalTrips}</p>
               <p className="text-sm font-medium text-gray-500 mt-1">Celkem jízd</p>
               <div className="flex items-center gap-2 mt-2 text-xs">
-                <span className="text-blue-600 font-semibold">{stats.businessTrips} služebních</span>
+                <span className="text-blue-400 font-semibold">{stats.businessTrips} služebních</span>
                 <span className="text-gray-400">|</span>
-                <span className="text-orange-600 font-semibold">{stats.personalTrips} osobních</span>
+                <span className="text-amber-400 font-semibold">{stats.personalTrips} osobních</span>
               </div>
             </CardContent>
           </div>
         </Card>
 
-        <Card className="card-hover overflow-hidden rounded-2xl border-0 shadow-sm">
+        <Card className="card-hover overflow-hidden rounded-2xl border-[#2a2d35] shadow-none">
           <div className="flex">
             <div className="w-1 shrink-0 bg-gradient-to-b from-green-500 to-emerald-600" />
             <CardContent className="p-5 flex-1">
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-3xl font-bold text-white">
                 {stats.totalKm.toLocaleString("cs-CZ")} km
               </p>
               <p className="text-sm font-medium text-gray-500 mt-1">Celkem najeté km</p>
               <div className="flex items-center gap-2 mt-2 text-xs">
-                <Briefcase className="h-3 w-3 text-green-600" />
-                <span className="text-green-600 font-semibold">{stats.businessKm.toLocaleString("cs-CZ")} km služebně</span>
+                <Briefcase className="h-3 w-3 text-emerald-400" />
+                <span className="text-emerald-400 font-semibold">{stats.businessKm.toLocaleString("cs-CZ")} km služebně</span>
               </div>
             </CardContent>
           </div>
         </Card>
 
-        <Card className="card-hover overflow-hidden rounded-2xl border-0 shadow-sm">
+        <Card className="card-hover overflow-hidden rounded-2xl border-[#2a2d35] shadow-none">
           <div className="flex">
             <div className="w-1 shrink-0 bg-gradient-to-b from-purple-500 to-violet-600" />
             <CardContent className="p-5 flex-1">
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-3xl font-bold text-white">
                 {formatCurrency(stats.totalCosts)}
               </p>
               <p className="text-sm font-medium text-gray-500 mt-1">Celkové náklady</p>
               <div className="flex items-center gap-2 mt-2 text-xs">
-                <Fuel className="h-3 w-3 text-purple-600" />
-                <span className="text-purple-600 font-semibold">PHM: {formatCurrency(stats.totalFuel)}</span>
+                <Fuel className="h-3 w-3 text-purple-400" />
+                <span className="text-purple-400 font-semibold">PHM: {formatCurrency(stats.totalFuel)}</span>
               </div>
             </CardContent>
           </div>
         </Card>
 
-        <Card className="card-hover overflow-hidden rounded-2xl border-0 shadow-sm">
+        <Card className="card-hover overflow-hidden rounded-2xl border-[#2a2d35] shadow-none">
           <div className="flex">
             <div className="w-1 shrink-0 bg-gradient-to-b from-amber-500 to-orange-600" />
             <CardContent className="p-5 flex-1">
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-3xl font-bold text-white">
                 {formatCurrency(stats.taxDeduction)}
               </p>
               <p className="text-sm font-medium text-gray-500 mt-1">Daňový odpočet</p>
               <div className="flex items-center gap-2 mt-2 text-xs">
-                <TrendingUp className="h-3 w-3 text-amber-600" />
-                <span className="text-amber-600 font-semibold">{stats.kmRate} Kč/km</span>
+                <TrendingUp className="h-3 w-3 text-amber-400" />
+                <span className="text-amber-400 font-semibold">{stats.kmRate} Kč/km</span>
               </div>
             </CardContent>
           </div>
@@ -112,41 +112,41 @@ export default async function TripLogPage() {
 
       {/* Additional stats */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <Card className="stat-card-blue rounded-2xl border-0 shadow-sm">
+        <Card className="stat-card-blue rounded-2xl border-[#2a2d35] shadow-none">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">Stravné</p>
-                <p className="text-xl font-bold text-gray-900">{formatCurrency(stats.totalMeal)}</p>
+                <p className="text-xl font-bold text-white">{formatCurrency(stats.totalMeal)}</p>
               </div>
-              <div className="p-2 rounded-xl bg-white/70 shadow-sm">
-                <Calendar className="h-5 w-5 text-blue-600" />
+              <div className="p-2 rounded-xl bg-[#2a2d35] shadow-sm">
+                <Calendar className="h-5 w-5 text-blue-400" />
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card className="stat-card-green rounded-2xl border-0 shadow-sm">
+        <Card className="stat-card-green rounded-2xl border-[#2a2d35] shadow-none">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">Osobní km</p>
-                <p className="text-xl font-bold text-gray-900">{stats.personalKm.toLocaleString("cs-CZ")} km</p>
+                <p className="text-xl font-bold text-white">{stats.personalKm.toLocaleString("cs-CZ")} km</p>
               </div>
-              <div className="p-2 rounded-xl bg-white/70 shadow-sm">
-                <User className="h-5 w-5 text-green-600" />
+              <div className="p-2 rounded-xl bg-[#2a2d35] shadow-sm">
+                <User className="h-5 w-5 text-emerald-400" />
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card className="stat-card-purple rounded-2xl border-0 shadow-sm">
+        <Card className="stat-card-purple rounded-2xl border-[#2a2d35] shadow-none">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500">Ostatní náklady</p>
-                <p className="text-xl font-bold text-gray-900">{formatCurrency(stats.totalOther)}</p>
+                <p className="text-xl font-bold text-white">{formatCurrency(stats.totalOther)}</p>
               </div>
-              <div className="p-2 rounded-xl bg-white/70 shadow-sm">
-                <Fuel className="h-5 w-5 text-purple-600" />
+              <div className="p-2 rounded-xl bg-[#2a2d35] shadow-sm">
+                <Fuel className="h-5 w-5 text-purple-400" />
               </div>
             </div>
           </CardContent>
@@ -154,7 +154,7 @@ export default async function TripLogPage() {
       </div>
 
       {/* Trips Table */}
-      <Card className="rounded-2xl border-0 shadow-sm">
+      <Card className="rounded-2xl border-[#2a2d35] shadow-none">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Záznamy jízd</CardTitle>
           <Badge variant="outline">{total} záznamů</Badge>
@@ -181,7 +181,7 @@ export default async function TripLogPage() {
                     <Route className="h-12 w-12 text-gray-300 mx-auto mb-3" />
                     <p className="font-medium">Zatím žádné záznamy jízd</p>
                     <p className="text-sm mt-1">
-                      <Link href="/kniha-jizd/nova" className="text-blue-600 hover:underline">
+                      <Link href="/kniha-jizd/nova" className="text-[#B5E126] hover:underline">
                         Zaznamenejte první jízdu
                       </Link>
                     </p>
