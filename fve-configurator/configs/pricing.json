@@ -16,7 +16,7 @@
     },
     {
       "key": "livinginprice",
-      "name": "Objekt obývaný během instalace",
+      "name": "Příplatek za obývaný objekt",
       "unit": "ks",
       "price_net": 8000,
       "active": true
@@ -30,9 +30,9 @@
     },
     {
       "key": "safety120Vpriceperkw",
-      "name": "Odpojovač 120V/string (nad 10 kWp) – cena za kWp",
+      "name": "Odpojovač 120V/string (nad 10 kWp)",
       "unit": "kWp",
-      "price_net": 900,
+      "price_net": 950,
       "active": true
     },
     {
@@ -44,31 +44,61 @@
     },
     {
       "key": "panel_basic",
-      "name": "FV panel 450 Wp",
+      "name": "FV panel 500 Wp mono",
       "unit": "ks",
-      "price_net": 3200,
+      "price_net": 2800,
+      "active": true,
+      "wp_per_panel": 500
+    },
+    {
+      "key": "inverter_fronius_small",
+      "name": "Střídač Fronius Gen24 (do 10 kWp)",
+      "unit": "ks",
+      "price_net": 45000,
       "active": true
     },
     {
-      "key": "inverter_fronius",
-      "name": "Střídač Fronius",
+      "key": "inverter_fronius_medium",
+      "name": "Střídač Fronius Symo Gen24 (10–20 kWp)",
       "unit": "ks",
-      "price_net": 52000,
+      "price_net": 72000,
       "active": true
     },
     {
-      "key": "inverter_victron",
-      "name": "Měnič Victron",
+      "key": "inverter_fronius_large",
+      "name": "Střídač Fronius Tauro (20–50 kWp)",
       "unit": "ks",
-      "price_net": 68000,
+      "price_net": 95000,
+      "active": true
+    },
+    {
+      "key": "inverter_victron_small",
+      "name": "Měnič Victron MultiPlus-II 5000VA + MPPT (do 10 kWp)",
+      "unit": "sada",
+      "price_net": 55000,
+      "active": true
+    },
+    {
+      "key": "inverter_victron_medium",
+      "name": "Měnič Victron Quattro-II + MPPT (10–20 kWp)",
+      "unit": "sada",
+      "price_net": 75000,
+      "active": true
+    },
+    {
+      "key": "inverter_victron_large",
+      "name": "Měnič Victron Quattro-II + MPPT (20–50 kWp)",
+      "unit": "sada",
+      "price_net": 110000,
       "active": true
     },
     {
       "key": "battery_module",
-      "name": "Bateriový modul",
+      "name": "Baterie Pylontech US5000 (4,8 kWh)",
       "unit": "ks",
-      "price_net": 28000,
-      "active": true
+      "price_net": 35000,
+      "active": true,
+      "kwh_per_module": 4.8
     },
     {
       "key": "structure",
@@ -78,10 +108,24 @@
       "active": true
     },
     {
-      "key": "installation",
-      "name": "Montáž a elektroinstalace",
+      "key": "installation_small",
+      "name": "Montáž a elektroinstalace (do 10 kWp)",
       "unit": "sada",
-      "price_net": 65000,
+      "price_net": 55000,
+      "active": true
+    },
+    {
+      "key": "installation_medium",
+      "name": "Montáž a elektroinstalace (10–20 kWp)",
+      "unit": "sada",
+      "price_net": 85000,
+      "active": true
+    },
+    {
+      "key": "installation_large",
+      "name": "Montáž a elektroinstalace (20–50 kWp)",
+      "unit": "sada",
+      "price_net": 125000,
       "active": true
     }
   ],
@@ -89,72 +133,86 @@
     {
       "system": "fronius_no_battery",
       "range_from_kWp": 3,
-      "range_to_kWp": 10,
-      "key": "inverter_fronius",
+      "range_to_kWp": 9.99,
+      "key": "inverter_fronius_small",
       "qty": 1
     },
     {
       "system": "fronius_no_battery",
       "range_from_kWp": 3,
-      "range_to_kWp": 10,
-      "key": "panel_basic",
-      "qty": 10
-    },
-    {
-      "system": "fronius_no_battery",
-      "range_from_kWp": 11,
-      "range_to_kWp": 50,
-      "key": "inverter_fronius",
+      "range_to_kWp": 9.99,
+      "key": "installation_small",
       "qty": 1
     },
     {
       "system": "fronius_no_battery",
-      "range_from_kWp": 11,
-      "range_to_kWp": 50,
-      "key": "panel_basic",
-      "qty": 20
+      "range_from_kWp": 10,
+      "range_to_kWp": 19.99,
+      "key": "inverter_fronius_medium",
+      "qty": 1
     },
     {
-      "system": "victron_with_battery",
-      "range_from_kWp": 3,
-      "range_to_kWp": 10,
-      "key": "inverter_victron",
+      "system": "fronius_no_battery",
+      "range_from_kWp": 10,
+      "range_to_kWp": 19.99,
+      "key": "installation_medium",
+      "qty": 1
+    },
+    {
+      "system": "fronius_no_battery",
+      "range_from_kWp": 20,
+      "range_to_kWp": 50,
+      "key": "inverter_fronius_large",
+      "qty": 1
+    },
+    {
+      "system": "fronius_no_battery",
+      "range_from_kWp": 20,
+      "range_to_kWp": 50,
+      "key": "installation_large",
       "qty": 1
     },
     {
       "system": "victron_with_battery",
       "range_from_kWp": 3,
-      "range_to_kWp": 10,
-      "key": "panel_basic",
-      "qty": 10
+      "range_to_kWp": 9.99,
+      "key": "inverter_victron_small",
+      "qty": 1
     },
     {
       "system": "victron_with_battery",
       "range_from_kWp": 3,
-      "range_to_kWp": 10,
-      "key": "battery_module",
+      "range_to_kWp": 9.99,
+      "key": "installation_small",
       "qty": 1
     },
     {
       "system": "victron_with_battery",
-      "range_from_kWp": 11,
-      "range_to_kWp": 50,
-      "key": "inverter_victron",
+      "range_from_kWp": 10,
+      "range_to_kWp": 19.99,
+      "key": "inverter_victron_medium",
       "qty": 1
     },
     {
       "system": "victron_with_battery",
-      "range_from_kWp": 11,
-      "range_to_kWp": 50,
-      "key": "panel_basic",
-      "qty": 20
+      "range_from_kWp": 10,
+      "range_to_kWp": 19.99,
+      "key": "installation_medium",
+      "qty": 1
     },
     {
       "system": "victron_with_battery",
-      "range_from_kWp": 11,
+      "range_from_kWp": 20,
       "range_to_kWp": 50,
-      "key": "battery_module",
-      "qty": 2
+      "key": "inverter_victron_large",
+      "qty": 1
+    },
+    {
+      "system": "victron_with_battery",
+      "range_from_kWp": 20,
+      "range_to_kWp": 50,
+      "key": "installation_large",
+      "qty": 1
     }
   ],
   "ConditionalRules": [],
@@ -299,6 +357,14 @@
     {
       "key": "vat_default_rate",
       "value": 0.21
+    },
+    {
+      "key": "panel_wp",
+      "value": 500
+    },
+    {
+      "key": "battery_kwh_per_module",
+      "value": 4.8
     },
     {
       "key": "lead_webhook_url",

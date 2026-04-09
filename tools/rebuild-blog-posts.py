@@ -47,20 +47,23 @@ NAV='''<div class="pix_section pix_nav_menu normal pix-padding-v-20 pix-over-hea
     <div class="col-md-10 col-xs-12 pix-inner-col col-sm-10 column ui-droppable"><div class="pix-content"><nav class="navbar navbar-default pix-no-margin-bottom pix-navbar-default"><div class="container"><div class="navbar-header pix-lg-inline-block pix-float-none"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pix-navbar-collapse" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand logo-img logo-img-a pix-adjust-height" href="https://www.plushouse.cz/"><img src="/uploads/plushouse-RSF.png" alt="PLUS HOUSE" class="img-responsive pix-logo-img"></a></div></div></nav></div></div>
     <div class="col-md-2 col-xs-12 pix-inner-col col-sm-2 column ui-droppable"><div class="pix-content pix-adjust-height text-right mobile-text-left" id="pix-header-btn" style="margin-top: 8.5px;"><a href="https://www.plushouse.cz/kontakt" class="btn small-text brown-bg pix-white pix-margin-top-10 pix-inline-block normal btn-md pix-line super-slow-mo" style="background: transparent; border-color: rgb(181,225,38); color: rgb(181,225,38);"><span class="pix_edit_text"><span style="font-weight:700;">KONTAKTUJTE NÁS</span></span></a></div></div>
     <div class="col-md-10 col-xs-10 pix-inner-col col-sm-10 column ui-droppable"><div class="pix-content"><div class="navbar-collapse pix-no-h-padding collapse" id="pix-navbar-collapse"><ul class="nav navbar-nav pix-inline-block pix-float-none media-middle pix-header-nav pix-adjust-height" id="pix-header-nav" style="margin-top: 13.5px;">
-      <li class="dropdown"><a href="https://www.plushouse.cz/#section_gallery_1" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">SLUŽBY</a>
+      <li class="dropdown"><a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">SLUŽBY</a>
         <ul class="dropdown-menu dropdown-menu-left">
-          <li><a href="https://www.plushouse.cz/fotovoltaika" class="dropdown-menu-link" data-toggle="undefined">FOTOVOLTAIKA</a></li>
-          <li><a href="https://www.plushouse.cz/trafostanice" class="dropdown-menu-link" data-toggle="undefined">TRAFOSTANICE</a></li>
-          <li><a href="https://www.plushouse.cz/kontakt" class="dropdown-menu-link" data-toggle="undefined">REKUPERACE</a></li>
-          <li><a href="https://www.plushouse.cz/fototermika.html" class="dropdown-menu-link" data-toggle="undefined">FOTOTERMIKA</a></li>
-          <li><a href="https://www.plushouse.cz/tepelna-cerpadla.html" class="dropdown-menu-link" data-toggle="undefined">TEPELNÁ ČERPADLA</a></li>
-          <li><a href="https://www.plushouse.cz/nabijeci-stanice.html" class="dropdown-menu-link" data-toggle="undefined">NABÍJECÍ STANICE</a></li>
-          <li><a href="https://www.plushouse.cz/pms" class="dropdown-menu-link" data-toggle="undefined">PMS PRO HOTELY</a></li>
+          <li><a href="https://www.plushouse.cz/fotovoltaika" class="dropdown-menu-link">FOTOVOLTAIKA</a></li>
+          <li><a href="https://www.plushouse.cz/trafostanice" class="dropdown-menu-link">TRAFOSTANICE</a></li>
+          <li><a href="https://www.plushouse.cz/kontakt" class="dropdown-menu-link">REKUPERACE</a></li>
+          <li><a href="https://www.plushouse.cz/fototermika.html" class="dropdown-menu-link">FOTOTERMIKA</a></li>
+          <li><a href="https://www.plushouse.cz/tepelna-cerpadla.html" class="dropdown-menu-link">TEPELNÁ ČERPADLA</a></li>
+          <li><a href="https://www.plushouse.cz/nabijeci-stanice.html" class="dropdown-menu-link">NABÍJECÍ STANICE</a></li>
+          <li><a href="https://www.plushouse.cz/pms" class="dropdown-menu-link">PMS PRO HOTELY</a></li>
+<li><a href="https://www.plushouse.cz/plusconnect" class="dropdown-menu-link pix-nav-link">PLUSCONNECT</a></li>
+<li><a href="https://www.plushouse.cz/eshop/loxone/balicky/" class="dropdown-menu-link pix-nav-link">ESHOP</a></li>
         </ul>
       </li>
-      <li><a href="https://www.plushouse.cz/cenik.html" class="pix-gray pix-nav-link" data-toggle="undefined" style="color: rgb(181, 225, 38);">CENÍK</a></li>
-      <li><a href="https://www.plushouse.cz/clenstvi.html" class="pix-gray pix-nav-link" data-toggle="undefined" style="color: rgb(181, 225, 38);">ČLENSTVÍ</a></li>
-      <li><a href="https://www.plushouse.cz/blog" class="pix-gray pix-nav-link" data-toggle="undefined" style="color: rgb(181, 225, 38);">BLOG</a></li>
+      <li><a href="https://www.plushouse.cz/cenik.html" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">CENÍK</a></li>
+      <li><a href="https://www.plushouse.cz/clenstvi.html" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">ČLENSTVÍ</a></li>
+      <li><a href="https://www.plushouse.cz/blog" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">BLOG</a></li>
+<li><a href="https://www.plushouse.cz/eshop/loxone/balicky/" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">ESHOP</a></li>
     </ul></div></div></div>
   </div></div>
 </div>'''

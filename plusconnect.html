@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="PlusConnect – integrační platforma pro propojení hotelových PMS systémů s budovou. Automatizace provozu, úspory energií a přehledný dashboard.">
+<meta name="keywords" content="plusconnect,integrace pms,hotelová automatizace,dashboard,energetický management,loxone,previo,better hotel">
+<title>PlusConnect – Integrační platforma pro chytré budovy | PLUS HOUSE</title>
+<meta property="og:title" content="PlusConnect – Integrační platforma pro chytré budovy | PLUS HOUSE">
+<meta property="og:site_name" content="PlusHouse">
+<meta property="og:url" content="https://www.plushouse.cz/plusconnect">
+<meta property="og:description" content="PlusConnect propojuje hotelové PMS systémy s automatizací budovy. Jeden dashboard, úspory energií, plná kontrola provozu.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.plushouse.cz/uploads/ogfoto.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css" href="/css/pix_style.css" />
+<link rel="stylesheet" type="text/css" href="/css/main.css"/>
+<link rel="stylesheet" type="text/css" href="/css/font-style.css" />
+<link href="/css/animations.min.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="/css/professional.css" />
+<link rel="canonical" href="https://www.plushouse.cz/plusconnect">
+<!--ICO -->
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.plushouse.cz/uploads/ico/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.plushouse.cz/uploads/ico/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.plushouse.cz/uploads/ico/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.plushouse.cz/uploads/ico/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.plushouse.cz/uploads/ico/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.plushouse.cz/uploads/ico/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.plushouse.cz/uploads/ico/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.plushouse.cz/uploads/ico/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.plushouse.cz/uploads/ico/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.plushouse.cz/uploads/ico/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.plushouse.cz/uploads/ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://www.plushouse.cz/uploads/ico/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.plushouse.cz/uploads/ico/favicon-16x16.png">
+<link rel="manifest" href="https://www.plushouse.cz/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#0F0F0F">
+<!--ICO -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GVQ2MF6LY5');
+</script>
+<style>
+html { scroll-behavior: smooth; }
+.plusconnect-flow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 50px 0;
+}
+.plusconnect-flow .flow-box {
+  background: #111;
+  border: 2px solid #333;
+  border-radius: 14px;
+  padding: 34px 28px;
+  text-align: center;
+  min-width: 210px;
+  max-width: 260px;
+  flex: 1;
+  transition: border-color .3s ease, transform .3s ease;
+}
+.plusconnect-flow .flow-box:hover {
+  border-color: #b5e126;
+  transform: translateY(-4px);
+}
+.plusconnect-flow .flow-box h5 {
+  color: #b5e126;
+  font-family: Montserrat;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.plusconnect-flow .flow-box p {
+  color: #aaa;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+.plusconnect-flow .flow-arrow {
+  color: #b5e126;
+  font-size: 36px;
+  font-weight: bold;
+  animation: pulseArrow 2s ease-in-out infinite;
+}
+@keyframes pulseArrow {
+  0%, 100% { opacity: .5; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(4px); }
+}
+.plusconnect-feature-card {
+  background: #1A1A1A;
+  border-radius: 12px;
+  padding: 35px 25px;
+  text-align: center;
+  border-bottom: 4px solid #b5e126;
+  min-height: 220px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.plusconnect-feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0,0,0,.10);
+}
+.plusconnect-feature-card i {
+  color: #b5e126;
+  font-size: 56px;
+  margin-bottom: 18px;
+  display: block;
+  transition: transform .3s ease;
+}
+.plusconnect-feature-card:hover i {
+  transform: scale(1.1);
+}
+.plusconnect-feature-card h5 {
+  font-family: Montserrat;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.plusconnect-feature-card p {
+  color: #666;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.plusconnect-stat-bar {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  padding: 30px 0;
+}
+.plusconnect-stat {
+  text-align: center;
+}
+.plusconnect-stat .stat-num {
+  font-size: 42px;
+  font-weight: 800;
+  color: #000;
+  font-family: Montserrat;
+  line-height: 1;
+}
+.plusconnect-stat .stat-label {
+  font-size: 13px;
+  color: #FFFFFF;
+  font-family: Montserrat;
+  margin-top: 6px;
+}
+@media (max-width: 767px) {
+  .plusconnect-flow {
+    flex-direction: column;
+  }
+  .plusconnect-flow .flow-arrow {
+    transform: rotate(90deg);
+  }
+  @keyframes pulseArrow {
+    0%, 100% { opacity: .5; transform: rotate(90deg) translateX(0); }
+    50% { opacity: 1; transform: rotate(90deg) translateX(4px); }
+  }
+  .plusconnect-stat-bar { gap: 30px; }
+}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1417475208778687');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1417475208778687&ev=PageView&noscript=1" /></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+<div class="pix_section pix_nav_menu normal pix-padding-v-20 pix-over-header pix_scroll_header slow-mo" data-scroll-bg="#000000" id="section_1" style="background-repeat: repeat-x; padding-top: 20px; padding-bottom: 20px; display: block;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-xs-12 pix-inner-col col-sm-10 column ui-droppable">
+        <div class="pix-content">
+          <nav class="navbar navbar-default pix-no-margin-bottom pix-navbar-default">
+            <div class="container">
+              <div class="navbar-header pix-lg-inline-block pix-float-none">
+                <button style="background-color: #0F0F0F !important;" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pix-navbar-collapse" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo-img logo-img-a pix-adjust-height" href="https://www.plushouse.cz/">
+                  <img src="/uploads/plushouse-RSF.png" alt="PLUS HOUSE logo" class="img-responsive pix-logo-img">
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-12 pix-inner-col col-sm-2 column ui-droppable pix-header-btn-col">
+        <div class="pix-content pix-adjust-height text-right mobile-text-left" id="pix-header-btn" style="margin-top: 8.5px;">
+          <a href="https://www.plushouse.cz/kontakt" class="btn small-text brown-bg pix-white pix-margin-top-10 pix-inline-block normal btn-md pix-line super-slow-mo" style="background: #b5e126; border-color: #b5e126; color: #0F0F0F; font-weight: 700;">
+            <span class="pix_edit_text"><span style="font-weight: 700;">KONZULTACE ZDARMA</span></span>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-10 col-xs-10 pix-inner-col col-sm-10 column ui-droppable">
+        <div class="pix-content">
+          <div class="navbar-collapse pix-no-h-padding collapse" id="pix-navbar-collapse" style="height: 1px;">
+            <ul class="nav navbar-nav pix-inline-block pix-float-none media-middle pix-header-nav pix-adjust-height" id="pix-header-nav" style="margin-top: 13.5px;">
+              <li class="dropdown">
+                <a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">ŘEŠENÍ</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="https://www.plushouse.cz/chytra-domacnost-loxone/" class="dropdown-menu-link">Chytrá domácnost</a></li>
+                  <li><a href="https://www.plushouse.cz/fotovoltaika" class="dropdown-menu-link">Fotovoltaika</a></li>
+                  <li><a href="https://www.plushouse.cz/tepelna-cerpadla.html" class="dropdown-menu-link">Tepelná čerpadla</a></li>
+                  <li><a href="https://www.plushouse.cz/nabijeci-stanice.html" class="dropdown-menu-link">Nabíjecí stanice</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">TECHNOLOGIE</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="https://www.plushouse.cz/pms" class="dropdown-menu-link">PMS pro hotely</a></li>
+                  <li><a href="https://www.plushouse.cz/plusconnect" class="dropdown-menu-link">PlusConnect</a></li>
+                  <li><a href="https://www.plushouse.cz/audio" class="dropdown-menu-link">Audio systémy</a></li>
+                  <li><a href="https://www.plushouse.cz/fototermika.html" class="dropdown-menu-link">Fototermika</a></li>
+                  <li><a href="https://www.plushouse.cz/trafostanice" class="dropdown-menu-link">Trafostanice</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">SLUŽBY</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="https://www.plushouse.cz/servis-fotovoltaiky/" class="dropdown-menu-link">Servis FVE</a></li>
+                  <li><a href="https://www.plushouse.cz/cenik.html" class="dropdown-menu-link">Ceník</a></li>
+                  <li><a href="https://www.plushouse.cz/clenstvi.html" class="dropdown-menu-link">Členství +house</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">ZNALOSTI</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="https://www.plushouse.cz/blog" class="dropdown-menu-link">Blog</a></li>
+                  <li><a href="https://www.plushouse.cz/eshop/loxone/balicky/" class="dropdown-menu-link">E-shop</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.plushouse.cz/kontakt" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">KONTAKT</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-12 pix-inner-col col-sm-2 column ui-droppable">
+        <div class="pix-content pix-adjust-height text-right mobile-text-left" style="margin-top: 10px;">
+          <div class="pix-header-item">
+            <a href="https://www.facebook.com/plushousecz" class="small-social"><i class="pixicon-facebook3" style="color: #b5e126; font-size: 27px;"></i></a>
+            <a href="https://www.instagram.com/plushouse.cz" class="small-social"><i class="pixicon-instagram4" style="color: #b5e126; font-size: 27px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="pix_section pix-real-intro pix-padding-v-100" id="section_2" style="padding-top: 520px; background-image: linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.72)), url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1920' height='1080' viewBox='0 0 1920 1080'%3E%3Crect fill='%23111318' width='1920' height='1080'/%3E%3C!-- Sidebar --%3E%3Crect fill='%230d0f13' x='0' y='0' width='260' height='1080'/%3E%3Crect fill='%23b5e126' x='30' y='30' width='8' height='8' rx='4'/%3E%3Crect fill='%23b5e126' x='48' y='30' width='100' height='8' rx='2' opacity='0.7'/%3E%3Crect fill='%231a1d24' x='20' y='80' width='220' height='36' rx='6'/%3E%3Crect fill='%23b5e126' x='30' y='90' width='16' height='16' rx='3' opacity='0.9'/%3E%3Crect fill='%23b5e126' x='58' y='93' width='80' height='10' rx='2' opacity='0.5'/%3E%3Crect fill='%23181b21' x='20' y='126' width='220' height='36' rx='6'/%3E%3Crect fill='%23555' x='30' y='136' width='16' height='16' rx='3' opacity='0.4'/%3E%3Crect fill='%23555' x='58' y='139' width='70' height='10' rx='2' opacity='0.3'/%3E%3Crect fill='%23181b21' x='20' y='172' width='220' height='36' rx='6'/%3E%3Crect fill='%23555' x='30' y='182' width='16' height='16' rx='3' opacity='0.4'/%3E%3Crect fill='%23555' x='58' y='185' width='90' height='10' rx='2' opacity='0.3'/%3E%3Crect fill='%23181b21' x='20' y='218' width='220' height='36' rx='6'/%3E%3Crect fill='%23555' x='30' y='228' width='16' height='16' rx='3' opacity='0.4'/%3E%3Crect fill='%23555' x='58' y='231' width='60' height='10' rx='2' opacity='0.3'/%3E%3Crect fill='%23181b21' x='20' y='264' width='220' height='36' rx='6'/%3E%3Crect fill='%23555' x='30' y='274' width='16' height='16' rx='3' opacity='0.4'/%3E%3Crect fill='%23555' x='58' y='277' width='75' height='10' rx='2' opacity='0.3'/%3E%3C!-- Top bar --%3E%3Crect fill='%23161920' x='260' y='0' width='1660' height='60'/%3E%3Crect fill='%23222' x='280' y='18' width='200' height='24' rx='12' opacity='0.5'/%3E%3Ccircle fill='%23b5e126' cx='1860' cy='30' r='14' opacity='0.6'/%3E%3Ccircle fill='%2344cc44' cx='1820' cy='30' r='6' opacity='0.5'/%3E%3C!-- Status cards row --%3E%3Crect fill='%231a1d24' x='290' y='90' width='370' height='160' rx='12'/%3E%3Crect fill='%23b5e126' x='320' y='115' width='50' height='6' rx='3' opacity='0.6'/%3E%3Ctext fill='%23b5e126' x='320' y='165' font-family='sans-serif' font-size='36' font-weight='bold' opacity='0.8'%3E94.2%25%3C/text%3E%3Crect fill='%23333' x='320' y='195' width='140' height='4' rx='2' opacity='0.4'/%3E%3Crect fill='%23b5e126' x='320' y='195' width='100' height='4' rx='2' opacity='0.5'/%3E%3Crect fill='%23333' x='320' y='215' width='200' height='6' rx='3' opacity='0.2'/%3E%3Crect fill='%231a1d24' x='690' y='90' width='370' height='160' rx='12'/%3E%3Crect fill='%2344cc44' x='720' y='115' width='50' height='6' rx='3' opacity='0.6'/%3E%3Ctext fill='%2344cc44' x='720' y='165' font-family='sans-serif' font-size='36' font-weight='bold' opacity='0.8'%3E23.4 kW%3C/text%3E%3Crect fill='%23333' x='720' y='195' width='140' height='4' rx='2' opacity='0.4'/%3E%3Crect fill='%2344cc44' x='720' y='195' width='60' height='4' rx='2' opacity='0.5'/%3E%3Crect fill='%23333' x='720' y='215' width='180' height='6' rx='3' opacity='0.2'/%3E%3Crect fill='%231a1d24' x='1090' y='90' width='370' height='160' rx='12'/%3E%3Crect fill='%23ff9900' x='1120' y='115' width='50' height='6' rx='3' opacity='0.6'/%3E%3Ctext fill='%23ff9900' x='1120' y='165' font-family='sans-serif' font-size='36' font-weight='bold' opacity='0.8'%3E18 / 42%3C/text%3E%3Ccircle fill='%23ff9900' cx='1420' cy='150' r='4' opacity='0.7'/%3E%3Crect fill='%23333' x='1120' y='215' width='160' height='6' rx='3' opacity='0.2'/%3E%3C!-- Chart area --%3E%3Crect fill='%231a1d24' x='290' y='280' width='770' height='340' rx='12'/%3E%3Crect fill='%23b5e126' x='320' y='305' width='80' height='6' rx='3' opacity='0.5'/%3E%3Cline x1='320' y1='340' x2='320' y2='580' stroke='%23333' stroke-width='1' opacity='0.3'/%3E%3Cline x1='320' y1='580' x2='1030' y2='580' stroke='%23333' stroke-width='1' opacity='0.3'/%3E%3Cline x1='320' y1='420' x2='1030' y2='420' stroke='%23222' stroke-width='1' stroke-dasharray='4' opacity='0.3'/%3E%3Cline x1='320' y1='500' x2='1030' y2='500' stroke='%23222' stroke-width='1' stroke-dasharray='4' opacity='0.3'/%3E%3Cpolyline fill='none' stroke='%23b5e126' stroke-width='2.5' opacity='0.7' points='340,520 400,480 460,500 520,420 580,440 640,380 700,400 760,360 820,370 880,340 940,355 1000,330'/%3E%3Cpolyline fill='none' stroke='%2344cc44' stroke-width='2' opacity='0.4' points='340,540 400,530 460,520 520,500 580,510 640,470 700,490 760,460 820,465 880,430 940,450 1000,420'/%3E%3C!-- Right panel - device list --%3E%3Crect fill='%231a1d24' x='1090' y='280' width='370' height='340' rx='12'/%3E%3Crect fill='%23b5e126' x='1120' y='305' width='60' height='6' rx='3' opacity='0.5'/%3E%3Crect fill='%23161920' x='1110' y='330' width='330' height='44' rx='6'/%3E%3Ccircle fill='%2344cc44' cx='1130' cy='352' r='5' opacity='0.8'/%3E%3Crect fill='%23555' x='1148' y='346' width='120' height='8' rx='2' opacity='0.3'/%3E%3Crect fill='%23b5e126' x='1390' y='346' width='30' height='8' rx='2' opacity='0.4'/%3E%3Crect fill='%23161920' x='1110' y='384' width='330' height='44' rx='6'/%3E%3Ccircle fill='%2344cc44' cx='1130' cy='406' r='5' opacity='0.8'/%3E%3Crect fill='%23555' x='1148' y='400' width='100' height='8' rx='2' opacity='0.3'/%3E%3Crect fill='%23b5e126' x='1390' y='400' width='30' height='8' rx='2' opacity='0.4'/%3E%3Crect fill='%23161920' x='1110' y='438' width='330' height='44' rx='6'/%3E%3Ccircle fill='%23ff9900' cx='1130' cy='460' r='5' opacity='0.7'/%3E%3Crect fill='%23555' x='1148' y='454' width='130' height='8' rx='2' opacity='0.3'/%3E%3Crect fill='%23ff9900' x='1390' y='454' width='30' height='8' rx='2' opacity='0.3'/%3E%3Crect fill='%23161920' x='1110' y='492' width='330' height='44' rx='6'/%3E%3Ccircle fill='%2344cc44' cx='1130' cy='514' r='5' opacity='0.8'/%3E%3Crect fill='%23555' x='1148' y='508' width='110' height='8' rx='2' opacity='0.3'/%3E%3Crect fill='%23b5e126' x='1390' y='508' width='30' height='8' rx='2' opacity='0.4'/%3E%3Crect fill='%23161920' x='1110' y='546' width='330' height='44' rx='6'/%3E%3Ccircle fill='%2344cc44' cx='1130' cy='568' r='5' opacity='0.8'/%3E%3Crect fill='%23555' x='1148' y='562' width='90' height='8' rx='2' opacity='0.3'/%3E%3Crect fill='%23b5e126' x='1390' y='562' width='30' height='8' rx='2' opacity='0.4'/%3E%3C!-- Bottom row cards --%3E%3Crect fill='%231a1d24' x='290' y='650' width='370' height='200' rx='12'/%3E%3Crect fill='%23b5e126' x='320' y='675' width='70' height='6' rx='3' opacity='0.5'/%3E%3Crect fill='%23222' x='340' y='710' width='30' height='100' rx='3'/%3E%3Crect fill='%23b5e126' x='340' y='760' width='30' height='50' rx='3' opacity='0.6'/%3E%3Crect fill='%23222' x='390' y='710' width='30' height='100' rx='3'/%3E%3Crect fill='%23b5e126' x='390' y='730' width='30' height='80' rx='3' opacity='0.6'/%3E%3Crect fill='%23222' x='440' y='710' width='30' height='100' rx='3'/%3E%3Crect fill='%23b5e126' x='440' y='745' width='30' height='65' rx='3' opacity='0.6'/%3E%3Crect fill='%23222' x='490' y='710' width='30' height='100' rx='3'/%3E%3Crect fill='%23b5e126' x='490' y='720' width='30' height='90' rx='3' opacity='0.6'/%3E%3Crect fill='%23222' x='540' y='710' width='30' height='100' rx='3'/%3E%3Crect fill='%23b5e126' x='540' y='750' width='30' height='60' rx='3' opacity='0.6'/%3E%3Crect fill='%23222' x='590' y='710' width='30' height='100' rx='3'/%3E%3Crect fill='%23b5e126' x='590' y='735' width='30' height='75' rx='3' opacity='0.6'/%3E%3Crect fill='%231a1d24' x='690' y='650' width='370' height='200' rx='12'/%3E%3Crect fill='%2344cc44' x='720' y='675' width='70' height='6' rx='3' opacity='0.5'/%3E%3Ccircle fill='none' stroke='%23333' cx='875' cy='770' r='55' stroke-width='10' opacity='0.4'/%3E%3Ccircle fill='none' stroke='%23b5e126' cx='875' cy='770' r='55' stroke-width='10' stroke-dasharray='260 90' opacity='0.7'/%3E%3Ctext fill='%23b5e126' x='850' y='778' font-family='sans-serif' font-size='20' font-weight='bold' opacity='0.7'%3E76%25%3C/text%3E%3Crect fill='%231a1d24' x='1090' y='650' width='370' height='200' rx='12'/%3E%3Crect fill='%23ff9900' x='1120' y='675' width='70' height='6' rx='3' opacity='0.5'/%3E%3Crect fill='%23222' x='1140' y='710' width='280' height='30' rx='4' opacity='0.3'/%3E%3Crect fill='%23ff9900' x='1140' y='710' width='180' height='30' rx='4' opacity='0.3'/%3E%3Crect fill='%23222' x='1140' y='755' width='280' height='30' rx='4' opacity='0.3'/%3E%3Crect fill='%23b5e126' x='1140' y='755' width='230' height='30' rx='4' opacity='0.3'/%3E%3Crect fill='%23222' x='1140' y='800' width='280' height='30' rx='4' opacity='0.3'/%3E%3Crect fill='%2344cc44' x='1140' y='800' width='250' height='30' rx='4' opacity='0.3'/%3E%3C/svg%3E&quot;); background-size: cover; background-repeat: no-repeat; background-attachment: fixed; padding-bottom: 140px;">
+  <div class="container"><div class="row"><div class="col-xs-12 col-sm-7 col-md-12">
+    <div class="pix-content pix-padding-top-40 slow-mo">
+      <h5 class="pix-brown-2"><span class="pix_edit_text"><strong style="font-family: Montserrat; color: rgb(181, 225, 38);">INTEGRAČNÍ PLATFORMA</strong></span></h5>
+      <h1 class="pix-white pix-no-margin-top"><span class="pix_edit_text"><span style="font-family: Montserrat; font-weight: bold;">PlusConnect propojuje vaši budovu s&nbsp;provozními systémy do jednoho celku.</span></span></h1>
+      <p class="pix-slight-white big-text"><span class="pix_edit_text"><span style="font-family: Montserrat;">Vlastní integrační vrstva mezi PMS, automatizací budovy a energetikou. Dashboard, stavové přehledy a automatická provozní logika.</span></span></p>
+      <div class="pix-padding-top-20">
+        <a href="https://www.plushouse.cz/kontakt" class="btn btn-md wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; font-family: Montserrat;">CHCI VĚDĚT VÍC</a>
+      </div>
+    </div>
+  </div></div></div>
+</div>
+
+<!-- CO JE PLUSCONNECT -->
+<div class="pix_section pix-padding" id="section_about" style="background-color: rgb(181, 225, 38); padding-top: 60px; padding-bottom: 60px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-20 animate-in">
+      <h5 class="text-center"><span style="color: rgb(0, 0, 0);">Co je PlusConnect?</span></h5>
+      <h2 class="text-center pix-no-margin-top"><span style="font-family: Montserrat; font-weight: 700; color: rgb(0, 0, 0);">Integrační most mezi světem IT a světem budovy</span></h2>
+    </div></div>
+    <div class="col-md-6 col-sm-6">
+      <div class="pix-content animate-in">
+        <p style="color: #000; font-family: Montserrat; font-size: 15px; line-height: 26px;">
+          <strong>PlusConnect</strong> je naše proprietární integrační řešení, které překlenuje mezeru mezi provozními systémy (PMS, booking, správa hostů) a fyzickou automatizací budovy (HVAC, přístupy, osvětlení, energie).
+        </p>
+        <p style="color: #253700; font-family: Montserrat; font-size: 14px; line-height: 24px;">
+          Místo desítek izolovaných nástrojů získáte jeden přehledný systém, kde vidíte stav celého objektu v reálném čase – od obsazenosti pokojů přes spotřebu energie po servisní požadavky.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <div class="pix-content animate-in">
+        <p style="color: #000; font-family: Montserrat; font-size: 15px; line-height: 26px;">
+          Systém byl navržen pro <strong>hotely, penziony a komerční objekty</strong>, kde provozní efektivita přímo ovlivňuje ziskovost. PlusConnect řeší komunikaci mezi systémy, které spolu běžně nemluvily.
+        </p>
+        <p style="color: #253700; font-family: Montserrat; font-size: 14px; line-height: 24px;">
+          Konkrétní technickou architekturu a způsob integrace navrhujeme vždy na míru po úvodní konzultaci, protože každý objekt má jiné potřeby i infrastrukturu.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="plusconnect-stat-bar animate-in">
+        <div class="plusconnect-stat"><div class="stat-num">1</div><div class="stat-label">Jednotný dashboard</div></div>
+        <div class="plusconnect-stat"><div class="stat-num">24/7</div><div class="stat-label">Automatický provoz</div></div>
+        <div class="plusconnect-stat"><div class="stat-num">~30%</div><div class="stat-label">Úspora energií</div></div>
+        <div class="plusconnect-stat"><div class="stat-num">∞</div><div class="stat-label">Škálovatelnost</div></div>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- JAK TO FUNGUJE – SCHÉMA -->
+<div class="pix_section pix-padding-v-50" id="section_3" style="background-color: #000; padding-top: 70px; padding-bottom: 70px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-20 animate-in">
+      <h5 class="text-center" style="color: #b5e126; font-family: Montserrat; font-weight: 600;">Princip fungování</h5>
+      <h2 class="pix-white text-center pix-no-margin-top" style="font-family: Montserrat; font-weight: 700;">Jak PlusConnect propojuje váš provoz</h2>
+      <p class="text-center" style="color: #888; font-family: Montserrat; max-width: 700px; margin: 0 auto;">
+        Tři vrstvy, jeden cíl – automatizovat rutinní provozní rozhodnutí a dát vám přehled na jednom místě.
+      </p>
+    </div></div>
+
+    <div class="col-md-12">
+      <div class="plusconnect-flow animate-in">
+        <div class="flow-box">
+          <h5>Provozní systémy</h5>
+          <p>PMS, booking platformy, správa hostů, fakturace – data o rezervacích a obsazenosti</p>
+        </div>
+        <span class="flow-arrow hidden-xs">&#10132;</span>
+        <span class="flow-arrow visible-xs-block" style="text-align:center;">&#10515;</span>
+        <div class="flow-box" style="border-color: #b5e126;">
+          <h5 style="font-size: 22px;">PlusConnect</h5>
+          <p>Integrační vrstva s vlastní logikou, konektory a dashboardem</p>
+        </div>
+        <span class="flow-arrow hidden-xs">&#10132;</span>
+        <span class="flow-arrow visible-xs-block" style="text-align:center;">&#10515;</span>
+        <div class="flow-box">
+          <h5>Budova</h5>
+          <p>Topení, chlazení, přístupy, osvětlení, energie – fyzická automatizace objektu</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-sm-4 pix-padding-top-40">
+      <div class="pix-content text-center animate-in">
+        <i class="pixicon-laptop3" style="color: #b5e126; font-size: 50px;"></i>
+        <h5 class="pix-white" style="font-family: Montserrat; font-weight: 600;">1. Sběr dat</h5>
+        <p style="color: #888;">PlusConnect přijímá data z provozních systémů – rezervace, check-iny, stavy pokojů a požadavky hostů.</p>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 pix-padding-top-40">
+      <div class="pix-content text-center animate-in">
+        <i class="pixicon-browser13" style="color: #b5e126; font-size: 50px;"></i>
+        <h5 class="pix-white" style="font-family: Montserrat; font-weight: 600;">2. Rozhodovací logika</h5>
+        <p style="color: #888;">Na základě pravidel a kontextu (čas, počasí, obsazenost) systém určí optimální akce pro budovu.</p>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4 pix-padding-top-40">
+      <div class="pix-content text-center animate-in">
+        <i class="pixicon-tools" style="color: #b5e126; font-size: 50px;"></i>
+        <h5 class="pix-white" style="font-family: Montserrat; font-weight: 600;">3. Řízení budovy</h5>
+        <p style="color: #888;">Automatizace provede akce – příprava pokoje, nastavení teploty, otevření přístupu, přepnutí režimů.</p>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- KLÍČOVÉ FUNKCE -->
+<div class="pix_section pix-padding-v-50" id="section_4" style="background-color: #1A1A1A; padding-top: 70px; padding-bottom: 70px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-40 animate-in">
+      <h5 class="text-center" style="color: #b5e126; font-family: Montserrat; font-weight: 600;">Klíčové funkce</h5>
+      <h2 class="text-center pix-no-margin-top" style="font-family: Montserrat; font-weight: 700; color: #FFFFFF;">Co PlusConnect umí</h2>
+    </div></div>
+
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-graphs4"></i>
+        <h5>Provozní dashboard</h5>
+        <p>Celkový přehled o stavu objektu, obsazenosti, energetice a servisních událostech na jednom místě.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-hotels"></i>
+        <h5>Automatické scénáře</h5>
+        <p>Check-in spustí přípravu pokoje. Check-out přepne do úsporného režimu. Bez zásahu recepce.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-money210"></i>
+        <h5>Energetické úspory</h5>
+        <p>Řízení topení a chlazení podle skutečné obsazenosti. Zbytečně nevytápíte prázdné pokoje.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-lock107"></i>
+        <h5>Přístupy a bezpečnost</h5>
+        <p>Časově omezené přístupy pro hosty, housekeeping i techniky s kompletním logem událostí.</p>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-wrench"></i>
+        <h5>Konektory na míru</h5>
+        <p>Napojení na PMS systémy, booking platformy a další provozní nástroje dle potřeb vašeho objektu.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-phone79"></i>
+        <h5>Alarmy a notifikace</h5>
+        <p>Upozornění na provozní anomálie, servisní požadavky a kritické stavy v reálném čase.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-cloud91"></i>
+        <h5>Vzdálený dohled</h5>
+        <p>Přístup k dashboardu odkudkoli. Správa více objektů z jednoho rozhraní.</p>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 pix-margin-v-10">
+      <div class="plusconnect-feature-card animate-in">
+        <i class="pixicon-refresh10"></i>
+        <h5>Průběžný rozvoj</h5>
+        <p>Systém roste s vámi. Nové konektory, funkce a integrace přidáváme podle vašich potřeb.</p>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- PRO KOHO -->
+<div class="pix_section pix-padding-v-50" id="section_5" style="background-color: #0F0F0F; padding-top: 70px; padding-bottom: 70px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><div class="pix-content pix-padding-bottom-40 animate-in">
+      <h5 class="text-center" style="color: #b5e126; font-family: Montserrat; font-weight: 600;">Pro koho je PlusConnect</h5>
+      <h2 class="text-center pix-no-margin-top" style="font-family: Montserrat; font-weight: 700; color: #FFFFFF;">Typické nasazení</h2>
+    </div></div>
+
+    <div class="col-md-4 col-sm-4">
+      <div class="pix-content text-center pix-margin-v-20 animate-in">
+        <span class="pix-margin-bottom-20"><i class="pixicon-hotels" style="color: #b5e126; font-size: 90px;"></i></span>
+        <h4 style="font-family: Montserrat; font-weight: 700;">Hotely a penziony</h4>
+        <p class="pix-black-gray-light" style="font-size: 14px;">Plná integrace PMS s automatizací pokojů, společných prostor a energetikou. Od malého penzionu po víceobjektový hotel.</p>
+        <a href="https://www.plushouse.cz/pms" class="btn btn-sm wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; margin-top: 15px;">PMS automatizace</a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <div class="pix-content text-center pix-margin-v-20 animate-in">
+        <span class="pix-margin-bottom-20"><i class="pixicon-office" style="color: #b5e126; font-size: 90px;"></i></span>
+        <h4 style="font-family: Montserrat; font-weight: 700;">Komerční objekty</h4>
+        <p class="pix-black-gray-light" style="font-size: 14px;">Propojení správy budovy s provozními systémy. Energetický management, přístupy a monitorování stavu technologií.</p>
+        <a href="https://www.plushouse.cz/kontakt" class="btn btn-sm wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; margin-top: 15px;">Konzultace</a>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+      <div class="pix-content text-center pix-margin-v-20 animate-in">
+        <span class="pix-margin-bottom-20"><i class="pixicon-house4" style="color: #b5e126; font-size: 90px;"></i></span>
+        <h4 style="font-family: Montserrat; font-weight: 700;">Apartmány a resorty</h4>
+        <p class="pix-black-gray-light" style="font-size: 14px;">Správa více jednotek s centrálním přehledem. Automatizace příjezdu a odjezdu hostů, úsporné režimy mimo sezónu.</p>
+        <a href="https://www.plushouse.cz/kontakt" class="btn btn-sm wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; margin-top: 15px;">Konzultace</a>
+      </div>
+    </div>
+  </div></div>
+</div>
+
+<!-- FAQ -->
+<div class="pix_section pix-padding" id="section_6" style="background-color: #000; padding-top: 60px; padding-bottom: 60px;">
+  <div class="container"><div class="row">
+    <div class="col-md-12"><h2 class="pix-white text-center" style="font-family: Montserrat; font-weight: 700;">Časté dotazy</h2></div>
+    <div class="col-md-4">
+      <h5 class="pix-white" style="font-family: Montserrat;">Jaké PMS systémy podporujete?</h5>
+      <p class="pix-gray">Aktuálně máme konektory pro nejrozšířenější české PMS. Konkrétní kompatibilitu ověříme při úvodní konzultaci.</p>
+    </div>
+    <div class="col-md-4">
+      <h5 class="pix-white" style="font-family: Montserrat;">Musím měnit stávající PMS?</h5>
+      <p class="pix-gray">Ne. PlusConnect se napojuje na váš stávající systém. Neměníme to, co funguje – rozšiřujeme to o automatizaci budovy.</p>
+    </div>
+    <div class="col-md-4">
+      <h5 class="pix-white" style="font-family: Montserrat;">Je to bezpečné?</h5>
+      <p class="pix-gray">Komunikace je šifrovaná a kritické funkce běží lokálně. Výpadek internetu neblokuje základní provozní scénáře.</p>
+    </div>
+    <div class="col-md-4 pix-padding-top-20">
+      <h5 class="pix-white" style="font-family: Montserrat;">Jak dlouho trvá nasazení?</h5>
+      <p class="pix-gray">Záleží na rozsahu objektu. Typicky od několika týdnů po etapizované nasazení u větších hotelů.</p>
+    </div>
+    <div class="col-md-4 pix-padding-top-20">
+      <h5 class="pix-white" style="font-family: Montserrat;">Mohu spravovat více objektů?</h5>
+      <p class="pix-gray">Ano. Dashboard umožňuje centrální správu a přehled přes všechny připojené objekty z jednoho místa.</p>
+    </div>
+    <div class="col-md-4 pix-padding-top-20">
+      <h5 class="pix-white" style="font-family: Montserrat;">Co když potřebuji nový konektor?</h5>
+      <p class="pix-gray">Vyvíjíme konektory na míru. Pokud váš systém ještě nepodporujeme, rádi to vyřešíme.</p>
+    </div>
+    <div class="col-md-12 text-center pix-padding-top-40">
+      <a href="https://www.plushouse.cz/kontakt" class="btn btn-md wide normal btn-flat" style="background-color: #b5e126; color: #000; font-weight: 700; font-family: Montserrat;">Domluvit konzultaci k PlusConnect</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- BLOG -->
+<div class="pix_section blog-strip" id="blog-strip">
+  <div class="container">
+    <div class="blog-strip__inner">
+      <div class="blog-strip__header">
+        <h3>Nejnovější články z blogu</h3>
+        <a href="https://www.plushouse.cz/blog">Zobrazit celý blog</a>
+      </div>
+      <div class="blog-strip__list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="pix_section pix-padding-bottom-20 pix-padding-top-60 gray-dark-bg" id="section_footer" style="background-color: #0F0F0F; padding-top: 60px; padding-bottom: 20px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-xs-12 col-sm-4">
+        <h5 class="pix-white" style="font-family:Montserrat;font-weight:700;letter-spacing:0.2em;">PLUS HOUSE</h5>
+        <p style="color:rgba(255,255,255,0.5);font-family:Montserrat;font-size:13px;line-height:22px;">Navrhujeme a realizujeme chytré řízení domů i komerčních objektů. Propojujeme automatizaci, MaR, hotelové integrace, osvětlení, audio, elektroinstalace i rozvaděče na míru. Jádrem je Loxone.</p>
+        <div style="margin-top:15px;">
+          <a href="https://www.facebook.com/plushousecz" class="small-social"><i class="pixicon-facebook3" style="color:#b5e126;font-size:24px;"></i></a>
+          <a href="https://www.instagram.com/plushouse.cz" class="small-social"><i class="pixicon-instagram4" style="color:#b5e126;font-size:24px;"></i></a>
+        </div>
+      </div>
+      <div class="col-md-3 col-xs-6 col-sm-3">
+        <h5 class="pix-white" style="font-family:Montserrat;font-weight:700;">ŘEŠENÍ</h5>
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/chytra-domacnost-loxone/" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">Chytrá domácnost</a></li>
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/fotovoltaika" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">Fotovoltaika</a></li>
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/tepelna-cerpadla.html" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">Tepelná čerpadla</a></li>
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/pms" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">PMS pro hotely</a></li>
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/plusconnect" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">PlusConnect</a></li>
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/servis-fotovoltaiky/" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">Servis FVE</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2 col-xs-6 col-sm-2">
+        <h5 class="pix-white" style="font-family:Montserrat;font-weight:700;">FIRMA</h5>
+        <ul style="list-style:none;padding:0;margin:0;">
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/blog" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">Blog</a></li>
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/cenik.html" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">Ceník</a></li>
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/clenstvi.html" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">Členství</a></li>
+          <li style="margin-bottom:6px;"><a href="https://www.plushouse.cz/eshop/loxone/balicky/" style="color:rgba(255,255,255,0.5);font-size:13px;text-decoration:none;">E-shop</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3 col-xs-12 col-sm-3">
+        <h5 class="pix-white" style="font-family:Montserrat;font-weight:700;">KONTAKT</h5>
+        <p style="color:rgba(255,255,255,0.5);font-family:Montserrat;font-size:13px;line-height:22px;">info@plushouse.cz<br><a href="tel:+420734384858" style="color:#fff;">+420 734 38 48 58</a><br>Mladeč 61, 783 21 Mladeč<br>IČ: 09439200</p>
+        <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:20px;font-family:Montserrat;">&copy; 2017&ndash;2026 PLUS HOUSE s.r.o.<br><a href="https://www.plushouse.cz/obchodni-podminky.html" style="color:rgba(255,255,255,0.3);">Obchodní podmínky</a> &middot; <a href="https://www.plushouse.cz/zasady_ochrany_os_udaju.html" style="color:rgba(255,255,255,0.3);">Ochrana osobních údajů</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PlusConnect","applicationCategory":"BusinessApplication","description":"Integrační platforma pro propojení PMS systémů s automatizací budovy","provider":{"@type":"Organization","name":"PLUS HOUSE s.r.o."},"url":"https://www.plushouse.cz/plusconnect"}</script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-migrate-3.4.1.min.js" integrity="sha256-UnTxkqpOXHpfEaIjMaiJYCnvZR84JkkCWz9MoFHEAkI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" defer crossorigin="anonymous"></script>
+<script src="js/bootstrap.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js" defer crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.ui.min.js" defer crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.appear/0.4.1/jquery.appear.min.js" defer crossorigin="anonymous"></script>
+<script src="js/animations.js" defer type="text/javascript"></script>
+<script src="js/plugins.js" defer type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" defer crossorigin="anonymous"></script>
+<script src="js/custom.js" defer></script>
+<script src="/blog/blog.js"></script>
+</body>
+</html>

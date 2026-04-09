@@ -3,5 +3,42 @@ Allow: /
 Disallow: /admin
 Disallow: /draft
 Disallow: /tools
+Disallow: /data/
+Disallow: /templates/
+Disallow: /blog/template.html
+Disallow: /*.log$
+Disallow: /config.php
+Disallow: /info.php
+Disallow: /PHPMailerAutoload.php
+Disallow: /class.phpmailer.php
+Disallow: /class.smtp.php
+Disallow: /class.pop3.php
+Disallow: /admin_fulfillment.php
+Disallow: /fulfillment_lib.php
+Disallow: /new_contact.php
+Disallow: /messages.php
+Disallow: /recaptchalib.php
 
 Sitemap: https://www.plushouse.cz/sitemap.xml
+Sitemap: https://www.plushouse.cz/blog/sitemap.xml
+
+# AI LLM crawlers
+User-agent: GPTBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /

@@ -1,0 +1,48 @@
+# PLUS HOUSE s.r.o.
+
+> Integrujeme chytré domácnosti, fotovoltaiku, tepelná čerpadla a elektroinstalace na Moravě. Loxone Gold Partner.
+
+## O firmě
+
+PLUS HOUSE je česká firma specializující se na automatizaci budov a obnovitelné zdroje energie. Působíme v Olomouckém, Jihomoravském a Zlínském kraji. Jsme Loxone Gold Partner s certifikovaným týmem techniků.
+
+- Web: https://www.plushouse.cz
+- Kontakt: info@plushouse.cz | +420 734 384 858
+- Sídlo: Mladeč 61, 783 21 Mladeč, Česká republika
+- Provozní doba: Po-Pá 08:00-17:00
+
+## Služby
+
+- [Chytré domácnosti Loxone](https://www.plushouse.cz/chytra-domacnost-loxone/): Kompletní automatizace rodinných domů, bytů i komerčních budov pomocí systému Loxone
+- [Fotovoltaické elektrárny](https://www.plushouse.cz/fotovoltaika.html): Návrh, projekce a instalace FVE na klíč s bateriemi Victron
+- [Tepelná čerpadla](https://www.plushouse.cz/tepelna-cerpadla.html): Viessmann tepelná čerpadla - návrh, instalace, elektroinstalace a regulace
+- [Nabíjecí stanice](https://www.plushouse.cz/nabijeci-stanice.html): Wallboxy a nabíjecí stanice pro elektromobily
+- [PMS integrace](https://www.plushouse.cz/pms.html): Automatizace hotelů a ubytovacích zařízení s napojením na PMS systémy (Previo)
+- [Elektroinstalace a rozvaděče](https://www.plushouse.cz/chytra-elektroinstalace/): Rozvaděče AC/DC na zakázku, MaR, osvětlení, audio
+- [FVE konfigurátor](https://www.plushouse.cz/fve-configurator/): Online kalkulačka ceny fotovoltaické elektrárny
+- [Ceník](https://www.plushouse.cz/cenik.html): Přehled cen služeb
+
+## Regiony
+
+- [Olomouc a Olomoucký kraj](https://www.plushouse.cz/chytra-domacnost-olomouc/)
+- [Brno a Jihomoravský kraj](https://www.plushouse.cz/chytra-domacnost-brno/)
+- [Zlín a Zlínský kraj](https://www.plushouse.cz/chytra-domacnost-zlin/)
+
+## Reference a realizace
+
+- [Realizace FVE Olomouc 10 kWp](https://www.plushouse.cz/realizace/olomouc-10kwp-victron-ess/)
+- [Realizace FVE Brno 12 kWp](https://www.plushouse.cz/realizace/brno-12kwp-fve-na-klic/)
+- [Realizace FVE Zlín 8 kWp](https://www.plushouse.cz/realizace/zlin-8kwp-victron-zaloha/)
+- [Reference chytrá domácnost](https://www.plushouse.cz/reference/chytra-domacnost/)
+
+## Blog
+
+- [Blog PlusHouse](https://www.plushouse.cz/blog): Články o fotovoltaice, chytrých domácnostech, tepelných čerpadlech a úsporách energie
+
+## eShop
+
+- [Loxone balíčky](https://www.plushouse.cz/eshop/loxone/balicky/): Startovací sady pro chytrou domácnost od 28 990 Kč
+
+## Rozšířený popis
+
+- [llms-full.txt](https://www.plushouse.cz/llms-full.txt): Kompletní popis firmy, služeb a konkurenčních výhod

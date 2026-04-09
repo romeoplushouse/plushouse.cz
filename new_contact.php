@@ -4,6 +4,18 @@ ini_set("log_errors", 1);
 ini_set("error_log", dirname(__FILE__) . "/php-error.log");
 
 
+function errorLog($name,$desc){
+	file_put_contents(ERROR_LOG, date("m.d.Y H:i:s")." (".$name.") ".$desc."\n", FILE_APPEND);
+}
+
+function getName($mail){
+	preg_match("/([a-zA-Z0-9._-]*)@[a-zA-Z0-9._-]*$/",$mail,$matches);
+	if(sizeof($matches)>=2){
+		return $matches[1];
+	}
+	return "";
+}
+
 if($_POST)
 {
 	$language = "EN";
@@ -181,7 +193,7 @@ if($_POST)
 			require 'phpmailer/PHPMailerAutoload.php';
 			$mail = new PHPMailer;
 
-			$final_msg = "\n"."Nová poptávka,"."<br>";
+			$final_msg = "\n"."Novï¿½ poptï¿½vka,"."<br>";
 			$final_msg .= $o_string_html;
 
 			//$mail->SMTPDebug = 3;                               // Enable verbose debug output
@@ -638,16 +650,6 @@ if($_POST)
 		}
 	}
 
-	function errorLog($name,$desc){
-		file_put_contents(ERROR_LOG, date("m.d.Y H:i:s")." (".$name.") ".$desc."\n", FILE_APPEND);
-	}
-
-	function getName($mail){
-		preg_match("/([a-zA-Z0-9._-]*)@[a-zA-Z0-9._-]*$/",$mail,$matches);
-        if(sizeof($matches)>=2){
-            return $matches[1];
-        }
-        return "";
-	}
+}
 
 ?>

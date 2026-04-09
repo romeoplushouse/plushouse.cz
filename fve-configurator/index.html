@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FVE konfigurátor</title>
+  <title>FVE konfigurátor | PLUS HOUSE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --accent: #B5E126;
+      --accent-dark: #9bc41e;
       --bg: #f7f7f7;
       --card-bg: #ffffff;
       --text: #111827;
@@ -28,14 +29,22 @@
     h1, h2, h3 {
       margin: 0 0 12px 0;
       font-weight: 700;
-      font-size: clamp(18px, 2vw, 28px);
     }
+    h1 { font-size: clamp(20px, 2.2vw, 30px); }
+    h2 { font-size: clamp(17px, 1.8vw, 24px); }
+    h3 { font-size: clamp(15px, 1.5vw, 20px); }
     p { margin: 0 0 12px 0; color: var(--muted); }
     .wrap {
-      max-width: 1200px;
+      max-width: 720px;
       margin: 0 auto;
       padding: 32px 20px 60px;
     }
+    /* Hide nav when embedded in iframe */
+    .in-iframe .pix_section.pix_nav_menu { display: none !important; }
+    .in-iframe body, .in-iframe .wrap { padding-top: 0; }
+    .in-iframe .wrap { padding: 12px 12px 40px; }
+
+    /* ── Header ── */
     .header {
       display: flex;
       align-items: center;
@@ -45,6 +54,7 @@
       border-radius: 16px;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
+      margin-bottom: 24px;
     }
     .logo {
       height: 52px;
@@ -60,70 +70,172 @@
       font-weight: 600;
       font-size: 0.85em;
     }
-    .grid {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
+
+    /* ── Progress stepper ── */
+    .stepper {
+      display: flex;
+      gap: 0;
+      margin-bottom: 28px;
+      position: relative;
     }
-    @media (max-width: 960px) {
-      .grid { grid-template-columns: 1fr; }
+    .stepper-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      cursor: default;
     }
+    .stepper-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--border);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9em;
+      margin-bottom: 6px;
+      transition: all 0.3s;
+    }
+    .stepper-step.active .stepper-circle {
+      background: var(--accent);
+      color: #111;
+    }
+    .stepper-step.done .stepper-circle {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+    .stepper-label {
+      display: block;
+      font-size: 0.75em;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .stepper-step.active .stepper-label { color: var(--text); }
+    .stepper-step.done .stepper-label { color: var(--accent-dark); }
+    .stepper-line {
+      position: absolute;
+      top: 18px;
+      left: calc(50% + 22px);
+      right: calc(-50% + 22px);
+      height: 3px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .stepper-step.done .stepper-line { background: var(--accent-dark); }
+    .stepper-step:last-child .stepper-line { display: none; }
+
+    /* ── Card (wizard step) ── */
     .card {
       background: var(--card-bg);
       border-radius: 16px;
-      padding: 24px;
+      padding: 28px 24px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
     }
+    .step { display: none; }
+    .step.visible { display: block; }
+
+    /* ── Form elements ── */
     .form-row {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     label { font-weight: 600; }
     input[type="text"],
     input[type="email"],
     input[type="number"],
+    input[type="tel"],
     select {
       width: 100%;
       padding: 12px 14px;
       border-radius: 10px;
       border: 1px solid var(--border);
       font-size: 1em;
+      font-family: inherit;
       min-height: 44px;
     }
-    input[type="range"] { width: 100%; }
+    input[type="range"] { width: 100%; accent-color: var(--accent); }
+    .range-value {
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin: 4px 0;
+    }
+
+    /* ── Toggle buttons (system type, segment) ── */
     .toggle {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
     .toggle button {
-      border: 1px solid var(--border);
-      background: #fff;
-      padding: 10px 16px;
-      border-radius: 999px;
+      flex: 1;
+      min-width: 120px;
+      border: 2px solid var(--border);
+      background: var(--card-bg);
+      padding: 14px 16px;
+      border-radius: 12px;
       cursor: pointer;
       min-height: 44px;
       font-weight: 600;
+      font-family: inherit;
+      font-size: 0.95em;
+      transition: all 0.2s;
+      color: var(--text);
     }
+    .toggle button:hover { border-color: var(--accent); }
     .toggle button.active {
       background: var(--accent);
       border-color: var(--accent);
       color: #111;
     }
+    .toggle button small {
+      display: block;
+      font-weight: 400;
+      font-size: 0.8em;
+      margin-top: 4px;
+      opacity: 0.7;
+    }
+
     .checkbox-row {
       display: flex;
       align-items: center;
       gap: 10px;
       font-weight: 600;
     }
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+    }
+
+    /* ── Summary ── */
+    .price-highlight {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #111;
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+      font-size: 1.4em;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .price-highlight small {
+      display: block;
+      font-size: 0.55em;
+      font-weight: 400;
+      opacity: 0.8;
+      margin-top: 6px;
+    }
     .summary {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 18px;
     }
     .summary-item {
@@ -131,36 +243,74 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       background: #fbfbfd;
-      font-size: 0.95em;
+      font-size: 0.9em;
     }
+    .summary-item small { color: var(--muted); }
+
     .price-box {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 18px;
     }
     .price-card {
-      padding: 14px;
+      padding: 12px;
       border-radius: 12px;
       border: 1px solid var(--border);
-      background: #fff;
+      background: #1A1A1A;
       text-align: center;
+      color: #fff;
     }
-    .price-card strong { font-size: 1.2em; display: block; }
+    .price-card span { font-size: 0.8em; opacity: 0.7; }
+    .price-card strong { font-size: 1.1em; display: block; margin-top: 4px; }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.95em;
+      font-size: 0.85em;
     }
     th, td {
-      padding: 10px;
+      padding: 8px 10px;
       border-bottom: 1px solid var(--border);
       text-align: left;
     }
-    th { background: #f1f4f9; }
+    th { background: #f1f4f9; font-weight: 600; }
+
+    /* ── Buttons ── */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .btn {
+      background: var(--accent);
+      border: none;
+      color: #111;
+      padding: 14px 24px;
+      border-radius: 10px;
+      cursor: pointer;
+      min-height: 44px;
+      font-weight: 700;
+      font-family: inherit;
+      font-size: 1em;
+      flex: 1;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover { border-color: var(--accent); }
+
     .note {
-      margin-top: 16px;
-      font-size: 0.9em;
+      margin-top: 14px;
+      font-size: 0.85em;
       color: var(--muted);
     }
     .error {
@@ -172,21 +322,18 @@
       margin-bottom: 16px;
       display: none;
     }
-    .btn {
-      background: var(--accent);
-      border: none;
-      color: #111;
-      padding: 12px 18px;
-      border-radius: 10px;
-      cursor: pointer;
-      min-height: 44px;
-      font-weight: 700;
-      width: 100%;
+    .success-box {
+      background: #e8fce8;
+      border: 1px solid #a3d9a3;
+      color: #1a6e1a;
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
     }
-    .btn[disabled] {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+
+    /* ── Cookie consent ── */
     .cookie-consent {
       position: fixed;
       left: 24px;
@@ -227,6 +374,7 @@
       border-radius: 999px;
       padding: 8px 16px;
       cursor: pointer;
+      font-family: inherit;
     }
     .cookie-consent__btn--ghost {
       background: transparent;
@@ -238,41 +386,39 @@
       text-decoration: none;
       font-weight: 600;
     }
-    .cookie-consent__link:hover {
-      text-decoration: underline;
-    }
+    .cookie-consent__link:hover { text-decoration: underline; }
     @media (max-width: 640px) {
-      .cookie-consent {
-        left: 16px;
-        right: 16px;
-        bottom: 16px;
-      }
+      .cookie-consent { left: 16px; right: 16px; bottom: 16px; }
+      .summary { grid-template-columns: 1fr; }
+      .price-box { grid-template-columns: 1fr; }
+      .btn-row { flex-direction: column; }
     }
   </style>
 <meta name="description" content="FVE konfigurátor | PLUS HOUSE">
 <meta property="og:title" content="FVE konfigurátor">
 <meta property="og:description" content="FVE konfigurátor | PLUS HOUSE">
-<meta property="og:image" content="https://www.plushouse.cz/uploads/uploads/ogfoto.jpg">
+<meta property="og:image" content="https://www.plushouse.cz/uploads/ogfoto.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
 <link rel="canonical" href="https://www.plushouse.cz/fve-configurator/">
 <!--ICO -->
-<link rel="apple-touch-icon" sizes="57x57" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="https://www.plushouse.cz/uploads/uploads/ico/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="https://www.plushouse.cz/uploads/uploads/ico/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://www.plushouse.cz/uploads/uploads/ico/favicon-16x16.png">
-<link rel="manifest" href="https://www.plushouse.cz//manifest.json">
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.plushouse.cz/uploads/ico/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.plushouse.cz/uploads/ico/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.plushouse.cz/uploads/ico/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.plushouse.cz/uploads/ico/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.plushouse.cz/uploads/ico/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.plushouse.cz/uploads/ico/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.plushouse.cz/uploads/ico/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.plushouse.cz/uploads/ico/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.plushouse.cz/uploads/ico/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.plushouse.cz/uploads/ico/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.plushouse.cz/uploads/ico/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://www.plushouse.cz/uploads/ico/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.plushouse.cz/uploads/ico/favicon-16x16.png">
+<link rel="manifest" href="https://www.plushouse.cz/manifest.json">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#0F0F0F">
 <!--ICO -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GVQ2MF6LY5"></script>
@@ -280,129 +426,298 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-GVQ2MF6LY5');
 </script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1417475208778687');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1417475208778687&ev=PageView&noscript=1" /></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 <div class="pix_section pix_nav_menu normal pix-padding-v-20 pix-over-header pix_scroll_header slow-mo" data-scroll-bg="#000000" id="section_1" style="background-repeat: repeat-x; padding-top: 20px; padding-bottom: 20px; display: block;">
-  <div class="container"><div class="row">
-    <div class="col-md-10 col-xs-12 pix-inner-col col-sm-10 column ui-droppable"><div class="pix-content"><nav class="navbar navbar-default pix-no-margin-bottom pix-navbar-default"><div class="container"><div class="navbar-header pix-lg-inline-block pix-float-none"><button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pix-navbar-collapse" aria-expanded="false"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand logo-img logo-img-a pix-adjust-height" href="https://www.plushouse.cz/"><img src="uploads/plushouse-RSF.png" alt="" class="img-responsive pix-logo-img"></a></div></div></nav></div></div>
-    <div class="col-md-2 col-xs-12 pix-inner-col col-sm-2 column ui-droppable"><div class="pix-content pix-adjust-height text-right mobile-text-left" id="pix-header-btn" style="margin-top: 8.5px;"><a href="https://www.plushouse.cz/kontakt" class="btn small-text brown-bg pix-white pix-margin-top-10 pix-inline-block normal btn-md pix-line super-slow-mo" style="background: transparent; border-color: rgb(181, 225, 38); color: rgb(181, 225, 38);"><span class="pix_edit_text"><b>KONZULTACE</b></span></a></div></div>
-    <div class="col-md-10 col-xs-10 pix-inner-col col-sm-10 column ui-droppable"><div class="pix-content"><div class="navbar-collapse pix-no-h-padding collapse" id="pix-navbar-collapse" style="height: 1px;"><ul class="nav navbar-nav pix-inline-block pix-float-none media-middle pix-header-nav pix-adjust-height" id="pix-header-nav" style="margin-top: 13.5px;">
-<li><a href="https://www.plushouse.cz/" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">DOMŮ</a></li>
-<li class="dropdown"><a class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">SLUŽBY</a>
-<ul class="dropdown-menu dropdown-menu-left">
-<li><a href="https://www.plushouse.cz/fotovoltaika" class="dropdown-menu-link pix-nav-link">FOTOVOLTAIKA</a></li>
-<li><a href="https://www.plushouse.cz/trafostanice" class="dropdown-menu-link pix-nav-link">TRAFOSTANICE</a></li>
-<li><a href="https://www.plushouse.cz/fototermika.html" class="dropdown-menu-link pix-nav-link">FOTOTERMIKA</a></li>
-<li><a href="https://www.plushouse.cz/tepelna-cerpadla.html" class="dropdown-menu-link pix-nav-link">TEPELNÁ ČERPADLA</a></li>
-<li><a href="https://www.plushouse.cz/nabijeci-stanice.html" class="dropdown-menu-link pix-nav-link">NABÍJECÍ STANICE</a></li>
-<li><a href="https://www.plushouse.cz/pms" class="dropdown-menu-link pix-nav-link">PMS PRO HOTELY</a></li>
-</ul></li>
-<li><a href="#section_3" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">SLUŽBY</a></li>
-<li><a href="#section_4" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">SPOLUPRÁCE</a></li>
-<li><a href="#section_5" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">FAQ</a></li>
-<li><a href="https://www.plushouse.cz/blog" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">BLOG</a></li>
-</ul></div></div></div>
-  </div></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-xs-12 pix-inner-col col-sm-10 column ui-droppable">
+        <div class="pix-content">
+          <nav class="navbar navbar-default pix-no-margin-bottom pix-navbar-default">
+            <div class="container">
+              <div class="navbar-header pix-lg-inline-block pix-float-none">
+                <button style="background-color: #0F0F0F !important;" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pix-navbar-collapse" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo-img logo-img-a pix-adjust-height" href="https://www.plushouse.cz/">
+                  <img src="/uploads/plushouse-RSF.png" alt="PLUS HOUSE logo" class="img-responsive pix-logo-img">
+                </a>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-12 pix-inner-col col-sm-2 column ui-droppable pix-header-btn-col">
+        <div class="pix-content pix-adjust-height text-right mobile-text-left" id="pix-header-btn" style="margin-top: 8.5px;">
+          <a href="https://www.plushouse.cz/kontakt" class="btn small-text brown-bg pix-white pix-margin-top-10 pix-inline-block normal btn-md pix-line super-slow-mo" style="background: #b5e126; border-color: #b5e126; color: #0F0F0F; font-weight: 700;">
+            <span class="pix_edit_text"><span style="font-weight: 700;">KONZULTACE ZDARMA</span></span>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-10 col-xs-10 pix-inner-col col-sm-10 column ui-droppable">
+        <div class="pix-content">
+          <div class="navbar-collapse pix-no-h-padding collapse" id="pix-navbar-collapse" style="height: 1px;">
+            <ul class="nav navbar-nav pix-inline-block pix-float-none media-middle pix-header-nav pix-adjust-height" id="pix-header-nav" style="margin-top: 13.5px;">
+              <li class="dropdown">
+                <a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">RESENI</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="https://www.plushouse.cz/chytra-domacnost-loxone/" class="dropdown-menu-link">Chytra domacnost</a></li>
+                  <li><a href="https://www.plushouse.cz/fotovoltaika" class="dropdown-menu-link">Fotovoltaika</a></li>
+                  <li><a href="https://www.plushouse.cz/tepelna-cerpadla.html" class="dropdown-menu-link">Tepelna cerpadla</a></li>
+                  <li><a href="https://www.plushouse.cz/nabijeci-stanice.html" class="dropdown-menu-link">Nabijeci stanice</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">TECHNOLOGIE</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="https://www.plushouse.cz/pms" class="dropdown-menu-link">PMS pro hotely</a></li>
+                  <li><a href="https://www.plushouse.cz/plusconnect" class="dropdown-menu-link">PlusConnect</a></li>
+                  <li><a href="https://www.plushouse.cz/audio" class="dropdown-menu-link">Audio systemy</a></li>
+                  <li><a href="https://www.plushouse.cz/fototermika.html" class="dropdown-menu-link">Fototermika</a></li>
+                  <li><a href="https://www.plushouse.cz/trafostanice" class="dropdown-menu-link">Trafostanice</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">SLUZBY</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="https://www.plushouse.cz/servis-fotovoltaiky/" class="dropdown-menu-link">Servis FVE</a></li>
+                  <li><a href="https://www.plushouse.cz/cenik.html" class="dropdown-menu-link">Cenik</a></li>
+                  <li><a href="https://www.plushouse.cz/clenstvi.html" class="dropdown-menu-link">Clenstvi +house</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="pix-gray pix-nav-link" data-toggle="dropdown" style="color: rgb(181, 225, 38);">ZNALOSTI</a>
+                <ul class="dropdown-menu dropdown-menu-left">
+                  <li><a href="https://www.plushouse.cz/blog" class="dropdown-menu-link">Blog</a></li>
+                  <li><a href="https://www.plushouse.cz/eshop/loxone/balicky/" class="dropdown-menu-link">E-shop</a></li>
+                </ul>
+              </li>
+              <li><a href="https://www.plushouse.cz/kontakt" class="pix-gray pix-nav-link" style="color: rgb(181, 225, 38);">KONTAKT</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 col-xs-12 pix-inner-col col-sm-2 column ui-droppable">
+        <div class="pix-content pix-adjust-height text-right mobile-text-left" style="margin-top: 10px;">
+          <div class="pix-header-item">
+            <a href="https://www.facebook.com/plushousecz" class="small-social"><i class="pixicon-facebook3" style="color: #b5e126; font-size: 27px;"></i></a>
+            <a href="https://www.instagram.com/plushouse.cz" class="small-social"><i class="pixicon-instagram4" style="color: #b5e126; font-size: 27px;"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
   <div class="wrap">
     <div class="header">
       <img id="brandLogo" class="logo" alt="Logo" />
       <div>
-        <span class="badge" id="brandNameBadge">FVE konfigurátor</span>
-        <h1 id="headline">Konfigurátor fotovoltaiky</h1>
-        <p id="subhead">Ceny a pravidla jsou načítány z JSON ceníku.</p>
+        <span class="badge" id="brandNameBadge">FVE konfigurator</span>
+        <h1 id="headline">Konfigurator fotovoltaiky</h1>
+        <p id="subhead">Orientacni kalkulace na klic -- ceny odpovidaji aktualnimu trhu 2025/2026.</p>
       </div>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="error" id="adminError"></div>
+    <!-- Progress stepper -->
+    <div class="stepper" id="stepper">
+      <div class="stepper-step active" data-step="1">
+        <div class="stepper-circle">1</div>
+        <span class="stepper-label">Objekt</span>
+        <div class="stepper-line"></div>
+      </div>
+      <div class="stepper-step" data-step="2">
+        <div class="stepper-circle">2</div>
+        <span class="stepper-label">System</span>
+        <div class="stepper-line"></div>
+      </div>
+      <div class="stepper-step" data-step="3">
+        <div class="stepper-circle">3</div>
+        <span class="stepper-label">Lokalita</span>
+        <div class="stepper-line"></div>
+      </div>
+      <div class="stepper-step" data-step="4">
+        <div class="stepper-circle">4</div>
+        <span class="stepper-label">Souhrn</span>
+      </div>
+    </div>
 
-        <h2>Vstupy konfigurace</h2>
+    <div class="error" id="adminError"></div>
+
+    <div class="card">
+      <!-- ═══════ STEP 1: Objekt ═══════ -->
+      <div class="step visible" id="step1">
+        <h2>Typ objektu</h2>
+        <p>Vyberte segment a zakladni parametry budovy.</p>
+
         <div class="form-row">
-          <label for="segment">Segment</label>
-          <select id="segment"></select>
+          <label>Segment</label>
+          <div class="toggle" id="segmentToggle"></div>
         </div>
 
         <div class="form-row">
-          <label for="kwp">Velikost systému (kWp)</label>
-          <input type="range" id="kwpRange" min="3" max="50" step="0.1" />
-          <input type="number" id="kwpInput" min="3" max="50" step="0.1" />
-        </div>
-
-        <div class="form-row">
-          <label>Systém</label>
-          <div class="checkbox-row">
-            <input type="checkbox" id="hasBattery" />
-            <label for="hasBattery">S baterií (Victron)</label>
+          <label>Typ zakaznika</label>
+          <div class="toggle" id="customerTypeToggle">
+            <button type="button" data-value="B2C" class="active">
+              Soukroma osoba
+              <small>B2C</small>
+            </button>
+            <button type="button" data-value="B2B">
+              Firma / podnikatel
+              <small>B2B</small>
+            </button>
           </div>
         </div>
 
-        <div class="form-row">
-          <label for="region">Kraj instalace</label>
-          <select id="region"></select>
+        <div class="form-row checkbox-row">
+          <input type="checkbox" id="isLiving" checked />
+          <label for="isLiving">Budova slouzi k bydleni</label>
         </div>
 
         <div class="form-row checkbox-row">
           <input type="checkbox" id="hasLps" />
-          <label for="hasLps">Na budově je hromosvod (LPS)</label>
+          <label for="hasLps">Na budove je hromosvod (LPS)</label>
         </div>
 
-        <div class="form-row checkbox-row">
-          <input type="checkbox" id="isLiving" />
-          <label for="isLiving">Budova pro bydlení</label>
+        <div class="btn-row">
+          <button class="btn" id="btn1next">Dalsi krok</button>
         </div>
+      </div>
+
+      <!-- ═══════ STEP 2: System ═══════ -->
+      <div class="step" id="step2">
+        <h2>Fotovoltaicky system</h2>
+        <p>Zvolte typ systemu a pozadovany vykon.</p>
 
         <div class="form-row">
-          <label>Typ zákazníka</label>
-          <div class="toggle" id="customerTypeToggle">
-            <button type="button" data-value="B2C" class="active">B2C</button>
-            <button type="button" data-value="B2B">B2B</button>
+          <label>Typ systemu</label>
+          <div class="toggle" id="systemToggle">
+            <button type="button" data-value="fronius_no_battery" class="active">
+              Fronius
+              <small>Bez baterie</small>
+            </button>
+            <button type="button" data-value="victron_with_battery">
+              Victron + Pylontech
+              <small>S baterii</small>
+            </button>
           </div>
         </div>
 
-        <h3>Odeslání konfigurace</h3>
         <div class="form-row">
-          <label for="customerEmail">E-mail zákazníka *</label>
-          <input type="email" id="customerEmail" placeholder="email@domena.cz" />
+          <label for="kwpRange">Velikost systemu</label>
+          <div class="range-value" id="kwpDisplay">5 kWp</div>
+          <input type="range" id="kwpRange" min="3" max="50" step="0.5" value="5" />
+          <div style="display:flex; justify-content:space-between; font-size:0.8em; color:var(--muted);">
+            <span id="kwpMin">3 kWp</span>
+            <span id="kwpMax">50 kWp</span>
+          </div>
         </div>
-        <div class="form-row">
-          <label for="customerName">Jméno (volitelně)</label>
-          <input type="text" id="customerName" placeholder="Jméno a příjmení" />
+
+        <div class="btn-row">
+          <button class="btn btn-outline" id="btn2back">Zpet</button>
+          <button class="btn" id="btn2next">Dalsi krok</button>
         </div>
-        <div class="form-row checkbox-row">
-          <input type="checkbox" id="gdprConsent" />
-          <label for="gdprConsent">Souhlasím se zpracováním osobních údajů</label>
-        </div>
-        <button class="btn" id="sendBtn">Odeslat konfiguraci e-mailem</button>
-        <p class="note">Odeslání probíhá přes firemní webhook.</p>
       </div>
 
-      <div class="card">
-        <h2>Souhrn</h2>
+      <!-- ═══════ STEP 3: Lokalita ═══════ -->
+      <div class="step" id="step3">
+        <h2>Misto instalace</h2>
+        <p>Vyberte kraj pro vypocet dopravnich nakladu.</p>
+
+        <div class="form-row">
+          <label for="region">Kraj instalace</label>
+          <select id="region">
+            <option value="">Vyberte kraj</option>
+          </select>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-outline" id="btn3back">Zpet</button>
+          <button class="btn" id="btn3next">Zobrazit kalkulaci</button>
+        </div>
+      </div>
+
+      <!-- ═══════ STEP 4: Souhrn + kontakt ═══════ -->
+      <div class="step" id="step4">
+        <h2>Vase kalkulace</h2>
+
+        <div class="price-highlight" id="priceHighlight">--</div>
         <div class="summary" id="summary"></div>
         <div class="price-box" id="priceBox"></div>
-        <h3>Rozpad položek</h3>
+
+        <h3>Rozpad polozek</h3>
         <table>
           <thead>
             <tr>
-              <th>Položka</th>
-              <th>Množství</th>
+              <th>Polozka</th>
+              <th>Mnozstvi</th>
               <th>Jedn. cena bez DPH</th>
               <th>Celkem bez DPH</th>
             </tr>
           </thead>
           <tbody id="itemsTable"></tbody>
         </table>
-        <p class="note">Jedná se o orientační kalkulaci.</p>
+
+        <hr style="margin: 24px 0; border-color: var(--border);" />
+
+        <h3>Chci nezavaznou nabidku</h3>
+        <p>Poslete nam kontakt a pripravime individualni nabidku.</p>
+
+        <div class="form-row">
+          <label for="customerEmail">E-mail *</label>
+          <input type="email" id="customerEmail" placeholder="email@domena.cz" />
+        </div>
+        <div class="form-row">
+          <label for="customerName">Jmeno a prijmeni</label>
+          <input type="text" id="customerName" placeholder="Jan Novak" />
+        </div>
+        <div class="form-row">
+          <label for="customerPhone">Telefon</label>
+          <input type="tel" id="customerPhone" placeholder="+420 xxx xxx xxx" />
+        </div>
+        <div class="form-row checkbox-row">
+          <input type="checkbox" id="gdprConsent" />
+          <label for="gdprConsent">Souhlasim se zpracovanim osobnich udaju</label>
+        </div>
+
+        <div class="success-box" id="successBox">
+          Dekujeme! Vasi konfiguraci jsme prijali. Ozveme se vam.
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-outline" id="btn4back">Zpet</button>
+          <button class="btn" id="sendBtn">Odeslat poptavku</button>
+        </div>
+        <p class="note">Jedná se o orientacni kalkulaci. Finalni nabidku pripravime individualne.</p>
       </div>
     </div>
   </div>
 
+  <script>
+    if (window.self !== window.top) {
+      document.documentElement.classList.add('in-iframe');
+    }
+  </script>
   <script src="app.js"></script>
   <script>
     (function () {
@@ -422,13 +737,13 @@
         banner.innerHTML = '' +
           '<div class="cookie-consent__content">' +
             '<div class="cookie-consent__text">' +
-              '<strong>Používáme cookies</strong>' +
-              '<span>Pomáhají nám zlepšovat web. Souhlas můžete kdykoli změnit v zásadách ochrany osobních údajů.</span>' +
+              '<strong>Pouzivame cookies</strong>' +
+              '<span>Pomahaji nam zlepsovat web. Souhlas muzete kdykoli zmenit v zasadach ochrany osobnich udaju.</span>' +
             '</div>' +
             '<div class="cookie-consent__actions">' +
-              '<a class="cookie-consent__link" href="https://plushouse.cz/zasady_ochrany_os_udaju.html" target="_blank" rel="noopener">Více informací</a>' +
-              '<button type="button" class="cookie-consent__btn cookie-consent__btn--ghost" data-consent="denied">Odmítnout</button>' +
-              '<button type="button" class="cookie-consent__btn" data-consent="granted">Přijmout</button>' +
+              '<a class="cookie-consent__link" href="https://plushouse.cz/zasady_ochrany_os_udaju.html" target="_blank" rel="noopener">Vice informaci</a>' +
+              '<button type="button" class="cookie-consent__btn cookie-consent__btn--ghost" data-consent="denied">Odmitnout</button>' +
+              '<button type="button" class="cookie-consent__btn" data-consent="granted">Prijmout</button>' +
             '</div>' +
           '</div>';
 
