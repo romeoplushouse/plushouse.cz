@@ -31,14 +31,18 @@ a cesty na serveru. Útočníci to využívají k vyhledání známých zranitel
 $to_Email       = "tonda@plushouse.cz";
 define('SMTP_HOST', 'wes1-smtp.wedos.net');
 define('SMTP_USER', 'tonda@plushouse.cz');
-define('SMTP_PASS', '1@m.Th23K`c4Em');
-define('MC_APIKEY', '80c0cb054518dea608366800029674c4-us11');
+define('SMTP_PASS', '<REDACTED>');     // konkrétní hodnota viz config.php v repu
+define('MC_APIKEY', '<REDACTED>');     // konkrétní hodnota viz config.php v repu
 ```
-**Akce:** 
-- Přidat `config.php` do `.gitignore`
-- Změnit SMTP heslo (`1@m.Th23K\`c4Em`) – bylo committnuto do gitu, považujte za kompromitované
-- Otočit MailChimp API klíč
-- Hesla přesunout do environment variables nebo `config.local.php` mimo git
+**Akce (POŘADÍ DŮLEŽITÉ):**
+1. **Okamžitě otočit SMTP heslo na webhostingu (Wedos)** – původní hodnota
+   byla committnuta do gitu a musí být považována za kompromitovanou.
+2. **Okamžitě otočit MailChimp API klíč** – stejný důvod.
+3. Přidat `config.php` do `.gitignore`.
+4. Vyčistit historii gitu od starého hesla a klíče (např. `git filter-repo`)
+   – pouhé smazání souboru v novém commitu nestačí, hodnoty zůstávají
+   v historii.
+5. Hesla přesunout do environment variables nebo `config.local.php` mimo git.
 
 ---
 
