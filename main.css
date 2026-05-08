@@ -1051,3 +1051,43 @@
 .row-equal-height > [class*="col-"] > .pix-content > p {
     flex: 1 1 auto;
 }
+
+/* === Ceník: tabulka ze cenik.xlsx === */
+.cenik-table {
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+}
+.cenik-table thead th {
+    background-color: #b5e126;
+    color: #000;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    border-bottom: 2px solid #95bb19;
+    padding: 12px 10px;
+    vertical-align: middle;
+}
+.cenik-table tbody td {
+    padding: 8px 10px;
+    border-top: 1px solid #eee;
+    color: #333;
+    vertical-align: middle;
+}
+.cenik-table tbody tr:nth-of-type(odd) {
+    background-color: #fafafa;
+}
+.cenik-table tbody tr:hover {
+    background-color: #f0f9d6;
+}
+.cenik-table .text-right { text-align: right; }
+.cenik-table .text-center { text-align: center; }
+.cenik-table .nowrap { white-space: nowrap; }
+.cenik-table tbody td strong { color: #000; }
+
+@media (max-width: 767px) {
+    .cenik-table { font-size: 12px; }
+    .cenik-table thead th,
+    .cenik-table tbody td { padding: 6px 5px; }
+}
