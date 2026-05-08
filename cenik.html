@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ceník — orientační rozsahy cen | PlusHouse</title>
+  <meta name="description" content="Orientační ceny našich služeb — chytrá domácnost, fotovoltaika, tepelná čerpadla. Konkrétní cenu vždy dáváme až po nezávazné konzultaci.">
+  <link rel="canonical" href="https://www.plushouse.cz/cenik">
+  <meta name="theme-color" content="#0F1117">
+    <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="preload" as="font" type="font/ttf" href="/assets/fonts/PlusConnectSans-Regular.ttf" crossorigin>
+  <link rel="preload" as="font" type="font/ttf" href="/assets/fonts/PlusConnectSans-Bold.ttf" crossorigin>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <style>
+    .cenik-section { padding: 4rem 0; background: #fff; border-top: 1px solid rgba(0,0,0,0.06); }
+    .cenik-section .container > h2 { margin: 0 0 0.5rem; }
+    .cenik-section__intro { max-width: 720px; margin: 0 0 2rem; opacity: 0.75; line-height: 1.55; }
+    .cenik-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; }
+    .cenik-table { width: 100%; border-collapse: collapse; font-size: 0.9375rem; line-height: 1.4; min-width: 720px; }
+    .cenik-table thead th {
+      background: #0F1117; color: #fff;
+      padding: 0.875rem 1rem; text-align: left;
+      font-weight: 700; letter-spacing: 0.01em;
+      position: sticky; top: 0;
+    }
+    .cenik-table thead th.cenik-table__center { text-align: center; }
+    .cenik-table thead th.cenik-table__right { text-align: right; }
+    .cenik-table tbody td { padding: 0.75rem 1rem; border-top: 1px solid rgba(0,0,0,0.06); }
+    .cenik-table tbody tr:nth-of-type(even) td { background: rgba(0,0,0,0.025); }
+    .cenik-table tbody tr:hover td { background: rgba(181,225,38,0.12); }
+    .cenik-table__center { text-align: center; }
+    .cenik-table__right { text-align: right; }
+    .cenik-table__nowrap { white-space: nowrap; }
+    .cenik-table tbody td strong { color: #0F1117; font-weight: 800; }
+    @media (max-width: 640px) {
+      .cenik-table { font-size: 0.8125rem; }
+      .cenik-table thead th, .cenik-table tbody td { padding: 0.5rem 0.625rem; }
+    }
+</style>
+</head>
+<body>
+
+<header class="site-header"><div class="container"><div class="site-header__inner">
+  <a href="/" class="site-header__logo"><span class="logo-mark">+</span><span>PlusHouse</span></a>
+  <nav class="site-nav"><a href="/blog/" class="site-nav__link">Blog</a><a href="/clenstvi" class="site-nav__link">Členství</a><a href="/cenik" class="site-nav__link">Ceník</a><a href="/kontakt" class="site-nav__link">Kontakt</a></nav>
+  <div class="site-header__cta"><a href="/kontakt" class="btn btn--ghost">Domluvit konzultaci</a></div>
+  <button type="button" class="burger" aria-label="Menu"><span class="burger__lines"></span></button>
+</div></div></header>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero__inner">
+      <nav class="crumbs"><a href="/">Úvod</a><span class="crumbs__sep">/</span><span>Ceník</span></nav>
+      <span class="eyebrow">Orientační ceny</span>
+      <h1 class="h-display text-balance">Žádné typové balíčky.<br>Žádné překvapení.</h1>
+      <p class="lead lead--dark">Přesnou cenu vždy dáváme až po krátké konzultaci a posouzení projektu. Tady jsou orientační rozsahy, abyste věděli, do čeho jdete — a my ušetřili čas, když si nesedneme rozpočtově.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid--3 grid--lg">
+      <article class="card">
+        <span class="eyebrow">Chytrá domácnost</span>
+        <h3 class="card__title mt-4">Loxone na klíč</h3>
+        <p style="font-size: 1.75rem; font-weight: 900; color: var(--accent-ink); letter-spacing: -0.02em;">300 000 — 1 200 000 Kč</p>
+        <p class="card__text">Dle rozsahu — od základní automatizace topení a osvětlení v menším domě po plnou instalaci s FVE, audiem a multimédii ve vile.</p>
+        <a href="/kontakt" class="card__link">Spočítat <span class="arrow">→</span></a>
+      </article>
+
+      <article class="card">
+        <span class="eyebrow">Fotovoltaika</span>
+        <h3 class="card__title mt-4">FVE 6–15 kWp</h3>
+        <p style="font-size: 1.75rem; font-weight: 900; color: var(--accent-ink); letter-spacing: -0.02em;">220 000 — 650 000 Kč</p>
+        <p class="card__text">Včetně panelů, invertoru, kabeláže, montáže, revize a předání distributorovi. Baterie a wallbox extra. NZÚ řešíme.</p>
+        <a href="/kontakt" class="card__link">Spočítat <span class="arrow">→</span></a>
+      </article>
+
+      <article class="card">
+        <span class="eyebrow">Tepelná čerpadla</span>
+        <h3 class="card__title mt-4">Vzduch–voda</h3>
+        <p style="font-size: 1.75rem; font-weight: 900; color: var(--accent-ink); letter-spacing: -0.02em;">280 000 — 480 000 Kč</p>
+        <p class="card__text">Včetně instalace, akumulační nádrže, propojení s otopnou soustavou a TUV. Cena podle výkonu (8–16 kW).</p>
+        <a href="/kontakt" class="card__link">Spočítat <span class="arrow">→</span></a>
+      </article>
+
+      <article class="card">
+        <span class="eyebrow">Wallbox</span>
+        <h3 class="card__title mt-4">11 kW s řízením</h3>
+        <p style="font-size: 1.75rem; font-weight: 900; color: var(--accent-ink); letter-spacing: -0.02em;">35 000 — 80 000 Kč</p>
+        <p class="card__text">Wallbox + montáž + dynamické řízení dle FVE. Cena se zvedne s 22 kW provedením a delším kabelem.</p>
+        <a href="/kontakt" class="card__link">Spočítat <span class="arrow">→</span></a>
+      </article>
+
+      <article class="card">
+        <span class="eyebrow">Hodinová sazba</span>
+        <h3 class="card__title mt-4">Servis a poradenství</h3>
+        <p style="font-size: 1.75rem; font-weight: 900; color: var(--accent-ink); letter-spacing: -0.02em;">1 200 Kč / hod</p>
+        <p class="card__text">Sazba pro servisní zásahy mimo paušální členství, programování úprav a poradenství. Doprava účtována zvlášť.</p>
+        <a href="/kontakt" class="card__link">Domluvit termín <span class="arrow">→</span></a>
+      </article>
+
+      <article class="card">
+        <span class="eyebrow">Členství +House</span>
+        <h3 class="card__title mt-4">Měsíční paušál</h3>
+        <p style="font-size: 1.75rem; font-weight: 900; color: var(--accent-ink); letter-spacing: -0.02em;">od 990 Kč / měsíc</p>
+        <p class="card__text">Vzdálená správa, monitoring, prioritní reakce, plánovaná údržba. Konkrétní výše dle velikosti systému.</p>
+        <a href="/clenstvi" class="card__link">Více informací <span class="arrow">→</span></a>
+      </article>
+    </div>
+
+    <p class="muted text-center mt-7" style="max-width: 720px; margin-left: auto; margin-right: auto;">Všechny ceny jsou uvedeny <strong>bez DPH</strong>. U stavebních a montážních prací prováděných na rodinných domech a bytech standardně účtujeme <strong>12&nbsp;% DPH</strong> dle § 47 odst. 4 zákona č. 235/2004 Sb., o dani z přidané hodnoty (snížená sazba pro stavební a montážní práce na dokončené stavbě pro bydlení). Ostatní zboží a služby podléhají běžné sazbě <strong>21&nbsp;% DPH</strong>; aktuální sazba u každé položky je uvedena v tabulce níže.</p>
+  </div>
+</section>
+
+<section class="cenik-section">
+  <div class="container">
+    <h2 class="h2">Plný ceník (export z ERP)</h2>
+    <p class="cenik-section__intro">Položkový ceník našich služeb a komponent. Ceny jsou platné k&nbsp;<strong>2.&nbsp;2.&nbsp;2026</strong>; konkrétní rozsah dodávky a&nbsp;případné slevy řešíme v&nbsp;rámci individuální nabídky. V&nbsp;případě nejasností nás <a href="/kontakt">kontaktujte</a>.</p>
+    <div class="cenik-table-wrap">
+      <table class="cenik-table">
+        <thead>
+          <tr>
+            <th>Popis položky</th>
+            <th class="cenik-table__center">Jednotka</th>
+            <th class="cenik-table__right">Cena bez DPH</th>
+            <th class="cenik-table__center">Sazba DPH</th>
+            <th class="cenik-table__right">Cena s DPH</th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr><td>Projektová dokumentace FVE do 10kWp</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">10 000,00 Kč</td><td class="cenik-table__center">12 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>11 200,00 Kč</strong></td></tr>
+        <tr><td>Lynx Distributor (M10)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 789,00 Kč</td><td class="cenik-table__center">12 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 243,68 Kč</strong></td></tr>
+        <tr><td>Závaží konstrukce na plochou střehu 20kg</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">207,88 Kč</td><td class="cenik-table__center">12 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>232,83 Kč</strong></td></tr>
+        <tr><td>MPPT solární regulátor Victron Energy SmartSolar 100/20</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 888,00 Kč</td><td class="cenik-table__center">12 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 114,56 Kč</strong></td></tr>
+        <tr><td>Finder relé 1P/16A, 24V DC</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">198,00 Kč</td><td class="cenik-table__center">12 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>221,76 Kč</strong></td></tr>
+        <tr><td>Miniserver Compact</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">12 870,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>15 572,70 Kč</strong></td></tr>
+        <tr><td>Air Base Extension</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 724,48 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 296,62 Kč</strong></td></tr>
+        <tr><td>SMA Anténa - 868 MHz</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">485,76 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>587,77 Kč</strong></td></tr>
+        <tr><td>Hlavice Air</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 523,84 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 053,85 Kč</strong></td></tr>
+        <tr><td>Okenní a dveřní kontakt Air bílá</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 784,64 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 159,41 Kč</strong></td></tr>
+        <tr><td>AO Extension</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">6 779,52 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>8 203,22 Kč</strong></td></tr>
+        <tr><td>Příslušenství k LED páskům - set RGBW</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">528,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>638,88 Kč</strong></td></tr>
+        <tr><td>RGBW LED pásky 5m IP68</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 706,56 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 484,94 Kč</strong></td></tr>
+        <tr><td>RGBW 24V Dimmer Tree</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 974,72 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 389,41 Kč</strong></td></tr>
+        <tr><td>Montáž - Miniserver</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 500,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 815,00 Kč</strong></td></tr>
+        <tr><td>Programování - Miniserver - První nastavení (základ)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 500,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 025,00 Kč</strong></td></tr>
+        <tr><td>Montáž - Exstensions</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">890,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 076,90 Kč</strong></td></tr>
+        <tr><td>Montáž - Rozšíření internetového připojení  (1zařízení)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">790,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>955,90 Kč</strong></td></tr>
+        <tr><td>SSR relé FVE 30A AO 1F</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 429,50 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 939,70 Kč</strong></td></tr>
+        <tr><td>LOXONE ROZVÁDĚČ (dokumentace, zapojení,kabely)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">5 596,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>6 771,16 Kč</strong></td></tr>
+        <tr><td>LOXONE Zdroj 15/24V</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">834,24 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 009,43 Kč</strong></td></tr>
+        <tr><td>LOXONE zdroj 60/24V</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 731,84 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 095,53 Kč</strong></td></tr>
+        <tr><td>Dopravné</td><td class="cenik-table__center">km</td><td class="cenik-table__right cenik-table__nowrap">12,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>14,52 Kč</strong></td></tr>
+        <tr><td>Měření - třífázový elektroměr Chint DTSU666</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 836,07 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 431,64 Kč</strong></td></tr>
+        <tr><td>Modbus Air</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 120,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 775,20 Kč</strong></td></tr>
+        <tr><td>Montáž - Loxone (1 zařízení)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">550,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>665,50 Kč</strong></td></tr>
+        <tr><td>Programování - Modbus (1zařízení)</td><td class="cenik-table__center">h</td><td class="cenik-table__right cenik-table__nowrap">1 550,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 875,50 Kč</strong></td></tr>
+        <tr><td>Montáž - Digitální čidlo</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">550,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>665,50 Kč</strong></td></tr>
+        <tr><td>PLUS HOUSE + členství</td><td class="cenik-table__center">P</td><td class="cenik-table__right cenik-table__nowrap">471,90 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>571,00 Kč</strong></td></tr>
+        <tr><td>PLUS HOUSE + členství 12M FO</td><td class="cenik-table__center">P</td><td class="cenik-table__right cenik-table__nowrap">4 700,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>5 687,00 Kč</strong></td></tr>
+        <tr><td>Montáž - analogové čidlo</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">990,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 197,90 Kč</strong></td></tr>
+        <tr><td>Lištování (20/40/60)</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">150,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>181,50 Kč</strong></td></tr>
+        <tr><td>Servis - Výměna střídače</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">9 700,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>11 737,00 Kč</strong></td></tr>
+        <tr><td>Servis - Přidání/Výměna Baterie (Vysokonapěťové systémy)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 965,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 797,65 Kč</strong></td></tr>
+        <tr><td>Servis FVE - Hodinová sazba</td><td class="cenik-table__center">h</td><td class="cenik-table__right cenik-table__nowrap">1 480,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 790,80 Kč</strong></td></tr>
+        <tr><td>Servis Loxone - Hodinová sazba</td><td class="cenik-table__center">h</td><td class="cenik-table__right cenik-table__nowrap">1 520,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 839,20 Kč</strong></td></tr>
+        <tr><td>Přisazený hliníkový profil PF, 24x10 mm</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">349,56 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>422,97 Kč</strong></td></tr>
+        <tr><td>Montáž - LED</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">350,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>423,50 Kč</strong></td></tr>
+        <tr><td>Servis - Loxone Aktualizace</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 000,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 210,00 Kč</strong></td></tr>
+        <tr><td>Programování - AO (jeden výstup)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">997,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 206,37 Kč</strong></td></tr>
+        <tr><td>Žaluziový aktor Air</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 861,76 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 462,73 Kč</strong></td></tr>
+        <tr><td>Smart Socket Air - Typ E</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 993,60 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 412,26 Kč</strong></td></tr>
+        <tr><td>Servis - Loxone výměna SD karty</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 555,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 881,55 Kč</strong></td></tr>
+        <tr><td>SD karta + firmware</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">310,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>375,10 Kč</strong></td></tr>
+        <tr><td>1-Wire teplotní čip v pouzdře</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">369,60 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>447,22 Kč</strong></td></tr>
+        <tr><td>Stereo Extension</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">6 325,44 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>7 653,78 Kč</strong></td></tr>
+        <tr><td>Satellite Speaker IP64 Master</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">8 230,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>9 958,30 Kč</strong></td></tr>
+        <tr><td>Satellite Speaker IP64 Client</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">6 980,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>8 445,80 Kč</strong></td></tr>
+        <tr><td>Jistič Eaton PL6-B2/1 (6kA) 2A</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">145,53 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>176,09 Kč</strong></td></tr>
+        <tr><td>Programování - 1-Wire (1zařízení)</td><td class="cenik-table__center">kpt</td><td class="cenik-table__right cenik-table__nowrap">1 550,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 875,50 Kč</strong></td></tr>
+        <tr><td>Audioserver</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">12 640,32 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>15 294,79 Kč</strong></td></tr>
+        <tr><td>Montáž - Audioserver</td><td class="cenik-table__center">kpt</td><td class="cenik-table__right cenik-table__nowrap">3 950,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 779,50 Kč</strong></td></tr>
+        <tr><td>Programování - Audioserver integrace</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 550,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 295,50 Kč</strong></td></tr>
+        <tr><td>RS485 Extension</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">4 635,84 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>5 609,37 Kč</strong></td></tr>
+        <tr><td>Touch Pure Tree bílá</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">4 825,92 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>5 839,36 Kč</strong></td></tr>
+        <tr><td>Touch Pure CO2 Tree antracitová</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">6 080,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>7 356,80 Kč</strong></td></tr>
+        <tr><td>NFC Code Touch Tree antracitová</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">7 560,96 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>9 148,76 Kč</strong></td></tr>
+        <tr><td>Programování - Loxone API napojení na systémy třetích stran</td><td class="cenik-table__center">kpt</td><td class="cenik-table__right cenik-table__nowrap">15 560,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>18 827,60 Kč</strong></td></tr>
+        <tr><td>Smart Socket Air Typ E</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 993,60 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 412,26 Kč</strong></td></tr>
+        <tr><td>MPPT solární regulátor Victron Energy SmartSolar RS 450/100-MC4</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">25 820,79 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>31 243,16 Kč</strong></td></tr>
+        <tr><td>Měnič/nabíječ Victron Energy MultiPlus-II 48V/3000VA/35A-32A</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">13 631,28 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>16 493,85 Kč</strong></td></tr>
+        <tr><td>Měnič/nabíječ Victron Energy MultiPlus-II GX 48V/3000VA/35A-32A</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">15 531,80 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>18 793,48 Kč</strong></td></tr>
+        <tr><td>Lynx Class-T Power In (M10) 2IN</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 953,94 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 784,27 Kč</strong></td></tr>
+        <tr><td>Lynx Distributor (M8) 4IN</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">4 696,68 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>5 682,98 Kč</strong></td></tr>
+        <tr><td>MEGA-pojistka 250A/58V Victron Energy</td><td class="cenik-table__center"></td><td class="cenik-table__right cenik-table__nowrap">677,20 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>819,41 Kč</strong></td></tr>
+        <tr><td>NFC Code Touch Nano bílá</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">7 560,96 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>9 148,76 Kč</strong></td></tr>
+        <tr><td>NFC Code Touch Air bílá</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">7 560,96 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>9 148,76 Kč</strong></td></tr>
+        <tr><td>Elektromagnetický zámek CL2 12V 180kg - 17x4x2cm</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">762,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>922,02 Kč</strong></td></tr>
+        <tr><td>Montážní deska ZL pro elektromagnetický zámek CL2 180kg pro montáž na čelní stranu zárubně, nebo nad zárubeň</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">370,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>447,70 Kč</strong></td></tr>
+        <tr><td>Výměna deskového radiátoru do 2000mm</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 500,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 025,00 Kč</strong></td></tr>
+        <tr><td>KORADO RADIK KLASIK deskový radiátor 33-600/1400, boční připojení, white RAL9016</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">9 517,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>11 515,57 Kč</strong></td></tr>
+        <tr><td>STAS STAK - ŽALUZIOVÝ KONEKTOR</td><td class="cenik-table__center">pár</td><td class="cenik-table__right cenik-table__nowrap">598,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>723,58 Kč</strong></td></tr>
+        <tr><td>Solax Power G-690-926S Triple HV battery, 5,8kWh Slave V2</td><td class="cenik-table__center"></td><td class="cenik-table__right cenik-table__nowrap">37 300,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>45 133,00 Kč</strong></td></tr>
+        <tr><td>DIN lišta děrovaná 1m/7,5mm pozinkovaná</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">273,36 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>330,77 Kč</strong></td></tr>
+        <tr><td>Montáž - Elektro</td><td class="cenik-table__center">h</td><td class="cenik-table__right cenik-table__nowrap">750,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>907,50 Kč</strong></td></tr>
+        <tr><td>Loxone - Programování</td><td class="cenik-table__center">h</td><td class="cenik-table__right cenik-table__nowrap">1 450,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 754,50 Kč</strong></td></tr>
+        <tr><td>Elektroměr bezšroubový WAGO 879-3020, 400V, 65 A, MODBUS</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">8 179,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>9 896,59 Kč</strong></td></tr>
+        <tr><td>elektroměr SDM630MCT V2 X/5A MODBUS</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 387,54 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 098,92 Kč</strong></td></tr>
+        <tr><td>1-Wire Extension</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">4 635,84 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>5 609,37 Kč</strong></td></tr>
+        <tr><td>NFC Code Touch Air antracitová</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">7 560,96 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>9 148,76 Kč</strong></td></tr>
+        <tr><td>Touch Air antracitová</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 426,18 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 935,68 Kč</strong></td></tr>
+        <tr><td>Komfortní senzor Air antracitová</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 280,96 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 759,96 Kč</strong></td></tr>
+        <tr><td>Sekání, frézování, kabelové trasy</td><td class="cenik-table__center">bm</td><td class="cenik-table__right cenik-table__nowrap">445,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>538,45 Kč</strong></td></tr>
+        <tr><td>Nano IO Air (2NO)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 977,92 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 603,28 Kč</strong></td></tr>
+        <tr><td>Venkovní kamera - Eve Outdoor Cam</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">7 009,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>8 480,89 Kč</strong></td></tr>
+        <tr><td>Montáž -  Venkovní kamery</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 500,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 815,00 Kč</strong></td></tr>
+        <tr><td>Programování - Air (1 zařízení)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">610,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>738,10 Kč</strong></td></tr>
+        <tr><td>Programování - Integrace kamerových systémů</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 000,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 420,00 Kč</strong></td></tr>
+        <tr><td>Nano 2 Relay Tree</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 407,68 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 913,29 Kč</strong></td></tr>
+        <tr><td>Elektrický zámek, 12-24V AC/DC</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1 570,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 899,70 Kč</strong></td></tr>
+        <tr><td>NFC Code Touch for Nano antracitová</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">7 560,96 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>9 148,76 Kč</strong></td></tr>
+        <tr><td>NFC přívěsky (10ks)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">823,68 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>996,65 Kč</strong></td></tr>
+        <tr><td>Relay Extension</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">8 448,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>10 222,08 Kč</strong></td></tr>
+        <tr><td>Miniserver</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">16 399,68 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>19 843,61 Kč</strong></td></tr>
+        <tr><td>Miniserver Go</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">9 841,92 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>11 908,72 Kč</strong></td></tr>
+        <tr><td>Kabel J-Y(St)Y 2x2x0,8 rudá (JYSTY)</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">10,77 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>13,03 Kč</strong></td></tr>
+        <tr><td>Spojovací krabice Abox 025-L šedá IP65 IK07 80x80x52mm SPELSBERG</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">86,85 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>105,09 Kč</strong></td></tr>
+        <tr><td>Páčková spojovací svorka 5x 0,14-4 mm2 (CYA) WAGO 221-415</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">19,04 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>23,04 Kč</strong></td></tr>
+        <tr><td>Páčková spojovací svorka 3x 0,5-6 mm2 (CYA) WAGO 221-613</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">21,19 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>25,64 Kč</strong></td></tr>
+        <tr><td>Páčková spojovací svorka 3x 0,14-4 mm2 (CYA) WAGO 221-413</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">11,95 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>14,46 Kč</strong></td></tr>
+        <tr><td>kabelová vývodka WAPRO M20, IP68</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">12,22 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>14,79 Kč</strong></td></tr>
+        <tr><td>Kabelové sedlo černé pro pásky</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3,10 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3,75 Kč</strong></td></tr>
+        <tr><td>Senzor teploty a vlhkosti (venkovní)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 791,04 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 587,16 Kč</strong></td></tr>
+        <tr><td>Energizer Industrial Mignon AA (10 ks)</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">300,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>363,00 Kč</strong></td></tr>
+        <tr><td>Touch Tree bílá</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 280,96 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 759,96 Kč</strong></td></tr>
+        <tr><td>Belimo Tree</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 120,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 775,20 Kč</strong></td></tr>
+        <tr><td>RGBW 24V Compact Dimmer Air</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 302,08 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>2 785,52 Kč</strong></td></tr>
+        <tr><td>Průmyslové svítidlo PRIMA LED TUBE 2x120 PC 32W IP66 TREVOS</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">514,30 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>622,30 Kč</strong></td></tr>
+        <tr><td>Zářivková LED trubice PHILIPS CorePro LEDtube 1200mm 15.5W 830 T8</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">134,78 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>163,08 Kč</strong></td></tr>
+        <tr><td>Demontáž původních zářivkových svítidel</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">150,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>181,50 Kč</strong></td></tr>
+        <tr><td>Montáž průmyslových svítidel vč. připojení</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">600,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>726,00 Kč</strong></td></tr>
+        <tr><td>Práce ve výšce (cca 3–4 m) - příplatek</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">150,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>181,50 Kč</strong></td></tr>
+        <tr><td>FAMATEL ROZVODNICE ACQUA 3912-T IP65, 12MOD., PRŮHLED. DVEŘE</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">655,34 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>792,96 Kč</strong></td></tr>
+        <tr><td>Jistič Eaton PL6-6/B/1 (6kA) 6A</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">90,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>108,90 Kč</strong></td></tr>
+        <tr><td>ELKO EP ZDROJ PS1M-15 24V DC 15W</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">434,76 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>526,06 Kč</strong></td></tr>
+        <tr><td>ELKO EP ZDROJ PS4M-92 24V DC 105W</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">984,26 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 190,95 Kč</strong></td></tr>
+        <tr><td>EATON SKŘÍŇ NÁST BF-O-4/96-C 4X24MOD DV BÍLÉ IP30</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">5 298,40 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>6 411,06 Kč</strong></td></tr>
+        <tr><td>Izolační deska na hořlavé podklady CEMVIN 80x80x3mm</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">4,77 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>5,77 Kč</strong></td></tr>
+        <tr><td>KOPOS LIŠTA PLAST LHD 20X20 TD 2M/48M TMAVÉ DŘEVO</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">27,43 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>33,19 Kč</strong></td></tr>
+        <tr><td>Kabel CYKY-J 3x2,5 (C)</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">26,26 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>31,77 Kč</strong></td></tr>
+        <tr><td>KABEL J-Y/ST/Y 2X2X0,8 PVC PLÁŠŤ ŠEDÝ</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">10,65 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>12,89 Kč</strong></td></tr>
+        <tr><td>Kabel CYKY-O 2x2,5 (D)</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">22,53 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>27,26 Kč</strong></td></tr>
+        <tr><td>WAP PÁSEK VÁZ. WT-140IC-PA-UV 140X3,5MM ČERNÁ POLYAMID 6.6 UV STABIL.</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">0,67 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>0,81 Kč</strong></td></tr>
+        <tr><td>Kabelové sedlo pro pásky do 9mm WAPRO KSD-2316B 23x16mm</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">1,40 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1,69 Kč</strong></td></tr>
+        <tr><td>RAWL HMOŽDINKA NATLOUKACÍ FX S VÁLCOVOU HLAVOU NYLON 6X35MM</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">0,87 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1,05 Kč</strong></td></tr>
+        <tr><td>RAWL VRUT KONSTRUKČNÍ DO DŘEVA A DŘEVOTŘÍSKY ZÁPUSTNÁ HLAVA 4X50MM</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">11,52 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>13,94 Kč</strong></td></tr>
+        <tr><td>ZÁSUVKA NA POVRCH GHE-1 1XHNĚDÁ S VÍČKEM 230V</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">107,30 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>129,83 Kč</strong></td></tr>
+        <tr><td>Elektroměr 3fázový Tree</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">4 980,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>6 025,80 Kč</strong></td></tr>
+        <tr><td>Přemístění elektroměrového rozvaděče do 32A</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">5 000,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>6 050,00 Kč</strong></td></tr>
+        <tr><td>Výkop do 0,5m hloubky</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">700,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>847,00 Kč</strong></td></tr>
+        <tr><td>Gelová spojka SHARK 516 se svork. 5x (6-16mm2) pro Cu/Al 0 6/1kV ELEMAN</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">941,09 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>1 138,72 Kč</strong></td></tr>
+        <tr><td>Montáž Wallboxu</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">3 500,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>4 235,00 Kč</strong></td></tr>
+        <tr><td>H07RN-F 5G 6 TITANEX (5x6) (CYSY)</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">195,26 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>236,26 Kč</strong></td></tr>
+        <tr><td>Kabel CYKY-O 5 X 1,5</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">34,06 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>41,21 Kč</strong></td></tr>
+        <tr><td>kabel CYKYLO-J 3 X 1,5 C</td><td class="cenik-table__center">m</td><td class="cenik-table__right cenik-table__nowrap">17,54 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>21,22 Kč</strong></td></tr>
+        <tr><td>Gelová spojka SHARK 325, se svork., 3x (1,5 - 2,5mm2), 0,6/1kV ELEMAN</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">317,71 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>384,43 Kč</strong></td></tr>
+        <tr><td>Rozvodnice ACQUA 3908-T IP65 8 modulový, průhledný</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">482,23 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>583,50 Kč</strong></td></tr>
+        <tr><td>Jistič PL6-B20/3 char B, 3-pólový, 6kA, 20A EATON</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">300,48 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>363,58 Kč</strong></td></tr>
+        <tr><td>Elektroměr SDM630MCT V2 X/5A MODBUS MID</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">2 849,28 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>3 447,63 Kč</strong></td></tr>
+        <tr><td>CENTURY LED TRUBICE T8 FVT8M160-181240 FULLVISION+ 18W 4000K 2880LM 1200MM G13</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">144,54 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>174,89 Kč</strong></td></tr>
+        <tr><td>Osazení elektrického zámku</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">300,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>363,00 Kč</strong></td></tr>
+        <tr><td>Předplatné PLUSCONNECT (komunikační prostředí mezi Previo a Loxone)</td><td class="cenik-table__center">měsíců</td><td class="cenik-table__right cenik-table__nowrap">250,00 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>302,50 Kč</strong></td></tr>
+        <tr><td>Protiplech k otvíračům O&amp;C A49X - rohový, pravý</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">379,67 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>459,40 Kč</strong></td></tr>
+        <tr><td>Protiplech k otvíračům O&amp;C A49X - rohový, levý</td><td class="cenik-table__center">ks</td><td class="cenik-table__right cenik-table__nowrap">379,67 Kč</td><td class="cenik-table__center">21 %</td><td class="cenik-table__right cenik-table__nowrap"><strong>459,40 Kč</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section section--sm">
+  <div class="container">
+    <div class="cta-banner">
+      <div><h2 class="h2">Nezávazná konzultace = 0 Kč.</h2><p style="font-size: var(--fs-lead); line-height: 1.5; opacity: 0.85;">30 minut zdarma — uděláme si jasno, co dává smysl a v jaké cenové hladině.</p></div>
+      <div class="cta-banner__actions"><a href="/kontakt" class="btn btn--primary btn--lg">Domluvit konzultaci</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer"><div class="container">
+  <div class="site-footer__top">
+    <div class="site-footer__brand">
+      <a href="/" class="site-header__logo"><span class="logo-mark">+</span><span>PlusHouse</span></a>
+      <p class="muted-dark" style="font-size: var(--fs-small); line-height: 1.55;">Navrhujeme a realizujeme automatizaci domů i komerčních objektů. Od návrhu přes realizaci až po servis — jeden partner, jedna odpovědnost.</p>
+      <div class="site-footer__social">
+        <a href="https://www.facebook.com/plushousecz" target="_blank" rel="noopener" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+        <a href="https://www.instagram.com/plushouse.cz" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 1.85c-3.15 0-3.5.01-4.74.07-1.07.05-1.65.23-2.04.38-.51.2-.88.44-1.27.83-.39.39-.63.76-.83 1.27-.15.39-.33.97-.38 2.04-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.05 1.07.23 1.65.38 2.04.2.51.44.88.83 1.27.39.39.76.63 1.27.83.39.15.97.33 2.04.38 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.07-.05 1.65-.23 2.04-.38.51-.2.88-.44 1.27-.83.39-.39.63-.76.83-1.27.15-.39.33-.97.38-2.04.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.07-.23-1.65-.38-2.04a3.4 3.4 0 0 0-.83-1.27 3.4 3.4 0 0 0-1.27-.83c-.39-.15-.97-.33-2.04-.38-1.24-.06-1.59-.07-4.74-.07zm0 3.15a4.84 4.84 0 1 1 0 9.68 4.84 4.84 0 0 1 0-9.68zm0 7.99a3.15 3.15 0 1 0 0-6.3 3.15 3.15 0 0 0 0 6.3zm6.16-8.18a1.13 1.13 0 1 1-2.26 0 1.13 1.13 0 0 1 2.26 0z"/></svg></a>
+      </div>
+    </div>
+    <div class="site-footer__col"><h4>Služby</h4><ul>
+      <li><a href="/chytra-domacnost">Chytrá domácnost</a></li>
+      <li><a href="/fotovoltaika">Fotovoltaika</a></li>
+      <li><a href="/tepelna-cerpadla">Tepelná čerpadla</a></li>
+      <li><a href="/fototermika">Fototermika</a></li>
+      <li><a href="/nabijeci-stanice">Nabíjecí stanice</a></li>
+      <li><a href="/trafostanice">Trafostanice</a></li>
+      <li><a href="/pms-pro-hotely">PMS pro hotely</a></li>
+    </ul></div>
+    <div class="site-footer__col"><h4>Společnost</h4><ul>
+      <li><a href="/blog/">Blog</a></li>
+      <li><a href="/clenstvi">Členství</a></li>
+      <li><a href="/cenik">Ceník</a></li>
+      <li><a href="/kontakt">Kontakt</a></li>
+    </ul></div>
+    <div class="site-footer__col"><h4>Kontakt</h4><ul>
+      <li><a href="mailto:info@plushouse.cz">info@plushouse.cz</a></li>
+      <li><a href="tel:+420734384858">+420 734 38 48 58</a></li>
+      <li>Mladeč 61, 783 21 Mladeč</li>
+      <li>IČ: 09648852</li>
+      <li>DIČ: CZ09648852</li>
+    </ul></div>
+  </div>
+  <div class="site-footer__bottom">
+    <div>© 2026 PLUS HOUSE s.r.o.</div>
+    <div class="site-footer__legal"><a href="/zasady-ochrany-osobnich-udaju">Ochrana osobních údajů</a><a href="/obchodni-podminky">Obchodní podmínky</a><a href="/cookies">Cookies</a></div>
+  </div>
+</div></footer>
+<script src="/assets/js/main.js" defer></script>
+</body>
+</html>
